@@ -4,7 +4,7 @@
 //
 // Usage : tsx scripts/catalog/check-kiwix.ts [--dry-run]
 import { listAllKiwix, resolveKiwix, type KiwixEntry } from '../../src/core/kiwix.js';
-import { loadResourceFiles, saveResourceFiles, setField, writeReport, markChecked, today } from './lib.js';
+import { loadResourceFiles, saveResourceFiles, setField, writeReport, markChecked, today, setUpdaterNote } from './lib.js';
 
 const dry = process.argv.includes('--dry-run');
 
@@ -35,7 +35,7 @@ async function main() {
       markChecked(rf, i);
       // Alerte : taille qui chute de plus de 80 % = build cassé en amont (cas freecodecamp 2026-08)
       const prev = r.size_bytes ?? (r.size_estimate_gb ? r.size_estimate_gb * 1e9 : null);
-      if (prev && e.size_bytes < prev * 0.2) setField(rf, i, 'notes.en', `${r.notes?.en ?? ''} [updater ${today()}: size dropped from ${(prev / 1e9).toFixed(1)} GB to ${(e.size_bytes / 1e9).toFixed(2)} GB — upstream build may be broken]`.trim(), 'size drop');
+      if (prev && e.size_bytes < prev * 0.2) setUpdaterNote(rf, i, `size dropped from ${(prev / 1e9).toFixed(1)} GB to ${(e.size_bytes / 1e9).toFixed(2)} GB — upstream build may be broken`, 'size drop');
     }
   }
   if (!dry) saveResourceFiles(files);
