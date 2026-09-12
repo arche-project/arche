@@ -23,9 +23,15 @@
   requires: { os: [ linux, macos, windows ], arch: [ x64, arm64, armv7 ] }
   provides: [ kiwix-serve ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: 3.8.2
+  updated: 2026-03-02
+  notes:
+    fr: "[updater 2026-09-12: asset pattern matches nothing in 3.8.2]"
+    en: "[updater 2026-09-12: asset pattern matches nothing in 3.8.2]"
+  checked: 2026-09-12
 
 - id: kiwix-desktop
   type: software
@@ -42,9 +48,15 @@
   requires: { os: [ linux, windows, macos ], arch: [ x64 ] }
   provides: [ kiwix-reader ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: 2.5.1
+  updated: 2026-01-04
+  notes:
+    fr: "[updater 2026-09-12: asset pattern matches nothing in 2.5.1]"
+    en: "[updater 2026-09-12: asset pattern matches nothing in 2.5.1]"
+  checked: 2026-09-12
 
 - id: ollama
   type: software
@@ -61,9 +73,13 @@
   requires: { os: [ linux, macos, windows ], arch: [ x64, arm64 ] }
   provides: [ llm-runtime ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: v0.34.0
+  updated: 2026-09-05
+  size_bytes: 1574272976
+  checked: 2026-09-12
 
 - id: llama-cpp
   type: software
@@ -79,9 +95,15 @@
   license: { spdx: MIT, redistribution: allowed }
   provides: [ llm-runtime ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: v0.4.0
+  updated: 2026-09-04
+  notes:
+    fr: "[updater 2026-09-12: asset pattern matches nothing in v0.4.0]"
+    en: "[updater 2026-09-12: asset pattern matches nothing in v0.4.0]"
+  checked: 2026-09-12
 
 - id: open-webui
   type: software
@@ -103,10 +125,13 @@
     - ollama
   provides: [ chat-ui ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "ADR 0008 : installation par pip depuis le wheelhouse (`pip install --no-index --find-links wheels/ open-webui`), pas par Docker. L'interface principale d'Arche est `arche serve` ; Open WebUI est un confort pour qui le connaît déjà.", en: "ADR 0008: installed with pip from the wheelhouse (`pip install --no-index --find-links wheels/ open-webui`), not Docker. Arche's primary interface is `arche serve`; Open WebUI is a comfort for those who already know it." }
   runtime: python
+  version: v0.11.3
+  updated: 2026-08-31
+  checked: 2026-09-12
 
 - id: aider
   type: software
@@ -123,10 +148,13 @@
   requires: { tools: [ python3, pip ] }
   depends_on: [ ollama, ollama-qwen2-5-coder-7b ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "Installer via `pip download aider-chat` dans un cache pip local (voir toolchains.yaml/pip-cache).", en: "Install via `pip download aider-chat` into a local pip cache (see toolchains.yaml/pip-cache)." }
   runtime: python
+  version: v0.86.0
+  updated: 2025-08-09
+  checked: 2026-09-12
 
 - id: opencode
   type: software
@@ -142,9 +170,13 @@
   license: { spdx: MIT, redistribution: allowed }
   depends_on: [ ollama ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
   runtime: static-binary
+  version: v1.18.30
+  updated: 2026-09-09
+  size_bytes: 60686185
+  checked: 2026-09-12
 
 - id: jan
   type: software
@@ -162,10 +194,14 @@
   license: { spdx: Apache-2.0, redistribution: allowed }
   provides: [ chat-ui ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
   runtime: static-binary
   notes: { fr: "Embarque son propre llama.cpp : peut charger les GGUF téléchargés pour Ollama ou les siens. Configurer Arche dans Paramètres → MCP Servers (voir docs/fr/CLIENTS-IA.md).", en: "Bundles its own llama.cpp: can load the GGUFs pulled for Ollama or its own. Configure Arche in Settings → MCP Servers (see docs/en/AI-CLIENTS.md)." }
+  version: v0.8.4
+  updated: 2026-07-23
+  size_bytes: 157534712
+  checked: 2026-09-12
 
 - id: hermes-agent
   type: software
@@ -184,10 +220,13 @@
   requires: { tools: [ python3, pip ], ram_gb: 16 }
   depends_on: [ python-standalone, pip-cache, ollama ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
   runtime: python
   notes: { fr: "Installer depuis le wheelhouse (pas le script curl). Règles Arche : l'agent n'a que les outils MCP d'Arche et les fichiers locaux — aucun « skill » tiers téléchargé ; il ne pilote jamais un actionneur (ADR 0010) ; il tourne sous le superviseur comme un processus ordinaire. Ses canaux Telegram/Discord/WhatsApp sont inutiles hors ligne : rester en CLI ou Home Assistant.", en: "Install from the wheelhouse (not the curl script). Arche rules: the agent gets only Arche's MCP tools and local files — no third-party downloaded 'skills'; it never drives an actuator (ADR 0010); it runs under the supervisor as an ordinary process. Its Telegram/Discord/WhatsApp channels are useless offline: stay on CLI or Home Assistant." }
+  version: v2026.9.11
+  updated: 2026-09-11
+  checked: 2026-09-12
 
 - id: openclaw
   type: software
@@ -206,10 +245,13 @@
   requires: { tools: [ node ], ram_gb: 16 }
   depends_on: [ node-lts, ollama ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
   runtime: node
   notes: { fr: "Passerelle en tâche de fond (port 18789) : la lancer sous le superviseur, jamais exposée au-delà de 127.0.0.1. Aucun skill tiers ; pas de pilotage d'actionneur (ADR 0010). Support MCP à vérifier au moment de l'installation.", en: "Background gateway (port 18789): run it under the supervisor, never exposed beyond 127.0.0.1. No third-party skills; no actuator control (ADR 0010). MCP support to verify at install time." }
+  version: v2026.9.4
+  updated: 2026-09-11
+  checked: 2026-09-12
 
 - id: node-red
   type: software
@@ -228,10 +270,13 @@
   requires: { tools: [ node ] }
   depends_on: [ node-lts ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: node
   notes: { fr: "Installer depuis le miroir npm local (ressource verdaccio) : `npm install -g node-red --registry http://127.0.0.1:4873`. Les nœuds contrib s'installent de la même façon, à mettre en cache avant la coupure.", en: "Install from the local npm mirror (verdaccio resource): `npm install -g node-red --registry http://127.0.0.1:4873`. Contrib nodes install the same way; cache them before the outage." }
+  version: 5.0.7
+  updated: 2026-09-08
+  checked: 2026-09-12
 
 - id: n8n
   type: software
@@ -250,10 +295,13 @@
   requires: { tools: [ node ], ram_gb: 8 }
   depends_on: [ node-lts ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
   runtime: node
   notes: { fr: "Brancher Arche : nœud « MCP Client » sur http://127.0.0.1:8765/mcp. Pas de modèle de langue dans une boucle d'actionneur (ADR 0010).", en: "Connect Arche: 'MCP Client' node on http://127.0.0.1:8765/mcp. No language model in an actuator loop (ADR 0010)." }
+  version: n8n@2.38.7
+  updated: 2026-09-11
+  checked: 2026-09-12
 
 - id: gitea
   type: software
@@ -269,9 +317,13 @@
   license: { spdx: MIT, redistribution: allowed }
   provides: [ git-forge ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: v1.27.3
+  updated: 2026-08-29
+  size_bytes: 129469440
+  checked: 2026-09-12
 
 - id: zim-tools
   type: software
@@ -288,9 +340,15 @@
   requires: { os: [ linux, macos, windows ] }
   provides: [ zimdump ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: 3.8.0
+  updated: 2026-08-13
+  notes:
+    fr: "[updater 2026-09-12: asset pattern matches nothing in 3.8.0]"
+    en: "[updater 2026-09-12: asset pattern matches nothing in 3.8.0]"
+  checked: 2026-09-12
 
 - id: poppler-utils
   type: software
@@ -325,10 +383,14 @@
   license: { spdx: GPL-3.0-only, redistribution: allowed }
   requires: { os: [ linux, macos, windows ] }
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "Matériel : RTL-SDR v4 + antenne QFH ou V-dipôle 137 MHz (Meteor-M) ; parabole/grille + LNA pour GOES (1,69 GHz, GOES-19 visible depuis l'Europe de l'Ouest seulement en bord d'horizon, EUMETSAT Meteosat via EUMETCast nécessite abonnement).", en: "Hardware: RTL-SDR v4 + QFH or V-dipole at 137 MHz (Meteor-M); dish/grid + LNA for GOES (1.69 GHz; from Western Europe GOES-19 is barely above the horizon, Meteosat via EUMETCast needs a subscription)." }
   runtime: static-binary
+  version: 1.2.2
+  updated: 2024-11-29
+  size_bytes: 55123754
+  checked: 2026-09-12
 
 - id: meshtastic-firmware
   type: software
@@ -343,10 +405,14 @@
   source: { kind: github-release, github_repo: meshtastic/firmware, github_asset_pattern: "^firmware-.*\\.zip$", homepage: https://meshtastic.org }
   license: { spdx: GPL-3.0-only, redistribution: allowed }
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "En France : bande 869 MHz (EU_868), puissance limitée. Mettre aussi en cache l'APK Android (meshtastic/Meshtastic-Android) et le flasher (esptool).", en: "In France: 869 MHz band (EU_868), limited power. Also cache the Android APK (meshtastic/Meshtastic-Android) and the flasher (esptool)." }
   runtime: firmware
+  version: v2.7.26.54e0d8d
+  updated: 2026-06-24
+  size_bytes: 170272165
+  checked: 2026-09-12
 
 - id: internet-in-a-box
   type: software
@@ -362,10 +428,13 @@
   license: { spdx: GPL-2.0-or-later, redistribution: allowed }
   requires: { os: [ linux ], arch: [ arm64, x64 ] }
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "IIAB s'installe en ligne (playbooks Ansible). Pour une installation hors-ligne, préparer une image SD complète à l'avance.", en: "IIAB installs online (Ansible playbooks). For offline installation, prepare a full SD image beforehand." }
   runtime: source
+  version: release-8.2
+  updated: 2025-01-01
+  checked: 2026-09-12
 
 - id: rachel
   type: software
@@ -383,3 +452,4 @@
   status: unverified
   reliability: reference
   runtime: source
+  checked: 2026-09-12

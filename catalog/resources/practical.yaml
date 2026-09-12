@@ -13,13 +13,17 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 1.5
-  source: { kind: kiwix, kiwix_name: wikipedia_fr_medicine_maxi, url: https://download.kiwix.org/zim/wikipedia/wikipedia_fr_medicine_maxi.zim }
+  source: { kind: kiwix, kiwix_name: wikipedia_fr_medicine_maxi, url: https://lb.download.kiwix.org/zim/wikipedia/wikipedia_fr_medicine_maxi_2026-07.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
   printable: { available: false, note: { fr: "Voir docs/printables pour les fiches premiers secours.", en: "See docs/printables for the first-aid sheets." } }
+  size_bytes: 1303652352
+  version: 2026-07
+  updated: 2026-07-16
+  checked: 2026-09-12
 
 - id: mdwiki-en
   type: zim
@@ -33,12 +37,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 2.1
-  source: { kind: kiwix, kiwix_name: mdwiki_en_all_maxi, url: https://download.kiwix.org/zim/other/mdwiki_en_all_maxi.zim, homepage: https://mdwiki.org }
+  source: { kind: kiwix, kiwix_name: mdwiki_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/mdwiki_en_all_maxi_2025-11.zim, homepage: https://mdwiki.org }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 2302838784
+  version: 2025-11
+  updated: 2025-11-12
+  checked: 2026-09-12
 
 - id: wikem-en
   type: zim
@@ -52,12 +60,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 0.36
-  source: { kind: kiwix, kiwix_name: wikem_en_all_maxi, url: https://download.kiwix.org/zim/other/wikem_en_all_maxi.zim, homepage: https://wikem.org }
+  source: { kind: kiwix, kiwix_name: wikem_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/wikem_en_all_maxi_2026-07.zim, homepage: https://wikem.org }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 374632448
+  version: 2026-07
+  updated: 2026-07-24
+  checked: 2026-09-12
 
 - id: medlineplus-en
   type: zim
@@ -71,12 +83,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 1.8
-  source: { kind: kiwix, kiwix_name: medlineplus.gov_en_all, url: https://download.kiwix.org/zim/zimit/medlineplus.gov_en_all.zim }
+  source: { kind: kiwix, kiwix_name: medlineplus.gov_en_all, url: https://lb.download.kiwix.org/zim/zimit/medlineplus.gov_en_all_2025-01.zim }
   license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 1944841216
+  version: 2025-01
+  updated: 2025-01-04
+  checked: 2026-09-12
 
 - id: zimgit-post-disaster
   type: zim
@@ -90,12 +106,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.62
-  source: { kind: kiwix, kiwix_name: zimgit-post-disaster_en, url: https://download.kiwix.org/zim/other/zimgit-post-disaster_en.zim }
+  source: { kind: kiwix, kiwix_name: zimgit-post-disaster_en, url: https://lb.download.kiwix.org/zim/other/zimgit-post-disaster_en_2024-05.zim }
   license: { spdx: mixed, redistribution: unclear, note: { fr: "Licences variables selon les documents inclus (souvent gouvernementales ou ONG).", en: "Licenses vary per included document (mostly government or NGO)." } }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: curated
+  size_bytes: 644666368
+  version: 2024-05
+  updated: 2024-05-25
+  checked: 2026-09-12
 
 - id: zimgit-water
   type: zim
@@ -109,12 +129,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.02
-  source: { kind: kiwix, kiwix_name: zimgit-water_en, url: https://download.kiwix.org/zim/other/zimgit-water_en.zim }
+  source: { kind: kiwix, kiwix_name: zimgit-water_en, url: https://lb.download.kiwix.org/zim/other/zimgit-water_en_2024-08.zim }
   license: { spdx: mixed, redistribution: unclear }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: curated
+  size_bytes: 20925440
+  version: 2024-08
+  updated: 2024-08-29
+  checked: 2026-09-12
 
 - id: zimgit-medicine
   type: zim
@@ -128,13 +152,17 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.07
-  source: { kind: kiwix, kiwix_name: zimgit-medicine_en, url: https://download.kiwix.org/zim/other/zimgit-medicine_en.zim }
+  source: { kind: kiwix, kiwix_name: zimgit-medicine_en, url: https://lb.download.kiwix.org/zim/other/zimgit-medicine_en_2024-08.zim }
   license: { spdx: mixed, redistribution: unclear, note: { fr: "Les manuels Hesperian sont sous licence ouverte (usage non commercial). Vérifier avant reproduction.", en: "Hesperian manuals are under an open non-commercial license. Check before copying." } }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
   printable: { available: true, url: https://hesperian.org/books-and-resources/, note: { fr: "Hesperian vend les versions papier ; les PDF FR (« Là où il n'y a pas de docteur ») existent.", en: "Hesperian sells print editions; French PDFs ('Là où il n'y a pas de docteur') exist." } }
+  size_bytes: 70179840
+  version: 2024-08
+  updated: 2024-08-29
+  checked: 2026-09-12
 
 - id: zimgit-food-preparation
   type: zim
@@ -148,12 +176,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.09
-  source: { kind: kiwix, kiwix_name: zimgit-food-preparation_en, url: https://download.kiwix.org/zim/other/zimgit-food-preparation_en.zim }
+  source: { kind: kiwix, kiwix_name: zimgit-food-preparation_en, url: https://lb.download.kiwix.org/zim/other/zimgit-food-preparation_en_2025-04.zim }
   license: { spdx: mixed, redistribution: unclear }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: curated
+  size_bytes: 97822720
+  version: 2025-04
+  updated: 2025-04-11
+  checked: 2026-09-12
 
 - id: zimgit-knots
   type: zim
@@ -165,12 +197,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: recommended
   size_estimate_gb: 0.03
-  source: { kind: kiwix, kiwix_name: zimgit-knots_en, url: https://download.kiwix.org/zim/other/zimgit-knots_en.zim }
+  source: { kind: kiwix, kiwix_name: zimgit-knots_en, url: https://lb.download.kiwix.org/zim/other/zimgit-knots_en_2024-08.zim }
   license: { spdx: mixed, redistribution: unclear }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: curated
+  size_bytes: 27945984
+  version: 2024-08
+  updated: 2024-08-29
+  checked: 2026-09-12
 
 - id: ifixit-fr
   type: zim
@@ -184,12 +220,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 3.4
-  source: { kind: kiwix, kiwix_name: ifixit_fr_all, url: https://download.kiwix.org/zim/ifixit/ifixit_fr_all.zim, homepage: https://fr.ifixit.com }
+  source: { kind: kiwix, kiwix_name: ifixit_fr_all, url: https://lb.download.kiwix.org/zim/ifixit/ifixit_fr_all_2026-03.zim, homepage: https://fr.ifixit.com }
   license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 3652281344
+  version: 2026-03
+  updated: 2026-03-08
+  checked: 2026-09-12
 
 - id: ifixit-en
   type: zim
@@ -201,12 +241,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 3.3
-  source: { kind: kiwix, kiwix_name: ifixit_en_all, url: https://download.kiwix.org/zim/ifixit/ifixit_en_all.zim }
+  source: { kind: kiwix, kiwix_name: ifixit_en_all, url: https://lb.download.kiwix.org/zim/ifixit/ifixit_en_all_2025-12.zim }
   license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 3570696192
+  version: 2025-12
+  updated: 2025-12-21
+  checked: 2026-09-12
 
 - id: appropedia-en
   type: zim
@@ -220,12 +264,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.56
-  source: { kind: kiwix, kiwix_name: appropedia_en_all_maxi, url: https://download.kiwix.org/zim/other/appropedia_en_all_maxi.zim, homepage: https://www.appropedia.org }
+  source: { kind: kiwix, kiwix_name: appropedia_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/appropedia_en_all_maxi_2026-02.zim, homepage: https://www.appropedia.org }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 581642240
+  version: 2026-02
+  updated: 2026-02-26
+  checked: 2026-09-12
 
 - id: energypedia-en
   type: zim
@@ -239,12 +287,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: recommended
   size_estimate_gb: 0.76
-  source: { kind: kiwix, kiwix_name: energypedia_en_all_maxi, url: https://download.kiwix.org/zim/other/energypedia_en_all_maxi.zim, homepage: https://energypedia.info }
+  source: { kind: kiwix, kiwix_name: energypedia_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/energypedia_en_all_maxi_2026-06.zim, homepage: https://energypedia.info }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 799713280
+  version: 2026-06
+  updated: 2026-06-20
+  checked: 2026-09-12
 
 - id: lowtech-magazine-solar
   type: zim
@@ -258,12 +310,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: recommended
   size_estimate_gb: 0.67
-  source: { kind: kiwix, kiwix_name: solar.lowtechmagazine.com_mul_all, url: https://download.kiwix.org/zim/zimit/solar.lowtechmagazine.com_mul_all.zim, homepage: https://solar.lowtechmagazine.com }
+  source: { kind: kiwix, kiwix_name: solar.lowtechmagazine.com_mul_all, url: https://lb.download.kiwix.org/zim/zimit/solar.lowtechmagazine.com_mul_all_2025-01.zim, homepage: https://solar.lowtechmagazine.com }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: curated
+  size_bytes: 700556288
+  version: 2025-01
+  updated: 2025-01-02
+  checked: 2026-09-12
 
 - id: cuisine-libre-fr
   type: zim
@@ -275,12 +331,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: optional
   size_estimate_gb: 0.25
-  source: { kind: kiwix, kiwix_name: cuisinelibre.org_fr_all, url: https://download.kiwix.org/zim/other/cuisinelibre.org_fr_all.zim }
+  source: { kind: kiwix, kiwix_name: cuisinelibre.org_fr_all, url: https://lb.download.kiwix.org/zim/other/cuisinelibre.org_fr_all_2026-08.zim }
   license: { spdx: CC-BY-SA-3.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 255952896
+  version: 2026-08
+  updated: 2026-08-17
+  checked: 2026-09-12
 
 - id: ready-gov-en
   type: zim
@@ -292,12 +352,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 2.3
-  source: { kind: kiwix, kiwix_name: www.ready.gov_en, url: https://download.kiwix.org/zim/zimit/www.ready.gov_en.zim }
+  source: { kind: kiwix, kiwix_name: www.ready.gov_en, url: https://lb.download.kiwix.org/zim/zimit/www.ready.gov_en_2024-12.zim }
   license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 2429922304
+  version: 2024-12
+  updated: 2024-12-03
+  checked: 2026-09-12
 
 - id: survivor-library-en
   type: zim
@@ -311,12 +375,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 235
-  source: { kind: kiwix, kiwix_name: survivorlibrary.com_en_all, url: https://download.kiwix.org/zim/zimit/survivorlibrary.com_en_all.zim, homepage: https://www.survivorlibrary.com }
+  source: { kind: kiwix, kiwix_name: survivorlibrary.com_en_all, url: https://lb.download.kiwix.org/zim/zimit/survivorlibrary.com_en_all_2025-12.zim, homepage: https://www.survivorlibrary.com }
   license: { spdx: LicenseRef-PublicDomain, redistribution: allowed, note: { fr: "Scans de documents du domaine public ; le site lui-même n'est pas sous licence libre.", en: "Scans of public-domain documents; the site itself is not free-licensed." } }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: unknown
+  size_bytes: 251947683840
+  version: 2025-12
+  updated: 2025-12-11
+  checked: 2026-09-12
 
 - id: wikihow-fr
   type: zim
@@ -337,3 +405,4 @@
   notes:
     fr: "Au 2026-09-11, aucun ZIM WikiHow n'apparaît sur download.kiwix.org (ni FR ni EN). À arbitrer : retirer, ou produire soi-même via Zimit (licence NC : pas de redistribution, chaque utilisateur le fait pour lui)."
     en: "As of 2026-09-11 no WikiHow ZIM is listed on download.kiwix.org (FR or EN). Decision needed: drop it, or let each user build it with Zimit (NC license: no redistribution)."
+  checked: 2026-09-12

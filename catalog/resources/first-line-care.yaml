@@ -25,6 +25,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Le français n'existe qu'en HTML (pas de PDF FR) : c'est l'argument principal pour demander à Hesperian l'autorisation d'un ZIM FR.", en: "French exists only as HTML (no FR PDF): the main argument for asking Hesperian to allow a FR ZIM." }
+  checked: 2026-09-12
 
 - id: hesperian-where-women-no-doctor
   type: pdf
@@ -42,6 +43,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: who-mcpc-obstetric-complications
   type: pdf
@@ -78,6 +80,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 755
+  checked: 2026-09-12
 
 - id: msf-obstetric-newborn-care
   type: pdf
@@ -96,6 +100,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 9530029
+  checked: 2026-09-12
 
 # ---------- Enfants / Children ----------
 
@@ -117,6 +123,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 5304059
+  checked: 2026-09-12
 
 - id: hesperian-disability-children
   type: pdf
@@ -134,6 +142,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 # ---------- Dentaire / Dental ----------
 
@@ -155,6 +164,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: who-oral-health-report
   type: pdf
@@ -193,6 +203,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 # ---------- Premiers secours : la référence internationale / First aid: the international reference ----------
 
@@ -212,6 +223,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 4432256
+  checked: 2026-09-12
 
 - id: global-health-media-videos
   type: dataset

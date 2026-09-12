@@ -23,11 +23,14 @@
   requires: { tools: [ git, python3 ] }
   depends_on: [ gitea, pip-cache ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Les modèles et jeux de données LeRobot sont sur Hugging Face (plusieurs Go chacun) : à ajouter au cas par cas via source.kind: huggingface. Le cache pip doit inclure lerobot + torch (CPU) pour l'usage hors-ligne."
     en: "LeRobot models and datasets live on Hugging Face (several GB each): add case by case via source.kind: huggingface. The pip cache must include lerobot + torch (CPU) for offline use."
+  version: v0.6.1
+  updated: 2026-08-03
+  checked: 2026-09-12
 
 - id: git-so-arm101
   type: git-repo
@@ -46,8 +49,12 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-commit }
-  status: unverified
+  status: active
   reliability: reference
+  version: eecbe3e0a9eb
+  updated: 2026-09-06
+  size_bytes: 201998336
+  checked: 2026-09-12
 
 - id: git-reachy-mini
   type: git-repo
@@ -66,8 +73,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: v1.10.0
+  updated: 2026-08-13
+  checked: 2026-09-12
 
 - id: git-inmoov
   type: git-repo
@@ -86,6 +96,7 @@
   update: { tracker: http-head }
   status: unverified
   reliability: community
+  checked: 2026-09-12
 
 # --- Fabrication : imprimantes, scanners, recyclage ---
 
@@ -104,8 +115,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea, git-klipper ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
+  version: V2.4r2
+  updated: 2022-02-23
+  checked: 2026-09-12
 
 - id: git-prusa-firmware
   type: git-repo
@@ -122,8 +136,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: v3.14.1
+  updated: 2024-11-28
+  checked: 2026-09-12
 
 - id: git-precious-plastic
   type: git-repo
@@ -140,6 +157,7 @@
   update: { tracker: http-head }
   status: unverified
   reliability: community
+  checked: 2026-09-12
 
 # --- Agriculture, énergie, santé ---
 
@@ -158,8 +176,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: v15.30.5
+  updated: 2026-09-04
+  checked: 2026-09-12
 
 - id: git-libre-solar
   type: git-repo
@@ -176,9 +197,13 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea, toolchain-platformio ]
   update: { tracker: github-commit }
-  status: unverified
+  status: active
   reliability: community
   notes: { fr: "Mirrorer aussi les dépôts matériels (LibreSolar/mppt-2420-hc, bms-c1) et la doc (LibreSolar/docs).", en: "Also mirror the hardware repos (LibreSolar/mppt-2420-hc, bms-c1) and the docs (LibreSolar/docs)." }
+  version: b65f274541b1
+  updated: 2026-07-20
+  size_bytes: 4746240
+  checked: 2026-09-12
 
 - id: git-openenergymonitor
   type: git-repo
@@ -195,8 +220,12 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-commit }
-  status: unverified
+  status: active
   reliability: community
+  version: 46a4c43054bb
+  updated: 2025-10-12
+  size_bytes: 13759488
+  checked: 2026-09-12
 
 - id: git-openbionics
   type: git-repo
@@ -213,7 +242,7 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-commit }
-  status: unverified
+  status: missing
   reliability: community
 
 - id: enable-prosthetics
@@ -231,6 +260,7 @@
   update: { tracker: http-head }
   status: unverified
   reliability: community
+  checked: 2026-09-12
 
 - id: reprap-wiki
   type: git-repo

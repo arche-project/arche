@@ -35,12 +35,15 @@
   license: { spdx: mixed, redistribution: allowed }
   depends_on: [ apt-mirror-debian, ventoy ]
   update: { tracker: debian, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Prendre `debian-<version>-<arch>-DVD-1.iso` dans le dossier ; le tracker `debian` donne la version courante. Debian stable vit ~5 ans (dont 2 en LTS) : c'est le système qui change le moins, et c'est voulu."
     en: "Take `debian-<version>-<arch>-DVD-1.iso` from the folder; the `debian` tracker gives the current version. Debian stable lives ~5 years: it is the system that changes least, on purpose."
   runtime: none
+  version: 13.7 (trixie)
+  updated: 2026-09-12
+  checked: 2026-09-12
 
 - id: raspios-lite
   type: software
@@ -60,12 +63,15 @@
   requires: { arch: [ arm64 ] }
   depends_on: [ apt-mirror-debian ]
   update: { tracker: raspios, package: "Raspberry Pi OS Lite \\(64-bit\\)", check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Écrire l'image avec `dd` ou Raspberry Pi Imager en mode hors-ligne (« Utiliser une image personnalisée »). Ajouter `deb http://archive.raspberrypi.com/debian/ <codename> main` au miroir apt, sinon pas de mises à jour du noyau."
     en: "Write with `dd` or Raspberry Pi Imager offline ('Use custom image'). Add `deb http://archive.raspberrypi.com/debian/ <codename> main` to the apt mirror, or no kernel updates."
   runtime: none
+  version: 2026-06-19
+  updated: 2026-06-18
+  checked: 2026-09-12
 
 - id: ubuntu-lts
   type: software
@@ -84,12 +90,15 @@
   license: { spdx: mixed, redistribution: allowed }
   depends_on: [ ros2-apt-mirror ]
   update: { tracker: ubuntu-lts, stability: lts, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Prévoir aussi un miroir apt Ubuntu partiel (`apt-mirror` sur archive.ubuntu.com, sections main + universe pour amd64 et arm64) : ~60 Go. Sans lui, l'ISO installe et s'arrête là."
     en: "Also plan a partial Ubuntu apt mirror (`apt-mirror` on archive.ubuntu.com, main + universe, amd64 and arm64): ~60 GB. Without it the ISO installs and stops there."
   runtime: none
+  version: 24.04.5 LTS (noble)
+  updated: 2024-04-25
+  checked: 2026-09-12
 
 - id: systemrescue
   type: software
@@ -114,6 +123,7 @@
     fr: "Pas de dépôt à mettre en miroir : tout est dans l'ISO, c'est le but. Sur la clé Ventoy avec les autres. Le manuel (system-rescue.org/manual) vaut d'être imprimé : on s'en sert quand rien ne marche."
     en: "No repository to mirror: everything is in the ISO, by design. Put it on the Ventoy stick with the others. The manual is worth printing: it is used when nothing works."
   runtime: none
+  checked: 2026-09-12
 
 - id: openwrt
   type: software
@@ -130,12 +140,14 @@
   source: { kind: github-repo, github_repo: openwrt/openwrt, url: https://downloads.openwrt.org/releases/, homepage: https://openwrt.org }
   license: { spdx: GPL-2.0-only, redistribution: allowed }
   update: { tracker: github-tag, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Télécharger, pour la version stable : `targets/<cible>/<sous-cible>/` (images + ImageBuilder) et `packages/<arch>/` pour vos appareils. Le sélecteur firmware-selector.openwrt.org dit quelle cible correspond à quel routeur — le noter AVANT la coupure."
     en: "For the stable release download `targets/<target>/<subtarget>/` (images + ImageBuilder) and `packages/<arch>/` for your devices. firmware-selector.openwrt.org maps routers to targets — write it down BEFORE the outage."
   runtime: firmware
+  version: v25.12.5
+  checked: 2026-09-12
 
 - id: ventoy
   type: software
@@ -152,9 +164,13 @@
   source: { kind: github-release, github_repo: ventoy/Ventoy, url: https://github.com/ventoy/Ventoy/releases, homepage: https://www.ventoy.net, github_asset_pattern: "ventoy-.*-(linux\\.tar\\.gz|windows\\.zip)$" }
   license: { spdx: GPL-3.0-or-later, redistribution: allowed }
   update: { tracker: github-release, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: v1.1.17
+  updated: 2026-07-24
+  size_bytes: 20291141
+  checked: 2026-09-12
 
 - id: primtux
   type: software
@@ -175,6 +191,7 @@
   status: unverified
   reliability: community
   runtime: none
+  checked: 2026-09-12
 
 - id: alpine-standard
   type: software
@@ -194,8 +211,10 @@
   depends_on: [ ventoy ]
   update: { tracker: github-tag, check_interval_days: 30 }
   runtime: none
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Le tracker lit les tags du miroir GitHub alpinelinux/aports (v3.21.x…). musl ≠ glibc : les binaires précompilés d'Ollama, Node ou Gitea ont besoin de `gcompat` ou d'une version musl — vérifier avant de choisir Alpine pour le nœud Arche ; Debian reste le choix sûr pour ça."
     en: "The tracker reads the tags of the alpinelinux/aports GitHub mirror (v3.21.x…). musl ≠ glibc: prebuilt Ollama, Node or Gitea binaries need `gcompat` or a musl build — check before choosing Alpine for the Arche node; Debian remains the safe choice there."
+  version: v20260805
+  checked: 2026-09-12

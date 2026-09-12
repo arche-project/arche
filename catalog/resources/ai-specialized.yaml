@@ -19,16 +19,19 @@
   priority: recommended
   size_estimate_gb: 0.65
   source: { kind: huggingface, hf_repo: Qwen/Qwen3-Reranker-0.6B, hf_file: model.safetensors, url: https://huggingface.co/Qwen/Qwen3-Reranker-0.6B, homepage: https://huggingface.co/Qwen/Qwen3-Reranker-0.6B }
-  checksum: { algo: sha256, value: null, url: null }
+  checksum: { algo: sha256, value: 27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b, url: null }
   license: { spdx: Apache-2.0, redistribution: allowed }
   requires: { ram_gb: 4, gpu: none, tools: [ llama-server ] }
   depends_on: [ llama-cpp ]
   update: { tracker: huggingface, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Convertir en GGUF (`convert_hf_to_gguf.py`, Q8_0 : ~640 Mo) ou prendre une conversion communautaire. Lancer : `llama-server -m qwen3-reranker-0.6b-q8_0.gguf --reranking --port 8012`."
     en: "Convert to GGUF (`convert_hf_to_gguf.py`, Q8_0: ~640 MB) or take a community conversion. Run: `llama-server -m qwen3-reranker-0.6b-q8_0.gguf --reranking --port 8012`."
+  size_bytes: 1191588280
+  updated: 2026-09-12
+  checked: 2026-09-12
 
 # --- OCR : lire les scans / OCR: reading scans ------------------------------------------------------
 # Une grande part du corpus utile est SCANNÉE : Survivor Library (manuels du XIXe), planches BHL,
@@ -49,8 +52,12 @@
   requires: { ram_gb: 16, gpu: optional, tools: [ ollama ] }
   depends_on: [ ollama ]
   update: { tracker: ollama }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 6687239934
+  version: sha256:3a18673ff291
+  updated: 2026-09-12
+  checked: 2026-09-12
 
 - id: paddleocr
   type: software
@@ -68,8 +75,12 @@
   depends_on: [ python-standalone, pip-cache ]
   update: { tracker: pypi, package: paddleocr, check_interval_days: 30 }
   runtime: python
-  status: unverified
+  status: active
   reliability: reference
+  version: 3.7.0
+  updated: 2026-06-11
+  size_bytes: 2011150336
+  checked: 2026-09-12
 
 # --- Voix : écouter et parler / Speech: listen and speak -------------------------------------------
 # Accessibilité : quelqu'un qui ne lit pas bien, qui a les mains occupées, ou qui voit mal doit
@@ -89,11 +100,14 @@
   license: { spdx: MIT, redistribution: allowed }
   update: { tracker: github-release, check_interval_days: 30 }
   runtime: static-binary
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Modèles : https://huggingface.co/ggerganov/whisper.cpp (ggml-small.bin ≈ 466 Mo, ggml-medium.bin ≈ 1,5 Go). Le `small` suffit pour poser une question ; le `medium` pour dicter un carnet."
     en: "Models: https://huggingface.co/ggerganov/whisper.cpp (ggml-small.bin ≈ 466 MB, ggml-medium.bin ≈ 1.5 GB). `small` is enough to ask a question; `medium` to dictate a log."
+  version: v1.9.4
+  updated: 2026-09-11
+  checked: 2026-09-12
 
 - id: piper-tts
   type: software
@@ -109,8 +123,11 @@
   license: { spdx: MIT, redistribution: allowed }
   update: { tracker: github-release, check_interval_days: 60 }
   runtime: static-binary
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Voix : https://huggingface.co/rhasspy/piper-voices (fr_FR/siwis/medium ≈ 60 Mo). Le projet Piper est peu actif depuis 2025 ; il marche, et c'est ce qu'on lui demande. Alternative si besoin : Kokoro (Apache-2.0, français correct)."
     en: "Voices: https://huggingface.co/rhasspy/piper-voices (fr_FR/siwis/medium ≈ 60 MB). Piper has been quiet since 2025; it works, which is what we ask of it. Alternative if needed: Kokoro (Apache-2.0, decent French)."
+  version: 2023.11.14-2
+  updated: 2023-11-14
+  checked: 2026-09-12
