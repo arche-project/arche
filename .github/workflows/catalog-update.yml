@@ -73,6 +73,7 @@ jobs:
         with:
           name: catalog-reports
           path: .catalog-reports/
+          include-hidden-files: true   # v4 ignore les dossiers cachés par défaut : sans ça, aucun artefact (run #2)
 
       - name: Create or update the PR
         if: ${{ !inputs.dry_run }}

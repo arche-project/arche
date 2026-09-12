@@ -30,3 +30,29 @@ test('sidecar checksum parser', () => {
   assert.equal(parseSidecar(`${h}  wikipedia.zim\n`), h.toLowerCase());
   assert.equal(parseSidecar('not a hash'), null);
 });
+
+// Régression du premier run de catalog-update.yml (12 sept. 2026) : Kiwix publie désormais
+// `<name>wikipedia_fr_all</name>` + `<flavour>maxi</flavour>` ; notre `kiwix_name` garde la forme longue.
+// Regression: Kiwix moved the flavour out of `name` in 2026; `kiwix_name` keeps the long form.
+import { kiwixNames, matchesKiwixName, kiwixBaseName } from '../src/core/kiwix.js';
+
+test('kiwix : nom + saveur séparés (flux 2026) résolus depuis la forme longue du catalogue', () => {
+  const xml = `<feed><entry><title>Wikipédia</title><name>wikipedia_fr_all</name><flavour>nopic</flavour><updated>2026-05-02T00:00:00Z</updated>
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/wikipedia/wikipedia_fr_all_nopic_2026-05.zim.meta4" length="12912823296"/></entry>
+    <entry><title>Wikipédia</title><name>wikipedia_fr_all</name><flavour>maxi</flavour><updated>2026-05-02T00:00:00Z</updated>
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/wikipedia/wikipedia_fr_all_maxi_2026-05.zim.meta4" length="55438794752"/></entry>
+    <entry><title>iFixit</title><name>ifixit_fr_all</name><updated>2026-03-01T00:00:00Z</updated>
+    <link rel="http://opds-spec.org/acquisition/open-access" type="application/x-zim" href="https://lb.download.kiwix.org/zim/ifixit/ifixit_fr_all_2026-03.zim.meta4" length="3652281344"/></entry></feed>`;
+  const entries = parseOpds(xml);
+  assert.equal(entries.length, 3);
+  assert.deepEqual(kiwixNames(entries[0]), ['wikipedia_fr_all_nopic', 'wikipedia_fr_all']);
+  assert.deepEqual(kiwixNames(entries[2]), ['ifixit_fr_all']);
+  assert.ok(matchesKiwixName(entries[0], 'wikipedia_fr_all_nopic'));
+  assert.ok(!matchesKiwixName(entries[0], 'wikipedia_fr_all_maxi'));
+  assert.ok(matchesKiwixName(entries[1], 'wikipedia_fr_all_maxi'));
+  assert.ok(matchesKiwixName(entries[2], 'ifixit_fr_all'));
+  // Ancien flux (saveur dans le nom) : toujours accepté.
+  assert.ok(matchesKiwixName({ name: 'wikipedia_fr_all_maxi' }, 'wikipedia_fr_all_maxi'));
+  assert.deepEqual(kiwixBaseName('wikipedia_fr_all_maxi'), { name: 'wikipedia_fr_all', flavour: 'maxi' });
+  assert.deepEqual(kiwixBaseName('ifixit_fr_all'), { name: 'ifixit_fr_all' });
+});
