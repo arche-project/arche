@@ -36,7 +36,7 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.05
-  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/Là_où_les_femmes_n'ont_pas_de_docteur", url: https://hesperian.org/wp-content/uploads/pdf/en_wwhnd_2023/en_wwhnd_2023_fm.pdf }
+  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/L%C3%A0_o%C3%B9_les_femmes_n%27ont_pas_de_docteur", url: https://hesperian.org/wp-content/uploads/pdf/en_wwhnd_2023/en_wwhnd_2023_fm.pdf }
   license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc, note: { fr: "Idem : accord écrit requis pour le numérique.", en: "Same: written permission required for digital formats." } }
   printable: { available: true, pages_estimate: 600 }
   update: { tracker: http-head, check_interval_days: 90 }
@@ -149,7 +149,7 @@
   profiles: [ bunker, novice, lowtech ]
   priority: essential
   size_estimate_gb: 0.03
-  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/Là_où_il_n'ya_pas_de_dentiste", url: https://hesperian.org/wp-content/uploads/pdf/en_dent_2025/en_dent_2025_fm.pdf }
+  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/L%C3%A0_o%C3%B9_il_n%27ya_pas_de_dentiste", url: https://hesperian.org/wp-content/uploads/pdf/en_dent_2025/en_dent_2025_fm.pdf }
   license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc, note: { fr: "Accord écrit requis pour le numérique (ZIM).", en: "Written permission required for digital formats (ZIM)." } }
   printable: { available: true, pages_estimate: 250 }
   update: { tracker: http-head, check_interval_days: 90 }
