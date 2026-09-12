@@ -27,12 +27,15 @@
   source: { kind: http, url: https://nodejs.org/dist/index.json, homepage: https://nodejs.org }
   license: { spdx: MIT, redistribution: allowed }
   update: { tracker: node-lts, stability: lts, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
-    fr: "Télécharger les archives de la version affichée dans `version` pour chaque plateforme cible : https://nodejs.org/dist/<version>/. Le tracker suit la LTS, pas la version « current »."
-    en: "Download the archives of the version shown in `version` for each target platform from https://nodejs.org/dist/<version>/. The tracker follows the LTS line, not 'current'."
+    fr: "Télécharger les archives de la version affichée dans `version` pour chaque plateforme cible : https://nodejs.org/dist/<version>/. Le tracker suit la LTS, pas la version « current ». [updater 2026-09-12: LTS « Krypton »]"
+    en: "Download the archives of the version shown in `version` for each target platform from https://nodejs.org/dist/<version>/. The tracker follows the LTS line, not 'current'. [updater 2026-09-12: LTS « Krypton »]"
   runtime: static-binary
+  version: v24.21.0
+  updated: 2026-09-07
+  checked: 2026-09-12
 
 - id: python-standalone
   type: software
@@ -49,9 +52,13 @@
   source: { kind: github-release, github_repo: astral-sh/python-build-standalone, url: https://github.com/astral-sh/python-build-standalone/releases, github_asset_pattern: "cpython-3\\.1[2-9].*install_only.*\\.tar\\.gz$" }
   license: { spdx: PSF-2.0, redistribution: allowed }
   update: { tracker: github-release, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: "20260901"
+  updated: 2026-09-01
+  size_bytes: 151826400
+  checked: 2026-09-12
 
 - id: rustup-offline
   type: software
@@ -68,12 +75,15 @@
   source: { kind: github-release, github_repo: rust-lang/rust, url: https://forge.rust-lang.org/infra/other-installation-methods.html, homepage: https://www.rust-lang.org }
   license: { spdx: "MIT OR Apache-2.0", redistribution: allowed }
   update: { tracker: github-release, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Archives sur https://static.rust-lang.org/dist/rust-<version>-<cible>.tar.xz. Le tag GitHub donne la version ; les archives elles-mêmes ne sont pas sur GitHub."
     en: "Archives at https://static.rust-lang.org/dist/rust-<version>-<target>.tar.xz. The GitHub tag gives the version; the archives are not on GitHub."
   runtime: static-binary
+  version: 1.98.1
+  updated: 2026-09-03
+  checked: 2026-09-12
 
 # --- Registres de paquets : proxys-cache locaux / Package registries: local caching proxies -------
 
@@ -94,12 +104,15 @@
   requires: { tools: [ node, npm ] }
   depends_on: [ node-lts ]
   update: { tracker: npm, package: verdaccio, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
     fr: "Le cache ne contient que ce qu'on a installé : Arche fournit `requirements/npm-offline.txt`, la liste des paquets à réchauffer. La taille dépend entièrement de cette liste."
     en: "The cache only holds what was installed through it: Arche ships `requirements/npm-offline.txt`, the list of packages to warm. Size depends entirely on that list."
   runtime: node
+  version: 6.10.3
+  updated: 2026-09-05
+  checked: 2026-09-12
 
 - id: devpi
   type: software
@@ -118,9 +131,12 @@
   requires: { tools: [ python3, pip ] }
   depends_on: [ python-standalone ]
   update: { tracker: pypi, package: devpi-server, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   runtime: python
+  version: 6.20.3
+  updated: 2026-06-30
+  checked: 2026-09-12
 
 - id: panamax
   type: software
@@ -138,9 +154,12 @@
   license: { spdx: "MIT OR Apache-2.0", redistribution: allowed }
   depends_on: [ rustup-offline ]
   update: { tracker: github-release, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: community
   runtime: static-binary
+  version: v1.0.14
+  updated: 2024-06-06
+  checked: 2026-09-12
 
 - id: athens
   type: software
@@ -157,9 +176,12 @@
   source: { kind: github-release, github_repo: gomods/athens, url: https://github.com/gomods/athens/releases, homepage: https://docs.gomods.io }
   license: { spdx: MIT, redistribution: allowed }
   update: { tracker: github-release, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: community
   runtime: static-binary
+  version: v0.18.1
+  updated: 2026-07-15
+  checked: 2026-09-12
 
 - id: arduino-library-index
   type: dataset
@@ -179,6 +201,7 @@
   update: { tracker: http-head, check_interval_days: 14 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 # --- ROS 2 : la distribution est l'unité stable / ROS 2: the distribution is the stable unit ------
 
@@ -200,12 +223,13 @@
   requires: { os: [ linux ], tools: [ apt ] }
   depends_on: [ apt-mirror-debian ]
   update: { tracker: rosdistro, package: jazzy, stability: lts, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
   notes:
-    fr: "Une LTS ROS 2 sort les années paires en mai et vit cinq ans (Humble → 2027, Jazzy → 2029). Changer de distribution = changer `update.package` et `version` ensemble."
-    en: "A ROS 2 LTS ships in May of even years and lives five years (Humble → 2027, Jazzy → 2029). Switching distribution = changing `update.package` and `version` together."
+    fr: "Une LTS ROS 2 sort les années paires en mai et vit cinq ans (Humble → 2027, Jazzy → 2029). Changer de distribution = changer `update.package` et `version` ensemble. [updater 2026-09-12: une LTS plus récente est active : lyrical]"
+    en: "A ROS 2 LTS ships in May of even years and lives five years (Humble → 2027, Jazzy → 2029). Switching distribution = changing `update.package` and `version` together. [updater 2026-09-12: une LTS plus récente est active : lyrical]"
   runtime: none
+  checked: 2026-09-12
 
 - id: ros2-docs
   type: zim
@@ -230,8 +254,12 @@
   depends_on: [ kiwix-tools ]
   built_from: { url: https://docs.ros.org/en/jazzy/, tool: zimit, recipe: ros2-docs-en, built_at: null, permission: license }
   update: { tracker: rosdistro, package: jazzy, stability: lts, check_interval_days: 30 }
-  status: unverified
+  status: active
   reliability: reference
+  notes:
+    fr: "[updater 2026-09-12: une LTS plus récente est active : lyrical]"
+    en: "[updater 2026-09-12: une LTS plus récente est active : lyrical]"
+  checked: 2026-09-12
 
 # --- Images de conteneurs / Container images ---------------------------------------------------
 
@@ -251,9 +279,10 @@
   license: { spdx: GPL-3.0-or-later, redistribution: allowed }
   requires: { tools: [ docker ] }
   update: { tracker: dockerhub, package: kiwix/kiwix-serve, check_interval_days: 14 }
-  status: unverified
+  status: missing
   reliability: reference
   runtime: container
+  checked: 2026-09-12
 
 - id: docker-gitea
   type: software
@@ -271,6 +300,9 @@
   license: { spdx: MIT, redistribution: allowed }
   requires: { tools: [ docker ] }
   update: { tracker: dockerhub, package: gitea/gitea, check_interval_days: 14 }
-  status: unverified
+  status: active
   reliability: reference
   runtime: container
+  version: 1.27.3-rootless
+  updated: 2026-08-29
+  checked: 2026-09-12

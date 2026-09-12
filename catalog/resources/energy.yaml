@@ -19,9 +19,13 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea, toolchain-platformio ]
   update: { tracker: github-commit }
-  status: unverified
+  status: active
   reliability: community
   notes: { fr: "Mirrorer aussi stuartpittaway/diyBMSv4ESP32 (firmware du contrôleur).", en: "Also mirror stuartpittaway/diyBMSv4ESP32 (controller firmware)." }
+  version: 9afe427c7626
+  updated: 2025-04-18
+  size_bytes: 181900288
+  checked: 2026-09-12
 
 - id: git-openinverter
   type: git-repo
@@ -38,9 +42,12 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: community
   notes: { fr: "Mirrorer aussi jsphuebner/inverter-hardware. Le wiki openinverter.org bloque les robots : demander avant tout ZIM.", en: "Also mirror jsphuebner/inverter-hardware. The openinverter.org wiki blocks robots: ask before any ZIM." }
+  version: v5.40.R
+  updated: 2025-12-07
+  checked: 2026-09-12
 
 - id: git-openevse
   type: git-repo
@@ -57,9 +64,12 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "Mirrorer aussi OpenEVSE/OpenEVSE_PLUS (matériel).", en: "Also mirror OpenEVSE/OpenEVSE_PLUS (hardware)." }
+  version: 9.0.0
+  updated: 2026-07-12
+  checked: 2026-09-12
 
 - id: git-pvlib
   type: git-repo
@@ -76,8 +86,11 @@
   requires: { tools: [ git, python3 ] }
   depends_on: [ gitea, pip-cache ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: v0.15.2
+  updated: 2026-06-16
+  checked: 2026-09-12
 
 - id: git-nrel-sam
   type: git-repo
@@ -94,8 +107,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: 2026.7.3.r0.ssc.308
+  updated: 2026-07-07
+  checked: 2026-09-12
 
 - id: git-energyplus
   type: git-repo
@@ -112,8 +128,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: v26.1.0
+  updated: 2026-03-31
+  checked: 2026-09-12
 
 # ---------- Éolien, hydraulique, biogaz, solaire thermique : plans / Wind, hydro, biogas, solar thermal: plans ----------
 
@@ -135,6 +154,7 @@
   status: unverified
   reliability: community
   notes: { fr: "Aucun jeu complet de plans d'éolienne sous licence libre n'a été trouvé : le « Wind Turbine Recipe Book » de Hugh Piggott (axial-flux, 6 tailles) est la référence mais payant (~15 £) — à acheter avant, voir guide low-tech.", en: "No complete free-licensed small-wind plan set was found: Hugh Piggott's 'Wind Turbine Recipe Book' (axial flux, 6 sizes) is the reference but paid (~£15) — buy beforehand, see low-tech guide." }
+  checked: 2026-09-12
 
 - id: appropedia-energy-water-plans
   type: pdf
@@ -153,6 +173,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: community
+  checked: 2026-09-12
 
 - id: solar-cooking-wiki
   type: zim
@@ -188,9 +209,13 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   notes: { fr: "Mirrorer aussi home-assistant/core (gros dépôt). Les intégrations et add-ons se téléchargent en ligne : prévoir un cache Docker.", en: "Also mirror home-assistant/core (large repo). Integrations and add-ons download online: plan a Docker cache." }
+  version: "18.2"
+  updated: 2026-07-30
+  size_bytes: 579304656
+  checked: 2026-09-12
 
 - id: git-tasmota
   type: git-repo
@@ -207,8 +232,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea, toolchain-platformio ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: v15.6.0
+  updated: 2026-08-25
+  checked: 2026-09-12
 
 - id: git-emoncms
   type: git-repo
@@ -225,8 +253,11 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea, git-openenergymonitor ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
+  version: 11.17.1
+  updated: 2026-09-09
+  checked: 2026-09-12
 
 - id: git-openplc
   type: git-repo
@@ -243,9 +274,13 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea ]
   update: { tracker: github-commit }
-  status: unverified
+  status: deprecated
   reliability: reference
   notes: { fr: "Remplacer par le dépôt de la v4 dès qu'il est stable.", en: "Replace with the v4 repo once stable." }
+  version: b5d41356dab4
+  updated: 2026-04-04
+  size_bytes: 22457344
+  checked: 2026-09-12
 
 - id: git-knowflow
   type: git-repo
@@ -262,5 +297,9 @@
   requires: { tools: [ git ] }
   depends_on: [ gitea, toolchain-arduino-cli ]
   update: { tracker: github-commit }
-  status: unverified
+  status: active
   reliability: community
+  version: 178f25c202c2
+  updated: 2026-05-26
+  size_bytes: 11120640
+  checked: 2026-09-12

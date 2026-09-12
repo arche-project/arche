@@ -15,12 +15,16 @@
   profiles: [ bunker, novice ]
   priority: essential
   size_estimate_gb: 0.054
-  source: { kind: kiwix, kiwix_name: wikivet.net_en_all_maxi, url: https://download.kiwix.org/zim/other/wikivet.net_en_all_maxi.zim, homepage: https://en.wikivet.net }
+  source: { kind: kiwix, kiwix_name: wikivet.net_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/wikivet.net_en_all_maxi_2026-07a.zim, homepage: https://en.wikivet.net }
   license: { spdx: CC-BY-NC-ND-3.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 56980480
+  version: 2026-07
+  updated: 2026-07-09
+  checked: 2026-09-12
 
 - id: where-there-is-no-vet
   type: pdf
@@ -41,6 +45,8 @@
   status: unverified
   reliability: reference
   notes: { fr: "Télécharger les 6 parties (part1 à part6, même schéma d'URL). Une traduction FR n'existe pas : candidat à une demande auprès d'Oxfam.", en: "Download all 6 parts (part1..part6, same URL pattern). No FR translation exists: a candidate request to Oxfam." }
+  size_bytes: 827
+  checked: 2026-09-12
 
 - id: merck-vet-manual
   type: software
@@ -60,6 +66,7 @@
   status: unverified
   reliability: reference
   runtime: static-binary
+  checked: 2026-09-12
 
 - id: fao-poultry-manual
   type: pdf
@@ -78,6 +85,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "URL du PDF FR à confirmer (fetch bloqué à la vérification).", en: "FR PDF URL to confirm (fetch was blocked during verification)." }
+  checked: 2026-09-12
 
 - id: fao-family-poultry-decision-tools
   type: pdf
@@ -95,6 +103,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 1477565
+  checked: 2026-09-12
 
 - id: fao-beekeeping
   type: pdf
@@ -113,6 +123,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: open-vet-textbooks
   type: pdf
@@ -130,6 +141,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: anses-bulletin-sante-animale
   type: pdf
@@ -146,6 +158,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: heifer-animal-wellbeing
   type: pdf
@@ -163,6 +176,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: curated
+  size_bytes: 8814458
+  checked: 2026-09-12
 
 - id: woah-terrestrial-code
   type: pdf
@@ -180,3 +195,4 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12

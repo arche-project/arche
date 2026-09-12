@@ -39,9 +39,12 @@
   requires: { tools: [ git, python3, cmake, ninja ] }
   provides: [ build-esp32 ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: source
+  version: v6.1
+  updated: 2026-08-27
+  checked: 2026-09-12
 
 - id: toolchain-arduino-cli
   type: toolchain
@@ -58,9 +61,13 @@
   requires: { tools: [] }
   provides: [ build-avr, build-esp32 ]
   update: { tracker: github-release }
-  status: unverified
+  status: active
   reliability: reference
   runtime: static-binary
+  version: v1.5.1
+  updated: 2026-06-05
+  size_bytes: 19355892
+  checked: 2026-09-12
 
 - id: toolchain-kicad
   type: toolchain
@@ -80,6 +87,7 @@
   reliability: reference
   notes: { fr: "Les paquets 3D (kicad-packages3D) pèsent seuls plusieurs Go ; les rendre optionnels dans la recette.", en: "3D packages (kicad-packages3D) alone weigh several GB; make them optional in the recipe." }
   runtime: static-binary
+  checked: 2026-09-12
 
 - id: pip-ml-cache
   type: toolchain
@@ -98,10 +106,13 @@
   requires: { tools: [ python3, pip ], ram_gb: 8 }
   depends_on: [ python-standalone ]
   update: { tracker: pypi, package: torch }
-  status: unverified
+  status: active
   reliability: reference
   runtime: python
   notes: { fr: "Sur CPU : un réseau capteurs → récolte s'entraîne en minutes ; une politique ACT LeRobot en heures (file de tâches, ADR 0012). Sur une carte AMD : roues ROCm ; sur Mac : MPS. llama.cpp (déjà au catalogue) affine aussi par LoRA sans PyTorch.", en: "On CPU: a sensors → harvest network trains in minutes; a LeRobot ACT policy in hours (job queue, ADR 0012). On an AMD card: ROCm wheels; on a Mac: MPS. llama.cpp (already in the catalogue) also fine-tunes by LoRA without PyTorch." }
+  version: 2.14.0
+  updated: 2026-09-02
+  checked: 2026-09-12
 
 - id: pip-cache
   type: toolchain
@@ -135,6 +146,9 @@
   license: { spdx: mixed, redistribution: allowed }
   requires: { os: [ linux ], tools: [ apt ] }
   update: { tracker: debian, check_interval_days: 30 } # suit la version/le nom de code de Debian stable
-  status: unverified
+  status: active
   reliability: reference
   runtime: none
+  version: 13.7 (trixie)
+  updated: 2026-09-12
+  checked: 2026-09-12

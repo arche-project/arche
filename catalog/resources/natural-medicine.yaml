@@ -22,6 +22,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: ema-herbal-monographs
   type: pdf
@@ -37,7 +38,7 @@
   license: { spdx: LicenseRef-EMA-Attribution, redistribution: attribution }
   printable: { available: true }
   update: { tracker: http-head, check_interval_days: 90 }
-  status: unverified
+  status: missing
   reliability: reference
   notes: { fr: "Recette à écrire : script qui liste et télécharge les ~160 PDF « European Union herbal monograph » (permission=license grâce aux conditions EMA).", en: "Recipe to write: script listing and downloading the ~160 'European Union herbal monograph' PDFs (permission=license under EMA terms)." }
 
@@ -110,6 +111,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Recette simple : télécharger les fichiers CIS_*.txt listés sur la page (URL stables) ; les recharger chaque mois.", en: "Simple recipe: download the CIS_*.txt files listed on the page (stable URLs); refresh monthly." }
+  checked: 2026-09-12
 
 - id: drug-shelf-life-slep
   type: pdf
@@ -126,6 +128,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 # ---------- Identifier sans se tromper / Identify without mistakes ----------
 
@@ -144,6 +147,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: plantnet-offline
   type: software
@@ -158,7 +162,7 @@
   source: { kind: manual, homepage: https://plantnet.org, url: https://plantnet.org/en/download/ }
   license: { spdx: "CC-BY-SA-4.0 AND CC-BY-4.0", redistribution: attribution, note: { fr: "Données ouvertes ; l'application elle-même est gratuite, pas libre.", en: "Open data; the app itself is free, not libre." } }
   update: { tracker: http-head, check_interval_days: 90 }
-  status: unverified
+  status: missing
   reliability: reference
   notes: { fr: "Une identification par photo n'est JAMAIS suffisante pour manger ou se soigner : recouper avec la flore et l'aide-mémoire ANSES.", en: "A photo identification is NEVER enough to eat or treat: cross-check with the flora and the ANSES sheet." }
   runtime: static-binary
@@ -179,6 +183,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: wikipedia-fr-plantes-vente-libre
   type: pdf
@@ -215,6 +220,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: community
+  checked: 2026-09-12
 
 - id: henriettes-herbal-classics
   type: pdf
@@ -231,6 +237,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: community
+  checked: 2026-09-12
 
 - id: kew-powo-wcvp
   type: dataset
@@ -247,3 +254,4 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12

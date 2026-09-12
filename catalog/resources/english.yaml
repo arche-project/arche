@@ -15,12 +15,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 1.1
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_med, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_med.zim, homepage: https://med.libretexts.org }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_med, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_med_2025-01.zim, homepage: https://med.libretexts.org }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc, note: { fr: "Licence variable par livre (CC BY, BY-SA, BY-NC-SA) ; la plus restrictive est indiquée.", en: "License varies per book (CC BY, BY-SA, BY-NC-SA); the most restrictive is shown." } }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 1192567808
+  version: 2025-01
+  updated: 2025-01-16
+  checked: 2026-09-12
 
 - id: libretexts-eng
   type: zim
@@ -32,12 +36,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 0.65
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_eng, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_eng.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_eng, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_eng_2025-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 678394880
+  version: 2025-01
+  updated: 2025-01-16
+  checked: 2026-09-12
 
 - id: libretexts-bio
   type: zim
@@ -49,12 +57,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 2.1
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_bio, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_bio.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_bio, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_bio_2025-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 2240947200
+  version: 2025-01
+  updated: 2025-01-16
+  checked: 2026-09-12
 
 - id: libretexts-chem
   type: zim
@@ -66,12 +78,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 2.0
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_chem, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_chem.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_chem, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_chem_2025-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 2182917120
+  version: 2025-01
+  updated: 2025-01-16
+  checked: 2026-09-12
 
 - id: libretexts-phys
   type: zim
@@ -83,12 +99,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 0.55
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_phys, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_phys.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_phys, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_phys_2026-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 559554560
+  version: 2026-01
+  updated: 2026-01-16
+  checked: 2026-09-12
 
 - id: libretexts-math
   type: zim
@@ -100,12 +120,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 0.8
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_math, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_math.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_math, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_math_2026-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 830646272
+  version: 2026-01
+  updated: 2026-01-16
+  checked: 2026-09-12
 
 - id: libretexts-k12
   type: zim
@@ -117,12 +141,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 0.35
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_k12, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_k12.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_k12, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_k12_2026-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 369809408
+  version: 2026-01
+  updated: 2026-01-16
+  checked: 2026-09-12
 
 - id: libretexts-workforce
   type: zim
@@ -134,12 +162,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 0.5
-  source: { kind: kiwix, kiwix_name: libretexts.org_en_workforce, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_workforce.zim }
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_workforce, url: https://lb.download.kiwix.org/zim/libretexts/libretexts.org_en_workforce_2026-01.zim }
   license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 513664000
+  version: 2026-01
+  updated: 2026-01-16
+  checked: 2026-09-12
 
 - id: wikibooks-en
   type: zim
@@ -151,12 +183,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 5.8
-  source: { kind: kiwix, kiwix_name: wikibooks_en_all_maxi, url: https://download.kiwix.org/zim/wikibooks/wikibooks_en_all_maxi.zim }
+  source: { kind: kiwix, kiwix_name: wikibooks_en_all_maxi, url: https://lb.download.kiwix.org/zim/wikibooks/wikibooks_en_all_maxi_2026-04.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 6177865728
+  version: 2026-04
+  updated: 2026-04-27
+  checked: 2026-09-12
 
 - id: wikiversity-en
   type: zim
@@ -168,12 +204,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 2.3
-  source: { kind: kiwix, kiwix_name: wikiversity_en_all_maxi, url: https://download.kiwix.org/zim/wikiversity/wikiversity_en_all_maxi.zim }
+  source: { kind: kiwix, kiwix_name: wikiversity_en_all_maxi, url: https://lb.download.kiwix.org/zim/wikiversity/wikiversity_en_all_maxi_2026-05.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 2459209728
+  version: 2026-05
+  updated: 2026-05-06
+  checked: 2026-09-12
 
 - id: wikipedia-en-medicine
   type: zim
@@ -185,12 +225,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: recommended
   size_estimate_gb: 2.1
-  source: { kind: kiwix, kiwix_name: wikipedia_en_medicine_maxi, url: https://download.kiwix.org/zim/wikipedia/wikipedia_en_medicine_maxi.zim }
+  source: { kind: kiwix, kiwix_name: wikipedia_en_medicine_maxi, url: https://lb.download.kiwix.org/zim/wikipedia/wikipedia_en_medicine_maxi_2026-04.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: reference
+  size_bytes: 2215521280
+  version: 2026-04
+  updated: 2026-04-11
+  checked: 2026-09-12
 
 # ---------- StackExchange supplémentaires / More StackExchange ----------
 
@@ -204,12 +248,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 0.14
-  source: { kind: kiwix, kiwix_name: outdoors.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/outdoors.stackexchange.com_en_all.zim }
+  source: { kind: kiwix, kiwix_name: outdoors.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/outdoors.stackexchange.com_en_all_2026-08.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 141408256
+  version: 2026-08
+  updated: 2026-08-04
+  checked: 2026-09-12
 
 - id: stackexchange-sustainability
   type: zim
@@ -221,12 +269,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 0.03
-  source: { kind: kiwix, kiwix_name: sustainability.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/sustainability.stackexchange.com_en_all.zim }
+  source: { kind: kiwix, kiwix_name: sustainability.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/sustainability.stackexchange.com_en_all_2026-08.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 27667456
+  version: 2026-08
+  updated: 2026-08-06
+  checked: 2026-09-12
 
 - id: stackexchange-cooking
   type: zim
@@ -238,12 +290,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 0.23
-  source: { kind: kiwix, kiwix_name: cooking.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/cooking.stackexchange.com_en_all.zim }
+  source: { kind: kiwix, kiwix_name: cooking.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/cooking.stackexchange.com_en_all_2026-07.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 237005824
+  version: 2026-07
+  updated: 2026-07-31
+  checked: 2026-09-12
 
 - id: stackexchange-engineering
   type: zim
@@ -255,12 +311,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 0.24
-  source: { kind: kiwix, kiwix_name: engineering.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/engineering.stackexchange.com_en_all.zim }
+  source: { kind: kiwix, kiwix_name: engineering.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/engineering.stackexchange.com_en_all_2026-08.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 255770624
+  version: 2026-08
+  updated: 2026-08-01
+  checked: 2026-09-12
 
 - id: stackexchange-medicalsciences
   type: zim
@@ -272,12 +332,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 0.06
-  source: { kind: kiwix, kiwix_name: medicalsciences.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/medicalsciences.stackexchange.com_en_all.zim }
+  source: { kind: kiwix, kiwix_name: medicalsciences.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/medicalsciences.stackexchange.com_en_all_2026-02.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 60800000
+  version: 2026-02
+  updated: 2026-02-02
+  checked: 2026-09-12
 
 - id: stackexchange-pets
   type: zim
@@ -289,12 +353,16 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 0.08
-  source: { kind: kiwix, kiwix_name: pets.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/pets.stackexchange.com_en_all.zim }
+  source: { kind: kiwix, kiwix_name: pets.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/pets.stackexchange.com_en_all_2026-08.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
-  status: unverified
+  status: active
   reliability: community
+  size_bytes: 86638592
+  version: 2026-08
+  updated: 2026-08-04
+  checked: 2026-09-12
 
 # ---------- Domaine public : manuels militaires et FEMA / Public domain: military and FEMA manuals ----------
 
@@ -332,6 +400,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "URL directe du PDF à fixer depuis la page IA (nom de fichier variable).", en: "Pin the direct PDF URL from the IA page (variable file name)." }
+  checked: 2026-09-12
 
 - id: fema-cert-manual
   type: pdf
@@ -349,6 +418,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 5509166
+  checked: 2026-09-12
 
 # ---------- Organisations internationales / International organisations ----------
 
@@ -369,6 +440,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Fixer les URL IRIS des PDF EN et FR (bitstream).", en: "Pin the IRIS bitstream URLs for the EN and FR PDFs." }
+  checked: 2026-09-12
 
 - id: who-basic-emergency-care
   type: pdf
@@ -386,6 +458,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: msf-medical-guidelines
   type: pdf
@@ -403,6 +476,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: fao-knowledge-repository
   type: pdf
@@ -420,6 +494,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: practical-action-briefs
   type: pdf
@@ -454,6 +529,7 @@
   status: unverified
   reliability: curated
   notes: { fr: "Candidat Zimit (permission=license).", en: "Zimit candidate (permission=license)." }
+  checked: 2026-09-12
 
 - id: cd3wd-library
   type: dataset
@@ -470,6 +546,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: unknown
+  checked: 2026-09-12
 
 # ---------- Cours et manuels universitaires hors Kiwix / University courses and textbooks outside Kiwix ----------
 
@@ -490,6 +567,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Écrire une recette « openstax » qui télécharge les PDF listés dans un fichier de sélection.", en: "Write an 'openstax' recipe that downloads the PDFs listed in a selection file." }
+  checked: 2026-09-12
 
 - id: mit-ocw
   type: dataset
@@ -506,6 +584,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
 
 - id: nih-bookshelf-oa
   type: dataset
@@ -522,3 +601,4 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-12
