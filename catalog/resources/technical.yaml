@@ -234,7 +234,7 @@
   profiles: [ bunker, novice ]
   priority: optional
   size_estimate_gb: 0.3
-  source: { kind: kiwix, kiwix_name: phet_fr, url: https://download.kiwix.org/zim/phet/phet_fr.zim }
+  source: { kind: kiwix, kiwix_name: phet_fr_all, url: https://download.kiwix.org/zim/phet/phet_fr_all.zim }
   license: { spdx: CC-BY-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
