@@ -1,0 +1,78 @@
+# Type de projet : le robot désherbeur — « réseau coupé, je veux un robot qui reconnaît les plantes à
+# arracher ; génère-moi les plans, le PCB et la liste des composants avec ce que j'ai ou ce qui se trouve ».
+# Project type: the weeding robot. Schéma et règles : ADR 0010.
+
+id: robot-desherbeur
+name: { fr: "Robot désherbeur : reconnaître et arracher", en: "Weeding robot: recognise and pull" }
+scenario:
+  fr: "Le réseau est coupé. Je veux construire un robot qui m'aide à désherber : il reconnaît les plantes à arracher. Génère-moi les plans, le schéma, le PCB et la liste des composants — avec ce que j'ai en stock ou des composants faciles à trouver."
+  en: "The network is down. I want to build a robot that helps me weed: it recognises the plants to pull. Generate the plans, the schematic, the PCB and the parts list — from what I have in stock or parts that are easy to find."
+status: recipe
+
+inventory:
+  required: [ components, tools ]
+  recommended: [ machines, materials, plots, power ]
+
+# Point de départ : on part d'un design de référence et on le dérive, on ne conçoit pas de zéro.
+corpus:
+  - git-openweedlocator
+  - git-farmbot
+  - git-acorn-rover
+  - git-lerobot
+  - git-simplefoc
+  - git-opencv
+  - git-micro-ros-arduino
+  - stackexchange-robotics
+  - stackexchange-electronics
+  - stackexchange-arduino
+  - stackexchange-raspberrypi
+  - arduino-library-index
+  - toolchain-kicad
+  - toolchain-platformio
+
+solvers: [ bom_substitute ]
+generators: [ schemdraw, wireviz, kicad-sch, openscad, mermaid ]
+
+deliverables:
+  - id: architecture
+    title: { fr: "Architecture : capteur → décision → actionneur, avec le design de référence choisi", en: "Architecture: sensor → decision → actuator, with the chosen reference design" }
+    format: [ md, mermaid ]
+    by: assistant
+  - id: schema
+    title: { fr: "Schéma électrique (schemdraw / KiCad) dérivé du design de référence", en: "Electrical schematic (schemdraw / KiCad) derived from the reference design" }
+    format: [ py, kicad_sch, svg ]
+    by: assistant
+  - id: cablage
+    title: { fr: "Câblage (WireViz) entre carte, moteurs, caméra, batterie", en: "Wiring (WireViz) between board, motors, camera, battery" }
+    format: [ yaml, svg ]
+    by: assistant
+  - id: nomenclature
+    title: { fr: "Liste des composants : ce qui est en stock, ce qui manque, les substitutions", en: "Parts list: in stock, missing, substitutions" }
+    format: [ csv, md ]
+    by: solver
+  - id: pieces
+    title: { fr: "Pièces mécaniques (OpenSCAD → STL) : supports, boîtier, outil", en: "Mechanical parts (OpenSCAD → STL): brackets, enclosure, tool" }
+    format: [ scad, stl ]
+    by: assistant
+  - id: firmware
+    title: { fr: "Squelette de firmware (PlatformIO) et script de vision (OWL)", en: "Firmware skeleton (PlatformIO) and vision script (OWL)" }
+    format: [ cpp, py ]
+    by: assistant
+
+gates:
+  - fr: "Reconnaissance des plantes : le robot n'arrache rien seul avant qu'un humain ait validé ses détections sur au moins un passage complet ; tri par espèce = modèle de vision local + confirmation, jamais la seule détection de couleur."
+    en: "Plant recognition: the robot pulls nothing on its own before a human has validated its detections over at least one full pass; species sorting = local vision model + confirmation, never colour detection alone."
+  - fr: "Tout actionneur (moteur, lame, buse) a un arrêt d'urgence physique et un délai de sécurité (watchdog) — écrit dans le firmware généré, pas en option."
+    en: "Every actuator (motor, blade, nozzle) has a physical emergency stop and a watchdog — written into the generated firmware, not optional."
+  - fr: "Une substitution de composant change une tension, un courant ou un brochage : le plan la signale et l'utilisateur la valide."
+    en: "A part substitution changes a voltage, a current or a pinout: the plan flags it and the user validates it."
+
+never:
+  - fr: "Concevoir un PCB de zéro : l'assistant dérive un design de référence existant (OWL, FarmBot, Acorn) et explique chaque écart."
+    en: "Design a PCB from scratch: the assistant derives an existing reference design (OWL, FarmBot, Acorn) and explains every deviation."
+  - fr: "Déclarer qu'une plante est comestible à partir de la caméra (ADR 0007) — reconnaître « à arracher » n'est pas reconnaître « à manger »."
+    en: "Declare a plant edible from the camera (ADR 0007) — recognising 'to pull' is not recognising 'to eat'."
+
+limits:
+  fr: "Un modèle local de 4 à 9 milliards de paramètres écrit un schéma cohérent à partir d'un design de référence ; il se trompe sur les valeurs de composants et les brochages quand il invente. D'où : générateurs (le schéma est du code, vérifiable), nomenclature par substitution (solveur), et design de référence obligatoire."
+  en: "A 4–9 billion-parameter local model writes a coherent schematic from a reference design; it gets component values and pinouts wrong when it invents. Hence: generators (the schematic is code, checkable), substitution BOM (solver), and a mandatory reference design."

@@ -1,0 +1,22 @@
+# Amanite phalloïde — le concept le plus dangereux de la bibliothèque, donc le premier manifeste.
+# Les fichiers sont ajoutés par scripts/visuals/commons.ts (status: candidate) puis vérifiés à l'œil.
+id: amanita-phalloides
+kind: fungus
+names: { fr: "Amanite phalloïde", en: "Death cap" }
+latin: Amanita phalloides
+wikidata: Q131201
+commons_category: Amanita phalloides
+lookalikes: [agaricus-campestris, russula-virescens, amanita-verna, volvariella-volvacea]
+views:
+  habit:        { search: ["in situ", "habitat", "oak", "chêne"], files: [] }
+  cap:          { search: ["cap", "chapeau", "olive"], files: [] }
+  hymenium:     { search: ["gills", "lamelles", "white gills"], files: [] }
+  stem_base:    { search: ["volva", "base", "ring", "anneau", "dug"], files: [] }
+  cross_section: { search: ["section", "coupe"], files: [] }
+  spore_print:  { search: ["spore print", "sporée"], files: [] }
+  micrograph:   { search: ["spores", "microscope", "amyloid"], files: [] }
+  lookalike:    { search: ["comparison", "Agaricus", "Russula"], files: [] }
+  age_series:   { search: ["young", "button", "egg", "mature"], files: [] }
+notes:
+  fr: "La vue `stem_base` (volve déterrée) et `hymenium` (lames toujours blanches) sont celles qui sauvent : ne jamais les marquer verified sans que la volve et les lames soient nettes. La vue `lookalike` doit montrer un rosé des prés à côté, lames roses/brunes visibles."
+  en: "`stem_base` (dug volva) and `hymenium` (always-white gills) are the views that save lives: never mark them verified unless volva and gills are sharp. `lookalike` must show a field mushroom beside it, pink/brown gills visible."

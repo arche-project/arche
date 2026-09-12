@@ -1,0 +1,20 @@
+name: "Devenir point Arche / Become an Arche point"
+description: "Un lieu physique qui garde un disque à jour, le duplique et seede."
+labels: [arche-point]
+body:
+  - type: input
+    id: place
+    attributes: { label: "Lieu (ville, type : fablab, bibliothèque, ferme, école…) / place" }
+    validations: { required: true }
+  - type: input
+    id: contact
+    attributes: { label: "Contact public (mail, site) / public contact" }
+    validations: { required: true }
+  - type: checkboxes
+    id: offers
+    attributes:
+      label: "Ce que vous proposez / what you offer"
+      options:
+        - label: "Duplication de disque pour qui vient avec un disque vide / disk duplication"
+        - label: "Pi allumé qui seede et sert le réseau local / always-on seeding Pi"
+        - label: "Ateliers d'initiation / intro workshops"

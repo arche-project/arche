@@ -1,0 +1,249 @@
+# Médecine naturelle, phytothérapie, pharmacie de maison : sources de RÉFÉRENCE seulement (règle éditoriale n°4).
+# Herbal medicine and home pharmacy: REFERENCE sources only (editorial rule 4).
+# Vérifié le 2026-09-11. Chaque entrée dit ce qu'elle apporte ET ses limites (identification, toxicité, doses).
+# Ligne du projet (docs/fr/ZONES-GRISES.md) : savoir préparer et utiliser des remèdes végétaux pour soi = oui ;
+# synthèse de médicaments, antibiotiques « maison », substances contrôlées = jamais dans le catalogue.
+
+# ---------- Monographies officielles / Official monographs ----------
+
+- id: who-medicinal-plants-monographs
+  type: pdf
+  category: medical
+  name: { fr: "OMS — Monographies de plantes médicinales (4 volumes)", en: "WHO — Monographs on selected medicinal plants (4 volumes)" }
+  description: { fr: "~120 plantes : identification pharmacopéique, pharmacologie clinique, indications, posologie, contre-indications, effets indésirables. La référence de qualité/sécurité, indépendante du commerce.", en: "~120 plants: pharmacopoeial identification, clinical pharmacology, indications, posology, contraindications, adverse effects. The quality/safety reference, independent of commerce." }
+  tags: [ legal:grey, herbal, monographs, dosage, safety ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: https://iris.who.int/handle/10665/42052, url: https://iris.who.int/bitstream/handle/10665/42052/9241545178.pdf }
+  license: { spdx: LicenseRef-WHO-Copyright, redistribution: unclear, note: { fr: "Volumes de 1999–2009, antérieurs à la politique CC de l'OMS : © OMS, usage personnel. Vol. 3 : https://iris.who.int/bitstream/handle/10665/42052/9789241547024_eng.pdf?sequence=3", en: "1999–2009 volumes predate WHO's CC policy: © WHO, personal use. Vol. 3 URL in the FR note." } }
+  printable: { available: true, pages_estimate: 1200 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: ema-herbal-monographs
+  type: pdf
+  category: medical
+  name: { fr: "EMA — Monographies européennes de plantes (HMPC, ~160 plantes)", en: "EMA — EU herbal monographs (HMPC, ~160 substances)" }
+  description: { fr: "Pour chaque plante : usage bien établi vs usage traditionnel, indications reconnues, posologie, durée, populations à éviter. Reproduction autorisée avec mention de la source. Un PDF par plante (pas d'archive globale).", en: "Per substance: well-established vs traditional use, accepted indications, posology, duration, populations to avoid. Reproduction allowed with attribution. One PDF per plant (no bulk archive)." }
+  tags: [ legal:grey, herbal, monographs, dosage, eu ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.1
+  source: { kind: manual, homepage: https://www.ema.europa.eu/en/human-regulatory-overview/herbal-medicinal-products/european-union-monographs-and-list-entries, url: https://www.ema.europa.eu/en/medicines/field_ema_web_categories%253Aname_field/Herbal }
+  license: { spdx: LicenseRef-EMA-Attribution, redistribution: attribution }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Recette à écrire : script qui liste et télécharge les ~160 PDF « European Union herbal monograph » (permission=license grâce aux conditions EMA).", en: "Recipe to write: script listing and downloading the ~160 'European Union herbal monograph' PDFs (permission=license under EMA terms)." }
+
+- id: wikiphyto-fr
+  type: zim
+  category: medical
+  name: { fr: "WikiPhyto — encyclopédie de phytothérapie (FR, ~1 750 articles)", en: "WikiPhyto — French phytotherapy encyclopedia (~1,750 articles)" }
+  description: { fr: "Wiki tenu par des professionnels de santé : plantes, huiles essentielles, gemmothérapie, avec pharmacologie et références. Le meilleur contenu FR du domaine ; « libre de droits » selon le site, sans licence formelle.", en: "Wiki run by health professionals: plants, essential oils, gemmotherapy, with pharmacology and references. Best FR content in the field; 'free of rights' per the site, no formal license." }
+  tags: [ legal:grey, herbal, aromatherapy, fr, wiki ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: http://www.wikiphyto.org, url: http://www.wikiphyto.org }
+  license: { spdx: LicenseRef-Wikiphyto-Free, redistribution: unclear, note: { fr: "Demander une licence explicite (CC BY-SA) avant tout ZIM publié.", en: "Ask for an explicit license (CC BY-SA) before any published ZIM." } }
+  update: { tracker: http-head, check_interval_days: 30 }
+  status: unverified
+  reliability: curated
+
+- id: hesperian-green-pages
+  type: pdf
+  category: medical
+  name: { fr: "Hesperian — « Pages vertes » : usage, doses et précautions des médicaments", en: "Hesperian — Green Pages: uses, dosage and precautions of medicines" }
+  description: { fr: "Le formulaire de « Là où il n'y a pas de docteur » : les médicaments essentiels expliqués pour des non-soignants, doses par poids, quand NE PAS donner. Fait partie du livre (ressource pdf-ou-il-ny-a-pas-de-docteur).", en: "The formulary of 'Where There Is No Doctor': essential medicines explained for lay carers, doses by weight, when NOT to give. Part of the book (resource pdf-ou-il-ny-a-pas-de-docteur)." }
+  tags: [ legal:grey, medicines, dosage, formulary ]
+  languages: [ en, fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.01
+  source: { kind: manual, homepage: https://hesperian.org/books-and-resources/, url: https://hesperian.org/wp-content/uploads/pdf/en_wtnd_2022/ }
+  license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 60 }
+  depends_on: [ pdf-ou-il-ny-a-pas-de-docteur ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Pharmacie de maison : ce qui existe, ce qui est essentiel, combien de temps ça se garde ----------
+
+- id: who-essential-medicines-list
+  type: pdf
+  category: medical
+  name: { fr: "OMS — Liste modèle des médicaments essentiels (24e, 2025)", en: "WHO — Model List of Essential Medicines (24th, 2025)" }
+  description: { fr: "Les ~500 médicaments qu'un système de santé doit avoir. Sert à composer une pharmacie familiale rationnelle avec son médecin, pas à s'automédiquer.", en: "The ~500 medicines a health system must have. Use it to build a rational family pharmacy with your doctor, not to self-medicate." }
+  tags: [ legal:grey, medicines, list, printable ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.002
+  source: { kind: http, url: https://iris.who.int/server/api/core/bitstreams/17642505-ecd3-4940-a691-4f1dfa0d835a/content, homepage: https://www.who.int/publications/i/item/B09474 }
+  license: { spdx: CC-BY-NC-SA-3.0-IGO, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 72 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: bdpm-ansm
+  type: dataset
+  category: medical
+  name: { fr: "ANSM — Base de données publique des médicaments (France, Licence Ouverte)", en: "ANSM — French public drug database (open license)" }
+  description: { fr: "Toutes les spécialités commercialisées en France : compositions, présentations, génériques, conditions de prescription, avis HAS. Fichiers texte (~25 Mo). Avec l'IA locale : « ce médicament contient-il du paracétamol ? quel générique ? ».", en: "Every drug marketed in France: compositions, presentations, generics, prescribing conditions, HAS opinions. Text files (~25 MB). With the local AI: 'does this contain paracetamol? which generic?'." }
+  tags: [ legal:grey, medicines, database, fr, open-data ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.03
+  source: { kind: manual, homepage: https://base-donnees-publique.medicaments.gouv.fr/telechargement, url: https://base-donnees-publique.medicaments.gouv.fr/telechargement }
+  license: { spdx: etalab-2.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Recette simple : télécharger les fichiers CIS_*.txt listés sur la page (URL stables) ; les recharger chaque mois.", en: "Simple recipe: download the CIS_*.txt files listed on the page (stable URLs); refresh monthly." }
+
+- id: drug-shelf-life-slep
+  type: pdf
+  category: medical
+  name: { fr: "Durée de conservation réelle des médicaments (programme SLEP, FDA/DoD)", en: "Real drug shelf life (SLEP program, FDA/DoD)" }
+  description: { fr: "Le programme américain qui teste les stocks périmés : 88 % de 122 produits encore conformes ≥ 1 an après la date (Lyon et al. 2006). Les données détaillées ne sont PAS publiques ; la page officielle et l'étude (résumé) suffisent pour comprendre ce qui se garde (comprimés secs) et ce qui ne se garde pas (insuline, adrénaline, sirops, antibiotiques liquides).", en: "The US program testing expired stockpiles: 88% of 122 products still compliant ≥ 1 year past date (Lyon et al. 2006). Detailed data are NOT public; the official page and the study abstract are enough to understand what keeps (dry tablets) and what doesn't (insulin, epinephrine, syrups, liquid antibiotics)." }
+  tags: [ legal:grey, medicines, shelf-life, stockpile ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.001
+  source: { kind: manual, homepage: https://www.health.mil/Military-Health-Topics/Health-Readiness/Medical-Logistics/Shelf-Life-Extension-Program, url: https://pubmed.ncbi.nlm.nih.gov/16721796/ }
+  license: { spdx: mixed, redistribution: unclear, note: { fr: "Page .mil : œuvre fédérale (domaine public présumé) ; l'étude Lyon 2006 est © Wiley (résumé seulement).", en: "The .mil page is a federal work (presumed PD); the Lyon 2006 paper is © Wiley (abstract only)." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Identifier sans se tromper / Identify without mistakes ----------
+
+- id: tela-botanica-eflore
+  type: dataset
+  category: agriculture
+  name: { fr: "Tela Botanica — eFlore et bases BDTFX (flore de France, ODbL / CC BY-SA)", en: "Tela Botanica — eFlore and BDTFX databases (flora of France, ODbL / CC BY-SA)" }
+  description: { fr: "Le réseau des botanistes francophones : nomenclature, descriptions, écologie, répartition de toutes les plantes vasculaires de France. Exports de bases téléchargeables. La base d'identification sérieuse, en français.", en: "The French-speaking botanists' network: nomenclature, descriptions, ecology, distribution of all vascular plants of France. Downloadable database exports. The serious identification base, in French." }
+  tags: [ plants, flora, identification, fr ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://www.tela-botanica.org, url: https://www.tela-botanica.org/ressources/donnees/telechargements/ }
+  license: { spdx: "ODbL-1.0 AND CC-BY-SA-2.0", redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: plantnet-offline
+  type: software
+  category: agriculture
+  name: { fr: "Pl@ntNet — identification de plantes par photo (modèle embarqué hors-ligne)", en: "Pl@ntNet — photo plant identification (embedded offline model)" }
+  description: { fr: "L'application (INRIA/CIRAD/IRD/INRAE) peut télécharger un modèle compressé qui identifie hors-ligne, 51 000 espèces. Images CC BY-SA, métadonnées CC BY. À installer et configurer AVANT la coupure.", en: "The app (INRIA/CIRAD/IRD/INRAE) can download a compressed model that identifies offline, 51,000 species. Images CC BY-SA, metadata CC BY. Install and configure BEFORE the outage." }
+  tags: [ plants, identification, app, vision ]
+  languages: [ mul, fr, en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://plantnet.org, url: https://plantnet.org/en/download/ }
+  license: { spdx: "CC-BY-SA-4.0 AND CC-BY-4.0", redistribution: attribution, note: { fr: "Données ouvertes ; l'application elle-même est gratuite, pas libre.", en: "Open data; the app itself is free, not libre." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Une identification par photo n'est JAMAIS suffisante pour manger ou se soigner : recouper avec la flore et l'aide-mémoire ANSES.", en: "A photo identification is NEVER enough to eat or treat: cross-check with the flora and the ANSES sheet." }
+  runtime: static-binary
+
+- id: anses-plantes-toxiques
+  type: pdf
+  category: medical
+  name: { fr: "ANSES — aide-mémoire des plantes toxiques et de leurs confusions", en: "ANSES — toxic plants and their look-alikes (memo)" }
+  description: { fr: "Une page officielle : cytise, digitale, vérâtre, colchique, œnanthe, datura, bulbes, arum, belladone… et les comestibles avec lesquels on les confond (ail des ours, gentiane…). À plastifier.", en: "One official page: laburnum, foxglove, veratrum, colchicum, hemlock water-dropwort, datura, bulbs, arum, belladonna… and the edibles they are confused with (wild garlic, gentian…). Laminate it." }
+  tags: [ toxic, plants, safety, printable, fr ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.001
+  source: { kind: http, url: https://www.anses.fr/fr/system/files/2020-02_aide_memoire-plantes_toxiques.pdf, homepage: https://www.anses.fr }
+  license: { spdx: LicenseRef-Anses-Copyright, redistribution: unclear, note: { fr: "© Anses ; usage personnel et impression pour soi. Demander avant redistribution.", en: "© Anses; personal use and printing. Ask before redistributing." } }
+  printable: { available: true, pages_estimate: 1 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: wikipedia-fr-plantes-vente-libre
+  type: pdf
+  category: legal
+  name: { fr: "Les 148 plantes médicinales en vente libre en France (décret 2008-841)", en: "The 148 medicinal plants freely sellable in France (decree 2008-841)" }
+  description: { fr: "La liste légale des plantes qu'on peut vendre hors pharmacie — et donc cultiver, sécher, échanger sans contrainte. Tout le reste relève du monopole pharmaceutique à la vente, pas à l'usage personnel. Article Wikipédia FR (inclus dans le ZIM Wikipédia FR) + texte sur Légifrance.", en: "The legal list of plants sellable outside pharmacies — hence growable, dried, exchanged without constraint. Everything else is under the pharmacy monopoly for sale, not for personal use. Wikipedia FR article (in the Wikipedia FR ZIM) + decree on Légifrance." }
+  tags: [ legal:grey, legal, herbal, fr, list ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.001
+  source: { kind: manual, homepage: "https://fr.wikipedia.org/wiki/Liste_des_plantes_m%C3%A9dicinales_en_vente_libre_en_France", url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000019375944" }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  printable: { available: true, pages_estimate: 4 }
+  depends_on: [ wikipedia-fr-nopic ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Textes classiques (à lire avec recul) / Classic texts (read critically) ----------
+
+- id: modern-herbal-grieve
+  type: pdf
+  category: medical
+  name: { fr: "A Modern Herbal (M. Grieve, 1931) — 800 plantes, domaine public au Royaume-Uni", en: "A Modern Herbal (M. Grieve, 1931) — 800 herbs, public domain in the UK" }
+  description: { fr: "Usages médicinaux, culinaires, cosmétiques, culture, folklore, recettes, section poisons. Texte de 1931 : précieux pour les préparations traditionnelles, dépassé pour la pharmacologie — recouper avec l'EMA/OMS.", en: "Medicinal, culinary, cosmetic uses, cultivation, folklore, recipes, poisons section. A 1931 text: valuable for traditional preparations, outdated for pharmacology — cross-check with EMA/WHO." }
+  tags: [ legal:grey, herbal, classic, preparations ]
+  languages: [ en ]
+  profiles: [ bunker, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: https://www.botanical.com/botanical/mgmh/mgmh.html, url: https://www.botanical.com/botanical/mgmh/mgmh.html }
+  license: { spdx: LicenseRef-PublicDomain-UK, redistribution: unclear, note: { fr: "Texte 1931 (autrice † 1941) : domaine public vie+70 ; l'édition hypertexte de botanical.com revendique un ©. Copie personnelle.", en: "1931 text (author d. 1941): PD life+70; the botanical.com hypertext edition claims ©. Personal copy." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+
+- id: henriettes-herbal-classics
+  type: pdf
+  category: medical
+  name: { fr: "Henriette's Herbal — 60 textes classiques de matière médicale (King's Dispensatory 1898…)", en: "Henriette's Herbal — 60 classic materia medica texts (King's Dispensatory 1898…)" }
+  description: { fr: "Transcriptions des grands ouvrages éclectiques américains (Felter & Lloyd, Ellingwood, Cook) : préparations, teintures, doses de l'époque. Historique, à recouper.", en: "Transcriptions of the major American eclectic works (Felter & Lloyd, Ellingwood, Cook): preparations, tinctures, period doses. Historical, cross-check." }
+  tags: [ legal:grey, herbal, classic, tinctures ]
+  languages: [ en, mul ]
+  profiles: [ bunker, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://www.henriettes-herb.com/eclectic/, url: https://www.henriettes-herb.com/eclectic/ }
+  license: { spdx: mixed, redistribution: unclear, note: { fr: "Textes anciens libres ; les scans/transcriptions sont © H. Kress. Copie personnelle.", en: "Old texts are free; scans/transcriptions © H. Kress. Personal copy." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+
+- id: kew-powo-wcvp
+  type: dataset
+  category: agriculture
+  name: { fr: "Kew — World Checklist of Vascular Plants (noms et répartitions, CC BY)", en: "Kew — World Checklist of Vascular Plants (names and distributions, CC BY)" }
+  description: { fr: "La colonne vertébrale taxonomique de Plants of the World Online : synonymes, noms acceptés, répartition mondiale. Pour lever les ambiguïtés de noms entre sources (FR/EN/latin).", en: "The taxonomic backbone of Plants of the World Online: synonyms, accepted names, world distribution. To resolve name ambiguities across sources (FR/EN/Latin)." }
+  tags: [ plants, taxonomy, database ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://powo.science.kew.org, url: http://sftp.kew.org/pub/data-repositories/WCVP/ }
+  license: { spdx: CC-BY-4.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference

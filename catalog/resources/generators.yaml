@@ -1,0 +1,356 @@
+# Générateurs : produire des schémas, câblages, pièces et diagrammes EXACTS à partir d'une source.
+# Generators: produce EXACT schematics, wiring, parts and diagrams from a source.
+#
+# ADR 0009 : un schéma est du code ; le rendu en est une vue. Le modèle de langue écrit la source,
+# l'outil la rend. Tout ici tourne sans démon (ADR 0008) : binaire statique, Node ou Python autonome.
+# Les modèles de diffusion sont en bas du fichier, dans une section à part, parce qu'ils ne font pas
+# la même chose : ils illustrent, ils ne produisent pas — et jamais un schéma technique.
+#
+# ADR 0009: a diagram is code; the rendering is a view. Diffusion models are at the bottom, apart:
+# they illustrate, they do not produce — and never a technical diagram.
+
+# --- Électronique / Electronics -----------------------------------------------------------------
+
+- id: schemdraw
+  type: software
+  category: electronics
+  name: { fr: "schemdraw — schémas électriques en Python", en: "schemdraw — circuit schematics in Python" }
+  description:
+    fr: "Écrire un schéma électrique comme une suite d'éléments (source, résistance, LED, transistor…) et obtenir un SVG propre, avec étiquettes et valeurs. C'est ce que l'assistant produit quand on lui demande « un schéma de… » : de la source relisible, pas des pixels. Pur Python, aucune dépendance native."
+    en: "Write a circuit schematic as a sequence of elements (source, resistor, LED, transistor…) and get a clean SVG with labels and values. What the assistant produces when asked for 'a schematic of…': reviewable source, not pixels. Pure Python, no native dependency."
+  tags: [ electronics, schematic, diagram, generator, python ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.05
+  source: { kind: github-repo, github_repo: cdelker/schemdraw, url: https://github.com/cdelker/schemdraw.git, homepage: https://schemdraw.readthedocs.io }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone, pip-cache ]
+  update: { tracker: pypi, package: schemdraw, check_interval_days: 30 }
+  runtime: python
+  status: unverified
+  reliability: reference
+
+- id: skidl
+  type: software
+  category: electronics
+  name: { fr: "SKiDL — décrire un circuit en code, sortir une netliste KiCad", en: "SKiDL — describe a circuit in code, output a KiCad netlist" }
+  description:
+    fr: "Le circuit comme programme : composants, connexions, vérification ERC, puis netliste pour KiCad. Le pont entre « l'assistant écrit un circuit » et « on fabrique une carte » : la source est vérifiable, la carte suit."
+    en: "The circuit as a program: parts, connections, ERC check, then a netlist for KiCad. The bridge between 'the assistant writes a circuit' and 'we make a board': the source is checkable, the board follows."
+  tags: [ electronics, netlist, kicad, generator, python ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.05
+  source: { kind: github-repo, github_repo: devbisme/skidl, url: https://github.com/devbisme/skidl.git, homepage: https://devbisme.github.io/skidl/ }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone, pip-cache, toolchain-kicad ]
+  update: { tracker: pypi, package: skidl, check_interval_days: 30 }
+  runtime: python
+  status: unverified
+  reliability: community
+
+- id: wireviz
+  type: software
+  category: electronics
+  name: { fr: "WireViz — schémas de câblage et faisceaux depuis un YAML", en: "WireViz — wiring and harness diagrams from YAML" }
+  description:
+    fr: "Connecteurs, brochages, couleurs de fils, longueurs, nomenclature : un fichier YAML de vingt lignes devient un schéma de câblage lisible avec sa liste de pièces. Exactement ce qu'il faut pour « panneau → régulateur → batterie » ou « capteur → carte ». Rend via Graphviz."
+    en: "Connectors, pinouts, wire colours, lengths, BOM: a twenty-line YAML becomes a readable wiring diagram with its parts list. Exactly what 'panel → controller → battery' or 'sensor → board' needs. Renders through Graphviz."
+  tags: [ electronics, wiring, harness, generator, python ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.05
+  source: { kind: github-repo, github_repo: wireviz/WireViz, url: https://github.com/wireviz/WireViz.git, homepage: https://github.com/wireviz/WireViz }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone, pip-cache, graphviz ]
+  update: { tracker: pypi, package: wireviz, check_interval_days: 30 }
+  runtime: python
+  status: unverified
+  reliability: reference
+
+- id: ngspice
+  type: software
+  category: electronics
+  name: { fr: "ngspice — simuler un circuit avant de le construire", en: "ngspice — simulate a circuit before building it" }
+  description:
+    fr: "Simulateur SPICE de référence, intégré à KiCad. Vérifier qu'un régulateur régule, qu'un filtre filtre, qu'une résistance ne fume pas — avant de souder avec des composants qu'on ne pourra pas racheter. Binaire statique."
+    en: "The reference SPICE simulator, integrated in KiCad. Check that a regulator regulates, a filter filters, a resistor does not smoke — before soldering parts you cannot buy again. Static binary."
+  tags: [ electronics, simulation, spice ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: http, url: https://sourceforge.net/projects/ngspice/files/ng-spice-rework/, homepage: https://ngspice.sourceforge.io }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  update: { tracker: http-head, check_interval_days: 60 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+
+# --- Diagrammes et graphes / Diagrams and graphs -------------------------------------------------
+
+- id: graphviz
+  type: software
+  category: dev
+  name: { fr: "Graphviz — graphes et réseaux depuis un texte", en: "Graphviz — graphs and networks from text" }
+  description:
+    fr: "Le moteur de mise en page de graphes : nœuds et liens décrits en `dot`, dessin automatique. Réseau du hameau, topologie mesh, arbre de pannes, dépendances entre paquets. Aussi le moteur de rendu de WireViz. Binaire statique."
+    en: "The graph layout engine: nodes and links described in `dot`, automatic drawing. Hamlet network, mesh topology, fault tree, package dependencies. Also WireViz's rendering engine. Static binary."
+  tags: [ diagram, graph, generator ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.05
+  source: { kind: github-repo, github_repo: gitlab-graphviz/graphviz, url: https://graphviz.org/download/, homepage: https://graphviz.org }
+  license: { spdx: EPL-1.0, redistribution: allowed }
+  update: { tracker: http-head, check_interval_days: 60 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Le dépôt canonique est sur GitLab ; la page de téléchargement officielle est suivie par http-head. Sous Debian : paquet `graphviz` dans le miroir apt."
+    en: "The canonical repo is on GitLab; the official download page is tracked by http-head. On Debian: package `graphviz` in the apt mirror."
+
+- id: mermaid-cli
+  type: software
+  category: dev
+  name: { fr: "Mermaid CLI — organigrammes, séquences, Gantt, arbres de décision", en: "Mermaid CLI — flowcharts, sequences, Gantt, decision trees" }
+  description:
+    fr: "Le langage de diagramme le plus simple à écrire et à relire : `A --> B{choix}`. Une procédure, un arbre de décision (« délai > 6 h ? »), un calendrier de saison, un plan de secours. Tourne sur Node, que la bibliothèque a déjà. C'est le générateur par défaut de l'assistant quand ce n'est ni un circuit ni une pièce."
+    en: "The simplest diagram language to write and read: `A --> B{choice}`. A procedure, a decision tree ('delay > 6 h?'), a seasonal calendar, a contingency plan. Runs on Node, which the library already has. The assistant's default generator when it is neither a circuit nor a part."
+  tags: [ diagram, flowchart, generator, node ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.4
+  source: { kind: github-repo, github_repo: mermaid-js/mermaid-cli, url: https://github.com/mermaid-js/mermaid-cli.git, homepage: https://mermaid.js.org }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ node, npm ] }
+  depends_on: [ node-lts, verdaccio ]
+  update: { tracker: npm, package: "@mermaid-js/mermaid-cli", check_interval_days: 30 }
+  runtime: node
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "mmdc rend via un Chromium embarqué (Puppeteer) : ~300 Mo, à mettre en cache dans Verdaccio. Alternative sans navigateur : les diagrammes Mermaid s'affichent nativement dans l'interface web d'Arche."
+    en: "mmdc renders through an embedded Chromium (Puppeteer): ~300 MB, to cache in Verdaccio. Browser-free alternative: Mermaid diagrams render natively in Arche's web UI."
+
+- id: drawio-desktop
+  type: software
+  category: dev
+  name: { fr: "draw.io Desktop — dessiner à la main, exporter en ligne de commande", en: "draw.io Desktop — draw by hand, export from the command line" }
+  description:
+    fr: "L'éditeur de schémas généraliste, hors ligne, avec ses bibliothèques de formes (électrique, plomberie, réseau, bâtiment). Pour ce qu'aucun générateur ne sait décrire : un plan de masse, un schéma de tuyauterie, un croquis annoté. `drawio -x -f svg` exporte en lot."
+    en: "The general-purpose offline diagram editor with its shape libraries (electrical, plumbing, network, building). For what no generator can describe: a site plan, a piping diagram, an annotated sketch. `drawio -x -f svg` exports in batch."
+  tags: [ diagram, editor, cad ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.4
+  source: { kind: github-release, github_repo: jgraph/drawio-desktop, url: https://github.com/jgraph/drawio-desktop/releases, homepage: https://www.drawio.com, github_asset_pattern: "drawio-(x86_64|arm64|amd64).*\\.(AppImage|deb|dmg|exe)$" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 30 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+
+- id: plantuml
+  type: software
+  category: dev
+  name: { fr: "PlantUML — UML, réseau, déploiement, cartes mentales", en: "PlantUML — UML, network, deployment, mind maps" }
+  description:
+    fr: "Diagrammes d'architecture logicielle et réseau depuis un texte. Demande une JVM : n'entre qu'avec le JDK Temurin en dépendance. Pour l'usage courant, Mermaid suffit et ne demande rien."
+    en: "Software and network architecture diagrams from text. Needs a JVM: enters only with the Temurin JDK as a dependency. For everyday use Mermaid is enough and needs nothing."
+  tags: [ diagram, uml, generator, jvm ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.02
+  source: { kind: github-release, github_repo: plantuml/plantuml, url: https://github.com/plantuml/plantuml/releases, homepage: https://plantuml.com, github_asset_pattern: "plantuml-.*\\.jar$" }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { tools: [ java ] }
+  depends_on: [ temurin-jdk, graphviz ]
+  update: { tracker: github-release, check_interval_days: 30 }
+  runtime: jvm
+  status: unverified
+  reliability: reference
+
+- id: temurin-jdk
+  type: software
+  category: dev
+  name: { fr: "JDK Temurin (Java LTS, autonome)", en: "Temurin JDK (Java LTS, standalone)" }
+  description:
+    fr: "La JVM pour ce qui en a besoin — PlantUML, quelques outils de CAO et de radio. Archive autonome, aucune installation système. Ligne LTS (21 ou 25)."
+    en: "The JVM for what needs one — PlantUML, a few CAD and radio tools. Standalone archive, no system install. LTS line (21 or 25)."
+  tags: [ java, runtime ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-release, github_repo: adoptium/temurin21-binaries, url: https://adoptium.net/temurin/releases/, homepage: https://adoptium.net, github_asset_pattern: "OpenJDK21U-jdk_(x64|aarch64)_(linux|mac|windows)_hotspot_.*\\.(tar\\.gz|zip)$" }
+  license: { spdx: GPL-2.0-with-classpath-exception, redistribution: allowed }
+  update: { tracker: github-release, stability: lts, check_interval_days: 30 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+
+# --- Mécanique / Mechanical ------------------------------------------------------------------------
+
+- id: openscad
+  type: software
+  category: fabrication
+  name: { fr: "OpenSCAD — pièces paramétriques en code (STL, DXF, SVG)", en: "OpenSCAD — parametric parts in code (STL, DXF, SVG)" }
+  description:
+    fr: "Une pièce est un programme : `cylinder(d=20, h=10)`. Changer une cote, c'est changer un nombre. Sort du STL à imprimer, du DXF à découper, des projections 2D. C'est ce que l'assistant écrit quand on lui demande une entretoise, une bride, un boîtier. Binaire autonome (AppImage / dmg / zip)."
+    en: "A part is a program: `cylinder(d=20, h=10)`. Changing a dimension is changing a number. Outputs STL to print, DXF to cut, 2D projections. What the assistant writes when asked for a spacer, a bracket, an enclosure. Standalone binary (AppImage / dmg / zip)."
+  tags: [ cad, 3d-printing, generator, fabrication ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.1
+  source: { kind: github-repo, github_repo: openscad/openscad, url: https://openscad.org/downloads.html, homepage: https://openscad.org }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  update: { tracker: github-tag, check_interval_days: 30 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+
+- id: cadquery
+  type: software
+  category: fabrication
+  name: { fr: "CadQuery — CAO paramétrique en Python, export STEP", en: "CadQuery — parametric CAD in Python, STEP export" }
+  description:
+    fr: "Quand OpenSCAD ne suffit plus : congés, chanfreins, filetages, assemblages, et surtout l'export STEP que FreeCAD et les usineurs comprennent. Repose sur le noyau OpenCascade (le même que FreeCAD)."
+    en: "When OpenSCAD is not enough: fillets, chamfers, threads, assemblies, and above all STEP export that FreeCAD and machinists understand. Built on the OpenCascade kernel (same as FreeCAD)."
+  tags: [ cad, step, generator, python, fabrication ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.6
+  source: { kind: github-repo, github_repo: CadQuery/cadquery, url: https://github.com/CadQuery/cadquery.git, homepage: https://cadquery.readthedocs.io }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone, pip-cache ]
+  update: { tracker: pypi, package: cadquery, check_interval_days: 30 }
+  runtime: python
+  status: unverified
+  reliability: reference
+
+# --- Modèles de diffusion : ILLUSTRER, pas produire / Diffusion models: ILLUSTRATE, do not produce ---
+#
+# Règle (VISUELS.md, ADR 0009) : provenance `generated`, étiquetée, jamais pour une vue diagnostique,
+# jamais pour un schéma technique. Un générateur exact existe pour ça.
+
+- id: sweethome3d
+  type: software
+  category: construction
+  name: { fr: "Sweet Home 3D — plans de maison et aménagement (Java)", en: "Sweet Home 3D — house plans and interior layout (Java)" }
+  description:
+    fr: "Dessin de plans de maison en 2D avec vue 3D immédiate, murs, ouvertures, mobilier, export SVG/OBJ/PDF. GPL-2.0, fonctionne hors ligne. Pour un projet de maison bioclimatique, c'est l'outil du plan de masse et des orientations ; le calcul thermique va dans EnergyPlus ou dans le calculateur solaire d'Arche."
+    en: "2D house plans with an immediate 3D view, walls, openings, furniture, SVG/OBJ/PDF export. GPL-2.0, works offline. For a bioclimatic house project it is the tool for the site plan and orientations; thermal calculation goes to EnergyPlus or Arche's solar calculator."
+  tags: [ house, plans, cad, construction, bioclimatic ]
+  languages: [ mul, fr, en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.15
+  source: { kind: http, url: https://sourceforge.net/projects/sweethome3d/files/SweetHome3D/, homepage: https://www.sweethome3d.com }
+  license: { spdx: GPL-2.0-only, redistribution: allowed }
+  update: { tracker: http-head, check_interval_days: 60 }
+  runtime: jvm
+  requires: { tools: [ temurin-jdk ] }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Dernière version vue : 7.5 (2024-08). Les installeurs embarquent un JRE ; sinon Temurin.", en: "Last version seen: 7.5 (2024-08). Installers bundle a JRE; otherwise Temurin." }
+
+- id: comfyui
+  type: software
+  category: ai
+  name: { fr: "ComfyUI — interface à nœuds pour la diffusion (images, 3D, audio)", en: "ComfyUI — node interface for diffusion (images, 3D, audio)" }
+  description:
+    fr: "La référence des interfaces de diffusion : graphes de nœuds, images, vidéo, audio, et génération 3D (Hunyuan3D). GPL-3.0, Python + PyTorch, tourne hors ligne (le cœur ne télécharge rien ; désactiver les nœuds API payants avec `--disable-api-nodes`). CPU possible mais lent : réaliste avec une carte graphique. Règle ADR 0009 inchangée : illustrer, jamais produire un schéma technique ni identifier une espèce ; un maillage 3D généré n'est jamais une pièce fonctionnelle (OpenSCAD)."
+    en: "The reference diffusion interface: node graphs, images, video, audio, and 3D generation (Hunyuan3D). GPL-3.0, Python + PyTorch, runs offline (the core downloads nothing; disable paid API nodes with `--disable-api-nodes`). CPU possible but slow: realistic with a GPU. ADR 0009 rule unchanged: illustrate, never produce a technical diagram or identify a species; a generated 3D mesh is never a functional part (OpenSCAD)."
+  tags: [ diffusion, images, 3d, gui, illustration ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 6
+  source: { kind: github-repo, github_repo: comfyanonymous/ComfyUI, url: https://github.com/comfyanonymous/ComfyUI.git, homepage: https://www.comfy.org }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ python3, pip ], ram_gb: 16, vram_gb: 6 }
+  depends_on: [ python-standalone, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: python
+  notes: { fr: "PyTorch et les modèles (FLUX.1-schnell, SDXL au catalogue) se mettent en cache avant la coupure ; compter 6 Go pour l'environnement seul. Alternative légère sans GPU : stable-diffusion.cpp.", en: "PyTorch and the models (FLUX.1-schnell, SDXL in the catalogue) are cached before the outage; count 6 GB for the environment alone. Light no-GPU alternative: stable-diffusion.cpp." }
+
+- id: stable-diffusion-cpp
+  type: software
+  category: ai
+  name: { fr: "stable-diffusion.cpp — génération d'images en binaire natif (CPU/GPU)", en: "stable-diffusion.cpp — image generation as a native binary (CPU/GPU)" }
+  description:
+    fr: "Le llama.cpp de l'image : un seul binaire, poids GGUF, tourne sur CPU (lentement) ou GPU, sans Python ni démon — cohérent avec l'ADR 0008. Pour illustrer une fiche, un geste, une scène. Pas pour identifier, pas pour un schéma : un générateur exact existe pour ça."
+    en: "The llama.cpp of images: one binary, GGUF weights, runs on CPU (slowly) or GPU, no Python, no daemon — consistent with ADR 0008. To illustrate a sheet, a gesture, a scene. Not to identify, not for a diagram: an exact generator exists for that."
+  tags: [ ai, image-generation, diffusion ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.05
+  source: { kind: github-release, github_repo: leejet/stable-diffusion.cpp, url: https://github.com/leejet/stable-diffusion.cpp/releases, homepage: https://github.com/leejet/stable-diffusion.cpp }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { ram_gb: 16, gpu: optional }
+  update: { tracker: github-release, check_interval_days: 14 }
+  runtime: static-binary
+  status: unverified
+  reliability: community
+
+- id: hf-flux1-schnell-gguf
+  type: ai-model
+  category: ai
+  name: { fr: "FLUX.1 [schnell] — poids GGUF pour stable-diffusion.cpp", en: "FLUX.1 [schnell] — GGUF weights for stable-diffusion.cpp" }
+  description:
+    fr: "Le meilleur modèle d'image libre (Apache-2.0) en version rapide : quatre pas, une image en une minute sur un GPU modeste, plusieurs sur CPU. Quantifié Q4 pour tenir dans 8 Go. Illustration uniquement ; provenance `generated`."
+    en: "The best free image model (Apache-2.0), fast variant: four steps, an image in a minute on a modest GPU, several on CPU. Q4-quantised to fit in 8 GB. Illustration only; provenance `generated`."
+  tags: [ ai, image-generation, diffusion, gguf ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 7
+  source: { kind: huggingface, hf_repo: city96/FLUX.1-schnell-gguf, hf_file: flux1-schnell-Q4_K_S.gguf, url: https://huggingface.co/city96/FLUX.1-schnell-gguf, homepage: https://huggingface.co/black-forest-labs/FLUX.1-schnell }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 16, vram_gb: 8, gpu: optional }
+  depends_on: [ stable-diffusion-cpp ]
+  update: { tracker: huggingface, check_interval_days: 30 }
+  status: unverified
+  reliability: community
+  notes:
+    fr: "Il faut aussi l'encodeur de texte T5-XXL (GGUF, ~5 Go en Q5) et le VAE `ae.safetensors` du dépôt officiel : voir la doc de stable-diffusion.cpp. Total ~13 Go."
+    en: "Also needs the T5-XXL text encoder (GGUF, ~5 GB at Q5) and the official `ae.safetensors` VAE: see the stable-diffusion.cpp docs. ~13 GB total."
+
+- id: hf-sdxl-base
+  type: ai-model
+  category: ai
+  name: { fr: "Stable Diffusion XL 1.0 (base)", en: "Stable Diffusion XL 1.0 (base)" }
+  description:
+    fr: "Le modèle d'image libre le plus documenté, en un seul fichier safetensors, sans encodeur séparé : le plus simple à faire tourner avec stable-diffusion.cpp. Licence OpenRAIL++-M : redistribution libre avec restrictions d'usage. Illustration uniquement."
+    en: "The best-documented free image model, one safetensors file, no separate encoder: the simplest to run with stable-diffusion.cpp. OpenRAIL++-M licence: free redistribution with use restrictions. Illustration only."
+  tags: [ ai, image-generation, diffusion ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 7
+  source: { kind: huggingface, hf_repo: stabilityai/stable-diffusion-xl-base-1.0, hf_file: sd_xl_base_1.0.safetensors, url: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0 }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: LicenseRef-OpenRAIL-M, url: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md, redistribution: allowed }
+  requires: { ram_gb: 16, vram_gb: 6, gpu: optional }
+  depends_on: [ stable-diffusion-cpp ]
+  update: { tracker: huggingface, check_interval_days: 60 }
+  status: unverified
+  reliability: reference

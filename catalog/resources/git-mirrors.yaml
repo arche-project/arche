@@ -1,0 +1,294 @@
+# Dépôts Git à mirrorer (git clone --mirror). include_wiki / include_releases déclenchent les traitements séparés
+# (un clone ne récupère ni le wiki GitHub ni les binaires de release).
+# Git repositories to mirror. include_wiki / include_releases trigger the separate handling.
+
+- id: git-klipper
+  type: git-repo
+  category: fabrication
+  name: { fr: "Klipper (firmware imprimante 3D)", en: "Klipper (3D printer firmware)" }
+  description: { fr: "Firmware d'imprimante 3D moderne, avec sa documentation complète dans le dépôt.", en: "Modern 3D printer firmware, full documentation inside the repo." }
+  tags: [ 3dprinting, firmware ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.4
+  source: { kind: github-repo, github_repo: Klipper3d/klipper, url: https://github.com/Klipper3d/klipper.git, include_wiki: false, include_releases: false }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-marlin
+  type: git-repo
+  category: fabrication
+  name: { fr: "Marlin (firmware imprimante 3D)", en: "Marlin (3D printer firmware)" }
+  description: { fr: "Firmware le plus répandu sur les imprimantes grand public.", en: "Most widespread firmware on consumer printers." }
+  tags: [ 3dprinting, firmware ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.6
+  source: { kind: github-repo, github_repo: MarlinFirmware/Marlin, url: https://github.com/MarlinFirmware/Marlin.git, include_releases: true }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-freecad
+  type: git-repo
+  category: fabrication
+  name: { fr: "FreeCAD (sources + binaires)", en: "FreeCAD (sources + binaries)" }
+  description: { fr: "CAO paramétrique libre. Les binaires (AppImage/dmg/exe) sont récupérés via les releases.", en: "Free parametric CAD. Binaries (AppImage/dmg/exe) fetched via releases." }
+  tags: [ cad, design ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 3
+  source: { kind: github-repo, github_repo: FreeCAD/FreeCAD, url: https://github.com/FreeCAD/FreeCAD.git, include_releases: true, github_asset_pattern: "\\.(AppImage|dmg|exe|7z)$" }
+  license: { spdx: LGPL-2.0-or-later, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-open-source-ecology
+  type: git-repo
+  category: fabrication
+  name: { fr: "Open Source Ecology (Global Village Construction Set)", en: "Open Source Ecology (Global Village Construction Set)" }
+  description: { fr: "Plans des 50 machines industrielles open source (tracteur, presse à briques, four…). Le wiki OSE est la source principale ; il n'est pas sur GitHub.", en: "Plans for 50 open-source industrial machines (tractor, brick press, furnace…). The OSE wiki is the main source; it is not on GitHub." }
+  tags: [ machines, agriculture, fabrication ]
+  languages: [ en ]
+  profiles: [ bunker, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://wiki.opensourceecology.org, url: https://wiki.opensourceecology.org }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: community
+  notes: { fr: "À produire en ZIM avec Zimit (voir docs/fr/guide-expert.md, section « Fabriquer ses propres ZIM »). Arbitrage : proposer un ZIM communautaire hébergé par le projet ?", en: "Build as a ZIM with Zimit (see docs/en/guide-expert.md, 'Build your own ZIMs'). Decision: offer a community ZIM hosted by the project?" }
+
+- id: git-farm-hack
+  type: git-repo
+  category: agriculture
+  name: { fr: "Farm Hack (outils agricoles open source)", en: "Farm Hack (open-source farm tools)" }
+  description: { fr: "Communauté d'outils agricoles à fabriquer. Site web, pas de dépôt Git central : à convertir avec Zimit.", en: "Community of farm tools to build. Website, no central Git repo: convert with Zimit." }
+  tags: [ agriculture, tools ]
+  languages: [ en ]
+  profiles: [ bunker, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://farmhack.org, url: https://farmhack.org/tools }
+  license: { spdx: mixed, redistribution: unclear }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: community
+
+- id: git-lowtech-lab
+  type: git-repo
+  category: energy
+  name: { fr: "Low-tech Lab (tutoriels)", en: "Low-tech Lab (tutorials)" }
+  description: { fr: "Tutoriels FR de low-tech (poêle-fusée, séchoir solaire, phytoépuration…). Wiki sur wiki.lowtechlab.org : à convertir avec Zimit.", en: "French low-tech tutorials (rocket stove, solar dryer, constructed wetlands…). Wiki at wiki.lowtechlab.org: convert with Zimit." }
+  tags: [ low-tech, tutorials ]
+  languages: [ fr, en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://wiki.lowtechlab.org, url: https://wiki.lowtechlab.org }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: curated
+  notes: { fr: "Contenu FR de premier plan mais absent de Kiwix. Candidat n°1 pour demander au Low-tech Lab un ZIM officiel (ou l'autorisation d'en publier un).", en: "First-rate French content missing from Kiwix. Top candidate to ask Low-tech Lab for an official ZIM (or permission to publish one)." }
+
+- id: git-ros2
+  type: git-repo
+  category: robotics
+  name: { fr: "ROS 2 (documentation + dépôts de base)", en: "ROS 2 (docs + core repos)" }
+  description: { fr: "Documentation ROS 2 et dépôts principaux. Les paquets binaires (apt) demandent un miroir apt séparé, non couvert ici.", en: "ROS 2 docs and core repos. Binary packages (apt) need a separate apt mirror, not covered here." }
+  tags: [ robotics, ros ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: ros2/ros2_documentation, url: https://github.com/ros2/ros2_documentation.git }
+  license: { spdx: CC-BY-4.0, redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-ardupilot
+  type: git-repo
+  category: robotics
+  name: { fr: "ArduPilot", en: "ArduPilot" }
+  description: { fr: "Autopilote open source pour drones, rovers, bateaux.", en: "Open-source autopilot for drones, rovers, boats." }
+  tags: [ robotics, drones ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: github-repo, github_repo: ArduPilot/ardupilot, url: https://github.com/ArduPilot/ardupilot.git, include_wiki: false }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-esphome
+  type: git-repo
+  category: electronics
+  name: { fr: "ESPHome", en: "ESPHome" }
+  description: { fr: "Capteurs ESP32 configurés en YAML (BME280, sol, eau…). Pilier de la station météo locale.", en: "ESP32 sensors configured in YAML (BME280, soil, water…). Pillar of the local weather station." }
+  tags: [ esp32, sensors, iot ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: esphome/esphome, url: https://github.com/esphome/esphome.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-platformio ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-arche
+  type: git-repo
+  category: platform
+  name: { fr: "Arche (ce dépôt)", en: "Arche (this repository)" }
+  description: { fr: "Toujours mirrorer Arche lui-même : le wizard, le catalogue et les docs doivent survivre à la coupure.", en: "Always mirror Arche itself: wizard, catalog and docs must survive the outage." }
+  tags: [ self ]
+  languages: [ fr, en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source: { kind: github-repo, github_repo: arche-project/arche, url: https://github.com/arche-project/arche.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Remplacer l'URL par celle du dépôt réel une fois créé.", en: "Replace the URL with the real repo once created." }
+
+# --- Pérennité du format ZIM (angle mort A2/A3) : sans ces sources, plus de lecteur dans dix ans. ---
+- id: git-libzim
+  type: git-repo
+  category: platform
+  name: { fr: "libzim (sources du format ZIM)", en: "libzim (ZIM format sources)" }
+  description: { fr: "La bibliothèque de lecture/écriture ZIM. À recompiler si plus aucun binaire ne tourne.", en: "The ZIM read/write library. Rebuild it if no binary runs any more." }
+  tags: [ zim, kiwix, sources, longevity ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.1
+  source: { kind: github-repo, github_repo: openzim/libzim, url: https://github.com/openzim/libzim.git, include_releases: true, github_asset_pattern: "\\.tar\\.gz$" }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  requires: { tools: [ git ] }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-tinygrad
+  type: git-repo
+  category: ai
+  name: { fr: "tinygrad — un moteur d'apprentissage profond lisible de bout en bout", en: "tinygrad — a deep-learning engine readable end to end" }
+  description:
+    fr: "Quelques milliers de lignes de Python qui font tourner et entraîner des réseaux sur CPU, GPU AMD/Intel/Apple, sans CUDA. MIT. Ce n'est pas le plus rapide ; c'est celui qu'on peut lire, comprendre et réparer sans réseau — exactement ce que « reproduire la technologie depuis zéro » demande (ADR 0013)."
+    en: "A few thousand lines of Python that run and train networks on CPU, AMD/Intel/Apple GPUs, without CUDA. MIT. Not the fastest; the one you can read, understand and fix offline — exactly what 'rebuilding the technology from scratch' asks for (ADR 0013)."
+  tags: [ training, ml, from-scratch, gpu ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.1
+  source: { kind: github-repo, github_repo: tinygrad/tinygrad, url: https://github.com/tinygrad/tinygrad.git, homepage: https://tinygrad.org }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+
+- id: git-tflite-micro
+  type: git-repo
+  category: electronics
+  name: { fr: "TensorFlow Lite Micro — inférence sur ESP32 et microcontrôleurs", en: "TensorFlow Lite Micro — inference on ESP32 and microcontrollers" }
+  description:
+    fr: "Faire tourner un petit réseau (entraîné sur le PC avec PyTorch/ONNX ou TensorFlow) directement sur l'ESP32 du capteur : détecter une anomalie de température, classer un son, compter. Apache-2.0. Avec esp-nn, les opérations sont accélérées sur ESP32-S3."
+    en: "Run a small network (trained on the PC with PyTorch/ONNX or TensorFlow) directly on the sensor's ESP32: detect a temperature anomaly, classify a sound, count. Apache-2.0. With esp-nn, operations are accelerated on ESP32-S3."
+  tags: [ tinyml, esp32, inference, sensors ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: tensorflow/tflite-micro, url: https://github.com/tensorflow/tflite-micro.git, homepage: https://www.tensorflow.org/lite/microcontrollers }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-esp-idf ]
+  update: { tracker: github-commit, check_interval_days: 60 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Mirrorer aussi espressif/esp-tflite-micro (composant ESP-IDF prêt à l'emploi) et espressif/esp-nn.", en: "Also mirror espressif/esp-tflite-micro (ready-made ESP-IDF component) and espressif/esp-nn." }
+
+- id: git-kiwix-tools-src
+  type: git-repo
+  category: platform
+  name: { fr: "kiwix-tools + zim-tools (sources)", en: "kiwix-tools + zim-tools (sources)" }
+  description: { fr: "Sources de kiwix-serve et de zimdump (export d'un ZIM en HTML plat).", en: "Sources of kiwix-serve and zimdump (flat HTML export of a ZIM)." }
+  tags: [ zim, kiwix, sources, longevity ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.1
+  source: { kind: github-repo, github_repo: kiwix/kiwix-tools, url: https://github.com/kiwix/kiwix-tools.git }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { tools: [ git ] }
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Ajouter aussi openzim/zim-tools et la spec openzim/spec ; ils sont petits.", en: "Also add openzim/zim-tools and the openzim/spec repo; they are small." }
+
+- id: git-zimit
+  type: git-repo
+  category: platform
+  name: { fr: "Zimit (fabriquer un ZIM depuis n'importe quel site)", en: "Zimit (build a ZIM from any website)" }
+  description: { fr: "L'outil qui permet de produire soi-même les ZIM manquants (Low-tech Lab, OSE…). Image Docker à sauvegarder séparément.", en: "The tool to build the missing ZIMs yourself (Low-tech Lab, OSE…). Save the Docker image separately." }
+  tags: [ zim, scraper, sources ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.05
+  source: { kind: github-repo, github_repo: openzim/zimit, url: https://github.com/openzim/zimit.git }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { tools: [ git, docker ] }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: container
+  notes:
+    fr: "ADR 0008 : Zimit n'existe qu'en conteneur. C'est l'outil de notre chaîne de construction en CI (zim-build.yml), pas un outil du quotidien hors-ligne — on garde le source pour qui voudra reconstruire."
+    en: "ADR 0008: Zimit only exists as a container. It is our CI build tool (zim-build.yml), not a daily offline tool — the source is kept for whoever wants to rebuild."
+
+- id: git-llama-cpp-src
+  type: git-repo
+  category: ai
+  name: { fr: "llama.cpp (sources)", en: "llama.cpp (sources)" }
+  description: { fr: "Pour faire tourner un fichier GGUF sans Ollama, sur n'importe quelle machine, dans dix ans.", en: "To run a GGUF file without Ollama, on any machine, in ten years." }
+  tags: [ llm, sources, longevity ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: ggml-org/llama.cpp, url: https://github.com/ggml-org/llama.cpp.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference

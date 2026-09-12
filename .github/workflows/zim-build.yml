@@ -1,0 +1,111 @@
+# Construit les ZIM hébergés par Arche (catalog/zim-recipes.yaml) dans GitHub Actions, les envoie sur Internet Archive,
+# et ouvre une PR qui met le catalogue à jour. Rien ne transite par la machine du mainteneur.
+# Builds Arche-hosted ZIMs in GitHub Actions, uploads them to Internet Archive, opens a catalog PR.
+#
+# Secrets requis / required secrets : IA_ACCESS_KEY, IA_SECRET_KEY (https://archive.org/account/s3.php)
+# Limites GitHub Actions : 6 h par job, ~14 Go de disque libre. Les recettes plus grosses → runner auto-hébergé (voir HEBERGEMENT.md).
+name: zim-build
+
+on:
+  schedule:
+    - cron: "0 3 1 * *"          # le 1er du mois : recettes "monthly" ; quarterly/yearly filtrées par le script
+  workflow_dispatch:
+    inputs:
+      recipe:
+        description: "Recipe id (catalog/zim-recipes.yaml). Vide = toutes celles dont c'est l'échéance."
+        required: false
+        default: ""
+      force:
+        description: "Ignorer l'échéance (schedule) et construire quand même"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.sel.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - id: sel
+        name: Select recipes (permission license|written, due today or forced)
+        run: |
+          node -e '
+            const {parse}=require("yaml");const fs=require("fs");
+            const all=parse(fs.readFileSync("catalog/zim-recipes.yaml","utf8"));
+            const want=process.env.RECIPE, force=process.env.FORCE==="true", month=new Date().getUTCMonth();
+            const due=r=>force||r.schedule==="asap"||r.schedule==="monthly"||(r.schedule==="quarterly"&&month%3===0)||(r.schedule==="yearly"&&month===0);
+            const sel=all.filter(r=>["license","written"].includes(r.permission)).filter(r=>want?r.id===want:due(r)).map(r=>r.id);
+            const refused=all.filter(r=>!["license","written"].includes(r.permission)).map(r=>`${r.id} (${r.permission})`);
+            console.log("selected:",sel.join(", ")||"none");console.log("refused (no permission):",refused.join(", ")||"none");
+            fs.appendFileSync(process.env.GITHUB_OUTPUT,`matrix=${JSON.stringify({recipe:sel.length?sel:["none"]})}\n`);'
+        env:
+          RECIPE: ${{ inputs.recipe }}
+          FORCE: ${{ inputs.force }}
+
+  build:
+    needs: plan
+    if: ${{ needs.plan.outputs.matrix != '' && !contains(needs.plan.outputs.matrix, '"none"') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Free disk space (drop unused toolchains from the runner image)
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+
+      - name: Build ${{ matrix.recipe }}
+        run: scripts/zim/build.sh ${{ matrix.recipe }} build/zim
+
+      - name: Smoke-check the ZIM (opens, has a main page, search index present)
+        run: |
+          ZIM=$(ls build/zim/*.zim | head -1)
+          docker run --rm -v "$PWD/build/zim:/z" ghcr.io/openzim/zim-tools:latest zimcheck -A "/z/$(basename "$ZIM")" || echo "zimcheck reported issues (non-blocking)"
+          docker run --rm -v "$PWD/build/zim:/z" ghcr.io/openzim/zim-tools:latest zimdump info "/z/$(basename "$ZIM")"
+
+      - name: Upload to Internet Archive
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+        run: |
+          pip install --quiet internetarchive
+          scripts/zim/upload-ia.sh build/zim/build.json
+
+      - name: Update catalog entry
+        run: npx tsx scripts/zim/update-catalog.ts build/zim/build.json
+
+      - name: Validate catalog
+        run: npx tsx src/cli.ts catalog validate
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zim-${{ matrix.recipe }}-meta
+          path: |
+            build/zim/build.json
+            build/zim/*.sha256
+            .catalog-reports/
+
+      - name: Open PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: zim/${{ matrix.recipe }}
+          delete-branch: true
+          commit-message: "catalog: ${{ matrix.recipe }} built and hosted (${{ github.run_id }})"
+          title: "zim: ${{ matrix.recipe }} — nouveau build hébergé / new hosted build"
+          body-path: .catalog-reports/zim-${{ matrix.recipe }}.md
+          labels: catalog, zim, automated, catalog-sensitive   # nouvelle URL + hachage : relecture à deux, jamais fusionné par un robot (M2-3)
+          add-paths: catalog/**

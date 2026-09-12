@@ -1,0 +1,233 @@
+# Médecine d'appoint : ce qu'on fait quand il n'y a ni médecin, ni sage-femme, ni dentiste, ni psychiatre.
+# First-line care: what you do when there is no doctor, midwife, dentist or psychiatrist.
+# Sources de RÉFÉRENCE uniquement (règle éditoriale n°4), vérifiées le 2026-09-11.
+# Attention licences : Hesperian autorise la copie non commerciale MAIS exige un accord écrit pour tout FORMAT NUMÉRIQUE
+# et toute traduction → aucune de ces ressources ne peut devenir un ZIM Arche sans leur accord (permission: pending).
+
+# ---------- Naissance et santé des femmes / Birth and women's health ----------
+
+- id: hesperian-book-for-midwives
+  type: pdf
+  category: medical
+  name: { fr: "Guide des sages-femmes (Hesperian)", en: "A Book for Midwives (Hesperian)" }
+  description:
+    fr: "Le manuel de référence pour accompagner une grossesse et un accouchement sans hôpital : suivi prénatal, déroulement normal, positions, délivrance, hémorragie, soins au nouveau-né, suites de couches. Édition FR en ligne (HTML), PDF chapitre par chapitre en anglais."
+    en: "The reference manual to follow a pregnancy and birth without a hospital: antenatal care, normal labour, positions, delivery, haemorrhage, newborn care, postpartum. FR edition online (HTML), per-chapter PDFs in English."
+  tags: [ midwifery, birth, women, printable, "legal:grey" ]
+  languages: [ fr, en, es ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/Guide_des_sages-femmes", url: https://hesperian.org/wp-content/uploads/pdf/en_midw_2021/en_midw_2021_fm.pdf }
+  license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc, note: { fr: "Copie non commerciale autorisée avec attribution ; accord écrit OBLIGATOIRE pour tout format numérique (donc pour un ZIM) et pour toute traduction. Contact : permissions@hesperian.org", en: "Non-commercial copying allowed with credit; written permission REQUIRED for any digital format (hence any ZIM) and any translation." } }
+  printable: { available: true, pages_estimate: 550 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Le français n'existe qu'en HTML (pas de PDF FR) : c'est l'argument principal pour demander à Hesperian l'autorisation d'un ZIM FR.", en: "French exists only as HTML (no FR PDF): the main argument for asking Hesperian to allow a FR ZIM." }
+
+- id: hesperian-where-women-no-doctor
+  type: pdf
+  category: medical
+  name: { fr: "Là où les femmes n'ont pas de docteur (Hesperian)", en: "Where Women Have No Doctor (Hesperian)" }
+  description: { fr: "Santé des femmes en l'absence de soignant : cycle, contraception, infections, grossesse, ménopause, violences, maladies chroniques. Édition FR en ligne.", en: "Women's health with no health worker: cycle, contraception, infections, pregnancy, menopause, violence, chronic illness. FR edition online." }
+  tags: [ women, health, contraception, printable, "legal:grey" ]
+  languages: [ fr, en, es ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/Là_où_les_femmes_n'ont_pas_de_docteur", url: https://hesperian.org/wp-content/uploads/pdf/en_wwhnd_2023/en_wwhnd_2023_fm.pdf }
+  license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc, note: { fr: "Idem : accord écrit requis pour le numérique.", en: "Same: written permission required for digital formats." } }
+  printable: { available: true, pages_estimate: 600 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: who-mcpc-obstetric-complications
+  type: pdf
+  category: medical
+  name: { fr: "OMS — Prise en charge des complications de la grossesse et de l'accouchement (MCPC)", en: "WHO — Managing Complications in Pregnancy and Childbirth (MCPC)" }
+  description:
+    fr: "Le manuel d'urgence obstétricale : hémorragie, éclampsie, septicémie, travail bloqué, réanimation du nouveau-né. 492 pages, existe en français. Seule ressource de ce domaine sous licence VRAIMENT redistribuable (CC BY-NC-SA 3.0 IGO) — donc candidate n°1 à un ZIM Arche."
+    en: "The obstetric emergency manual: haemorrhage, eclampsia, sepsis, obstructed labour, newborn resuscitation. 492 pages, French edition exists. The only resource here under a TRULY redistributable license (CC BY-NC-SA 3.0 IGO) — hence the top ZIM candidate."
+  tags: [ obstetrics, emergency, birth, printable ]
+  languages: [ en, fr, es, ar, ru, zh, pt ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.005
+  source: { kind: http, url: https://iris.who.int/server/api/core/bitstreams/3bda1306-da5d-487d-b2ad-aff995112a7a/content, homepage: https://www.who.int/publications/i/item/9789241565493 }
+  license: { spdx: CC-BY-NC-SA-3.0-IGO, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 492 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: who-pcpnc-pregnancy-care
+  type: pdf
+  category: medical
+  name: { fr: "OMS — Grossesse, accouchement, post-partum et soins au nouveau-né (PCPNC)", en: "WHO — Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC)" }
+  description: { fr: "Guide de décision pour les soins de routine et d'urgence au premier niveau. 184 pages. Édition FR antérieure disponible sur IRIS.", en: "Decision-support guide for routine and emergency care at primary level. 184 pages. Earlier FR edition on IRIS." }
+  tags: [ pregnancy, newborn, printable ]
+  languages: [ en, fr, es, ar, ru, zh, pt ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.003
+  source: { kind: http, url: https://iris.who.int/bitstream/handle/10665/249580/9789241549356-eng.pdf, homepage: https://www.who.int/publications/i/item/9789241549356 }
+  license: { spdx: LicenseRef-WHO-All-Rights-Reserved, redistribution: unclear, note: { fr: "Édition 2015 « tous droits réservés » (avant la politique CC de l'OMS) : téléchargement personnel. Édition FR : https://iris.who.int/bitstream/handle/10665/43227/9242590843_fre.pdf", en: "2015 edition 'all rights reserved' (predates WHO's CC policy): personal download. FR edition URL in the FR note." } }
+  printable: { available: true, pages_estimate: 184 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: msf-obstetric-newborn-care
+  type: pdf
+  category: medical
+  name: { fr: "MSF — Soins obstétricaux et néonatals essentiels (FR)", en: "MSF — Essential obstetric and newborn care" }
+  description: { fr: "Le guide MSF pour les sages-femmes et médecins en contexte humanitaire, 279 pages, PDF français disponible. Gratuit mais © tous droits réservés : téléchargement personnel uniquement.", en: "MSF's guide for midwives and doctors in humanitarian settings, 279 pages, French PDF available. Free but © all rights reserved: personal download only." }
+  tags: [ obstetrics, newborn, field, fr ]
+  languages: [ fr, en, es, ar ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.01
+  source: { kind: http, url: https://medicalguidelines.msf.org/sites/default/files/pdf/guideline-449-fr.pdf, homepage: https://medicalguidelines.msf.org/fr/node/449 }
+  license: { spdx: LicenseRef-MSF-All-Rights-Reserved, redistribution: forbidden }
+  printable: { available: true, pages_estimate: 279 }
+  depends_on: [ msf-medical-guidelines ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Enfants / Children ----------
+
+- id: who-imci-chart-booklet
+  type: pdf
+  category: medical
+  name: { fr: "OMS — Carnet de prise en charge intégrée des maladies de l'enfant (PCIME)", en: "WHO — IMCI chart booklet" }
+  description:
+    fr: "Le document le plus dense qui existe pour un enfant malade de moins de 5 ans : évaluer, classer, traiter, par algorithmes (respiration, diarrhée, fièvre, dénutrition, signes de danger). 80 pages, existe en français. À plastifier."
+    en: "The densest document that exists for a sick child under 5: assess, classify, treat, by algorithms (breathing, diarrhoea, fever, malnutrition, danger signs). 80 pages, French edition exists. Laminate it."
+  tags: [ children, paediatrics, triage, printable ]
+  languages: [ en, fr, es, ar, ru, zh, pt ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.005
+  source: { kind: http, url: "https://cdn.who.int/media/docs/default-source/mca-documents/9789241506823_chartbook_eng.pdf", homepage: "https://www.who.int/publications/m/item/integrated-management-of-childhood-illness---chart-booklet-(march-2014)" }
+  license: { spdx: LicenseRef-WHO-All-Rights-Reserved, redistribution: unclear, note: { fr: "Édition 2014 « tous droits réservés » : téléchargement et impression pour soi.", en: "2014 edition 'all rights reserved': personal download and printing." } }
+  printable: { available: true, pages_estimate: 80 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: hesperian-disability-children
+  type: pdf
+  category: medical
+  name: { fr: "Hesperian — Aide aux enfants sourds / aveugles, santé des femmes handicapées (FR)", en: "Hesperian — Helping Children Who Are Deaf / Blind, Health for women with disabilities (FR)" }
+  description: { fr: "Trois manuels Hesperian qui existent en PDF français : aide aux enfants sourds (2015), aide aux enfants aveugles (2015), manuel de santé des femmes handicapées (2024). Rééducation communautaire, communication, autonomie.", en: "Three Hesperian manuals with French PDFs: helping deaf children (2015), helping blind children (2015), health handbook for women with disabilities (2024). Community rehabilitation, communication, autonomy." }
+  tags: [ disability, children, fr, printable ]
+  languages: [ fr, en, es ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: "https://languages.hesperian.org/pages/fr/pdf.html", url: "https://languages.hesperian.org/pages/fr/pdf.html#hcwd" }
+  license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Dentaire / Dental ----------
+
+- id: hesperian-where-no-dentist
+  type: pdf
+  category: medical
+  name: { fr: "Là où il n'y a pas de dentiste (Hesperian)", en: "Where There Is No Dentist (Hesperian)" }
+  description:
+    fr: "Le seul manuel de soins dentaires pour non-dentistes qui existe : caries, abcès, extraction, détartrage, prévention, fabrication d'instruments. Édition 2025, version FR en ligne. La douleur dentaire est la première urgence non traitée en isolement."
+    en: "The only lay dental care manual that exists: caries, abscesses, extraction, scaling, prevention, making instruments. 2025 edition, FR version online. Tooth pain is the first untreated emergency in isolation."
+  tags: [ dental, printable, "legal:grey" ]
+  languages: [ fr, en, es, ko ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.03
+  source: { kind: manual, homepage: "https://fr.hesperian.org/hhg/Là_où_il_n'ya_pas_de_dentiste", url: https://hesperian.org/wp-content/uploads/pdf/en_dent_2025/en_dent_2025_fm.pdf }
+  license: { spdx: LicenseRef-Hesperian-Open-Copyright, redistribution: allowed-nc, note: { fr: "Accord écrit requis pour le numérique (ZIM).", en: "Written permission required for digital formats (ZIM)." } }
+  printable: { available: true, pages_estimate: 250 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: who-oral-health-report
+  type: pdf
+  category: medical
+  name: { fr: "OMS — Rapport mondial sur la santé bucco-dentaire (2022)", en: "WHO — Global oral health status report (2022)" }
+  description: { fr: "Épidémiologie et politiques, pas de la clinique : utile pour comprendre prévention et priorités. Pour le soin proprement dit, voir « Là où il n'y a pas de dentiste ». CC BY-NC-SA 3.0 IGO.", en: "Epidemiology and policy, not clinical: useful for prevention and priorities. For actual care, see 'Where There Is No Dentist'. CC BY-NC-SA 3.0 IGO." }
+  tags: [ dental, prevention ]
+  languages: [ en, fr, es, ar, ru, zh, pt ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.012
+  source: { kind: http, url: https://iris.who.int/server/api/core/bitstreams/dd9c07d6-9b29-4f94-8fb7-4c2d44906109/content, homepage: https://www.who.int/publications/i/item/9789240061484 }
+  license: { spdx: CC-BY-NC-SA-3.0-IGO, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 100 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Santé mentale / Mental health ----------
+
+- id: where-there-is-no-psychiatrist
+  type: pdf
+  category: society
+  name: { fr: "Where There Is No Psychiatrist (2e éd., CC BY-NC-ND)", en: "Where There Is No Psychiatrist (2nd ed., CC BY-NC-ND)" }
+  description:
+    fr: "Reconnaître et accompagner les troubles mentaux courants et sévères sans spécialiste : dépression, angoisse, psychose, deuil, addictions, troubles de l'enfant. Accès libre chez Cambridge, licence CC BY-NC-ND 4.0 : redistribution verbatim autorisée — donc ZIM possible sans demander. Anglais seulement."
+    en: "Recognise and support common and severe mental disorders without a specialist: depression, anxiety, psychosis, grief, addiction, child disorders. Open access at Cambridge, CC BY-NC-ND 4.0: verbatim redistribution allowed — a ZIM is possible without asking. English only."
+  tags: [ mental-health, psychology, printable ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.02
+  source: { kind: manual, homepage: https://www.cambridge.org/core/books/where-there-is-no-psychiatrist/47578A845CAFC7E23A181749A4190B54, url: https://www.cambridge.org/core/books/where-there-is-no-psychiatrist/47578A845CAFC7E23A181749A4190B54 }
+  license: { spdx: CC-BY-NC-ND-4.0, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 200 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Premiers secours : la référence internationale / First aid: the international reference ----------
+
+- id: ifrc-first-aid-guidelines-2020
+  type: pdf
+  category: medical
+  name: { fr: "IFRC — Lignes directrices internationales de premiers secours et de réanimation 2020", en: "IFRC — International First Aid, Resuscitation and Education Guidelines 2020" }
+  description: { fr: "Les recommandations fondées sur les preuves qui servent de base à toutes les formations de secourisme. Reproduction non commerciale autorisée avec mention de la source. Supports FR via le Centre mondial de référence.", en: "The evidence-based recommendations underpinning all first-aid training. Non-commercial reproduction allowed with attribution. FR materials via the Global First Aid Reference Centre." }
+  tags: [ first-aid, guidelines, printable ]
+  languages: [ en, fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.02
+  source: { kind: http, url: https://www.ifrc.org/sites/default/files/2022-02/EN_GFARC_GUIDELINES_2020.pdf, homepage: https://www.globalfirstaidcentre.org/fr/first-aid-guidelines-2020/ }
+  license: { spdx: LicenseRef-IFRC-NC-Attribution, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 300 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: global-health-media-videos
+  type: dataset
+  category: medical
+  name: { fr: "Global Health Media — vidéos de soins (accouchement, nouveau-né, allaitement)", en: "Global Health Media — care videos (childbirth, newborn, breastfeeding)" }
+  description:
+    fr: "323 vidéos courtes en 119 langues (français inclus), conçues pour des soignants peu lettrés : voir un geste vaut mille mots quand personne ne peut le montrer. Application hors-ligne « Birth & Beyond ». Licence restrictive : téléchargement personnel autorisé, ré-hébergement INTERDIT — jamais dans un ZIM Arche."
+    en: "323 short videos in 119 languages (French included), designed for low-literacy health workers: seeing a gesture is worth a thousand words when nobody can demonstrate. Offline 'Birth & Beyond' app. Restrictive license: personal download allowed, re-hosting FORBIDDEN — never in an Arche ZIM."
+  tags: [ video, birth, newborn, breastfeeding ]
+  languages: [ mul, fr, en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 5
+  source: { kind: manual, homepage: https://globalhealthmedia.org, url: https://globalhealthmedia.org }
+  license: { spdx: LicenseRef-GHMP-Educational-Only, redistribution: forbidden }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Une licence annuelle existe pour les organisations : si Arche devient une association, la demander pour pouvoir intégrer les vidéos.", en: "An annual license exists for organisations: if Arche becomes a non-profit, request it to be able to bundle the videos." }

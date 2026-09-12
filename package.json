@@ -1,0 +1,49 @@
+{
+  "name": "arche",
+  "version": "0.1.0",
+  "description": "Kit de survie numérique hors-réseau : catalogue + wizard qui construit un « web local » (ZIM, IA locale, miroirs Git, toolchains). / Off-grid digital survival kit: catalog + wizard that builds a local web.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/arche-project/arche.git" },
+  "homepage": "https://github.com/arche-project/arche#readme",
+  "bugs": "https://github.com/arche-project/arche/issues",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "arche": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "catalog",
+    "locales",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-static.mjs",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "test": "tsx --test tests/*.test.ts",
+    "catalog:validate": "tsx src/cli.ts catalog validate",
+    "catalog:update": "tsx scripts/catalog/update-all.ts",
+    "catalog:links": "tsx scripts/catalog/check-links.ts",
+    "package:sea": "bash scripts/build-sea.sh",
+    "catalog:schema-ajv": "tsx scripts/catalog/check-schema-ajv.ts",
+    "loc": "bash scripts/loc.sh",
+    "backlog": "node scripts/orchestrate/run.mjs --status",
+    "backlog:run": "node scripts/orchestrate/run.mjs"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arche</title>
+<style>
+  :root { --bg:#f6f4ee; --fg:#1d1d1b; --muted:#6b6b66; --line:#d9d6cc; --accent:#2f5d50; --accent2:#c9a227; --card:#fffdf8; --warn:#8a4b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#17181a; --fg:#ecebe6; --muted:#9b9a94; --line:#33353a; --accent:#7fb8a6; --accent2:#e2c463; --card:#1f2124; --warn:#f0b26b; } }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding:20px 24px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap }
+  header h1 { margin:0; font-size:22px; letter-spacing:.02em } header small { color:var(--muted) }
+  main { max-width:1000px; margin:0 auto; padding:24px 16px 80px }
+  .step { display:none } .step.active { display:block }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin:12px 0 }
+  .choice { display:flex; gap:12px; align-items:flex-start; padding:14px; border:2px solid var(--line); border-radius:12px; margin:10px 0; cursor:pointer }
+  .choice:hover { border-color:var(--accent) } .choice.on { border-color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent) }
+  .choice b { display:block } .choice span { color:var(--muted); font-size:14px }
+  button { font:inherit; padding:10px 18px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent) } button:disabled { opacity:.5; cursor:default }
+  .nav { display:flex; justify-content:space-between; margin-top:20px; gap:8px; flex-wrap:wrap }
+  table { width:100%; border-collapse:collapse; font-size:14px } td,th { padding:6px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top } td.num { text-align:right; white-space:nowrap }
+  .cat { font-weight:600; background:color-mix(in srgb, var(--accent2) 15%, transparent) }
+  .muted { color:var(--muted) } .warn { color:var(--warn) }
+  .bar { height:8px; background:var(--line); border-radius:4px; overflow:hidden } .bar i { display:block; height:100%; background:var(--accent); width:0 }
+  .row { display:flex; gap:12px; flex-wrap:wrap; align-items:center }
+  .expert { display:none } body.expert .expert { display:initial } body.expert .novice-only { display:none }
+  input[type=number], input[type=text], select { font:inherit; padding:8px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--fg) }
+  .pill { font-size:12px; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted) }
+  a { color:var(--accent) }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Arche</h1><small data-i18n="tagline"></small></div>
+  <div class="row">
+    <label><input type="checkbox" id="expertToggle"> <span data-i18n="expert"></span></label>
+    <select id="lang"><option value="fr">Français</option><option value="en">English</option></select>
+  </div>
+</header>
+<main>
+
+<section class="step active" id="s0">
+  <div class="card">
+    <h2 data-i18n="s0.title"></h2>
+    <p data-i18n="s0.intro"></p>
+    <p class="muted" id="hwLine"></p>
+    <p class="muted"><span data-i18n="s0.kiwix"></span> <a id="kiwixLink" target="_blank"></a></p>
+  </div>
+  <h3 data-i18n="q.profile"></h3>
+  <div id="profiles"></div>
+  <div class="nav"><span></span><button class="primary" onclick="go(1)" data-i18n="next"></button></div>
+</section>
+
+<section class="step" id="s1">
+  <h3 data-i18n="q.target"></h3>
+  <div id="presets"></div>
+  <div class="expert card">
+    <div class="row">
+      <label>RAM (GB) <input type="number" id="ram" min="1"></label>
+      <label>VRAM (GB) <input type="number" id="vram" min="0"></label>
+      <label data-i18n-label="budget">Budget (GB) <input type="number" id="budget" min="1"></label>
+    </div>
+  </div>
+  <h3 data-i18n="q.langs"></h3>
+  <div class="row" id="langs">
+    <label><input type="checkbox" value="fr" checked> Français</label>
+    <label><input type="checkbox" value="en" checked> English</label>
+    <label><input type="checkbox" value="es"> Español</label>
+    <label><input type="checkbox" value="de"> Deutsch</label>
+    <label><input type="checkbox" value="ja"> 日本語</label>
+  </div>
+  <div class="nav"><button onclick="go(0)" data-i18n="back"></button><button class="primary" onclick="go(2)" data-i18n="next"></button></div>
+</section>
+
+<section class="step" id="s2">
+  <h3 data-i18n="q.bundles"></h3>
+  <div id="bundles"></div>
+  <div class="nav"><button onclick="go(1)" data-i18n="back"></button><button class="primary" onclick="computePlan()" data-i18n="see_plan"></button></div>
+</section>
+
+<section class="step" id="s3">
+  <div class="card">
+    <h2 data-i18n="s3.title"></h2>
+    <p id="summary"></p>
+    <div class="bar"><i id="budgetBar"></i></div>
+    <div id="warnings" class="warn"></div>
+  </div>
+  <table id="planTable"></table>
+  <div class="nav">
+    <button onclick="go(2)" data-i18n="back"></button>
+    <div class="row">
+      <button class="expert" onclick="downloadConfig()" data-i18n="export_yaml"></button>
+      <button class="primary" id="startBtn" onclick="startDownload()" data-i18n="start"></button>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="s4">
+  <div class="card"><h2 data-i18n="s4.title"></h2><p class="muted" data-i18n="s4.intro"></p></div>
+  <table id="progressTable"></table>
+  <div class="nav"><span></span><a id="openLib" target="_blank"><button class="primary" data-i18n="open_library"></button></a></div>
+</section>
+
+</main>
+<script>
+const I18N = {
+  fr: { tagline:'votre web local, sans internet', expert:'mode expert', next:'Continuer', back:'Retour', see_plan:'Voir ma sélection', start:'Lancer les téléchargements', export_yaml:'Exporter en arche.yaml', open_library:'Ouvrir la bibliothèque',
+    's0.title':'Bienvenue', 's0.intro':'En trois questions, Arche choisit pour vous une bibliothèque hors-ligne adaptée à votre machine. Vous pourrez tout modifier avant de lancer.', 's0.kiwix':'Bibliothèque déjà installée :',
+    'q.profile':'Qu’est-ce qui vous ressemble le plus ?', 'q.target':'Où va vivre la bibliothèque ?', 'q.langs':'Dans quelles langues lisez-vous ?', 'q.bundles':'Quels sujets voulez-vous absolument ? Le reste est choisi pour vous.',
+    detect:'Cet ordinateur (détection automatique)', 's3.title':'Votre sélection', 's4.title':'Téléchargement en cours', 's4.intro':'Vous pouvez fermer cette page : les téléchargements reprennent là où ils se sont arrêtés au prochain lancement.',
+    summary:'{count} éléments · {size} Go sur {budget} Go disponibles', hw:'Machine : {os}/{arch}, {ram} Go RAM, {vram} Go GPU, {disk} Go libres · {online}', online:'en ligne', offline:'hors-ligne',
+    'reason.essential':'Indispensable', 'reason.recommended_fits':'Recommandé', 'reason.recommended_no_room':'Recommandé, plus de place', 'reason.optional_fits':'Optionnel', 'reason.explicit':'Demandé', 'reason.bundle':'Paquet « {arg} »', 'reason.dependency':'Nécessaire à {arg}', 'reason.ai_tier':'IA adaptée (palier {arg})', 'reason.replaced_by':'Remplacé par {arg}', 'reason.upgrade_from':'Version complète de {arg}', 'reason.excluded':'Exclu', 'reason.unselected':'Non coché', 'reason.lang_not_requested':'Langue non demandée',
+    'warn.over_budget':'Dépasse le budget disque de {arg} Go.', 'warn.offline':'Hors-ligne : impossible de télécharger. Utilisez un bundle USB (arche import).', 'warn.unverified_sizes':'Tailles estimées (±20 %).', 'warn.no_ai_tier':'Pas assez de mémoire pour une IA locale.',
+    manual:'étape manuelle', done:'terminé', error:'erreur', verify:'vérification' },
+  en: { tagline:'your local web, no internet required', expert:'expert mode', next:'Continue', back:'Back', see_plan:'See my selection', start:'Start downloads', export_yaml:'Export as arche.yaml', open_library:'Open the library',
+    's0.title':'Welcome', 's0.intro':'In three questions, Arche picks an offline library that fits your machine. You can change everything before starting.', 's0.kiwix':'Library already installed:',
+    'q.profile':'Which sounds most like you?', 'q.target':'Where will the library live?', 'q.langs':'Which languages do you read?', 'q.bundles':'Which topics do you absolutely want? The rest is chosen for you.',
+    detect:'This computer (auto-detect)', 's3.title':'Your selection', 's4.title':'Downloading', 's4.intro':'You can close this page: downloads resume where they stopped next time.',
+    summary:'{count} items · {size} GB of {budget} GB available', hw:'Machine: {os}/{arch}, {ram} GB RAM, {vram} GB GPU, {disk} GB free · {online}', online:'online', offline:'offline',
+    'reason.essential':'Essential', 'reason.recommended_fits':'Recommended', 'reason.recommended_no_room':'Recommended, no room', 'reason.optional_fits':'Optional', 'reason.explicit':'Requested', 'reason.bundle':'Bundle “{arg}”', 'reason.dependency':'Required by {arg}', 'reason.ai_tier':'AI suited (tier {arg})', 'reason.replaced_by':'Replaced by {arg}', 'reason.upgrade_from':'Full version of {arg}', 'reason.excluded':'Excluded', 'reason.unselected':'Not selected', 'reason.lang_not_requested':'Language not requested',
+    'warn.over_budget':'Exceeds the disk budget by {arg} GB.', 'warn.offline':'Offline: cannot download. Use a USB bundle (arche import).', 'warn.unverified_sizes':'Estimated sizes (±20%).', 'warn.no_ai_tier':'Not enough memory for a local AI.',
+    manual:'manual step', done:'done', error:'error', verify:'verifying' }
+};
+let lang = (navigator.language || 'fr').startsWith('en') ? 'en' : 'fr';
+const t = (k, v={}) => { let s = (I18N[lang][k] ?? I18N.en[k] ?? k); for (const [a,b] of Object.entries(v)) s = s.replaceAll('{'+a+'}', b); return s; };
+const pick = x => x ? (x[lang] ?? x.en) : '';
+const gb = n => n >= 100 ? Math.round(n)+' Go' : n >= 1 ? n.toFixed(1)+' Go' : Math.round(n*1000)+' Mo';
+let CAT, HW, PLAN, sel = { profile:'novice', preset:'detect', bundles:new Set(['core']) }, manual = new Map();
+
+function applyI18n(){ document.documentElement.lang = lang; document.querySelectorAll('[data-i18n]').forEach(e => e.textContent = t(e.dataset.i18n)); }
+function go(n){ document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('s'+n).classList.add('active'); window.scrollTo(0,0); }
+function choice(container, items, key, current, onpick, multi){
+  container.innerHTML = '';
+  for (const it of items) {
+    const d = document.createElement('div'); d.className = 'choice' + ((multi ? current.has(it.id) : current === it.id) ? ' on' : '');
+    d.innerHTML = `<div><b>${pick(it.name)}</b><span>${pick(it.description || it.tagline)}</span></div>`;
+    d.onclick = () => { onpick(it.id); choice(container, items, key, multi ? current : sel[key], onpick, multi); };
+    container.appendChild(d);
+  }
+}
+async function boot(){
+  document.getElementById('lang').value = lang;
+  document.getElementById('lang').onchange = e => { lang = e.target.value; render(); };
+  document.getElementById('expertToggle').onchange = e => document.body.classList.toggle('expert', e.target.checked);
+  CAT = await (await fetch('/api/catalog')).json();
+  HW = await (await fetch('/api/hardware')).json();
+  document.getElementById('ram').value = HW.ram_gb; document.getElementById('vram').value = HW.vram_gb;
+  document.getElementById('kiwixLink').href = `http://${location.hostname}:${CAT.kiwixPort}`; document.getElementById('kiwixLink').textContent = `http://${location.hostname}:${CAT.kiwixPort}`;
+  document.getElementById('openLib').href = `http://${location.hostname}:${CAT.kiwixPort}`;
+  render();
+}
+function render(){
+  applyI18n();
+  document.getElementById('hwLine').textContent = t('hw', { os:HW.os, arch:HW.arch, ram:HW.ram_gb, vram:HW.vram_gb, disk:HW.disk_free_gb.toFixed(0), online: t(HW.online ? 'online' : 'offline') });
+  choice(document.getElementById('profiles'), CAT.profiles, 'profile', sel.profile, id => sel.profile = id);
+  const presets = [...CAT.hardware_presets, { id:'detect', name:{fr:t('detect'),en:t('detect')}, description:{fr:'',en:''} }];
+  choice(document.getElementById('presets'), presets, 'preset', sel.preset, id => sel.preset = id);
+  const visible = CAT.bundles.filter(b => sel.profile === 'bunker' || document.body.classList.contains('expert') || !['dev','robotics-lab','everything-big'].includes(b.id));
+  choice(document.getElementById('bundles'), visible, 'bundles', sel.bundles, id => sel.bundles.has(id) ? sel.bundles.delete(id) : sel.bundles.add(id), true);
+}
+async function computePlan(){
+  const languages = [...document.querySelectorAll('#langs input:checked')].map(i => i.value);
+  const body = { profile: sel.profile, languages, bundles: [...sel.bundles], include: [...manual].filter(([,v]) => v).map(([k]) => k), exclude: [...manual].filter(([,v]) => !v).map(([k]) => k) };
+  if (sel.preset !== 'detect') body.preset = sel.preset;
+  if (document.body.classList.contains('expert')) { body.hardware = { ram_gb: +ram.value, vram_gb: +vram.value }; if (+budget.value) body.budget = +budget.value; }
+  PLAN = await (await fetch('/api/plan', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) })).json();
+  renderPlan(); go(3);
+}
+function renderPlan(){
+  const items = PLAN.items.map(i => ({ ...i, r: CAT.resources.find(r => r.id === i.id) }));
+  const selected = items.filter(i => i.selected);
+  document.getElementById('summary').textContent = t('summary', { count: selected.length, size: PLAN.totalSelectedGb.toFixed(1), budget: PLAN.budgetGb.toFixed(0) });
+  document.getElementById('budgetBar').style.width = Math.min(100, 100*PLAN.totalSelectedGb/PLAN.budgetGb) + '%';
+  document.getElementById('warnings').innerHTML = PLAN.warnings.map(w => { const [k,a] = w.split(':'); return '<div>⚠ ' + t('warn.'+k, {arg:a||''}) + '</div>'; }).join('');
+  const tbl = document.getElementById('planTable'); tbl.innerHTML = ''; let cat = '';
+  for (const i of [...selected, ...items.filter(i => !i.selected)]) {
+    if (i.r.category !== cat) { cat = i.r.category; tbl.insertAdjacentHTML('beforeend', `<tr class="cat"><td colspan="4">${cat}</td></tr>`); }
+    const [rk, ra] = i.reason.split(':');
+    tbl.insertAdjacentHTML('beforeend', `<tr><td><input type="checkbox" ${i.selected?'checked':''} onchange="manual.set('${i.id}', this.checked); computePlan()"></td><td><b>${pick(i.r.name)}</b><br><span class="muted">${pick(i.r.description)}</span> <span class="expert pill">${i.id} · ${i.r.license.spdx}</span></td><td class="num">${gb(i.sizeGb)}</td><td class="muted">${t('reason.'+rk.replace('reason.',''), {arg:ra||''})}</td></tr>`);
+  }
+  document.getElementById('startBtn').disabled = !HW.online;
+}
+async function startDownload(){
+  const ids = PLAN.items.filter(i => i.selected).map(i => i.id);
+  await fetch('/api/download', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ids }) });
+  const tbl = document.getElementById('progressTable'); tbl.innerHTML = ids.map(id => `<tr id="p-${id}"><td>${pick(CAT.resources.find(r=>r.id===id).name)}</td><td style="width:40%"><div class="bar"><i></i></div></td><td class="muted"></td></tr>`).join('');
+  go(4);
+  const es = new EventSource('/api/events');
+  es.onmessage = ev => { const p = JSON.parse(ev.data); const row = document.getElementById('p-'+p.id); if (!row) return;
+    const bar = row.querySelector('i'), txt = row.lastElementChild;
+    if (p.phase === 'download' && p.total) { bar.style.width = (100*p.done/p.total)+'%'; txt.textContent = Math.floor(100*p.done/p.total)+' % / '+gb(p.total/1e9); }
+    else if (p.phase === 'download') txt.textContent = p.message ?? '';
+    else if (p.phase === 'verify') txt.textContent = t('verify');
+    else if (p.phase === 'done' || p.phase === 'skip') { bar.style.width = '100%'; txt.textContent = t('done'); }
+    else if (p.phase === 'manual') txt.innerHTML = t('manual') + ' — <a target="_blank" href="'+(p.message||'#')+'">'+(p.message||'')+'</a>';
+    else if (p.phase === 'error') { txt.textContent = t('error') + ': ' + p.message; txt.className = 'warn'; }
+  };
+}
+function downloadConfig(){
+  const y = ['library: ./library', `profile: ${sel.profile}`, `languages: [${[...document.querySelectorAll('#langs input:checked')].map(i=>i.value).join(', ')}]`, `bundles: [${[...sel.bundles].join(', ')}]`,
+    `include: [${[...manual].filter(([,v])=>v).map(([k])=>k).join(', ')}]`, `exclude: [${[...manual].filter(([,v])=>!v).map(([k])=>k).join(', ')}]`, +budget.value ? `disk_budget_gb: ${+budget.value}` : ''].filter(Boolean).join('\n') + '\n';
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([y], {type:'text/yaml'})); a.download = 'arche.yaml'; a.click();
+}
+boot();
+</script>
+</body>
+</html>

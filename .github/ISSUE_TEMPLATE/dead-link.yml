@@ -1,0 +1,15 @@
+name: "Signaler un lien mort / Report a dead link"
+description: "Une ressource du catalogue ne se télécharge plus."
+labels: [dead-link]
+body:
+  - type: input
+    id: rid
+    attributes: { label: "id de la ressource (catalog/resources/*.yaml) / resource id", placeholder: "wikipedia-fr-maxi" }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes: { label: "Ce qui se passe (message d'erreur, code HTTP, date) / what happens" }
+    validations: { required: true }
+  - type: input
+    id: alt
+    attributes: { label: "Nouvelle URL si vous la connaissez / new URL if known" }

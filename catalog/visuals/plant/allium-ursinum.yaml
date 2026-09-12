@@ -1,0 +1,21 @@
+# Ail des ours — et son sosie mortel, le colchique (voir fiche 07). Le manifeste existe d'abord
+# pour la vue `lookalike` : feuille d'ail des ours et feuille de colchique côte à côte.
+id: allium-ursinum
+kind: plant
+names: { fr: "Ail des ours", en: "Wild garlic" }
+latin: Allium ursinum
+wikidata: Q157547
+commons_category: Allium ursinum
+lookalikes: [colchicum-autumnale, arum-maculatum, convallaria-majalis]
+views:
+  habit:      { search: ["carpet", "tapis", "woodland", "sous-bois"], files: [] }
+  leaf:       { search: ["leaf", "feuille", "underside"], files: [] }
+  flower:     { search: ["flower", "fleur", "umbel"], files: [] }
+  fruit_seed: { search: ["seed", "capsule", "fruit"], files: [] }
+  stem_bark:  { search: ["stem", "tige", "petiole"], files: [] }
+  root:       { search: ["bulb", "bulbe"], files: [] }
+  lookalike:  { search: ["Colchicum", "colchique", "Arum", "comparison"], files: [] }
+  plate:      { search: ["illustration", "Thomé", "Köhler"], files: [] }
+notes:
+  fr: "Le critère qui sauve n'est pas visuel : la feuille froissée sent l'ail. La vue lookalike doit le dire en légende."
+  en: "The saving criterion is not visual: the crushed leaf smells of garlic. The lookalike caption must say so."

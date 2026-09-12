@@ -1,0 +1,90 @@
+# Les ordres de grandeur du calcul local, en lisible-machine (ADR 0012).
+# Local-compute orders of magnitude, machine-readable (ADR 0012).
+#
+# Principe : on adapte le TEMPS à la machine, jamais les capacités. Un modèle trop gros pour la RAM
+# ne devient pas interdit : il devient lent, et on dit combien. Ces chiffres servent à l'estimation
+# (`src/core/compute.ts`) ; ils sont des ordres de grandeur, ±3×. Un modèle de langue en génération
+# est borné par la bande passante mémoire (un token = relire tous les poids actifs) ; en lecture du
+# prompt (prefill) il est borné par le calcul.
+#
+# Sources : mesures publiques llama.cpp (discussions et benchmarks 2024–2026), fiches constructeurs
+# pour les bandes passantes. À corriger par vos propres mesures : `arche compute bench` (à venir).
+# Provenance (M4-1, docs/fr/PROVENANCE.md) : chaque nombre porte `source: { resource, path, quote }`
+# ou, en période de grâce, `unsourced: true` sur la valeur ou sur le bloc qui la contient — compté,
+# publié, à remplacer par un locator ou une mesure datée (M4-2). `verified` n'est jamais écrit ici.
+
+version: 1
+updated: 2026-09-11
+uncertainty: "×3 dans les deux sens — ordres de grandeur, pas des promesses"
+
+# Bande passante effective en lecture séquentielle, Go/s. « effective » = ce que llama.cpp obtient,
+# pas la fiche technique.
+bandwidth_gbs:
+  vram:
+    unsourced: true
+    integrated: 60      # Apple M1/M2 de base, iGPU AMD/Intel (mémoire partagée)
+    laptop: 250         # RTX 3060/4060 mobile
+    desktop: 450        # RTX 3080/4070/4080
+    high_end: 900       # RTX 4090/5090, Apple M-Ultra
+  ram:
+    unsourced: true
+    ddr4_dual: 25       # portable / tour 2015–2022, deux barrettes
+    ddr4_single: 14     # une seule barrette : deux fois moins
+    ddr5_dual: 45
+    lpddr5_apple: 90    # M2/M3 Pro et au-dessus (mémoire unifiée, c'est la « vram.integrated » pour le GPU)
+    raspberry_pi_5: 8
+  disk:
+    unsourced: true
+    nvme: 1.8           # lecture séquentielle réelle sous mmap, pas les 7 Go/s de la boîte
+    sata_ssd: 0.45
+    usb3_ssd: 0.35
+    hdd: 0.12
+    sd_card: 0.06
+
+# Vitesse de lecture du prompt (prefill) sur CPU : tokens/s ≈ per_core_per_gb × cœurs / (Go de poids actifs).
+# Sur GPU : ≈ gpu_per_gb / (Go actifs), quasiment indépendant du nombre de tokens.
+prefill:
+  unsourced: true   # nombres nus : la grâce se déclare sur le bloc (M4-1)
+  cpu_per_core_per_gb: 12
+  gpu_per_gb: 4000
+  integrated_gpu_per_gb: 600
+
+# Taille sur disque d'un modèle selon sa quantification, octets par paramètre.
+bytes_per_param:
+  unsourced: true   # nombres nus : la grâce se déclare sur le bloc (M4-1)
+  q4_k_m: 0.58
+  q5_k_m: 0.70
+  q8_0: 1.06
+  f16: 2.0
+
+# Ce qui doit tenir en mémoire en plus des poids : contexte (KV cache) et tampons. Go pour 8 k tokens
+# de contexte, par milliard de paramètres actifs. Un contexte de 32 k coûte quatre fois plus.
+kv_cache_gb_per_active_b_per_8k: { value: 0.06, unsourced: true }
+
+# Marge système : la RAM que l'OS, kiwix-serve et l'interface gardent pour eux.
+system_reserve_gb: { value: 2.5, unsourced: true }
+
+# Rechargement d'un modèle depuis le disque : on relit tout, à la vitesse du disque. Avec plusieurs
+# modèles dans un workflow, chaque échange coûte un rechargement — d'où l'ordre des étapes.
+swap:
+  note: "coût = taille du modèle / bande passante du disque ; l'ordre des étapes groupe les appels au même modèle"
+
+# Consommation électrique, watts, pendant qu'un modèle tourne (charge) et au repos. C'est ce qui compte
+# pour qui vit sur panneaux : une réponse se paie en wattheures, et une grosse carte graphique rapide
+# peut coûter MOINS de Wh par réponse qu'un petit CPU lent. Ordres de grandeur mesurés à la prise.
+power_w:
+  raspberry_pi_5: { idle: 3, load: 10, unsourced: true }
+  laptop_cpu: { idle: 8, load: 45, unsourced: true }
+  apple_silicon: { idle: 5, load: 40, unsourced: true }
+  desktop_cpu: { idle: 40, load: 130, unsourced: true }
+  desktop_gpu_laptop: { idle: 15, load: 120, unsourced: true }
+  desktop_gpu_desktop: { idle: 60, load: 350, unsourced: true }
+  desktop_gpu_high_end: { idle: 80, load: 550, unsourced: true }
+
+# Références rapides, pour vérifier l'estimateur contre l'expérience (mesures publiques llama.cpp).
+reference_points:
+  - { model: "qwen3.5:4b q4", machine: "portable 8 Go DDR4, CPU", tok_s: { lo: 6, hi: 12 }, unsourced: true }
+  - { model: "qwen3.5:9b q4", machine: "16 Go DDR4, CPU", tok_s: { lo: 3, hi: 6 }, unsourced: true }
+  - { model: "qwen3.5:35b-a3b q4 (3B actifs)", machine: "32 Go DDR5, CPU", tok_s: { lo: 10, hi: 20 }, unsourced: true }
+  - { model: "qwen3.6:27b q4", machine: "RTX 4090 24 Go", tok_s: { lo: 30, hi: 45 }, unsourced: true }
+  - { model: "qwen3.6:27b q4", machine: "8 Go RAM + NVMe (mmap)", tok_s: { lo: 0.05, hi: 0.2 }, unsourced: true }

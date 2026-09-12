@@ -1,0 +1,42 @@
+# Alpine — petit, musl, parfait pour un routeur, un conteneur reconverti en machine, un vieux PC de
+# 512 Mo ou un nœud très sobre. Le dépôt est plat et son index (APKINDEX) tient en quelques Mo :
+# c'est la distribution la plus facile à mettre en miroir de toutes.
+id: alpine-stable
+resource: alpine-standard
+type: apk
+base_url: https://dl-cdn.alpinelinux.org/alpine
+suite: latest-stable              # ou figer : v3.21
+components: [main, community]
+architectures: [x86_64, aarch64]
+size_estimate_gb: 1.5
+packages:
+  - alpine-base
+  - linux-lts
+  - openrc
+  - openssh
+  - hostapd
+  - dnsmasq
+  - iptables
+  - nftables
+  - avahi
+  - rsync
+  - tmux
+  - vim
+  - htop
+  - curl
+  - git
+  - python3
+  - py3-pip
+  - nodejs
+  - npm
+  - build-base
+  - cmake
+  - pkgconf
+  - openssl-dev
+  - e2fsprogs
+  - smartmontools
+  - cryptsetup
+  - lvm2
+note:
+  fr: "Alpine n'a pas de Recommends : la fermeture est exacte. Attention à musl : certains binaires précompilés (glibc) ne tournent pas sans `gcompat`."
+  en: "Alpine has no Recommends: the closure is exact. Mind musl: some prebuilt (glibc) binaries need `gcompat`."

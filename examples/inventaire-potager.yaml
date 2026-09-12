@@ -1,0 +1,22 @@
+# Exemple d'inventaire — « j'ai X semences et telles parcelles, fais-moi le planning ».
+# Copiez-le, remplacez par ce que VOUS avez. Tout ce qui n'est pas là, le solveur le dit.
+version: 1
+project: { name: "Potager 2027", type: potager }
+people: 3
+climate: { last_frost: "05-10", first_frost: "10-25", note: "Essonne, plaine ; gelées tardives possibles" }
+plots:
+  - { id: A, name: "Planche sud", area_m2: 24, sun: full, last_family: Solanaceae }
+  - { id: B, name: "Planche est", area_m2: 18, sun: full, last_family: Fabaceae }
+  - { id: C, name: "Sous le noyer", area_m2: 10, sun: partial }
+seeds:
+  - { crop: tomate, plants: 12, variety: "Cœur de bœuf, Rose de Berne" }
+  - { crop: courgette, plants: 4 }
+  - { crop: haricot nain }
+  - { crop: carotte }
+  - { crop: laitue }
+  - { crop: poireau, plants: 40 }
+  - { crop: ail }
+  - { crop: chou }
+  - { crop: radis }
+  - { crop: fraisier, note: "20 plants de l'an dernier" }
+tools: [ serre froide, motoculteur, arrosage goutte-à-goutte ]

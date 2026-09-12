@@ -1,0 +1,169 @@
+# Données de terrain : photogrammétrie drone, LiDAR, SIG, caméras, capteurs — le lien avec le physique
+# pour une exploitation déjà automatisée (ADR 0012). Field data: drone photogrammetry, LiDAR, GIS,
+# cameras, sensors — the link to the physical world for an already-automated farm (ADR 0012).
+# Vérifié sur les dépôts le 2026-09-11. Voir aussi robotics.yaml (OpenCV), energy.yaml (Home Assistant),
+# software.yaml (Node-RED, Hermes Agent, SatDump), git-mirrors.yaml (ESPHome), maps-and-printables.yaml (OSM).
+
+- id: opendronemap
+  type: software
+  category: agriculture
+  name: { fr: "OpenDroneMap (ODM) — photos de drone → orthophoto, MNS/MNT, nuage de points, 3D", en: "OpenDroneMap (ODM) — drone photos → orthophoto, DSM/DTM, point cloud, 3D" }
+  description:
+    fr: "La chaîne libre de photogrammétrie : des photos de drone (ou de ballon, ou de perche) sortent une orthophoto GeoTIFF géoréférencée, des modèles numériques de surface et de terrain, un nuage de points LAZ et un maillage 3D texturé. AGPL-3.0. Docker est la voie « recommandée » par le projet ; l'installation native existe (Ubuntu 24.04 : `configure.sh install`, Windows : installeur) et c'est celle d'Arche. GPU NVIDIA facultatif (~2× sur l'extraction des points). Sur CPU, une parcelle de 500 photos prend des heures : c'est une tâche de file, pas une conversation."
+    en: "The free photogrammetry chain: drone (or balloon, or pole) photos become a georeferenced GeoTIFF orthophoto, digital surface and terrain models, a LAZ point cloud and a textured 3D mesh. AGPL-3.0. Docker is the project's 'recommended' path; native install exists (Ubuntu 24.04: `configure.sh install`, Windows: installer) and is Arche's. Optional NVIDIA GPU (~2× on feature extraction). On CPU a 500-photo field takes hours: a queued job, not a conversation."
+  tags: [ drone, photogrammetry, orthophoto, dsm, pointcloud, gis, agriculture ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 3
+  source: { kind: github-repo, github_repo: OpenDroneMap/ODM, url: https://github.com/OpenDroneMap/ODM.git, homepage: https://www.opendronemap.org }
+  license: { spdx: AGPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git, python3 ], ram_gb: 16, os: [ linux, windows ] }
+  depends_on: [ python-standalone ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: source
+  notes: { fr: "Installation native à préparer AVANT la coupure (elle compile et télécharge des dépendances). 16 Go de RAM pour ~300 photos ; au-delà, découper en lots ou `--fast-orthophoto`. WebODM (interface web) est Docker-only : hors périmètre ; NodeODM en natif suffit pour piloter depuis Node-RED.", en: "Native install to prepare BEFORE the outage (it compiles and downloads dependencies). 16 GB RAM for ~300 photos; beyond, split into batches or `--fast-orthophoto`. WebODM (web UI) is Docker-only: out of scope; native NodeODM is enough to drive from Node-RED." }
+
+- id: pdal
+  type: software
+  category: agriculture
+  name: { fr: "PDAL — traitement de nuages de points LiDAR (LAS/LAZ)", en: "PDAL — LiDAR point-cloud processing (LAS/LAZ)" }
+  description:
+    fr: "La bibliothèque et l'outil en ligne de commande des nuages de points : filtrer, classer sol/végétation, rastériser en MNT, calculer des volumes (tas de fumier, réserve d'eau, terrassement), découper par parcelle. BSD-3. Disponible dans les dépôts Debian/Ubuntu (miroir apt d'Arche) et via pip (`pdal`)."
+    en: "The point-cloud library and command-line tool: filter, classify ground/vegetation, rasterise to a DTM, compute volumes (manure pile, water reserve, earthworks), clip by field. BSD-3. In the Debian/Ubuntu repositories (Arche's apt mirror) and via pip (`pdal`)."
+  tags: [ lidar, pointcloud, dtm, volumes, gis ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: PDAL/PDAL, url: https://github.com/PDAL/PDAL.git, homepage: https://pdal.io }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: python
+  notes: { fr: "Ajouter `pdal` et `python3-pdal` à la recette de miroir apt debian pour l'installation sans pip. Un LiDAR de drone ou de téléphone (iPhone Pro) sort du LAS/LAZ ou de l'E57 : PDAL lit les deux.", en: "Add `pdal` and `python3-pdal` to the debian apt-mirror recipe for a pip-less install. Drone or phone LiDAR (iPhone Pro) outputs LAS/LAZ or E57: PDAL reads both." }
+
+- id: cloudcompare
+  type: software
+  category: agriculture
+  name: { fr: "CloudCompare — voir, mesurer, comparer des nuages de points et des maillages", en: "CloudCompare — view, measure, compare point clouds and meshes" }
+  description:
+    fr: "L'outil de bureau des nuages de points : ouvrir un LiDAR ou une sortie ODM, mesurer des distances et des volumes, comparer deux relevés (avant/après un terrassement, pousse d'une haie), segmenter, exporter. GPL-2.0, binaires pour Linux (AppImage/snap), macOS et Windows."
+    en: "The desktop tool for point clouds: open a LiDAR or ODM output, measure distances and volumes, compare two surveys (before/after earthworks, hedge growth), segment, export. GPL-2.0, binaries for Linux (AppImage/snap), macOS and Windows."
+  tags: [ lidar, pointcloud, 3d, measure, gis ]
+  languages: [ mul, fr, en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.4
+  source: { kind: github-repo, github_repo: CloudCompare/CloudCompare, url: https://www.cloudcompare.org/release/index.html, homepage: https://www.cloudcompare.org }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 60 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: qgis
+  type: software
+  category: maps
+  name: { fr: "QGIS — le SIG libre : cartes, parcelles, orthophotos, MNT, 3D", en: "QGIS — the free GIS: maps, fields, orthophotos, DTMs, 3D" }
+  description:
+    fr: "Superposer ses parcelles, l'orthophoto du drone, le MNT LiDAR, les tuiles satellite téléchargées avant la coupure, les relevés GNSS et les traces de tracteur ; mesurer, découper, faire un plan d'assolement, une vue 3D du terrain (vue 3D intégrée), imprimer une carte. GPL-2.0. Installeurs pour Linux (dépôts, flatpak), macOS, Windows. Lourd (1,5 Go) mais c'est l'atelier cartographique complet, hors ligne, dans lequel tout le reste se rejoint."
+    en: "Overlay your fields, the drone orthophoto, the LiDAR DTM, satellite tiles downloaded before the outage, GNSS surveys and tractor tracks; measure, clip, plan rotations, view the terrain in 3D (built-in 3D view), print a map. GPL-2.0. Installers for Linux (repos, flatpak), macOS, Windows. Heavy (1.5 GB) but it is the complete offline mapping workshop where everything else meets."
+  tags: [ gis, maps, orthophoto, dtm, 3d, satellite, agriculture ]
+  languages: [ mul, fr, en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 1.5
+  source: { kind: github-repo, github_repo: qgis/QGIS, url: https://qgis.org/download/, homepage: https://qgis.org }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  requires: { ram_gb: 8 }
+  update: { tracker: github-tag, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+  notes: { fr: "Les tuiles satellite (Sentinel-2, IGN) doivent être téléchargées AVANT la coupure et déclarées dans l'inventaire (`datasets`, kind `satellite`) ; QGIS les lit en GeoTIFF/MBTiles sans réseau. Pour la France, le SCAN25 et la BD ORTHO IGN sont sous licence ouverte Etalab.", en: "Satellite tiles (Sentinel-2, national agencies) must be downloaded BEFORE the outage and declared in the inventory (`datasets`, kind `satellite`); QGIS reads GeoTIFF/MBTiles offline. For France, IGN's SCAN25 and BD ORTHO are under the Etalab open licence." }
+
+- id: meshroom
+  type: software
+  category: fabrication
+  name: { fr: "Meshroom (AliceVision) — photogrammétrie d'objets et de bâtiments, avec GPU", en: "Meshroom (AliceVision) — object and building photogrammetry, with GPU" }
+  description:
+    fr: "Des photos au téléphone autour d'une pièce cassée, d'une machine, d'un mur → un maillage 3D texturé, à mesurer ou à réimprimer après nettoyage (Blender, OpenSCAD pour la pièce fonctionnelle). MPL-2.0, binaires Linux/Windows. Demande une carte NVIDIA (CUDA) pour la reconstruction dense ; sans GPU, seule la partie éparse tourne. Complémentaire d'ODM (terrain) : ici, l'objet."
+    en: "Phone photos around a broken part, a machine, a wall → a textured 3D mesh, to measure or reprint after cleanup (Blender, OpenSCAD for the functional part). MPL-2.0, Linux/Windows binaries. Needs an NVIDIA (CUDA) card for dense reconstruction; without a GPU only the sparse stage runs. Complementary to ODM (terrain): here, the object."
+  tags: [ photogrammetry, 3d, mesh, reverse-engineering ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1.5
+  source: { kind: github-release, github_repo: alicevision/Meshroom, github_asset_pattern: "\\.(tar\\.gz|zip)$", homepage: https://alicevision.org }
+  license: { spdx: MPL-2.0, redistribution: allowed }
+  requires: { gpu: optional, vram_gb: 6, os: [ linux, windows ] }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: mosquitto
+  type: software
+  category: electronics
+  name: { fr: "Mosquitto — courtier MQTT (le bus des capteurs)", en: "Mosquitto — MQTT broker (the sensor bus)" }
+  description:
+    fr: "Le bus de messages de l'exploitation : capteurs ESP32/ESPHome, relais, station météo, caméras publient et s'abonnent en MQTT, Node-RED et Home Assistant écoutent. Minuscule, sans réseau, dans tous les dépôts Debian/Ubuntu/Alpine (miroirs apt/apk d'Arche). EPL-2.0 / EDL-1.0."
+    en: "The farm's message bus: ESP32/ESPHome sensors, relays, weather station, cameras publish and subscribe over MQTT; Node-RED and Home Assistant listen. Tiny, no network needed, in every Debian/Ubuntu/Alpine repository (Arche's apt/apk mirrors). EPL-2.0 / EDL-1.0."
+  tags: [ mqtt, iot, sensors, automation ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.01
+  source: { kind: github-repo, github_repo: eclipse-mosquitto/mosquitto, url: https://github.com/eclipse-mosquitto/mosquitto.git, homepage: https://mosquitto.org }
+  license: { spdx: "EPL-2.0 OR EDL-1.0", redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 60 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+  notes: { fr: "Paquet `mosquitto` dans les recettes de miroir debian/ubuntu/alpine. Écouter sur 127.0.0.1 et le réseau local seulement.", en: "Package `mosquitto` in the debian/ubuntu/alpine mirror recipes. Listen on 127.0.0.1 and the LAN only." }
+
+- id: frigate
+  type: software
+  category: electronics
+  name: { fr: "Frigate — enregistreur vidéo avec détection d'objets (caméras)", en: "Frigate — video recorder with object detection (cameras)" }
+  description:
+    fr: "NVR libre pour caméras RTSP/ONVIF : détection en temps réel (personne, véhicule, animal) sur CPU, Coral ou GPU, enregistrement sur événement, intégration Home Assistant et MQTT. MIT. Distribué en conteneur Docker uniquement : entre en `optional` (ADR 0008) pour qui accepte Docker sur la machine des caméras. Sans Docker : OpenCV + un petit modèle, ou `motion`."
+    en: "Free NVR for RTSP/ONVIF cameras: real-time detection (person, vehicle, animal) on CPU, Coral or GPU, event recording, Home Assistant and MQTT integration. MIT. Shipped as a Docker container only: enters as `optional` (ADR 0008) for those who accept Docker on the camera machine. Without Docker: OpenCV + a small model, or `motion`."
+  tags: [ camera, nvr, detection, rtsp, docker ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1.5
+  source: { kind: github-repo, github_repo: blakeblackshear/frigate, url: https://github.com/blakeblackshear/frigate.git, homepage: https://frigate.video }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ docker ], ram_gb: 8 }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  runtime: container
+  notes: { fr: "Une caméra qui détecte un sanglier dans la parcelle ou un intrus au hangar publie sur MQTT ; Node-RED décide, l'humain agit. Jamais de détection de personne reliée à un actionneur (ADR 0010).", en: "A camera that spots a boar in the field or an intruder at the barn publishes over MQTT; Node-RED decides, the human acts. Never person detection wired to an actuator (ADR 0010)." }
+
+- id: motion
+  type: software
+  category: electronics
+  name: { fr: "motion — détection de mouvement sur caméras, sans Docker", en: "motion — camera motion detection, no Docker" }
+  description:
+    fr: "Le vétéran : surveille des caméras V4L2 ou RTSP, enregistre sur mouvement, déclenche un script ou un message MQTT. GPL-2.0, paquet Debian/Alpine, tourne sur un Raspberry Pi. Pas de reconnaissance d'objets : c'est ce qu'on installe quand Frigate (Docker) est hors de question."
+    en: "The veteran: watches V4L2 or RTSP cameras, records on motion, triggers a script or an MQTT message. GPL-2.0, Debian/Alpine package, runs on a Raspberry Pi. No object recognition: what you install when Frigate (Docker) is out of the question."
+  tags: [ camera, motion, raspberrypi, offline ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.01
+  source: { kind: github-repo, github_repo: Motion-Project/motion, url: https://github.com/Motion-Project/motion.git, homepage: https://motion-project.github.io }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary

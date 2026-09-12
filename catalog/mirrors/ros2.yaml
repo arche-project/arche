@@ -1,0 +1,23 @@
+# ROS 2 — dépôt binaire officiel, distribution LTS courante (tracker `rosdistro`).
+id: ros2-jazzy
+resource: ros2-apt-mirror
+type: apt
+base_url: http://packages.ros.org/ros2/ubuntu
+suite: noble
+components: [main]
+architectures: [amd64, arm64]
+recommends: false
+size_estimate_gb: 4
+packages:
+  - ros-jazzy-desktop
+  - ros-jazzy-ros-base
+  - ros-jazzy-ros2-control
+  - ros-jazzy-ros2-controllers
+  - ros-jazzy-navigation2
+  - ros-jazzy-slam-toolbox
+  - ros-jazzy-rosbridge-suite
+  - ros-jazzy-micro-ros-agent
+  - ros-jazzy-moveit
+note:
+  fr: "Les dépendances système (Qt, OpenCV, Eigen…) sont résolues dans le miroir Ubuntu : les deux recettes vont ensemble."
+  en: "System dependencies (Qt, OpenCV, Eigen…) resolve in the Ubuntu mirror: the two recipes go together."

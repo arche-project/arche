@@ -1,0 +1,22 @@
+# Entraîner en local, sans NVIDIA ni cloud (ressource `pip-ml-cache`, ADR 0013) :
+#   pip download -r requirements/ml-offline.txt -d wheels-ml/ --python-version 3.12 --only-binary=:all: \
+#       --extra-index-url https://download.pytorch.org/whl/cpu
+# Roues CPU (et ROCm / MPS selon la machine) : ~2 Go. Sur CPU un petit réseau (capteurs → récolte)
+# s'entraîne en minutes ; une politique de robot (LeRobot ACT) en heures — c'est une tâche de file.
+# Train locally, without NVIDIA or cloud. CPU wheels (~2 GB).
+torch
+torchvision
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+onnx
+onnxruntime
+safetensors
+transformers
+datasets
+peft
+tinygrad
+lerobot
+gymnasium

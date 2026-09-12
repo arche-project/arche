@@ -1,0 +1,249 @@
+# Matériel libre : plans, firmware et documentation de machines qu'on peut fabriquer et réparer soi-même.
+# Open hardware: plans, firmware and docs of machines you can build and repair yourself.
+# Principe : le logiciel au service du monde physique. Un dépôt Git mirroré = plans (STL/STEP) + firmware + docs, hors-ligne.
+# Les licences "matériel" (CERN-OHL, CC BY-SA, NC) sont distinctes des licences logicielles ; le champ license décrit
+# la partie la plus restrictive, pour guider la redistribution.
+
+# --- Robotique (LeRobot / Hugging Face) ---
+
+- id: git-lerobot
+  type: git-repo
+  category: robotics
+  name: { fr: "LeRobot (Hugging Face) — IA pour robots", en: "LeRobot (Hugging Face) — AI for robots" }
+  description:
+    fr: "Bibliothèque de robotique par apprentissage : téléopération, collecte de données, entraînement et déploiement de politiques sur des bras SO-101, Koch, LeKiwi… Documentation complète dans le dépôt."
+    en: "Learning-based robotics library: teleoperation, data collection, policy training and deployment on SO-101, Koch, LeKiwi arms… Full docs inside the repo."
+  tags: [ robotics, ai, lerobot, huggingface, imitation-learning ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: huggingface/lerobot, url: https://github.com/huggingface/lerobot.git, homepage: https://huggingface.co/lerobot }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git, python3 ] }
+  depends_on: [ gitea, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Les modèles et jeux de données LeRobot sont sur Hugging Face (plusieurs Go chacun) : à ajouter au cas par cas via source.kind: huggingface. Le cache pip doit inclure lerobot + torch (CPU) pour l'usage hors-ligne."
+    en: "LeRobot models and datasets live on Hugging Face (several GB each): add case by case via source.kind: huggingface. The pip cache must include lerobot + torch (CPU) for offline use."
+
+- id: git-so-arm101
+  type: git-repo
+  category: robotics
+  name: { fr: "SO-ARM100 / SO-101 — bras robot imprimable (~120 $)", en: "SO-ARM100 / SO-101 — printable robot arm (~$120)" }
+  description:
+    fr: "Bras 6 axes standard de LeRobot : fichiers STL/STEP, nomenclature avec fournisseurs par région, guide d'assemblage. Le point d'entrée le moins cher en robotique par IA."
+    en: "LeRobot's standard 6-axis arm: STL/STEP files, bill of materials with regional suppliers, assembly guide. The cheapest entry point into AI robotics."
+  tags: [ robotics, arm, 3dprinting, lerobot, cad ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: TheRobotStudio/SO-ARM100, url: https://github.com/TheRobotStudio/SO-ARM100.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-reachy-mini
+  type: git-repo
+  category: robotics
+  name: { fr: "Reachy Mini (Pollen Robotics / Hugging Face)", en: "Reachy Mini (Pollen Robotics / Hugging Face)" }
+  description:
+    fr: "Robot de bureau expressif, SDK Python et fichiers de conception matérielle publiés. Logiciel Apache-2.0, matériel CC BY-NC-SA."
+    en: "Expressive desktop robot, Python SDK and published hardware design files. Software Apache-2.0, hardware CC BY-NC-SA."
+  tags: [ robotics, huggingface, sdk ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: pollen-robotics/reachy_mini, url: https://github.com/pollen-robotics/reachy_mini.git, homepage: https://huggingface.co/blog/reachy-mini }
+  license: { spdx: "Apache-2.0 AND CC-BY-NC-SA-4.0", redistribution: allowed-nc, note: { fr: "Logiciel Apache-2.0 ; fichiers matériels CC BY-NC-SA (pas de fabrication commerciale).", en: "Software Apache-2.0; hardware files CC BY-NC-SA (no commercial manufacturing)." } }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-inmoov
+  type: git-repo
+  category: robotics
+  name: { fr: "InMoov — humanoïde imprimable grandeur nature", en: "InMoov — life-size printable humanoid" }
+  description:
+    fr: "Le premier humanoïde open source imprimable en 3D (Gaël Langevin, France). Plans STL et tutoriels sur inmoov.fr ; à convertir en ZIM."
+    en: "The first 3D-printable open-source humanoid (Gaël Langevin, France). STL plans and tutorials on inmoov.fr; convert to ZIM."
+  tags: [ robotics, humanoid, 3dprinting, fr ]
+  languages: [ en, fr ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: manual, homepage: https://inmoov.fr, url: https://inmoov.fr }
+  license: { spdx: CC-BY-NC-3.0, redistribution: allowed-nc }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: community
+
+# --- Fabrication : imprimantes, scanners, recyclage ---
+
+- id: git-voron
+  type: git-repo
+  category: fabrication
+  name: { fr: "Voron (imprimante 3D CoreXY à construire)", en: "Voron (build-it-yourself CoreXY 3D printer)" }
+  description: { fr: "Imprimante 3D performante entièrement documentée (STL, BOM, manuel d'assemblage). Tourne sous Klipper.", en: "High-performance, fully documented 3D printer (STL, BOM, assembly manual). Runs Klipper." }
+  tags: [ 3dprinting, cad ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: VoronDesign/Voron-2, url: https://github.com/VoronDesign/Voron-2.git, homepage: https://vorondesign.com }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-klipper ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+
+- id: git-prusa-firmware
+  type: git-repo
+  category: fabrication
+  name: { fr: "Prusa Firmware", en: "Prusa Firmware" }
+  description: { fr: "Firmware des imprimantes Prusa MK3/MK4, parmi les plus répandues en France.", en: "Firmware for Prusa MK3/MK4 printers, among the most common in France." }
+  tags: [ 3dprinting, firmware ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: prusa3d/Prusa-Firmware, url: https://github.com/prusa3d/Prusa-Firmware.git, include_releases: true }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-precious-plastic
+  type: git-repo
+  category: fabrication
+  name: { fr: "Precious Plastic (machines de recyclage du plastique)", en: "Precious Plastic (plastic recycling machines)" }
+  description: { fr: "Plans du broyeur, de l'extrudeuse, de l'injecteuse et de la presse à plaques. Fabriquer des objets utiles à partir de déchets.", en: "Plans for the shredder, extruder, injection and sheet press machines. Make useful objects from waste." }
+  tags: [ recycling, plastic, machines ]
+  languages: [ en, mul ]
+  profiles: [ bunker, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://www.preciousplastic.com, url: https://community.preciousplastic.com/academy }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution, note: { fr: "Licence à confirmer sur la page Academy avant publication d'un ZIM.", en: "Confirm the license on the Academy page before publishing a ZIM." } }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: community
+
+# --- Agriculture, énergie, santé ---
+
+- id: git-farmbot
+  type: git-repo
+  category: agriculture
+  name: { fr: "FarmBot (potager robotisé)", en: "FarmBot (robotic garden)" }
+  description: { fr: "Portique CNC de jardinage : semis, arrosage, désherbage automatisés. Logiciel MIT ; documentation matérielle sur genesis.farm.bot.", en: "CNC gardening gantry: automated sowing, watering, weeding. MIT software; hardware docs on genesis.farm.bot." }
+  tags: [ agriculture, robotics, cnc ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: FarmBot/Farmbot-Web-App, url: https://github.com/FarmBot/Farmbot-Web-App.git, homepage: https://farm.bot }
+  license: { spdx: MIT, redistribution: allowed, note: { fr: "Licence des plans matériels à vérifier (documentation séparée).", en: "Hardware plans license to verify (separate documentation)." } }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-libre-solar
+  type: git-repo
+  category: energy
+  name: { fr: "Libre Solar (régulateurs de charge et BMS libres)", en: "Libre Solar (open charge controllers and BMS)" }
+  description: { fr: "Électronique de puissance libre pour le solaire off-grid : régulateurs MPPT, BMS, firmware. Matériel CERN-OHL.", en: "Open power electronics for off-grid solar: MPPT charge controllers, BMS, firmware. CERN-OHL hardware." }
+  tags: [ energy, solar, electronics, bms ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: LibreSolar/charge-controller-firmware, url: https://github.com/LibreSolar/charge-controller-firmware.git, homepage: https://libre.solar }
+  license: { spdx: "Apache-2.0 AND CERN-OHL-W-2.0", redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-platformio ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+  notes: { fr: "Mirrorer aussi les dépôts matériels (LibreSolar/mppt-2420-hc, bms-c1) et la doc (LibreSolar/docs).", en: "Also mirror the hardware repos (LibreSolar/mppt-2420-hc, bms-c1) and the docs (LibreSolar/docs)." }
+
+- id: git-openenergymonitor
+  type: git-repo
+  category: energy
+  name: { fr: "OpenEnergyMonitor (mesure d'énergie)", en: "OpenEnergyMonitor (energy monitoring)" }
+  description: { fr: "Capteurs et logiciel pour mesurer production solaire et consommation. Indispensable pour dimensionner un système off-grid.", en: "Sensors and software to measure solar production and consumption. Essential to size an off-grid system." }
+  tags: [ energy, monitoring, electronics ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: openenergymonitor/emonpi, url: https://github.com/openenergymonitor/emonpi.git, homepage: https://openenergymonitor.org }
+  license: { spdx: "GPL-3.0-only AND CC-BY-SA-4.0", redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-openbionics
+  type: git-repo
+  category: medical
+  name: { fr: "Open Bionics — main prothétique Ada", en: "Open Bionics — Ada prosthetic hand" }
+  description: { fr: "Main prothétique imprimable en 3D, fichiers et instructions libres.", en: "3D-printable prosthetic hand, free files and instructions." }
+  tags: [ prosthetics, 3dprinting, medical ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: Open-Bionics/Ada, url: https://github.com/Open-Bionics/Ada.git }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: enable-prosthetics
+  type: git-repo
+  category: medical
+  name: { fr: "e-NABLE (prothèses de main imprimées, réseau bénévole)", en: "e-NABLE (printed hand prosthetics, volunteer network)" }
+  description: { fr: "Bibliothèque de prothèses de main et de bras imprimables, avec guides de mesure et d'assemblage. Site à convertir en ZIM.", en: "Library of printable hand and arm prosthetics with sizing and assembly guides. Website to convert to ZIM." }
+  tags: [ prosthetics, 3dprinting, medical ]
+  languages: [ en, fr ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://enablingthefuture.org, url: https://enablingthefuture.org/upper-limb-prosthetics/ }
+  license: { spdx: mixed, redistribution: unclear, note: { fr: "Chaque design a sa licence (souvent CC BY-SA ou CC0). Vérifier design par design.", en: "Each design has its own license (often CC BY-SA or CC0). Check per design." } }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: community
+
+- id: reprap-wiki
+  type: git-repo
+  category: fabrication
+  name: { fr: "RepRap (wiki fondateur de l'impression 3D libre)", en: "RepRap (founding wiki of open 3D printing)" }
+  description: { fr: "Construire une imprimante 3D capable de s'auto-répliquer, à partir de pièces standard. Wiki MediaWiki : candidat mwoffliner.", en: "Build a self-replicating 3D printer from standard parts. MediaWiki: mwoffliner candidate." }
+  tags: [ 3dprinting, wiki ]
+  languages: [ en, fr ]
+  profiles: [ bunker, lowtech ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: manual, homepage: https://reprap.org, url: https://reprap.org/wiki/RepRap }
+  license: { spdx: GFDL-1.2-or-later, redistribution: attribution }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: community

@@ -1,0 +1,266 @@
+# Énergie, eau, domotique : produire, stocker, mesurer, piloter — hors réseau.
+# Energy, water, home automation: produce, store, measure, control — off-grid.
+# Vérifié sur les dépôts/sites le 2026-09-11. Voir aussi open-hardware.yaml (Libre Solar, OpenEnergyMonitor) et practical.yaml (Energypedia, Low-tech).
+
+# ---------- Solaire, batteries, onduleurs / Solar, batteries, inverters ----------
+
+- id: git-diybms
+  type: git-repo
+  category: energy
+  name: { fr: "diyBMS v4 — BMS pour batteries Li-ion maison", en: "diyBMS v4 — BMS for home-built Li-ion packs" }
+  description: { fr: "Système de gestion de batterie très répandu chez les autoconstructeurs de « powerwalls » : contrôleur ESP32 + modules ATtiny par cellule, KiCad, gerbers, nomenclature. CC BY-NC-SA.", en: "Very popular BMS among DIY powerwall builders: ESP32 controller + per-cell ATtiny modules, KiCad, gerbers, BOM. CC BY-NC-SA." }
+  tags: [ battery, bms, esp32, pcb, powerwall ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.4
+  source: { kind: github-repo, github_repo: stuartpittaway/diyBMSv4, url: https://github.com/stuartpittaway/diyBMSv4.git }
+  license: { spdx: CC-BY-NC-SA-2.0-UK, redistribution: allowed-nc }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-platformio ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+  notes: { fr: "Mirrorer aussi stuartpittaway/diyBMSv4ESP32 (firmware du contrôleur).", en: "Also mirror stuartpittaway/diyBMSv4ESP32 (controller firmware)." }
+
+- id: git-openinverter
+  type: git-repo
+  category: energy
+  name: { fr: "OpenInverter — onduleur triphasé à partir de pièces de véhicules électriques", en: "OpenInverter — 3-phase inverter from EV parts" }
+  description: { fr: "Firmware GPL et cartes CC BY-SA (Eagle, gerbers, nomenclatures) pour réutiliser onduleurs et moteurs de Prius/Leaf : conversion de véhicules, moteurs industriels, micro-réseaux.", en: "GPL firmware and CC BY-SA boards (Eagle, gerbers, BOMs) to repurpose Prius/Leaf inverters and motors: EV conversions, industrial motors, micro-grids." }
+  tags: [ inverter, ev, motor, pcb ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: jsphuebner/stm32-sine, url: https://github.com/jsphuebner/stm32-sine.git, homepage: https://openinverter.org }
+  license: { spdx: "GPL-3.0-only AND CC-BY-SA-4.0", redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  notes: { fr: "Mirrorer aussi jsphuebner/inverter-hardware. Le wiki openinverter.org bloque les robots : demander avant tout ZIM.", en: "Also mirror jsphuebner/inverter-hardware. The openinverter.org wiki blocks robots: ask before any ZIM." }
+
+- id: git-openevse
+  type: git-repo
+  category: energy
+  name: { fr: "OpenEVSE — borne de recharge de véhicule électrique", en: "OpenEVSE — EV charging station" }
+  description: { fr: "Contrôleur de charge J1772/IEC 61851 : firmware GPL, cartes Eagle CC BY-SA (v1 à v6.5). Recharger un véhicule électrique depuis du solaire hors réseau.", en: "J1772/IEC 61851 charge controller: GPL firmware, CC BY-SA Eagle boards (v1 to v6.5). Charge an EV from off-grid solar." }
+  tags: [ ev, charger, pcb ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: OpenEVSE/open_evse, url: https://github.com/OpenEVSE/open_evse.git, homepage: https://www.openevse.com }
+  license: { spdx: "GPL-3.0-or-later AND CC-BY-SA-3.0", redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Mirrorer aussi OpenEVSE/OpenEVSE_PLUS (matériel).", en: "Also mirror OpenEVSE/OpenEVSE_PLUS (hardware)." }
+
+- id: git-pvlib
+  type: git-repo
+  category: energy
+  name: { fr: "pvlib — dimensionner et simuler une installation solaire", en: "pvlib — size and simulate a solar installation" }
+  description: { fr: "Bibliothèque Python de référence pour calculer la production d'un système photovoltaïque selon le lieu, l'orientation, les panneaux. Remplace les calculateurs en ligne.", en: "Reference Python library to compute a PV system's output from location, orientation, panels. Replaces online calculators." }
+  tags: [ solar, simulation, python ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: pvlib/pvlib-python, url: https://github.com/pvlib/pvlib-python.git }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  requires: { tools: [ git, python3 ] }
+  depends_on: [ gitea, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-nrel-sam
+  type: git-repo
+  category: energy
+  name: { fr: "NREL System Advisor Model (SAM)", en: "NREL System Advisor Model (SAM)" }
+  description: { fr: "Simulation de performance et de coût pour solaire, éolien, batteries, biomasse (laboratoire national US). Application de bureau, BSD-3.", en: "Performance and cost simulation for solar, wind, batteries, biomass (US national lab). Desktop app, BSD-3." }
+  tags: [ solar, wind, simulation ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: NREL/SAM, url: https://github.com/NREL/SAM.git, homepage: https://sam.nrel.gov, include_releases: true }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-energyplus
+  type: git-repo
+  category: construction
+  name: { fr: "EnergyPlus — simulation thermique du bâtiment", en: "EnergyPlus — building energy simulation" }
+  description: { fr: "Moteur de simulation énergétique des bâtiments (DOE/NREL) : isolation, solaire passif, chauffage. Pour concevoir une maison qui n'a pas besoin de chauffage.", en: "Building energy simulation engine (DOE/NREL): insulation, passive solar, heating. To design a house that needs no heating." }
+  tags: [ building, thermal, simulation, passive-solar ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: NREL/EnergyPlus, url: https://github.com/NREL/EnergyPlus.git, include_releases: true }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+# ---------- Éolien, hydraulique, biogaz, solaire thermique : plans / Wind, hydro, biogas, solar thermal: plans ----------
+
+- id: ose-wind-hydro-power
+  type: pdf
+  category: energy
+  name: { fr: "Open Source Ecology — éolienne, micro-hydro, Power Cube", en: "Open Source Ecology — wind turbine, micro-hydro, Power Cube" }
+  description: { fr: "Pages du wiki OSE (CC BY-SA 4.0) : recherche éolienne (guides Zoetrope, plans externes), micro-hydro, et le Power Cube (moteur + pompe hydraulique modulaire : nomenclature, instructions de fabrication, manuel). Inclus dans le ZIM OSE.", en: "OSE wiki pages (CC BY-SA 4.0): wind turbine R&D (Zoetrope guides, external plans), micro-hydro, and the Power Cube (modular engine + hydraulic pump: BOM, manufacturing instructions, manual). Included in the OSE ZIM." }
+  tags: [ wind, hydro, plans, ose ]
+  languages: [ en ]
+  profiles: [ bunker, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: manual, homepage: https://wiki.opensourceecology.org/wiki/Power_Cube, url: https://wiki.opensourceecology.org/wiki/Wind_Turbine/Research_Development }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  printable: { available: true }
+  depends_on: [ git-open-source-ecology ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+  notes: { fr: "Aucun jeu complet de plans d'éolienne sous licence libre n'a été trouvé : le « Wind Turbine Recipe Book » de Hugh Piggott (axial-flux, 6 tailles) est la référence mais payant (~15 £) — à acheter avant, voir guide low-tech.", en: "No complete free-licensed small-wind plan set was found: Hugh Piggott's 'Wind Turbine Recipe Book' (axial flux, 6 sizes) is the reference but paid (~£15) — buy beforehand, see low-tech guide." }
+
+- id: appropedia-energy-water-plans
+  type: pdf
+  category: energy
+  name: { fr: "Appropedia — pico-hydro, bélier hydraulique, biodigesteur (plans CC BY-SA)", en: "Appropedia — pico-hydro, hydraulic ram pump, biodigester (CC BY-SA plans)" }
+  description: { fr: "Trois pages de référence : générateur pico-hydro à partir d'un alternateur de voiture (~140 $, nomenclature en 8 pièces), pompe à bélier (eau sans électricité, < 120 $), biodigesteur Solar CITIES à 3 cuves IBC. Toutes dans le ZIM Appropedia.", en: "Three reference pages: pico-hydro generator from a car alternator (~$140, 8-item BOM), hydraulic ram pump (water without electricity, < $120), Solar CITIES 3-IBC biodigester. All inside the Appropedia ZIM." }
+  tags: [ hydro, water, biogas, plans ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: https://www.appropedia.org/Picohydro_generator, url: https://www.appropedia.org/Open_Source_Solar_CITIES_biodigestor_system }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  printable: { available: true }
+  depends_on: [ appropedia-en ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+
+- id: solar-cooking-wiki
+  type: zim
+  category: food
+  name: { fr: "Solar Cooking wiki — 115+ plans de cuiseurs solaires", en: "Solar Cooking wiki — 115+ solar cooker plans" }
+  description: { fr: "Le wiki de Solar Cookers International : cuiseurs boîte, panneau, parabolique, à partir de carton et d'aluminium (« moins de 5 $ »). Cuisiner et pasteuriser l'eau sans combustible.", en: "Solar Cookers International's wiki: box, panel and parabolic cookers from cardboard and foil ('under $5'). Cook and pasteurise water with no fuel." }
+  tags: [ solar, cooking, plans, low-tech ]
+  languages: [ en, mul ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://solarcooking.fandom.com, url: https://solarcooking.fandom.com/wiki/Category:Solar_cooker_plans }
+  license: { spdx: CC-BY-SA-3.0, redistribution: attribution, note: { fr: "Licence Fandom par défaut (CC BY-SA 3.0) ; non confirmée sur la page : vérifier avant publication.", en: "Fandom default license (CC BY-SA 3.0); not confirmed on the page: verify before publishing." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+  notes: { fr: "Recette Zimit `solarcooking-en` (permission pending jusqu'à confirmation de la licence).", en: "Zimit recipe `solarcooking-en` (permission pending until license confirmed)." }
+
+# ---------- Mesure et pilotage / Measuring and controlling ----------
+
+- id: git-home-assistant
+  type: git-repo
+  category: energy
+  name: { fr: "Home Assistant — domotique locale (+ images OS)", en: "Home Assistant — local home automation (+ OS images)" }
+  description: { fr: "Pilote capteurs, relais, onduleurs, batteries, chauffage, sans cloud. Les images Home Assistant OS (Pi, x86) sont des assets de release : à mettre en cache.", en: "Controls sensors, relays, inverters, batteries, heating, no cloud. Home Assistant OS images (Pi, x86) are release assets: cache them." }
+  tags: [ home-automation, energy-management, raspberrypi ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 2
+  source: { kind: github-repo, github_repo: home-assistant/operating-system, url: https://github.com/home-assistant/operating-system.git, homepage: https://www.home-assistant.io, include_releases: true, github_asset_pattern: "^haos_(rpi5-64|rpi4-64|generic-x86-64)-.*\\.img\\.xz$" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Mirrorer aussi home-assistant/core (gros dépôt). Les intégrations et add-ons se téléchargent en ligne : prévoir un cache Docker.", en: "Also mirror home-assistant/core (large repo). Integrations and add-ons download online: plan a Docker cache." }
+
+- id: git-tasmota
+  type: git-repo
+  category: electronics
+  name: { fr: "Tasmota — firmware pour prises, relais et capteurs ESP", en: "Tasmota — firmware for ESP plugs, relays and sensors" }
+  description: { fr: "Transforme n'importe quel appareil ESP8266/ESP32 du commerce en objet local (MQTT/HTTP), sans cloud. Complémentaire d'ESPHome.", en: "Turns any off-the-shelf ESP8266/ESP32 device into a local object (MQTT/HTTP), no cloud. Complements ESPHome." }
+  tags: [ esp8266, esp32, firmware, iot ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: arendst/Tasmota, url: https://github.com/arendst/Tasmota.git, include_releases: true }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-platformio ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-emoncms
+  type: git-repo
+  category: energy
+  name: { fr: "Emoncms — journal et graphiques d'énergie (OpenEnergyMonitor)", en: "Emoncms — energy logging and graphs (OpenEnergyMonitor)" }
+  description: { fr: "L'application web qui enregistre et affiche production, consommation, température. S'auto-héberge sur un Pi.", en: "The web app that logs and shows production, consumption, temperature. Self-hosts on a Pi." }
+  tags: [ energy, monitoring, web ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: emoncms/emoncms, url: https://github.com/emoncms/emoncms.git }
+  license: { spdx: AGPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-openenergymonitor ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-openplc
+  type: git-repo
+  category: electronics
+  name: { fr: "OpenPLC — automate programmable libre (IEC 61131-3)", en: "OpenPLC — open programmable logic controller (IEC 61131-3)" }
+  description: { fr: "Programmer en Ladder/ST un Raspberry Pi ou un ESP32 comme un automate industriel : pompes, moulins, serres. v3 archivée en 2026, remplacée par OpenPLC Runtime v4.", en: "Program a Raspberry Pi or ESP32 in Ladder/ST like an industrial PLC: pumps, mills, greenhouses. v3 archived in 2026, replaced by OpenPLC Runtime v4." }
+  tags: [ plc, automation, industrial ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: thiagoralves/OpenPLC_v3, url: https://github.com/thiagoralves/OpenPLC_v3.git, homepage: https://autonomylogic.com }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Remplacer par le dépôt de la v4 dès qu'il est stable.", en: "Replace with the v4 repo once stable." }
+
+- id: git-knowflow
+  type: git-repo
+  category: water
+  name: { fr: "KnowFlow — moniteur de qualité d'eau (pH, EC, ORP, O2, T°)", en: "KnowFlow — water-quality monitor (pH, EC, ORP, DO, T°)" }
+  description: { fr: "Station Arduino à 5 paramètres pour surveiller une source, un puits, un bassin d'aquaponie. Matériel documenté, kit vendu par DFRobot. CC BY-NC-SA.", en: "5-parameter Arduino station to monitor a spring, a well, an aquaponics tank. Documented hardware, kit sold by DFRobot. CC BY-NC-SA." }
+  tags: [ water, sensors, arduino, aquaponics ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: github-repo, github_repo: KnowFlow/KnowFlow_AWM, url: https://github.com/KnowFlow/KnowFlow_AWM.git }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-arduino-cli ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community

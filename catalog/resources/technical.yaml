@@ -1,0 +1,276 @@
+# Savoirs techniques : électronique, informatique, radio, cartes, éducation.
+# Technical knowledge: electronics, computing, radio, maps, education.
+
+- id: stackexchange-electronics
+  type: zim
+  category: electronics
+  name: { fr: "Electronics StackExchange", en: "Electronics StackExchange" }
+  description: { fr: "Questions/réponses d'électronique : alimentation, capteurs, microcontrôleurs, dépannage.", en: "Electronics Q&A: power, sensors, microcontrollers, troubleshooting." }
+  tags: [ electronics, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 3.9
+  source: { kind: kiwix, kiwix_name: electronics.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/electronics.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-diy
+  type: zim
+  category: construction
+  name: { fr: "Home Improvement StackExchange", en: "Home Improvement StackExchange" }
+  description: { fr: "Bricolage, plomberie, électricité domestique, charpente.", en: "DIY, plumbing, home electrics, framing." }
+  tags: [ diy, plumbing, qa ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 1.9
+  source: { kind: kiwix, kiwix_name: diy.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/diy.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-gardening
+  type: zim
+  category: agriculture
+  name: { fr: "Gardening StackExchange", en: "Gardening StackExchange" }
+  description: { fr: "Jardinage, potager, maladies des plantes, compost.", en: "Gardening, vegetable growing, plant diseases, compost." }
+  tags: [ gardening, qa ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.9
+  source: { kind: kiwix, kiwix_name: gardening.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/gardening.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-ham
+  type: zim
+  category: radio
+  name: { fr: "Amateur Radio StackExchange", en: "Amateur Radio StackExchange" }
+  description: { fr: "Radioamateurisme : antennes, propagation, réglementation, matériel.", en: "Ham radio: antennas, propagation, regulation, gear." }
+  tags: [ radio, ham, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.07
+  source: { kind: kiwix, kiwix_name: ham.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/ham.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-3dprinting
+  type: zim
+  category: fabrication
+  name: { fr: "3D Printing StackExchange", en: "3D Printing StackExchange" }
+  description: { fr: "Impression 3D : réglages, matériaux, pannes.", en: "3D printing: tuning, materials, failures." }
+  tags: [ 3dprinting, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.12
+  source: { kind: kiwix, kiwix_name: 3dprinting.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/3dprinting.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-arduino
+  type: zim
+  category: electronics
+  name: { fr: "Arduino StackExchange", en: "Arduino StackExchange" }
+  description: { fr: "Arduino et microcontrôleurs compatibles.", en: "Arduino and compatible microcontrollers." }
+  tags: [ arduino, esp32, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.25
+  source: { kind: kiwix, kiwix_name: arduino.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/arduino.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-raspberrypi
+  type: zim
+  category: electronics
+  name: { fr: "Raspberry Pi StackExchange", en: "Raspberry Pi StackExchange" }
+  description: { fr: "Raspberry Pi : système, GPIO, réseau, alimentation.", en: "Raspberry Pi: OS, GPIO, networking, power." }
+  tags: [ raspberrypi, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.29
+  source: { kind: kiwix, kiwix_name: raspberrypi.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/raspberrypi.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-robotics
+  type: zim
+  category: robotics
+  name: { fr: "Robotics StackExchange", en: "Robotics StackExchange" }
+  description: { fr: "Robotique : ROS, cinématique, capteurs, contrôle.", en: "Robotics: ROS, kinematics, sensors, control." }
+  tags: [ robotics, ros, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.23
+  source: { kind: kiwix, kiwix_name: robotics.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/robotics.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-unix
+  type: zim
+  category: dev
+  name: { fr: "Unix & Linux StackExchange", en: "Unix & Linux StackExchange" }
+  description: { fr: "Administration Linux : indispensable pour maintenir le serveur lui-même.", en: "Linux administration: indispensable to maintain the server itself." }
+  tags: [ linux, sysadmin, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 1.2
+  source: { kind: kiwix, kiwix_name: unix.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/unix.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackoverflow
+  type: zim
+  category: dev
+  name: { fr: "Stack Overflow (complet)", en: "Stack Overflow (full)" }
+  description: { fr: "Toutes les questions/réponses de programmation. Très volumineux ; utile surtout couplé à l'IA locale.", en: "All programming Q&A. Very large; mostly useful paired with the local AI." }
+  tags: [ programming, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 107
+  source: { kind: kiwix, kiwix_name: stackoverflow.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/stackoverflow.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: devdocs-en
+  type: zim
+  category: dev
+  name: { fr: "DevDocs (documentation des langages)", en: "DevDocs (language documentation)" }
+  description: { fr: "Documentation officielle de dizaines de langages et bibliothèques (Python, JS, C, Rust, Bash…). Un ZIM par techno ; l'updater les liste.", en: "Official docs for dozens of languages and libraries (Python, JS, C, Rust, Bash…). One ZIM per tech; the updater lists them." }
+  tags: [ programming, docs ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 2
+  source: { kind: kiwix, kiwix_name: devdocs_en_python, url: https://download.kiwix.org/zim/devdocs/devdocs_en_python.zim, homepage: https://devdocs.io }
+  license: { spdx: mixed, redistribution: unclear }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Entrée représentative (Python). Le bundle « dev » devrait référencer une liste de DevDocs choisis : python, javascript, c, cpp, rust, bash, git, linux (man pages).", en: "Representative entry (Python). The 'dev' bundle should list chosen DevDocs: python, javascript, c, cpp, rust, bash, git, linux (man pages)." }
+
+- id: freecodecamp-en
+  type: zim
+  category: education
+  name: { fr: "freeCodeCamp", en: "freeCodeCamp" }
+  description: { fr: "Cursus complet d'apprentissage de la programmation web.", en: "Full web-programming learning curriculum." }
+  tags: [ programming, course ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.01
+  source: { kind: kiwix, kiwix_name: freecodecamp_en_all, url: https://download.kiwix.org/zim/freecodecamp/freecodecamp_en_all.zim }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Taille listée de 7,5 Mo en 2026-08, suspecte (les builds précédents faisaient plusieurs Go). À vérifier par l'updater avant de le recommander.", en: "Listed at 7.5 MB in 2026-08, suspicious (earlier builds were several GB). Updater must confirm before recommending." }
+
+- id: khanacademy-fr
+  type: zim
+  category: education
+  name: { fr: "Khan Academy FR (vidéos)", en: "Khan Academy FR (videos)" }
+  description: { fr: "Cours en vidéo du primaire au lycée : maths, sciences. Très volumineux, dernière version 2023.", en: "Video lessons from primary to high school: maths, science. Very large, last built 2023." }
+  tags: [ school, videos, maths ]
+  languages: [ fr ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 94
+  source: { kind: kiwix, kiwix_name: khanacademy_fr_all, url: https://download.kiwix.org/zim/other/khanacademy_fr_all.zim }
+  license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: phet-fr
+  type: zim
+  category: education
+  name: { fr: "PhET (simulations de physique)", en: "PhET (physics simulations)" }
+  description: { fr: "Simulations interactives de physique, chimie, maths pour l'enseignement.", en: "Interactive physics, chemistry and maths simulations for teaching." }
+  tags: [ school, physics, simulations ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: kiwix, kiwix_name: phet_fr, url: https://download.kiwix.org/zim/phet/phet_fr.zim }
+  license: { spdx: CC-BY-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: openstreetmap-wiki-en
+  type: zim
+  category: maps
+  name: { fr: "Wiki OpenStreetMap", en: "OpenStreetMap wiki" }
+  description: { fr: "Documentation du projet OSM (pas les cartes elles-mêmes, voir maps.yaml).", en: "OSM project documentation (not the maps themselves, see maps.yaml)." }
+  tags: [ osm, maps, docs ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1.2
+  source: { kind: kiwix, kiwix_name: openstreetmap-wiki_en_all_maxi, url: https://download.kiwix.org/zim/other/openstreetmap-wiki_en_all_maxi.zim }
+  license: { spdx: CC-BY-SA-2.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: archlinux-wiki-en
+  type: zim
+  category: dev
+  name: { fr: "ArchWiki", en: "ArchWiki" }
+  description: { fr: "La meilleure documentation Linux générale, valable bien au-delà d'Arch.", en: "The best general Linux documentation, useful far beyond Arch." }
+  tags: [ linux, docs ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.04
+  source: { kind: kiwix, kiwix_name: archlinux_en_all_maxi, url: https://download.kiwix.org/zim/other/archlinux_en_all_maxi.zim }
+  license: { spdx: GFDL-1.3, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference

@@ -1,0 +1,582 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arche.local/schema/resource.schema.json",
+  "title": "Arche catalog resource",
+  "description": "One downloadable resource (ZIM, AI model, git mirror, toolchain, PDF, software). The catalog never contains the content itself, only how to obtain it from its official source.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "category",
+    "name",
+    "description",
+    "profiles",
+    "priority",
+    "languages",
+    "source",
+    "license",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,63}$",
+      "description": "Stable slug. Never reuse an id for a different thing."
+    },
+    "type": {
+      "enum": [
+        "zim",
+        "ai-model",
+        "git-repo",
+        "toolchain",
+        "pdf",
+        "software",
+        "dataset",
+        "map"
+      ]
+    },
+    "category": {
+      "enum": [
+        "encyclopedia",
+        "reference",
+        "medical",
+        "agriculture",
+        "food",
+        "water",
+        "energy",
+        "construction",
+        "electronics",
+        "robotics",
+        "fabrication",
+        "radio",
+        "weather",
+        "maps",
+        "education",
+        "dev",
+        "legal",
+        "ai",
+        "platform",
+        "survival",
+        "society"
+      ]
+    },
+    "name": {
+      "$ref": "#/$defs/i18n"
+    },
+    "description": {
+      "$ref": "#/$defs/i18n"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "languages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2,3}(-[A-Za-z]{2,4})?$|^mul$"
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "bunker",
+          "lowtech",
+          "novice"
+        ]
+      }
+    },
+    "priority": {
+      "enum": [
+        "essential",
+        "recommended",
+        "optional"
+      ],
+      "description": "essential = pre-checked for every matching profile regardless of disk; recommended = pre-checked if it fits the disk budget; optional = shown, unchecked."
+    },
+    "size_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Exact size when known (filled by the updater)."
+    },
+    "size_estimate_gb": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Human estimate used when size_bytes is null. The recommender uses size_bytes ?? size_estimate_gb."
+    },
+    "version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO date of the upstream version currently referenced."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "kiwix",
+            "github-release",
+            "github-repo",
+            "ollama",
+            "huggingface",
+            "http",
+            "manual",
+            "arche-hosted"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Direct download URL (or clone URL for git-repo). For kiwix, may be a dated file: the updater rewrites it."
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri"
+        },
+        "mirrors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "kiwix_name": {
+          "type": "string",
+          "description": "Name in the Kiwix OPDS catalog, e.g. wikipedia_fr_all_maxi"
+        },
+        "github_repo": {
+          "type": "string",
+          "pattern": "^[^/]+/[^/]+$"
+        },
+        "github_asset_pattern": {
+          "type": "string",
+          "description": "Regex matched against release asset names."
+        },
+        "ollama_model": {
+          "type": "string",
+          "description": "e.g. qwen3:8b"
+        },
+        "hf_repo": {
+          "type": "string"
+        },
+        "hf_file": {
+          "type": "string"
+        },
+        "include_wiki": {
+          "type": "boolean",
+          "description": "git-repo: also mirror the GitHub wiki (<repo>.wiki.git)"
+        },
+        "include_releases": {
+          "type": "boolean",
+          "description": "git-repo: also fetch latest release binaries"
+        },
+        "ia_item": {
+          "type": "string",
+          "description": "arche-hosted: Internet Archive item identifier (archive.org/details/<ia_item>)."
+        },
+        "torrent": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional .torrent URL (IA generates one per item). Preferred transport when available: resumable, verifiable, multi-source."
+        },
+        "magnet": {
+          "type": "string",
+          "description": "Optional magnet link."
+        },
+        "ipfs_cid": {
+          "type": "string",
+          "description": "Optional IPFS CID (content address) of the file."
+        }
+      }
+    },
+    "checksum": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "algo": {
+          "enum": [
+            "sha256",
+            "sha1",
+            "md5"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "URL of a sidecar checksum file (e.g. .sha256)."
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spdx"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "description": "SPDX id, or 'proprietary', 'mixed', 'unknown'."
+        },
+        "url": {
+          "type": "string"
+        },
+        "redistribution": {
+          "enum": [
+            "allowed",
+            "allowed-nc",
+            "attribution",
+            "forbidden",
+            "unclear"
+          ],
+          "description": "Whether a user may copy this to another person's machine. Arche itself never redistributes; this is guidance for users."
+        },
+        "note": {
+          "$ref": "#/$defs/i18n"
+        }
+      }
+    },
+    "requires": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "disk_gb": {
+          "type": "number"
+        },
+        "ram_gb": {
+          "type": "number"
+        },
+        "vram_gb": {
+          "type": "number"
+        },
+        "gpu": {
+          "enum": [
+            "none",
+            "optional",
+            "required"
+          ]
+        },
+        "os": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "linux",
+              "macos",
+              "windows"
+            ]
+          }
+        },
+        "arch": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "x64",
+              "arm64",
+              "armv7"
+            ]
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Binaries expected on PATH (git, ollama, docker...)"
+        }
+      }
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Other resource ids that must be installed first (e.g. a ZIM depends on kiwix-serve)."
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Capabilities, e.g. 'kiwix-serve', 'llm-runtime'."
+    },
+    "printable": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "pages_estimate": {
+          "type": "integer"
+        },
+        "note": {
+          "$ref": "#/$defs/i18n"
+        }
+      }
+    },
+    "update": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "tracker"
+      ],
+      "properties": {
+        "tracker": {
+          "enum": [
+            "kiwix-opds",
+            "github-release",
+            "github-commit",
+            "ollama",
+            "huggingface",
+            "http-head",
+            "arche-build",
+            "npm",
+            "pypi",
+            "rosdistro",
+            "node-lts",
+            "dockerhub",
+            "crates",
+            "debian",
+            "ubuntu-lts",
+            "raspios",
+            "github-tag",
+            "none"
+          ],
+          "description": "How the updater finds the latest stable version. Registry trackers (npm, pypi, crates, dockerhub) need `package`; rosdistro/node-lts/debian track a distribution, not a package."
+        },
+        "check_interval_days": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 7
+        },
+        "stability": {
+          "enum": [
+            "stable",
+            "lts",
+            "any"
+          ],
+          "default": "stable",
+          "description": "stable = highest version without a prerelease marker (rc, beta, alpha, dev, rolling…); lts = highest LTS where the ecosystem has the notion (Node, ROS 2, Ubuntu), else stable with a warning; any = highest, prereleases included — only for resources that explicitly want the bleeding edge."
+        },
+        "package": {
+          "type": "string",
+          "description": "Name in the registry (npm package, PyPI project, crate, Docker image `org/name`)."
+        }
+      }
+    },
+    "runtime": {
+      "enum": [
+        "static-binary",
+        "node",
+        "python",
+        "jvm",
+        "container",
+        "source",
+        "firmware",
+        "none"
+      ],
+      "description": "What the software runs on (ADR 0008). Anything but static-binary/none must be satisfiable from the catalog itself (node-lts, python-standalone…). A container runtime can be neither essential nor recommended, nor in the novice profile — enforced by validation. firmware = flashed onto a device, not run on the host."
+    },
+    "checked": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO date the updater last verified this resource upstream — distinct from `updated`, which is the upstream version's own date. Drives the freshness metric."
+    },
+    "status": {
+      "enum": [
+        "active",
+        "unverified",
+        "deprecated",
+        "missing"
+      ],
+      "description": "unverified = added by hand, not yet confirmed by the updater; missing = updater could not find it upstream."
+    },
+    "reliability": {
+      "enum": [
+        "reference",
+        "community",
+        "curated",
+        "unknown"
+      ],
+      "description": "Editorial confidence in the content (not a license field)."
+    },
+    "notes": {
+      "$ref": "#/$defs/i18n"
+    },
+    "built_from": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "tool"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Origin website the ZIM was built from."
+        },
+        "tool": {
+          "enum": [
+            "mwoffliner",
+            "zimit",
+            "zimwriterfs",
+            "other"
+          ]
+        },
+        "recipe": {
+          "type": "string",
+          "description": "Recipe id in catalog/zim-recipes.yaml."
+        },
+        "built_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "permission": {
+          "enum": [
+            "license",
+            "written",
+            "pending",
+            "none"
+          ],
+          "description": "license = the license alone allows publication; written = explicit permission on file (docs/permissions/); pending = asked; none = do not publish."
+        },
+        "permission_ref": {
+          "type": "string",
+          "description": "Path or URL of the written permission."
+        }
+      },
+      "description": "Only for arche-hosted resources: provenance and the legal basis for publishing."
+    },
+    "index": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "dims"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Download URL of the published corpus for this resource (.arche.sqlite.zst, ADR 0014; M1-10 finalises the block). Absent = not published yet; the client may build it locally."
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "model": {
+          "type": "string",
+          "description": "Embedding model the vectors were produced with, e.g. bge-m3. A shard is only fusable with shards of the same model."
+        },
+        "dims": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192,
+          "description": "Vector dimensionality; must match the model."
+        },
+        "chunks": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "built_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lexical": {
+          "type": "boolean",
+          "description": "true when the resource carries its own full-text index (Kiwix ZIMs ship Xapian): BM25 is served from it instead of being rebuilt."
+        }
+      },
+      "description": "Retrieval index shard for this resource (ADR 0007). Locators + int8 vectors; the text itself stays in the resource."
+    }
+  },
+  "$defs": {
+    "i18n": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fr",
+        "en"
+      ],
+      "properties": {
+        "fr": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

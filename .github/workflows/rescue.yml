@@ -1,0 +1,48 @@
+# SAUVEGARDE D'URGENCE dans GitHub Actions : crawle un site menacé et conserve le résultat comme artefact (90 jours),
+# sans compte Internet Archive et sans passer par la machine du mainteneur. Copie privée : rien n'est publié.
+# Quand le compte IA existe et que la permission est enregistrée, zim-build.yml prend le relais pour publier.
+# EMERGENCY RESCUE in GitHub Actions: crawl an at-risk site, keep the result as a 90-day artifact. Private copy, nothing published.
+name: rescue
+
+on:
+  workflow_dispatch:
+    inputs:
+      recipe:
+        description: "Recipe id (catalog/zim-recipes.yaml), ex. atelierpaysan-fr"
+        required: true
+      pdf_only:
+        description: "Documents seulement (wget), pas de ZIM — plus rapide, plus léger"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  rescue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc || true
+      - name: Rescue ${{ inputs.recipe }}
+        run: scripts/rescue/rescue.sh "${{ inputs.recipe }}" "$PWD/rescue-out" ${{ inputs.pdf_only && '--pdf-only' || '' }}
+      - name: Split into 2 GB parts (artifact-friendly)
+        run: |
+          cd rescue-out && tar cf - "${{ inputs.recipe }}" | split -b 2000m - "${{ inputs.recipe }}.tar.part-"
+          ls -la
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rescue-${{ inputs.recipe }}-${{ github.run_id }}
+          path: rescue-out/*.tar.part-*
+          retention-days: 90
+          compression-level: 0
+      - name: How to reassemble
+        run: |
+          echo "Download all parts from the workflow artifact, then:"
+          echo "  cat ${{ inputs.recipe }}.tar.part-* | tar xf -"
+          echo "Verify: cd ${{ inputs.recipe }} && sha256sum -c SHA256SUMS"

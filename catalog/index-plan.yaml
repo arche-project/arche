@@ -1,0 +1,130 @@
+# Le plan d'indexation : quelles ressources reçoivent un shard, dans quel ordre, et lesquelles dépassent
+# ce qu'un runner GitHub (6 h, CPU) peut embarquer — celles-là attendent un runner GPU ou un lot manuel.
+# The indexing plan: which resources get a shard, in what order; ci: false = too big for a GitHub runner.
+# Généré depuis le catalogue le 2026-09-11 (type zim ou pdf, priorité puis taille) ; à éditer à la main ensuite.
+# ~350 000 chunks par Go de texte, ~30 chunks/s sur CPU : 1 Go ≈ 3 h. Au-dessus de 2 Go : ci: false.
+# wave: 1 = la première vague publiée (M4-3, G2) : les vingt plus petits corpus `essential` (≈ 0,4 Go de texte).
+# Les locators de knowledge/eval.yaml restent `pending` tant que le shard de leur ressource n'est pas publié.
+
+model: bge-m3
+build:
+  - { id: centres-antipoison-fr, size_gb: 0.001, priority: essential, wave: 1 }
+  - { id: anses-plantes-toxiques, size_gb: 0.001, priority: essential, wave: 1 }
+  - { id: fm-21-76-survival, size_gb: 0.003, priority: essential, wave: 1 }
+  - { id: cap-lille-champignons-syndromes, size_gb: 0.003, priority: essential, wave: 1 }
+  - { id: who-psychological-first-aid, size_gb: 0.005, priority: essential, wave: 1 }
+  - { id: who-mcpc-obstetric-complications, size_gb: 0.005, priority: essential, wave: 1 }
+  - { id: who-imci-chart-booklet, size_gb: 0.005, priority: essential, wave: 1 }
+  - { id: arche-docs, size_gb: 0.01, priority: essential, wave: 1 }
+  - { id: hesperian-green-pages, size_gb: 0.01, priority: essential, wave: 1 }
+  - { id: ifrc-first-aid-guidelines-2020, size_gb: 0.02, priority: essential, wave: 1 }
+  - { id: pdf-sanitation-sphere-handbook, size_gb: 0.02, priority: essential, wave: 1 }
+  - { id: zimgit-water, size_gb: 0.02, priority: essential, wave: 1 }
+  - { id: where-there-is-no-vet, size_gb: 0.02, priority: essential, wave: 1 }
+  - { id: hesperian-where-no-dentist, size_gb: 0.03, priority: essential, wave: 1 }
+  - { id: pdf-who-first-aid, size_gb: 0.03, priority: essential, wave: 1 }
+  - { id: hesperian-book-for-midwives, size_gb: 0.05, priority: essential, wave: 1 }
+  - { id: hesperian-where-women-no-doctor, size_gb: 0.05, priority: essential, wave: 1 }
+  - { id: pdf-ou-il-ny-a-pas-de-docteur, size_gb: 0.05, priority: essential, wave: 1 }
+  - { id: who-medicinal-plants-monographs, size_gb: 0.05, priority: essential, wave: 1 }
+  - { id: wikivet-zim, size_gb: 0.054, priority: essential, wave: 1 }
+  - { id: zimgit-medicine, size_gb: 0.07, priority: essential }
+  - { id: zimgit-food-preparation, size_gb: 0.09, priority: essential }
+  - { id: msf-medical-guidelines, size_gb: 0.1, priority: essential }
+  - { id: ema-herbal-monographs, size_gb: 0.1, priority: essential }
+  - { id: appropedia-en, size_gb: 0.56, priority: essential }
+  - { id: zimgit-post-disaster, size_gb: 0.62, priority: essential }
+  - { id: wikipedia-fr-medicine, size_gb: 1.5, priority: essential }
+  - { id: atelier-paysan, size_gb: 2, priority: essential }
+  - { id: ifixit-fr, size_gb: 3.4, priority: essential, ci: false }
+  - { id: wikipedia-fr-nopic, size_gb: 13, priority: essential, ci: false }
+  - { id: wikipedia-fr-plantes-vente-libre, size_gb: 0.001, priority: recommended }
+  - { id: who-essential-medicines-list, size_gb: 0.002, priority: recommended }
+  - { id: fm-4-25-11-first-aid, size_gb: 0.003, priority: recommended }
+  - { id: who-pcpnc-pregnancy-care, size_gb: 0.003, priority: recommended }
+  - { id: anses-champignons-intoxications, size_gb: 0.003, priority: recommended }
+  - { id: fema-cert-manual, size_gb: 0.006, priority: recommended }
+  - { id: msf-obstetric-newborn-care, size_gb: 0.01, priority: recommended }
+  - { id: fao-poultry-manual, size_gb: 0.01, priority: recommended }
+  - { id: fao-beekeeping, size_gb: 0.01, priority: recommended }
+  - { id: who-basic-emergency-care, size_gb: 0.02, priority: recommended }
+  - { id: where-there-is-no-psychiatrist, size_gb: 0.02, priority: recommended }
+  - { id: zimgit-knots, size_gb: 0.03, priority: recommended }
+  - { id: archlinux-wiki-en, size_gb: 0.04, priority: recommended }
+  - { id: appropedia-energy-water-plans, size_gb: 0.05, priority: recommended }
+  - { id: stackexchange-ham, size_gb: 0.07, priority: recommended }
+  - { id: mycofrance-syndromes, size_gb: 0.1, priority: recommended }
+  - { id: stackexchange-3dprinting, size_gb: 0.12, priority: recommended }
+  - { id: stackexchange-outdoors, size_gb: 0.14, priority: recommended }
+  - { id: stackexchange-arduino, size_gb: 0.25, priority: recommended }
+  - { id: stackexchange-raspberrypi, size_gb: 0.29, priority: recommended }
+  - { id: libretexts-k12, size_gb: 0.35, priority: recommended }
+  - { id: wikem-en, size_gb: 0.36, priority: recommended }
+  - { id: vikidia-fr, size_gb: 0.5, priority: recommended }
+  - { id: libretexts-workforce, size_gb: 0.5, priority: recommended }
+  - { id: wikiphyto-fr, size_gb: 0.5, priority: recommended }
+  - { id: libretexts-eng, size_gb: 0.65, priority: recommended }
+  - { id: lowtech-magazine-solar, size_gb: 0.67, priority: recommended }
+  - { id: energypedia-en, size_gb: 0.76, priority: recommended }
+  - { id: stackexchange-gardening, size_gb: 0.9, priority: recommended }
+  - { id: practical-plants, size_gb: 1, priority: recommended }
+  - { id: solar-cooking-wiki, size_gb: 1, priority: recommended }
+  - { id: fao-knowledge-repository, size_gb: 1, priority: recommended }
+  - { id: practical-action-briefs, size_gb: 1, priority: recommended }
+  - { id: libretexts-med, size_gb: 1.1, priority: recommended }
+  - { id: stackexchange-unix, size_gb: 1.2, priority: recommended }
+  - { id: wikibooks-fr, size_gb: 1.5, priority: recommended }
+  - { id: stackexchange-diy, size_gb: 1.9, priority: recommended }
+  - { id: devdocs-en, size_gb: 2, priority: recommended }
+  - { id: wikipedia-en-medicine, size_gb: 2.1, priority: recommended, ci: false }
+  - { id: mdwiki-en, size_gb: 2.1, priority: recommended, ci: false }
+  - { id: mycodb, size_gb: 3, priority: recommended, ci: false }
+  - { id: ifixit-en, size_gb: 3.3, priority: recommended, ci: false }
+  - { id: stackexchange-electronics, size_gb: 3.9, priority: recommended, ci: false }
+  - { id: openstax-textbooks, size_gb: 4, priority: recommended, ci: false }
+  - { id: wiktionary-fr, size_gb: 4.6, priority: recommended, ci: false }
+  - { id: wikibooks-en, size_gb: 5.8, priority: recommended, ci: false }
+  - { id: wiktionary-en, size_gb: 8.5, priority: recommended, ci: false }
+  - { id: gutenberg-fr, size_gb: 9.8, priority: recommended, ci: false }
+  - { id: wikipedia-en-nopic, size_gb: 50, priority: recommended, ci: false }
+  - { id: wikipedia-fr-maxi, size_gb: 52, priority: recommended, ci: false }
+  - { id: wikipedia-en-maxi, size_gb: 115, priority: recommended, ci: false }
+  - { id: wikihow-fr, size_gb: 0, priority: optional }
+  - { id: drug-shelf-life-slep, size_gb: 0.001, priority: optional }
+  - { id: heifer-animal-wellbeing, size_gb: 0.005, priority: optional }
+  - { id: usfs-macrofungi-guide, size_gb: 0.01, priority: optional }
+  - { id: freecodecamp-en, size_gb: 0.01, priority: optional }
+  - { id: fao-family-poultry-decision-tools, size_gb: 0.01, priority: optional }
+  - { id: who-oral-health-report, size_gb: 0.012, priority: optional }
+  - { id: stackexchange-sustainability, size_gb: 0.03, priority: optional }
+  - { id: hesperian-disability-children, size_gb: 0.05, priority: optional }
+  - { id: modern-herbal-grieve, size_gb: 0.05, priority: optional }
+  - { id: woah-terrestrial-code, size_gb: 0.05, priority: optional }
+  - { id: stackexchange-medicalsciences, size_gb: 0.06, priority: optional }
+  - { id: stackexchange-pets, size_gb: 0.08, priority: optional }
+  - { id: ose-wind-hydro-power, size_gb: 0.1, priority: optional }
+  - { id: anses-bulletin-sante-animale, size_gb: 0.2, priority: optional }
+  - { id: stackexchange-cooking, size_gb: 0.23, priority: optional }
+  - { id: stackexchange-robotics, size_gb: 0.23, priority: optional }
+  - { id: stackexchange-engineering, size_gb: 0.24, priority: optional }
+  - { id: cuisine-libre-fr, size_gb: 0.25, priority: optional }
+  - { id: cornell-poisonous-plants, size_gb: 0.3, priority: optional }
+  - { id: phet-fr, size_gb: 0.3, priority: optional }
+  - { id: open-vet-textbooks, size_gb: 0.3, priority: optional }
+  - { id: ros2-docs, size_gb: 0.5, priority: optional }
+  - { id: e4c-solutions-library, size_gb: 0.5, priority: optional }
+  - { id: henriettes-herbal-classics, size_gb: 0.5, priority: optional }
+  - { id: libretexts-phys, size_gb: 0.55, priority: optional }
+  - { id: libretexts-math, size_gb: 0.8, priority: optional }
+  - { id: openstreetmap-wiki-en, size_gb: 1.2, priority: optional }
+  - { id: wikispecies-zim, size_gb: 1.4, priority: optional }
+  - { id: medlineplus-en, size_gb: 1.8, priority: optional }
+  - { id: libretexts-chem, size_gb: 2, priority: optional }
+  - { id: libretexts-bio, size_gb: 2.1, priority: optional, ci: false }
+  - { id: wikiversity-en, size_gb: 2.3, priority: optional, ci: false }
+  - { id: ready-gov-en, size_gb: 2.3, priority: optional, ci: false }
+  - { id: wikipedia-fr-mini, size_gb: 3.5, priority: optional, ci: false }
+  - { id: khanacademy-fr, size_gb: 94, priority: optional, ci: false }
+  - { id: stackoverflow, size_gb: 107, priority: optional, ci: false }
+  - { id: gutenberg-en, size_gb: 206, priority: optional, ci: false }
+  - { id: survivor-library-en, size_gb: 235, priority: optional, ci: false }

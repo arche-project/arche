@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arche.local/schema/profile.schema.json",
+  "title": "Arche user profile and hardware presets",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profiles", "hardware_presets", "ai_tiers"],
+  "properties": {
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "tagline", "default_priorities", "disk_budget_ratio"],
+        "properties": {
+          "id": { "enum": ["bunker", "lowtech", "novice"] },
+          "name": { "$ref": "#/$defs/i18n" },
+          "tagline": { "$ref": "#/$defs/i18n" },
+          "default_priorities": { "type": "array", "items": { "enum": ["essential", "recommended", "optional"] } },
+          "disk_budget_ratio": { "type": "number", "minimum": 0.1, "maximum": 0.95, "description": "Share of free disk the recommender may fill." },
+          "prefer_printable": { "type": "boolean" },
+          "hide_types": { "type": "array", "items": { "type": "string" } },
+          "hide_categories": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "hardware_presets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "description", "assumed"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "$ref": "#/$defs/i18n" },
+          "description": { "$ref": "#/$defs/i18n" },
+          "assumed": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "disk_gb": { "type": "number" },
+              "ram_gb": { "type": "number" },
+              "vram_gb": { "type": "number" },
+              "arch": { "enum": ["x64", "arm64", "armv7"] },
+              "os": { "enum": ["linux", "macos", "windows"] }
+            }
+          }
+        }
+      }
+    },
+    "ai_tiers": {
+      "type": "array",
+      "description": "Ordered from smallest to largest. The recommender picks the largest tier whose min_ram_gb (or min_vram_gb when a GPU is present) is satisfied.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "min_ram_gb", "models"],
+        "properties": {
+          "id": { "type": "string" },
+          "min_ram_gb": { "type": "number" },
+          "min_vram_gb": { "type": ["number", "null"] },
+          "models": { "type": "array", "items": { "type": "string" }, "description": "Resource ids, first = default chat model." }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "i18n": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fr", "en"],
+      "properties": { "fr": { "type": "string" }, "en": { "type": "string" } }
+    }
+  }
+}

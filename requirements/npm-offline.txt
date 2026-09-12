@@ -1,0 +1,9 @@
+# Paquets npm à réchauffer dans le miroir local (ressource `verdaccio`) avant la coupure :
+#   for p in $(grep -v '^#' requirements/npm-offline.txt); do npm pack $p --registry https://registry.npmjs.org; done
+# puis servir avec verdaccio, ou `npm install --registry http://127.0.0.1:4873`.
+# npm packages to warm in the local mirror before the outage.
+node-red
+n8n
+verdaccio
+@mermaid-js/mermaid-cli
+arche

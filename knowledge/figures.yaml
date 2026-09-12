@@ -1,0 +1,188 @@
+# Les chiffres de l'autonomie, en lisible-machine.
+# The numbers of self-reliance, machine-readable.
+#
+# Ce fichier est la source unique des ordres de grandeur utilisés par les calculateurs
+# (src/core/rag/figures.ts) et par la fiche imprimable 08. Le LLM n'invente jamais un nombre :
+# il appelle un calculateur, qui lit ce fichier.
+#
+# Single source of truth for the sizing figures. The LLM never invents a number: it calls a
+# calculator, which reads this file.
+#
+# Règle d'édition (M4-1, docs/fr/PROVENANCE.md) : toute valeur porte une fourchette (`lo`/`hi`) quand
+# elle en a une, et `source: { resource, path, quote }` — un locator vers le corpus du catalogue, avec
+# la citation. En période de grâce, `unsourced: true`, explicite : compté, publié dans le README, à
+# rattacher ou retirer par M4-2. `verified` n'est jamais écrit ici : `arche knowledge verify` le
+# calcule en ouvrant les shards installés. Une valeur sans l'un ni l'autre fait échouer la CI.
+# Climat de référence : tempéré océanique / semi-continental (France, Europe de l'Ouest).
+
+version: 1
+updated: 2026-09-11
+climate: temperate
+uncertainty: "±30 % — ordres de grandeur, à vérifier localement"
+
+water:
+  litres_per_person_day:
+    survival: { value: 3, note: "boire seulement", unsourced: true }
+    sphere_minimum: { value: 15, note: "Sphere Handbook 2018, WASH — locator à écrire (M4-2)", unsourced: true }
+    frugal: { lo: 30, hi: 50, unsourced: true }
+    normal: { lo: 80, hi: 150, unsourced: true }
+  animals_litres_day:
+    hen: { value: 0.3, unsourced: true }
+    goat: { lo: 5, hi: 10, unsourced: true }
+    pig: { lo: 10, hi: 20, unsourced: true }
+    dairy_cow: { lo: 50, hi: 100, unsourced: true }
+  roof_runoff_coefficient: { value: 0.8, note: "tuile ou bac acier ; moins sur toiture poreuse", unsourced: true }
+  first_flush_litres_per_m2: { lo: 0.5, hi: 1, unsourced: true }
+  emergency_store_litres_per_person_day: { value: 3, unsourced: true }
+
+calories:
+  kcal_per_adult_day:
+    sedentary: { lo: 2000, hi: 2400, unsourced: true }
+    farm_work: { lo: 3000, hi: 4000, planning: 3500, unsourced: true }
+    hard_cold: { value: 4500, unsourced: true }
+  child_ratio: { value: 0.65, note: "fraction d'un adulte, moyenne 5–14 ans", unsourced: true }
+  density_kcal_per_100g:
+    unsourced: true   # nombres nus : la grâce se déclare sur le bloc (M4-1)
+    grain: 340
+    pulses: 330
+    potato: 77
+    oil: 900
+    lard: 890
+    nuts: 650
+    sugar: 400
+    milk_powder: 500
+    green_vegetables: { lo: 15, hi: 30, unsourced: true }
+
+land:
+  m2_per_person:
+    vegetables_only: { lo: 200, hi: 400, note: "maraîchage intensif maîtrisé — c'est un record, pas une norme", unsourced: true }
+    complete_diet: { lo: 1000, hi: 2500, planning: 1800, unsourced: true }
+    with_animals_ha: { lo: 0.5, hi: 1, unsourced: true }
+  yields_t_per_ha:
+    potato: { lo: 15, hi: 25, unsourced: true }
+    wheat: { lo: 2.5, hi: 4, note: "sans engrais de synthèse", unsourced: true }
+    dry_beans: { lo: 1, hi: 2, unsourced: true }
+    squash: { lo: 20, hi: 30, unsourced: true }
+    hay: { lo: 3, hi: 6, unsourced: true }
+  kcal_per_m2:
+    potato: { value: 1500, unsourced: true }
+    wheat: { value: 1100, unsourced: true }
+
+fats:
+  kg_per_person_year_food: { lo: 22, hi: 28, planning: 25, unsourced: true }
+  kg_per_person_year_soap: { lo: 3, hi: 5, unsourced: true }
+  sources:
+    walnut_tree_kg_nuts: { lo: 20, hi: 50, note: "arbre adulte ; 8–10 ans avant production", unsourced: true }
+    walnut_oil_fraction: { value: 0.6, unsourced: true }
+    rapeseed_oil_t_per_ha: { value: 1, unsourced: true }
+    pig_lard_kg: { lo: 15, hi: 25, unsourced: true }
+    butter_fraction_of_milk: { value: 0.04, unsourced: true }
+
+salt:
+  kg_per_person_year: { lo: 3, hi: 5, planning: 4, unsourced: true }
+  recommended_store_kg_per_person: { value: 10, unsourced: true }
+  dry_cure_g_per_kg_meat: { lo: 25, hi: 35, unsourced: true }
+  brine_g_per_litre: { lo: 200, hi: 250, unsourced: true }
+
+wood:
+  kwh_useful_per_stere: { lo: 1300, hi: 1450, planning: 1400, note: "feuillu dur sec, poêle ~75 %", unsourced: true }
+  steres_per_winter:
+    uninsulated_120m2: { lo: 15, hi: 25, unsourced: true }
+    insulated: { lo: 6, hi: 10, unsourced: true }
+    very_insulated: { lo: 2, hi: 5, unsourced: true }
+  cooking_t_per_person_year: { lo: 0.5, hi: 1.5, unsourced: true }
+  coppice_steres_per_ha_year: { lo: 3, hi: 8, planning: 5, unsourced: true }
+  seasoning_months: { lo: 18, hi: 24, unsourced: true }
+  sweeping_per_year: { value: 2, unsourced: true }
+
+solar:
+  kwh_per_kwp_year:
+    north_fr: { value: 1000, note: "≈ 50°N, Lille", unsourced: true }
+    mid_fr: { value: 1150, note: "≈ 48°N, Paris/Orléans", unsourced: true }
+    south_fr: { value: 1400, note: "≈ 43°N, Marseille", unsourced: true }
+  december_kwh_per_kwp_day:
+    north_fr: { value: 0.5, unsourced: true }
+    mid_fr: { value: 0.7, unsourced: true }
+    south_fr: { value: 1.2, unsourced: true }
+  system_losses: { value: 0.3, note: "onduleur, câbles, aller-retour batterie", unsourced: true }
+  autonomy_days: { value: 3, unsourced: true }
+  depth_of_discharge:
+    lifepo4: { value: 0.8, unsourced: true }
+    lead_acid: { value: 0.5, unsourced: true }
+  consumption_kwh_day:
+    arche_node: { lo: 0.2, hi: 0.5, unsourced: true }
+    lighting_radio_phones: { lo: 0.3, hi: 0.8, unsourced: true }
+    laptop: { lo: 0.5, hi: 1, unsourced: true }
+    frugal_offgrid_home: { lo: 2, hi: 4, unsourced: true }
+    fridge: { lo: 0.5, hi: 1, unsourced: true }
+
+animals:
+  hen:
+    grain_kg_year: { value: 45, unsourced: true }
+    eggs_year: { lo: 150, hi: 250, unsourced: true }
+  dairy_goat:
+    milk_l_day: { lo: 1.5, hi: 3, unsourced: true }
+    dry_matter_kg_day: { lo: 2, hi: 3, unsourced: true }
+  dairy_cow:
+    milk_l_day: { lo: 10, hi: 20, unsourced: true }
+    dry_matter_kg_day: { lo: 15, hi: 25, unsourced: true }
+    hay_t_winter: { lo: 2.5, hi: 3, unsourced: true }
+    pasture_ha: { lo: 0.5, hi: 1, unsourced: true }
+  pig:
+    feed_kg_total: { lo: 300, hi: 400, unsourced: true }
+    meat_kg: { lo: 70, hi: 80, unsourced: true }
+  rabbit_unit:
+    meat_kg_year: { lo: 60, hi: 100, unsourced: true }
+    feed_kg_year: { lo: 100, hi: 150, unsourced: true }
+
+seeds:
+  min_plants:
+    selfers: { value: 20, species: [tomate, haricot, laitue, pois, blé], unsourced: true }
+    cucurbits: { lo: 20, hi: 50, unsourced: true }
+    biennials: { lo: 40, hi: 80, species: [chou, carotte, oignon, betterave], unsourced: true }
+    outcrossers: { value: 200, species: [maïs, seigle, sarrasin], unsourced: true }
+  viability_years:
+    onion_parsnip_leek: { lo: 1, hi: 2, unsourced: true }
+    carrot_pepper: { lo: 2, hi: 3, unsourced: true }
+    bean_pea_wheat: { lo: 3, hi: 4, unsourced: true }
+    brassica_tomato_beet: { lo: 4, hi: 6, unsourced: true }
+    cucurbits: { lo: 5, hi: 8, unsourced: true }
+  sowing_kg_per_ha:
+    wheat: { lo: 150, hi: 200, unsourced: true }
+    beans: { lo: 80, hi: 120, unsourced: true }
+  keep_fraction_of_harvest: { lo: 0.10, hi: 0.15, unsourced: true }
+  potato_planted_t_per_ha: { lo: 2, hi: 2.5, unsourced: true }
+
+stores_kg_per_person_year:
+  unsourced: true   # nombres nus : la grâce se déclare sur le bloc (M4-1)
+  grain: 180
+  pulses: 30
+  fats: 25
+  sugar: 20
+  salt: 5
+  milk_powder: 15
+  leavening_and_spices: 5
+
+labour:
+  sickle_m2_per_day: { value: 500, unsourced: true }
+  flail_kg_grain_per_day: { lo: 50, hi: 100, unsourced: true }
+  hand_mill_kg_flour_per_hour: { value: 1, unsourced: true }
+  firewood_steres_per_day_two_people: { lo: 1, hi: 1.5, unsourced: true }
+  water_litres_per_trip: { value: 20, unsourced: true }
+  flour_kg_per_person_day: { value: 0.5, unsourced: true }
+
+group:
+  household: { lo: 2, hi: 5, note: "une jambe cassée et tout s'arrête", unsourced: true }
+  resilient_cluster: { lo: 15, hi: 25, unsourced: true }
+  supports_specialist: { lo: 30, hi: 60, unsourced: true }
+  dunbar: { value: 150, unsourced: true }
+  supply_radius_km: { value: 5, unsourced: true }
+
+# Bibliographie (lecture, pas provenance) : les locators vérifiables sont les `source:` ci-dessus.
+sources:
+  - "Sphere Handbook 2018 — normes eau, assainissement, abri"
+  - "OMS — besoins hydriques et nutritionnels"
+  - "PVGIS (Commission européenne) — productible photovoltaïque"
+  - "ADEME et tables de pouvoir calorifique — bois de chauffage"
+  - "FAO / Ciqual — composition des aliments et stockage des grains"
+  - "Réseaux semenciers (Seed Savers Exchange, Kokopelli) — effectifs et longévité"

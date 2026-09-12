@@ -1,0 +1,265 @@
+# Agriculture et alimentation : outils libres, logiciels de gestion, automatisation, bases de données de plantes et d'aliments.
+# Agriculture and food: open tools, farm management software, automation, plant and food databases.
+# Vérifié sur les dépôts/sites le 2026-09-11. Voir aussi open-hardware.yaml (FarmBot, OSE, Farm Hack) et robotics.yaml (Acorn).
+
+# ---------- Outils et machines / Tools and machines ----------
+
+- id: atelier-paysan
+  type: pdf
+  category: agriculture
+  name: { fr: "L'Atelier Paysan — 150+ plans d'outils agricoles (France)", en: "L'Atelier Paysan — 150+ farm-tool plans (France)" }
+  description:
+    fr: "Coopérative française d'autoconstruction d'outils pour le maraîchage et la petite agriculture : plans PDF et tutoriels (butteuse, semoir, vibroplanche, triangle d'attelage…). CC BY-NC-SA. La coopérative est en liquidation depuis avril 2026 : à archiver en priorité."
+    en: "French self-build cooperative for market-gardening tools: PDF plans and tutorials (bed former, seeder, quick-hitch triangle…). CC BY-NC-SA. The cooperative has been in liquidation since April 2026: archive as a priority."
+  tags: [ tools, plans, fr, market-gardening, urgent ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 2
+  source: { kind: manual, homepage: https://www.latelierpaysan.org, url: https://www.latelierpaysan.org/Outils-et-plans }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  printable: { available: true, note: { fr: "Les plans sont des PDF prêts à imprimer.", en: "Plans are print-ready PDFs." } }
+  update: { tracker: http-head, check_interval_days: 7 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Recette Zimit `atelierpaysan-fr` (permission pending). Vu la liquidation, demander l'accord ET faire une copie personnelle sans attendre.", en: "Zimit recipe `atelierpaysan-fr` (permission pending). Given the liquidation, ask for permission AND make a personal copy without waiting." }
+
+- id: git-agopengps
+  type: git-repo
+  category: agriculture
+  name: { fr: "AgOpenGPS — guidage et autoguidage de tracteur", en: "AgOpenGPS — tractor guidance and autosteer" }
+  description: { fr: "Guidage GPS, coupure de sections et autoguidage pour tracteurs, avec cartes électroniques ouvertes (AgOpenGPS-Official/Boards : gerbers, firmware Arduino/Teensy, GNSS F9P). La plus grande communauté d'agriculture de précision libre.", en: "GPS guidance, section control and autosteer for tractors, with open boards (AgOpenGPS-Official/Boards: gerbers, Arduino/Teensy firmware, F9P GNSS). The largest open precision-ag community." }
+  tags: [ tractor, gps, autosteer, pcb ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: AgOpenGPS-Official/AgOpenGPS, url: https://github.com/AgOpenGPS-Official/AgOpenGPS.git, homepage: https://agopengps.com }
+  license: { spdx: Apache-2.0, redistribution: allowed, note: { fr: "Badge Apache-2.0 ; le README cite encore GPLv3. Dépôt Boards sans licence affichée : à vérifier.", en: "Apache-2.0 badge; README still mentions GPLv3. Boards repo shows no license: verify." } }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  notes: { fr: "Mirrorer aussi AgOpenGPS-Official/Boards et Rate_Control.", en: "Also mirror AgOpenGPS-Official/Boards and Rate_Control." }
+
+- id: git-opensprinkler
+  type: git-repo
+  category: agriculture
+  name: { fr: "OpenSprinkler — contrôleur d'irrigation (firmware GPL, matériel CERN-OHL-S)", en: "OpenSprinkler — irrigation controller (GPL firmware, CERN-OHL-S hardware)" }
+  description: { fr: "Programmateur d'arrosage ouvert, versions ESP8266, Raspberry Pi et Linux. Schémas Eagle dans OpenSprinkler-Hardware.", en: "Open irrigation controller, ESP8266, Raspberry Pi and Linux variants. Eagle schematics in OpenSprinkler-Hardware." }
+  tags: [ irrigation, esp8266, raspberrypi ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: OpenSprinkler/OpenSprinkler-Firmware, url: https://github.com/OpenSprinkler/OpenSprinkler-Firmware.git, homepage: https://opensprinkler.com }
+  license: { spdx: "GPL-3.0-only AND CERN-OHL-S-2.0", redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Mirrorer aussi OpenSprinkler/OpenSprinkler-Hardware.", en: "Also mirror OpenSprinkler/OpenSprinkler-Hardware." }
+
+- id: git-mycodo
+  type: git-repo
+  category: agriculture
+  name: { fr: "Mycodo — automatisation de serre et de culture (Raspberry Pi)", en: "Mycodo — greenhouse and grow automation (Raspberry Pi)" }
+  description: { fr: "Surveillance et régulation d'environnement : température, humidité, CO2, pH, arrosage, éclairage, avec PID. Serres, hydroponie, champignonnières, incubateurs.", en: "Environmental monitoring and regulation: temperature, humidity, CO2, pH, watering, lighting, with PID. Greenhouses, hydroponics, mushroom rooms, incubators." }
+  tags: [ greenhouse, hydroponics, automation, raspberrypi ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: kizniche/Mycodo, url: https://github.com/kizniche/Mycodo.git }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-hiveeyes
+  type: git-repo
+  category: agriculture
+  name: { fr: "Hiveeyes — surveillance de ruches", en: "Hiveeyes — beehive monitoring" }
+  description: { fr: "Balances et capteurs de ruche (poids, température, humidité, son) : firmware Arduino/ESP, télémétrie, tableaux de bord. Matériel documenté sur hiveeyes.org (CERN OHL).", en: "Hive scales and sensors (weight, temperature, humidity, sound): Arduino/ESP firmware, telemetry, dashboards. Hardware documented on hiveeyes.org (CERN OHL)." }
+  tags: [ beekeeping, sensors, esp32 ]
+  languages: [ en, de ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: hiveeyes/arduino, url: https://github.com/hiveeyes/arduino.git, homepage: https://hiveeyes.org }
+  license: { spdx: "GPL-3.0-only AND CERN-OHL-P-2.0", redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-platformio ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-weewx
+  type: git-repo
+  category: weather
+  name: { fr: "WeeWX — logiciel de station météo", en: "WeeWX — weather station software" }
+  description: { fr: "Enregistre et trace les données d'une station météo (Davis, Fine Offset, LaCrosse, AcuRite, RTL-SDR, 1-wire). Complète la station ESP32 et SatDump : climat local sur des années.", en: "Logs and plots a weather station's data (Davis, Fine Offset, LaCrosse, AcuRite, RTL-SDR, 1-wire). Complements the ESP32 station and SatDump: local climate over years." }
+  tags: [ weather, station, python ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: weewx/weewx, url: https://github.com/weewx/weewx.git, homepage: https://weewx.com }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git, python3 ] }
+  depends_on: [ gitea, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+# ---------- Gestion de ferme / Farm management ----------
+
+- id: git-farmos
+  type: git-repo
+  category: agriculture
+  name: { fr: "farmOS — gestion et registre de ferme", en: "farmOS — farm management and records" }
+  description: { fr: "Planification, parcelles, cultures, animaux, traitements, traçabilité. Application web (Drupal), tourne sur un Pi en local.", en: "Planning, fields, crops, animals, treatments, traceability. Web app (Drupal), runs locally on a Pi." }
+  tags: [ farm-management, records ]
+  languages: [ en, mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: farmOS/farmOS, url: https://github.com/farmOS/farmOS.git, homepage: https://farmos.org }
+  license: { spdx: GPL-2.0-only, redistribution: allowed }
+  requires: { tools: [ git, docker ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: container
+
+- id: git-tania
+  type: git-repo
+  category: agriculture
+  name: { fr: "Tania — gestion de petite ferme (Go + React)", en: "Tania — smallholder farm management (Go + React)" }
+  description: { fr: "Plus léger que farmOS : un binaire, une base SQLite. Pour un potager familial ou une micro-ferme.", en: "Lighter than farmOS: one binary, a SQLite database. For a family garden or a micro-farm." }
+  tags: [ farm-management, lightweight ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: github-repo, github_repo: Tanibox/tania-core, url: https://github.com/Tanibox/tania-core.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+
+# ---------- Bases de données : plantes, aliments, maladies / Databases: plants, food, diseases ----------
+
+- id: openfarm-crops-rescue
+  type: dataset
+  category: agriculture
+  name: { fr: "OpenFarm (sauvetage) — 340 fiches de cultures en JSON, domaine public", en: "OpenFarm (rescue) — 340 crop records in JSON, public domain" }
+  description:
+    fr: "Les fiches de cultures d'OpenFarm.cc (fermé en avril 2025), récupérées via la Wayback Machine : nom botanique, exposition, méthode de semis, espacement (cm), hauteur, degrés-jours, associations. CC0, provenance par fiche. C'est la donnée structurée que lit le planificateur de parcelles d'Arche (knowledge/crops.yaml en est dérivé et complété)."
+    en: "The OpenFarm.cc crop records (site closed April 2025), rescued via the Wayback Machine: botanical name, sun, sowing method, spacing (cm), height, growing degree days, companions. CC0, per-record provenance. The structured data Arche's plot planner reads (knowledge/crops.yaml derives from and completes it)."
+  tags: [ plants, crops, dataset, planner, cc0 ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.01
+  source: { kind: github-repo, github_repo: thefullnacho/openfarm-crops-rescue, url: https://github.com/thefullnacho/openfarm-crops-rescue.git, homepage: https://github.com/thefullnacho/openfarm-crops-rescue }
+  license: { spdx: CC0-1.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  update: { tracker: github-commit, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+  notes: { fr: "Les associations de plantes viennent d'un wiki communautaire, fiabilité variable ; les noms scientifiques ont été recoupés. Pas de fenêtres de semis par climat : Arche les ajoute dans crops.yaml avec leur source.", en: "Companion data comes from a community wiki, variable reliability; scientific names were cross-checked. No sowing windows by climate: Arche adds them in crops.yaml with their source." }
+
+- id: git-openweedlocator
+  type: git-repo
+  category: agriculture
+  name: { fr: "OpenWeedLocator (OWL) — détecteur d'adventices sur Raspberry Pi", en: "OpenWeedLocator (OWL) — weed detector on Raspberry Pi" }
+  description:
+    fr: "Appareil ouvert et bon marché de détection d'adventices par caméra (détection du vert sur sol nu ou entre rangs), qui pilote des relais et électrovannes. Raspberry Pi, MIT. C'est le point de départ réaliste d'un robot désherbeur : la détection existe, il reste l'actionneur (buse, houe, bras) et le châssis."
+    en: "Open, low-cost camera-based weed detector (green-on-soil detection in fallow or between rows) driving relays and solenoids. Raspberry Pi, MIT. The realistic starting point for a weeding robot: detection exists; what remains is the actuator (nozzle, hoe, arm) and the chassis."
+  tags: [ weeding, vision, raspberrypi, robot, agriculture ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: geezacoleman/OpenWeedLocator, url: https://github.com/geezacoleman/OpenWeedLocator.git, homepage: https://github.com/geezacoleman/OpenWeedLocator }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit, check_interval_days: 30 }
+  status: unverified
+  reliability: community
+  notes: { fr: "Détection par couleur, pas par espèce : ne distingue pas une adventice d'une plantule de culture au même stade. Pour trier par espèce, coupler à un modèle de vision local (Qwen3.5) avec confirmation humaine des premiers passages.", en: "Colour detection, not species: cannot tell a weed from a crop seedling at the same stage. For species sorting, pair with a local vision model (Qwen3.5) and human confirmation of the first passes." }
+
+- id: practical-plants
+  type: zim
+  category: agriculture
+  name: { fr: "Practical Plants — 7 400 plantes utiles (permaculture)", en: "Practical Plants — 7,400 useful plants (permaculture)" }
+  description: { fr: "Encyclopédie MediaWiki des plantes comestibles, médicinales et utilitaires : culture, usages, associations. Site en lecture seule depuis 2022 (panne serveur) : risque de disparition.", en: "MediaWiki encyclopedia of edible, medicinal and useful plants: cultivation, uses, guilds. Read-only since 2022 (server failure): at risk of vanishing." }
+  tags: [ plants, permaculture, edible, urgent ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://practicalplants.org, url: https://practicalplants.org }
+  license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
+  update: { tracker: http-head, check_interval_days: 7 }
+  status: unverified
+  reliability: community
+  notes: { fr: "Recette mwoffliner `practicalplants-en` (permission pending). Les données viennent en grande partie de PFAF (CC BY 4.0 pour le texte).", en: "mwoffliner recipe `practicalplants-en` (permission pending). Data largely derived from PFAF (CC BY 4.0 for text)." }
+
+- id: pfaf-database
+  type: dataset
+  category: agriculture
+  name: { fr: "Plants For A Future — base de 7 000 plantes (texte CC BY)", en: "Plants For A Future — 7,000-plant database (CC BY text)" }
+  description: { fr: "La référence des plantes comestibles et médicinales des climats tempérés : rusticité, comestibilité, usages, culture. Site consultable gratuitement (texte CC BY 4.0) ; la base téléchargeable hors-ligne est vendue 40 $ par l'association.", en: "The temperate-climate reference for edible and medicinal plants: hardiness, edibility, uses, cultivation. Free site (CC BY 4.0 text); the offline database download is sold for $40 by the charity." }
+  tags: [ plants, edible, medicinal, temperate ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://pfaf.org, url: https://pfaf.org/user/Default.aspx }
+  license: { spdx: CC-BY-4.0, redistribution: attribution, note: { fr: "Texte CC BY 4.0 ; images CC BY-NC-ND ; le fichier de base de données vendu est © PFAF (ne pas redistribuer).", en: "Text CC BY 4.0; images CC BY-NC-ND; the sold database file is © PFAF (do not redistribute)." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Deux voies : (1) acheter la base (40 $, soutient l'association) ; (2) recette Zimit du site (texte CC BY : permission=license, exclure les images).", en: "Two paths: (1) buy the database ($40, supports the charity); (2) Zimit recipe of the site (CC BY text: permission=license, exclude images)." }
+
+- id: open-food-facts
+  type: dataset
+  category: food
+  name: { fr: "Open Food Facts — base mondiale des produits alimentaires", en: "Open Food Facts — global food products database" }
+  description: { fr: "Composition, nutrition, allergènes, Nutri-Score de millions de produits. Export CSV quotidien (~0,9 Go compressé, 9 Go brut) sous ODbL. Utile pour l'IA locale (« ce produit contient-il des arachides ? »).", en: "Ingredients, nutrition, allergens, Nutri-Score of millions of products. Daily CSV export (~0.9 GB gz, 9 GB raw) under ODbL. Useful for the local AI ('does this contain peanuts?')." }
+  tags: [ food, nutrition, allergens, database ]
+  languages: [ mul, fr, en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.9
+  source: { kind: http, url: https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz, homepage: https://world.openfoodfacts.org/data }
+  license: { spdx: ODbL-1.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+
+- id: plantvillage-dataset
+  type: dataset
+  category: agriculture
+  name: { fr: "PlantVillage — 54 000 photos de feuilles saines/malades", en: "PlantVillage — 54,000 healthy/diseased leaf photos" }
+  description: { fr: "14 cultures, 26 maladies. Sert à entraîner ou évaluer un modèle de vision local qui reconnaît une maladie de plante à partir d'une photo (Gemma 3 vision, ou un petit CNN).", en: "14 crops, 26 diseases. Train or evaluate a local vision model that recognises a plant disease from a photo (Gemma 3 vision, or a small CNN)." }
+  tags: [ plants, disease, dataset, vision ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2.2
+  source: { kind: manual, hf_repo: mohanty/PlantVillage, homepage: https://huggingface.co/datasets/mohanty/PlantVillage, url: https://huggingface.co/datasets/mohanty/PlantVillage }
+  license: { spdx: CC-BY-SA-3.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference

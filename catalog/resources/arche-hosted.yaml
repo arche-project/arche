@@ -1,0 +1,28 @@
+# ZIM construits et hébergés par Arche (Internet Archive). Voir catalog/zim-recipes.yaml et docs/fr/HEBERGEMENT.md.
+# ZIMs built and hosted by Arche (Internet Archive). See catalog/zim-recipes.yaml and docs/en/HOSTING.md.
+# Ces entrées sont réécrites par le workflow zim-build.yml (url, size_bytes, checksum, version, built_from.built_at).
+
+- id: arche-docs
+  type: zim
+  category: platform
+  name: { fr: "Arche — guides et fiches imprimables (ZIM)", en: "Arche — guides and printable sheets (ZIM)" }
+  description:
+    fr: "Toute la documentation d'Arche (FR/EN) et les fiches imprimables, lisibles dans Kiwix comme le reste de la bibliothèque. Construit à chaque release."
+    en: "All Arche documentation (FR/EN) and printable sheets, readable in Kiwix like the rest of the library. Built on every release."
+  tags: [ arche, docs, printable ]
+  languages: [ fr, en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.01
+  source:
+    kind: arche-hosted
+    ia_item: arche-docs-mul
+    url: https://archive.org/download/arche-docs-mul/arche_docs_mul_all.zim
+    torrent: https://archive.org/download/arche-docs-mul/arche-docs-mul_archive.torrent
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  built_from: { url: https://github.com/arche-project/arche/tree/main/docs, tool: zimwriterfs, recipe: arche-docs-mul, built_at: null, permission: license }
+  update: { tracker: arche-build }
+  status: unverified
+  reliability: curated

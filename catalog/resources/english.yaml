@@ -1,0 +1,524 @@
+# Sources anglophones de fond : manuels universitaires, cours, médecine de terrain, manuels de survie du domaine public,
+# bibliothèques de technologie appropriée. Vérifié le 2026-09-11 (miroirs Kiwix + agents de vérification).
+# In-depth English sources: textbooks, courses, field medicine, public-domain survival manuals, appropriate-technology libraries.
+# Complète encyclopedia.yaml / practical.yaml / technical.yaml (déjà largement EN : Wikipedia EN, MDWiki, WikEM, Appropedia, Energypedia, StackExchange…).
+
+# ---------- Manuels et cours (Kiwix) / Textbooks and courses (Kiwix) ----------
+
+- id: libretexts-med
+  type: zim
+  category: medical
+  name: { fr: "LibreTexts — médecine et soins (manuels universitaires)", en: "LibreTexts — medicine and nursing (college textbooks)" }
+  description: { fr: "Bibliothèque de manuels ouverts : anatomie, physiologie, pharmacologie, soins infirmiers. Le complément « cours » de WikiMed.", en: "Open textbook library: anatomy, physiology, pharmacology, nursing. The 'coursework' complement to WikiMed." }
+  tags: [ textbooks, medicine, nursing ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 1.1
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_med, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_med.zim, homepage: https://med.libretexts.org }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc, note: { fr: "Licence variable par livre (CC BY, BY-SA, BY-NC-SA) ; la plus restrictive est indiquée.", en: "License varies per book (CC BY, BY-SA, BY-NC-SA); the most restrictive is shown." } }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-eng
+  type: zim
+  category: electronics
+  name: { fr: "LibreTexts — ingénierie", en: "LibreTexts — engineering" }
+  description: { fr: "Électronique, mécanique, matériaux, génie civil, thermodynamique : les cours derrière les projets de l'atelier.", en: "Electronics, mechanics, materials, civil engineering, thermodynamics: the courses behind the workshop projects." }
+  tags: [ textbooks, engineering ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.65
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_eng, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_eng.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-bio
+  type: zim
+  category: education
+  name: { fr: "LibreTexts — biologie", en: "LibreTexts — biology" }
+  description: { fr: "Biologie, microbiologie, botanique, écologie : la base pour comprendre le vivant qu'on cultive et qu'on soigne.", en: "Biology, microbiology, botany, ecology: the foundation for understanding what we grow and heal." }
+  tags: [ textbooks, biology ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 2.1
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_bio, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_bio.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-chem
+  type: zim
+  category: education
+  name: { fr: "LibreTexts — chimie", en: "LibreTexts — chemistry" }
+  description: { fr: "Chimie générale et organique : savons, conservation, traitement de l'eau, métallurgie de base.", en: "General and organic chemistry: soap, preservation, water treatment, basic metallurgy." }
+  tags: [ textbooks, chemistry ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2.0
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_chem, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_chem.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-phys
+  type: zim
+  category: education
+  name: { fr: "LibreTexts — physique", en: "LibreTexts — physics" }
+  description: { fr: "Mécanique, électricité, thermodynamique, optique.", en: "Mechanics, electricity, thermodynamics, optics." }
+  tags: [ textbooks, physics ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.55
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_phys, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_phys.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-math
+  type: zim
+  category: education
+  name: { fr: "LibreTexts — mathématiques", en: "LibreTexts — mathematics" }
+  description: { fr: "De l'arithmétique aux équations différentielles.", en: "From arithmetic to differential equations." }
+  tags: [ textbooks, maths ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.8
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_math, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_math.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-k12
+  type: zim
+  category: education
+  name: { fr: "LibreTexts — primaire et secondaire (K-12)", en: "LibreTexts — K-12" }
+  description: { fr: "Manuels scolaires ouverts pour l'école à la maison, en anglais.", en: "Open school textbooks for homeschooling, in English." }
+  tags: [ textbooks, school, kids ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.35
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_k12, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_k12.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: libretexts-workforce
+  type: zim
+  category: fabrication
+  name: { fr: "LibreTexts — métiers (électricité, HVAC, soudure, construction)", en: "LibreTexts — workforce (electrical, HVAC, welding, construction)" }
+  description: { fr: "Manuels de formation professionnelle : électricité du bâtiment, plomberie, chauffage, soudure, mécanique auto. Rare et précieux.", en: "Vocational training textbooks: building electrics, plumbing, HVAC, welding, auto mechanics. Rare and valuable." }
+  tags: [ textbooks, trades, welding, plumbing ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: kiwix, kiwix_name: libretexts.org_en_workforce, url: https://download.kiwix.org/zim/libretexts/libretexts.org_en_workforce.zim }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: wikibooks-en
+  type: zim
+  category: education
+  name: { fr: "Wikibooks EN", en: "Wikibooks EN" }
+  description: { fr: "Manuels libres anglophones : bien plus fourni que la version FR (cuisine, jardinage, électronique, langues, programmation).", en: "English free textbooks: far larger than the FR version (cooking, gardening, electronics, languages, programming)." }
+  tags: [ textbooks, howto ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 5.8
+  source: { kind: kiwix, kiwix_name: wikibooks_en_all_maxi, url: https://download.kiwix.org/zim/wikibooks/wikibooks_en_all_maxi.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: wikiversity-en
+  type: zim
+  category: education
+  name: { fr: "Wikiversity EN", en: "Wikiversity EN" }
+  description: { fr: "Cours et exercices ouverts, tous niveaux.", en: "Open courses and exercises, all levels." }
+  tags: [ courses ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2.3
+  source: { kind: kiwix, kiwix_name: wikiversity_en_all_maxi, url: https://download.kiwix.org/zim/wikiversity/wikiversity_en_all_maxi.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: wikipedia-en-medicine
+  type: zim
+  category: medical
+  name: { fr: "WikiMed EN (sélection médicale de Wikipédia EN)", en: "WikiMed EN (Wikipedia EN medical subset)" }
+  description: { fr: "Plus complet que la version FR ; à prendre avec MDWiki.", en: "More complete than the FR version; take with MDWiki." }
+  tags: [ medicine, health ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 2.1
+  source: { kind: kiwix, kiwix_name: wikipedia_en_medicine_maxi, url: https://download.kiwix.org/zim/wikipedia/wikipedia_en_medicine_maxi.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+# ---------- StackExchange supplémentaires / More StackExchange ----------
+
+- id: stackexchange-outdoors
+  type: zim
+  category: survival
+  name: { fr: "The Great Outdoors StackExchange", en: "The Great Outdoors StackExchange" }
+  description: { fr: "Randonnée, bivouac, orientation, sécurité en montagne, faune.", en: "Hiking, camping, navigation, mountain safety, wildlife." }
+  tags: [ outdoors, qa ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.14
+  source: { kind: kiwix, kiwix_name: outdoors.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/outdoors.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-sustainability
+  type: zim
+  category: energy
+  name: { fr: "Sustainable Living StackExchange", en: "Sustainable Living StackExchange" }
+  description: { fr: "Vie sobre, énergie, compost, eau.", en: "Low-impact living, energy, compost, water." }
+  tags: [ sustainability, qa ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.03
+  source: { kind: kiwix, kiwix_name: sustainability.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/sustainability.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-cooking
+  type: zim
+  category: food
+  name: { fr: "Seasoned Advice (cuisine) StackExchange", en: "Seasoned Advice (cooking) StackExchange" }
+  description: { fr: "Cuisine, conservation, sécurité alimentaire.", en: "Cooking, preservation, food safety." }
+  tags: [ food, qa ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.23
+  source: { kind: kiwix, kiwix_name: cooking.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/cooking.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-engineering
+  type: zim
+  category: fabrication
+  name: { fr: "Engineering StackExchange", en: "Engineering StackExchange" }
+  description: { fr: "Mécanique, structures, matériaux, hydraulique.", en: "Mechanics, structures, materials, hydraulics." }
+  tags: [ engineering, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.24
+  source: { kind: kiwix, kiwix_name: engineering.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/engineering.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-medicalsciences
+  type: zim
+  category: medical
+  name: { fr: "Medical Sciences StackExchange", en: "Medical Sciences StackExchange" }
+  description: { fr: "Questions médicales, réponses sourcées. Communautaire : vérifier dans WikiMed.", en: "Medical questions, sourced answers. Community: verify in WikiMed." }
+  tags: [ medicine, qa ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.06
+  source: { kind: kiwix, kiwix_name: medicalsciences.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/medicalsciences.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: stackexchange-pets
+  type: zim
+  category: agriculture
+  name: { fr: "Pets StackExchange (animaux)", en: "Pets StackExchange" }
+  description: { fr: "Soins aux animaux domestiques et de basse-cour, en attendant une vraie source vétérinaire.", en: "Care of pets and backyard animals, pending a proper veterinary source." }
+  tags: [ animals, qa ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 0.08
+  source: { kind: kiwix, kiwix_name: pets.stackexchange.com_en_all, url: https://download.kiwix.org/zim/stack_exchange/pets.stackexchange.com_en_all.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+# ---------- Domaine public : manuels militaires et FEMA / Public domain: military and FEMA manuals ----------
+
+- id: fm-21-76-survival
+  type: pdf
+  category: survival
+  name: { fr: "US Army FM 21-76 — Survival (domaine public)", en: "US Army FM 21-76 — Survival (public domain)" }
+  description: { fr: "Le manuel de survie de référence : eau, feu, abri, nourriture, orientation, climat, premiers soins. Édition 1992 (remplacée par FM 3-05.70, même contenu de base). 3 Mo.", en: "The reference survival manual: water, fire, shelter, food, navigation, climate, first aid. 1992 edition (superseded by FM 3-05.70, same core). 3 MB." }
+  tags: [ survival, manual, public-domain, printable ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.003
+  source: { kind: http, url: https://archive.org/download/Fm21-76SurvivalManual/FM21-76_SurvivalManual.pdf, homepage: https://archive.org/details/Fm21-76SurvivalManual }
+  license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
+  printable: { available: true, pages_estimate: 290 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: fm-4-25-11-first-aid
+  type: pdf
+  category: medical
+  name: { fr: "US Army FM 4-25.11 — First Aid (domaine public)", en: "US Army FM 4-25.11 — First Aid (public domain)" }
+  description: { fr: "Premiers secours de terrain : hémorragies, fractures, brûlures, chaleur/froid, évacuation. Édition 2002 (remplacée par TC 4-02.1). 2,3 Mo.", en: "Field first aid: bleeding, fractures, burns, heat/cold, evacuation. 2002 edition (superseded by TC 4-02.1). 2.3 MB." }
+  tags: [ first-aid, manual, public-domain, printable ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.003
+  source: { kind: manual, homepage: https://archive.org/details/FM4-25.11, url: https://archive.org/details/FM4-25.11 }
+  license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
+  printable: { available: true, pages_estimate: 260 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "URL directe du PDF à fixer depuis la page IA (nom de fichier variable).", en: "Pin the direct PDF URL from the IA page (variable file name)." }
+
+- id: fema-cert-manual
+  type: pdf
+  category: society
+  name: { fr: "FEMA CERT — manuel de l'équipe communautaire d'intervention (domaine public)", en: "FEMA CERT — Community Emergency Response Team manual (public domain)" }
+  description: { fr: "Organiser des voisins en équipe d'intervention : préparation, sécurité incendie, recherche et sauvetage léger, triage médical de catastrophe, psychologie. Le manuel d'organisation de groupe qui manquait.", en: "Organise neighbours into a response team: preparedness, fire safety, light search and rescue, disaster medical triage, psychology. The group-organisation manual that was missing." }
+  tags: [ organisation, disaster, printable, public-domain ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.006
+  source: { kind: http, url: https://www.ready.gov/sites/default/files/2019.CERT_.Basic_.PM_FINAL_508c.pdf, homepage: https://www.fema.gov/emergency-managers/individuals-communities/preparedness-activities-webinars/community-emergency-response-team }
+  license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
+  printable: { available: true, pages_estimate: 400 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+# ---------- Organisations internationales / International organisations ----------
+
+- id: who-psychological-first-aid
+  type: pdf
+  category: society
+  name: { fr: "OMS — Premiers secours psychologiques (guide du praticien de terrain)", en: "WHO — Psychological First Aid (field workers' guide)" }
+  description: { fr: "Comment soutenir des personnes en détresse après un événement grave, sans être professionnel. Existe en FR et EN. CC BY-NC-SA 3.0 IGO.", en: "How to support people in distress after a serious event, without being a professional. FR and EN editions. CC BY-NC-SA 3.0 IGO." }
+  tags: [ psychology, crisis, printable ]
+  languages: [ en, fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.005
+  source: { kind: manual, homepage: https://www.who.int/publications/i/item/9789241548205, url: https://iris.who.int }
+  license: { spdx: CC-BY-NC-SA-3.0-IGO, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 64 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Fixer les URL IRIS des PDF EN et FR (bitstream).", en: "Pin the IRIS bitstream URLs for the EN and FR PDFs." }
+
+- id: who-basic-emergency-care
+  type: pdf
+  category: medical
+  name: { fr: "OMS/CICR — Basic Emergency Care (cours)", en: "WHO/ICRC — Basic Emergency Care (course)" }
+  description: { fr: "Cours de soins d'urgence pour personnel de première ligne à ressources limitées : approche ABCDE, traumatismes, difficultés respiratoires, choc, altération de la conscience.", en: "Emergency care course for frontline providers in low-resource settings: ABCDE approach, trauma, breathing difficulty, shock, altered mental status." }
+  tags: [ emergency, medicine, course ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.02
+  source: { kind: manual, homepage: https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured, url: https://iris.who.int }
+  license: { spdx: CC-BY-NC-SA-3.0-IGO, redistribution: allowed-nc }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: msf-medical-guidelines
+  type: pdf
+  category: medical
+  name: { fr: "MSF — Guides cliniques et médicaments essentiels", en: "MSF — Clinical Guidelines and Essential Drugs" }
+  description: { fr: "Les guides de Médecins Sans Frontières pour la médecine en contexte précaire (clinique, médicaments, obstétrique, tuberculose). PDF gratuits et application hors-ligne (EN/FR/ES/AR). © MSF, tous droits réservés : téléchargement personnel seulement, pas de redistribution.", en: "MSF's guides for medicine in precarious settings (clinical, drugs, obstetrics, TB). Free PDFs and offline app (EN/FR/ES/AR). © MSF, all rights reserved: personal download only, no redistribution." }
+  tags: [ medicine, field, drugs, obstetrics ]
+  languages: [ en, fr, es, ar ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.1
+  source: { kind: manual, homepage: https://medicalguidelines.msf.org, url: https://medicalguidelines.msf.org/sites/default/files/2026-05/guideline-170-en.pdf }
+  license: { spdx: LicenseRef-MSF-All-Rights-Reserved, redistribution: forbidden, note: { fr: "Gratuit mais non libre : chacun télécharge pour soi. Jamais dans un ZIM Arche.", en: "Free but not libre: everyone downloads for themselves. Never in an Arche ZIM." } }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: fao-knowledge-repository
+  type: pdf
+  category: agriculture
+  name: { fr: "FAO — dépôt de publications (agriculture, élevage, pêche, forêts)", en: "FAO — Knowledge Repository (farming, livestock, fisheries, forestry)" }
+  description: { fr: "Manuels FAO en accès libre, beaucoup en français : petit élevage, aviculture, apiculture, conservation des grains, pêche artisanale. Sélection à constituer titre par titre (pas de téléchargement groupé).", en: "Open-access FAO manuals, many in French: small livestock, poultry, beekeeping, grain storage, small-scale fisheries. Build a selection title by title (no bulk download)." }
+  tags: [ agriculture, livestock, manuals ]
+  languages: [ en, fr, es ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://openknowledge.fao.org, url: https://openknowledge.fao.org }
+  license: { spdx: CC-BY-NC-SA-3.0-IGO, redistribution: allowed-nc, note: { fr: "Politique d'accès ouvert FAO ; variante CC exacte à confirmer par titre.", en: "FAO open access policy; exact CC variant to confirm per title." } }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: practical-action-briefs
+  type: pdf
+  category: energy
+  name: { fr: "Practical Action — fiches techniques (technologie appropriée)", en: "Practical Action — technical briefs (appropriate technology)" }
+  description: { fr: "Centaines de fiches PDF de l'ONG britannique : micro-hydro, séchoirs, pompes, fours, conservation, briques. Licence non affichée : copie personnelle seulement tant que ce n'est pas clarifié.", en: "Hundreds of PDF briefs from the UK charity: micro-hydro, dryers, pumps, stoves, preservation, bricks. No license shown: personal copy only until clarified." }
+  tags: [ appropriate-technology, briefs ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://practicalaction.org/knowledge-centre/, url: https://infohub.practicalaction.org }
+  license: { spdx: unknown, redistribution: unclear }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: e4c-solutions-library
+  type: pdf
+  category: energy
+  name: { fr: "Engineering for Change — bibliothèque de solutions (1 000+ produits)", en: "Engineering for Change — Solutions Library (1,000+ products)" }
+  description: { fr: "Base évaluée de technologies appropriées : agriculture, énergie, santé, eau, assainissement, habitat. Fiches PDF/CSV. CC BY-SA 3.0.", en: "Vetted database of appropriate technologies: agriculture, energy, health, water, sanitation, habitat. PDF/CSV reports. CC BY-SA 3.0." }
+  tags: [ appropriate-technology, database ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: manual, homepage: https://www.engineeringforchange.org/solutions/, url: https://www.engineeringforchange.org/solutions/ }
+  license: { spdx: CC-BY-SA-3.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: curated
+  notes: { fr: "Candidat Zimit (permission=license).", en: "Zimit candidate (permission=license)." }
+
+- id: cd3wd-library
+  type: dataset
+  category: survival
+  name: { fr: "CD3WD — bibliothèque de développement (26 Go, Internet Archive)", en: "CD3WD — development library (26 GB, Internet Archive)" }
+  description: { fr: "Collection historique d'Alex Weir : milliers de documents ONG/gouvernements sur l'agriculture, l'eau, la santé, la construction, l'artisanat. 6 ISO de DVD sur archive.org. Contenus tiers agrégés, licences hétérogènes.", en: "Alex Weir's historic collection: thousands of NGO/government documents on farming, water, health, building, crafts. 6 DVD ISOs on archive.org. Aggregated third-party content, mixed licenses." }
+  tags: [ library, appropriate-technology, historical ]
+  languages: [ en, mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 26
+  source: { kind: manual, homepage: https://archive.org/details/2012_cdw3d_dvd_set, url: https://archive.org/details/2012_cdw3d_dvd_set }
+  license: { spdx: mixed, redistribution: unclear }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: unknown
+
+# ---------- Cours et manuels universitaires hors Kiwix / University courses and textbooks outside Kiwix ----------
+
+- id: openstax-textbooks
+  type: pdf
+  category: education
+  name: { fr: "OpenStax — manuels universitaires (PDF par livre)", en: "OpenStax — college textbooks (PDF per book)" }
+  description: { fr: "~60 manuels relus par des pairs (biologie, physique, chimie, maths, anatomie, économie…). PDF gratuit par livre, ~30–100 Mo chacun. Licence CC BY ou CC BY-NC-SA selon le livre.", en: "~60 peer-reviewed textbooks (biology, physics, chemistry, maths, anatomy, economics…). Free PDF per book, ~30–100 MB each. CC BY or CC BY-NC-SA per book." }
+  tags: [ textbooks, university ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 4
+  source: { kind: manual, homepage: https://openstax.org/subjects, url: https://openstax.org/subjects }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc, note: { fr: "Vérifier livre par livre : beaucoup sont CC BY 4.0.", en: "Check per book: many are CC BY 4.0." } }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Écrire une recette « openstax » qui télécharge les PDF listés dans un fichier de sélection.", en: "Write an 'openstax' recipe that downloads the PDFs listed in a selection file." }
+
+- id: mit-ocw
+  type: dataset
+  category: education
+  name: { fr: "MIT OpenCourseWare (zip par cours)", en: "MIT OpenCourseWare (zip per course)" }
+  description: { fr: "~2 500 cours du MIT : notes, exercices, examens, vidéos. Bouton « Download Course » par cours. CC BY-NC-SA 4.0. Sélection à faire : électronique, mécanique, agriculture urbaine, énergie.", en: "~2,500 MIT courses: notes, problem sets, exams, videos. 'Download Course' zip per course. CC BY-NC-SA 4.0. Curate a selection: electronics, mechanics, urban agriculture, energy." }
+  tags: [ courses, university ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 10
+  source: { kind: manual, homepage: https://ocw.mit.edu, url: https://ocw.mit.edu/search/ }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: nih-bookshelf-oa
+  type: dataset
+  category: medical
+  name: { fr: "NIH Bookshelf — sous-ensemble en accès ouvert (StatPearls…)", en: "NIH Bookshelf — Open Access subset (StatPearls…)" }
+  description: { fr: "Livres médicaux en accès ouvert de la National Library of Medicine, dont StatPearls (référence clinique très complète). Téléchargement groupé par FTP (LitArch). Licences par livre.", en: "Open-access medical books from the National Library of Medicine, incl. StatPearls (very complete clinical reference). Bulk download via FTP (LitArch). Per-book licenses." }
+  tags: [ medicine, books, statpearls ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 20
+  source: { kind: manual, homepage: https://www.ncbi.nlm.nih.gov/books/, url: https://ftp.ncbi.nlm.nih.gov/pub/litarch/ }
+  license: { spdx: mixed, redistribution: unclear, note: { fr: "Les ouvrages d'auteurs fédéraux sont du domaine public ; les autres CC variées. Vérifier par fichier.", en: "Federal-author works are public domain; others various CC. Check per file." } }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference

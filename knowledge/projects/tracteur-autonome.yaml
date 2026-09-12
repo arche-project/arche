@@ -1,0 +1,80 @@
+# Type de projet : le vieux tracteur — « automatiser un tracteur mécanique à boîte manuelle et lui
+# donner un cerveau IA ». Project type: the old tractor. Schéma et règles : ADR 0010.
+#
+# C'est le projet où la machine peut tuer. Les portes humaines ne sont pas des conseils : le plan
+# généré s'arrête là où elles ne sont pas franchies.
+
+id: tracteur-autonome
+name: { fr: "Vieux tracteur : autoguidage, puis automatisation", en: "Old tractor: autosteer, then automation" }
+scenario:
+  fr: "J'ai un vieux tracteur mécanique à transmission manuelle. Je veux l'automatiser et lui donner un cerveau IA : guidage, puis conduite des travaux, avec ce que j'ai."
+  en: "I have an old mechanical tractor with a manual gearbox. I want to automate it and give it an AI brain: guidance, then field work, with what I have."
+status: recipe
+
+inventory:
+  required: [ machines, components, tools ]
+  recommended: [ plots, power, people ]
+
+# Le design de référence est AgOpenGPS : la plus grande communauté d'autoguidage libre, cartes et
+# firmware ouverts. On ne réinvente pas l'autoguidage ; on ajoute les actionneurs, étage par étage.
+corpus:
+  - git-agopengps
+  - git-acorn-rover
+  - git-openplc
+  - git-vesc
+  - git-odrive
+  - git-simplefoc
+  - git-opencv
+  - git-ros2
+  - ros2-docs
+  - stackexchange-engineering
+  - stackexchange-electronics
+  - stackexchange-robotics
+  - atelier-paysan
+  - ifixit-fr
+  - toolchain-kicad
+  - toolchain-platformio
+
+solvers: [ bom_substitute ]
+generators: [ schemdraw, wireviz, kicad-sch, openscad, mermaid, graphviz ]
+
+# Les étages, dans l'ordre. Chaque étage est un livrable ; on ne passe pas au suivant sans la porte.
+deliverables:
+  - id: etage-0-securite
+    title: { fr: "Étage 0 — sécurité : arrêt d'urgence câblé, coupe-circuit, homme-mort, périmètre", en: "Stage 0 — safety: hard-wired e-stop, cut-off, dead-man, perimeter" }
+    format: [ md, wireviz ]
+    by: assistant
+  - id: etage-1-perception
+    title: { fr: "Étage 1 — savoir où l'on est : GNSS RTK (F9P), base fixe, capteur de roue (AgOpenGPS)", en: "Stage 1 — knowing where you are: RTK GNSS (F9P), fixed base, wheel-angle sensor (AgOpenGPS)" }
+    format: [ md, csv ]
+    by: solver
+  - id: etage-2-direction
+    title: { fr: "Étage 2 — autoguidage : moteur sur le volant ou valve hydraulique, carte AgOpenGPS, humain à bord", en: "Stage 2 — autosteer: steering-wheel motor or hydraulic valve, AgOpenGPS board, human on board" }
+    format: [ md, kicad_sch, wireviz, scad ]
+    by: assistant
+  - id: etage-3-organes
+    title: { fr: "Étage 3 — embrayage, accélérateur, freins, relevage : actionneurs linéaires, retour d'état, humain à bord", en: "Stage 3 — clutch, throttle, brakes, hitch: linear actuators, state feedback, human on board" }
+    format: [ md, wireviz, scad ]
+    by: assistant
+  - id: etage-4-cerveau
+    title: { fr: "Étage 4 — le « cerveau » : planification de passages, détection d'obstacles (caméra + OpenCV), superviseur ; l'IA générative n'y pilote rien en temps réel", en: "Stage 4 — the 'brain': pass planning, obstacle detection (camera + OpenCV), supervisor; generative AI drives nothing in real time" }
+    format: [ md, mermaid, py ]
+    by: assistant
+
+gates:
+  - fr: "Étage 0 avant tout : pas un moteur d'ajouté sans arrêt d'urgence physique qui coupe l'allumage et les actionneurs, indépendant de tout logiciel."
+    en: "Stage 0 first: not one motor added without a physical emergency stop that cuts ignition and actuators, independent of any software."
+  - fr: "Un humain à bord jusqu'à l'étage 4 inclus ; sans personne à bord, uniquement en périmètre clos, sans personne ni animal dedans, à vitesse de marche."
+    en: "A human on board through stage 4 inclusive; unmanned only inside a closed perimeter, nobody and no animal inside, at walking pace."
+  - fr: "Chaque actionneur ajouté est réversible (le tracteur reste conduisible à la main) et débrayable mécaniquement."
+    en: "Every added actuator is reversible (the tractor stays hand-drivable) and mechanically disengageable."
+
+never:
+  - fr: "Faire piloter un actionneur par un modèle de langage : le LLM planifie et explique, le contrôle temps réel est un firmware déterministe avec watchdog."
+    en: "Let a language model drive an actuator: the LLM plans and explains, real-time control is deterministic firmware with a watchdog."
+  - fr: "Retirer ou contourner une sécurité d'origine (prise de force, frein de parking, arceau)."
+    en: "Remove or bypass an original safety device (PTO guard, parking brake, roll bar)."
+
+limits:
+  fr: "Le MVP livre les étages 0 à 2 sur la base d'AgOpenGPS (un projet mûr, des cartes disponibles). Les étages 3 et 4 sont documentés comme démarche, pas comme plan clé en main : chaque tracteur est différent et le solveur ne connaît pas le vôtre."
+  en: "The MVP delivers stages 0 to 2 on the AgOpenGPS base (a mature project, boards available). Stages 3 and 4 are documented as a method, not a turnkey plan: every tractor is different and the solver does not know yours."

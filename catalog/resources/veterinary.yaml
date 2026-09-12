@@ -1,0 +1,182 @@
+# Vétérinaire et élevage : soigner ses animaux quand il n'y a pas de vétérinaire.
+# Veterinary and livestock: caring for your animals when there is no vet.
+# Vérifié le 2026-09-11. Un animal malade en autonomie, c'est le lait, les œufs, la viande, la traction — et le risque
+# zoonotique pour la famille. Sources de référence seulement.
+
+- id: wikivet-zim
+  type: zim
+  category: agriculture
+  name: { fr: "WikiVet — base vétérinaire des écoles britanniques (ZIM, 54 Mo)", en: "WikiVet — UK vet schools' knowledge base (ZIM, 54 MB)" }
+  description:
+    fr: "Tout le programme vétérinaire : anatomie, physiologie, pathologies par espèce, parasitologie, pharmacologie. Écrit par les facultés vétérinaires britanniques. ZIM officiel sur Kiwix, seulement 54 Mo — c'est le meilleur rapport valeur/taille de tout le catalogue vétérinaire."
+    en: "The whole veterinary curriculum: anatomy, physiology, species pathologies, parasitology, pharmacology. Written by UK vet schools. Official Kiwix ZIM, only 54 MB — the best value-per-byte in the veterinary catalog."
+  tags: [ veterinary, reference, zim ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 0.054
+  source: { kind: kiwix, kiwix_name: wikivet.net_en_all_maxi, url: https://download.kiwix.org/zim/other/wikivet.net_en_all_maxi.zim, homepage: https://en.wikivet.net }
+  license: { spdx: CC-BY-NC-ND-3.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: where-there-is-no-vet
+  type: pdf
+  category: agriculture
+  name: { fr: "Where There Is No Vet (Bill Forse, Oxfam) — PDF gratuit en 6 parties", en: "Where There Is No Vet (Bill Forse, Oxfam) — free PDF in 6 parts" }
+  description:
+    fr: "L'équivalent vétérinaire de « Là où il n'y a pas de docteur » : examiner un animal, diagnostiquer, soigner, mettre bas, vacciner, avec les moyens du bord. Bovins, ovins, caprins, porcs, volailles, ânes. PDF gratuit chez Oxfam (6 fichiers, ~19 Mo au total)."
+    en: "The veterinary equivalent of 'Where There Is No Doctor': examine an animal, diagnose, treat, assist birthing, vaccinate, with what you have. Cattle, sheep, goats, pigs, poultry, donkeys. Free PDF from Oxfam (6 files, ~19 MB total)."
+  tags: [ veterinary, livestock, printable, "legal:grey" ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.02
+  source: { kind: http, url: https://oxfamilibrary.openrepository.com/bitstream/handle/10546/123108/bk-where-there-is-no-vet-part1-010199-en.pdf, homepage: https://policy-practice.oxfam.org/resources/where-there-is-no-vet-123108/ }
+  license: { spdx: LicenseRef-Oxfam-Copyright, redistribution: unclear, note: { fr: "© Oxfam, aucune licence ouverte affichée : téléchargement personnel. Demander avant redistribution.", en: "© Oxfam, no open license shown: personal download. Ask before redistributing." } }
+  printable: { available: true, pages_estimate: 400 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Télécharger les 6 parties (part1 à part6, même schéma d'URL). Une traduction FR n'existe pas : candidat à une demande auprès d'Oxfam.", en: "Download all 6 parts (part1..part6, same URL pattern). No FR translation exists: a candidate request to Oxfam." }
+
+- id: merck-vet-manual
+  type: software
+  category: agriculture
+  name: { fr: "Merck Veterinary Manual — application hors-ligne gratuite", en: "Merck Veterinary Manual — free offline app" }
+  description:
+    fr: "La référence clinique vétérinaire mondiale (diagnostic et traitement, toutes espèces). Le site et l'application mobile sont gratuits, sans compte ni publicité, et l'application stocke le contenu pour une consultation hors-ligne. Propriétaire : à installer avant la coupure, jamais redistribuable."
+    en: "The world clinical veterinary reference (diagnosis and therapy, all species). Site and mobile app are free, no account, no ads, and the app stores content for offline use. Proprietary: install before the outage, never redistributable."
+  tags: [ veterinary, reference, app ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://www.merckvetmanual.com, url: https://www.merckvetmanual.com }
+  license: { spdx: LicenseRef-Merck-All-Rights-Reserved, redistribution: forbidden }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: fao-poultry-manual
+  type: pdf
+  category: agriculture
+  name: { fr: "FAO — Production en aviculture familiale (manuel technique, FR)", en: "FAO — Small-scale poultry production (technical guide)" }
+  description: { fr: "Races, alimentation, poulailler, maladies, incubation, commercialisation pour la basse-cour villageoise. Existe en français. Reproduction non commerciale autorisée avec mention de la source.", en: "Breeds, feeding, housing, diseases, hatching, marketing for village poultry. French edition exists. Non-commercial reproduction allowed with attribution." }
+  tags: [ poultry, livestock, fao, fr, printable ]
+  languages: [ fr, en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.01
+  source: { kind: manual, homepage: https://www.fao.org/4/y5169e/y5169e00.htm, url: https://www.fao.org/3/a-y5169f.pdf }
+  license: { spdx: LicenseRef-FAO-NC-Attribution, redistribution: allowed-nc }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "URL du PDF FR à confirmer (fetch bloqué à la vérification).", en: "FR PDF URL to confirm (fetch was blocked during verification)." }
+
+- id: fao-family-poultry-decision-tools
+  type: pdf
+  category: agriculture
+  name: { fr: "FAO — Outils de décision pour l'aviculture familiale", en: "FAO — Decision tools for family poultry development" }
+  description: { fr: "Quatre systèmes d'élevage avicole et neuf domaines d'intervention : sélection, nutrition, santé, logement, formation. Complète le manuel technique.", en: "Four family-poultry systems and nine intervention areas: breeding, nutrition, health, housing, training. Complements the technical guide." }
+  tags: [ poultry, livestock, fao ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.01
+  source: { kind: http, url: https://www.fao.org/4/i3542e/i3542e.pdf, homepage: https://www.fao.org/4/i3542e/i3542e.pdf }
+  license: { spdx: LicenseRef-FAO-NC-Attribution, redistribution: allowed-nc }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: fao-beekeeping
+  type: pdf
+  category: agriculture
+  name: { fr: "FAO — Apiculture et moyens d'existence durables", en: "FAO — Beekeeping and sustainable livelihoods" }
+  description: { fr: "L'apiculture comme production familiale : ruches, conduite, récolte, cire, transformation. Le miel est le seul aliment qui ne périme pas, et les abeilles pollinisent le potager.", en: "Beekeeping as a household enterprise: hives, management, harvest, wax, processing. Honey is the only food that never spoils, and bees pollinate the garden." }
+  tags: [ beekeeping, livestock, fao ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.01
+  source: { kind: manual, homepage: https://www.fao.org/3/y5110e/y5110e00.htm, url: https://www.fao.org/3/y5110e/y5110e00.htm }
+  license: { spdx: LicenseRef-FAO-NC-Attribution, redistribution: allowed-nc }
+  printable: { available: true }
+  depends_on: [ git-hiveeyes ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: open-vet-textbooks
+  type: pdf
+  category: agriculture
+  name: { fr: "Manuels vétérinaires ouverts (anatomie, physiologie, chirurgie des grands animaux)", en: "Open veterinary textbooks (anatomy, physiology, large animal surgery)" }
+  description: { fr: "« Anatomy and Physiology of Animals » (CC BY-NC-SA), « Veterinary Histology » (CC BY-NC), « Large Animal Surgery: Supplemental Notes » (CC BY-NC, université du Minnesota). Le fond théorique derrière les gestes.", en: "'Anatomy and Physiology of Animals' (CC BY-NC-SA), 'Veterinary Histology' (CC BY-NC), 'Large Animal Surgery: Supplemental Notes' (CC BY-NC, University of Minnesota). The theory behind the gestures." }
+  tags: [ veterinary, textbooks ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: manual, homepage: https://open.lib.umn.edu/largeanimalsurgery/, url: https://open.umn.edu/opentextbooks/textbooks/348 }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: anses-bulletin-sante-animale
+  type: pdf
+  category: agriculture
+  name: { fr: "Anses — Bulletin épidémiologique santé animale et alimentation (FR)", en: "Anses — Animal health and food epidemiological bulletin (FR)" }
+  description: { fr: "Surveillance des maladies animales en France : quelles maladies circulent, où, comment les reconnaître. Contenu français de référence, CC BY-NC-ND.", en: "Animal disease surveillance in France: which diseases circulate, where, how to recognise them. French reference content, CC BY-NC-ND." }
+  tags: [ veterinary, epidemiology, fr ]
+  languages: [ fr, en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: manual, homepage: https://be.anses.fr/, url: https://be.anses.fr/ }
+  license: { spdx: CC-BY-NC-ND-4.0, redistribution: allowed-nc }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: heifer-animal-wellbeing
+  type: pdf
+  category: agriculture
+  name: { fr: "Heifer International — normes de bien-être et de conduite d'élevage", en: "Heifer International — animal well-being guidelines and standards" }
+  description: { fr: "48 pages : acquisition, alimentation, logement, santé, reproduction, hygiène du lait et de la viande, agents de santé animale communautaires. Pratique et concret.", en: "48 pages: procurement, feeding, housing, health, breeding, milk and meat hygiene, community animal health workers. Practical and concrete." }
+  tags: [ livestock, welfare, printable ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.005
+  source: { kind: http, url: https://media-refresh.heifer.org/wp-content/uploads/Heifer_International_Animal_Well-Being_Guidelines_and_Standards_121818.pdf, homepage: https://www.heifer.org }
+  license: { spdx: LicenseRef-Heifer-Copyright, redistribution: unclear }
+  printable: { available: true, pages_estimate: 48 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: curated
+
+- id: woah-terrestrial-code
+  type: pdf
+  category: agriculture
+  name: { fr: "WOAH (OIE) — Code sanitaire pour les animaux terrestres", en: "WOAH (OIE) — Terrestrial Animal Health Code" }
+  description: { fr: "La norme internationale de santé animale : définitions des maladies, mesures de lutte, quarantaine. Utile pour reconnaître une épizootie et réagir (fièvre aphteuse, peste porcine, grippe aviaire). PDF gratuits sur les sites régionaux.", en: "The international animal health standard: disease definitions, control measures, quarantine. Useful to recognise an epizootic and react (foot-and-mouth, swine fever, avian influenza). Free PDFs on regional sites." }
+  tags: [ veterinary, disease, standards ]
+  languages: [ en, fr, es ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.05
+  source: { kind: http, url: https://rr-africa.woah.org/app/uploads/2023/09/en_csatvol1_2024.pdf, homepage: https://www.woah.org }
+  license: { spdx: LicenseRef-WOAH-Copyright, redistribution: unclear }
+  printable: { available: true }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference

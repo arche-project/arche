@@ -1,0 +1,56 @@
+# CI sur chaque push/PR : build, tests, validation du catalogue sur les trois OS.
+# CI on every push/PR: build, tests, catalog validation on all three OSes.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [22]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "${{ matrix.node }}", cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: node dist/cli.js catalog validate
+      # Taille du noyau (ADR 0013, audit décision 4, docs/fr/NOYAU.md). Seuil progressif :
+      # 7 000 aujourd'hui → 5 000 après M3-3 → 3 000 après M3-6. On ne le remonte jamais.
+      # Core size gate. Progressive threshold: 7 000 now → 5 000 → 3 000. Never raised.
+      - name: Core size (src/ ≤ 7000 lines)
+        shell: bash
+        run: bash scripts/loc.sh --max 7000
+      # Informative pour l'instant (--min 0) : la mesure devient bloquante dans catalog-update.yml,
+      # après que les vérificateurs ont tourné. Ici on s'assure seulement que la commande fonctionne.
+      - run: node dist/cli.js catalog freshness --min 0
+      - run: npx tsx scripts/catalog/check-schema-ajv.ts
+      - name: Plan smoke test (offline, no download)
+        run: node dist/cli.js plan --offline --profile novice --budget 200 --library ./tmp-lib
+      # Mesurer avant d'ajouter (audit, décision 3 ; M1-7) : le corpus fixture est notre propre documentation
+      # (docs/ → arche-docs, FTS5 seul : pas d'Ollama en CI). `arche eval` rend le code 1 sous le seuil de
+      # knowledge/eval.yaml (`threshold`) — un changement de découpage, de tokenizer ou de fusion qui fait
+      # baisser le tableau ne se fusionne pas. La première mesure sur des shards réels arrive avec M4-3.
+      # Retrieval gate: eval.yaml against the fixture corpus built from docs/; exit 1 below `threshold`.
+      - name: Eval gate (knowledge/eval.yaml on the fixture corpus, FTS5 only)
+        run: |
+          node dist/cli.js index build arche-docs --source docs --no-vectors --no-compress --library ./tmp-lib
+          node dist/cli.js eval --library ./tmp-lib --kiwix-host http://127.0.0.1:1
+
+  arm64-smoke:
+    # Le Raspberry Pi est une cible de premier rang : on vérifie au moins que ça démarre sur ARM64.
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci && npm run build
+      - run: node dist/cli.js plan --offline --profile novice --budget 100 --library ./tmp-lib

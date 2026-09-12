@@ -1,0 +1,387 @@
+# Les cultures du potager, en lisible-machine — la donnée que lit le planificateur de parcelles.
+# Garden crops, machine-readable — the data the plot planner reads.
+#
+# Règle (ADR 0010) : le LLM ne planifie pas un potager de tête. Il appelle `garden_plan`, qui lit ce
+# fichier et l'inventaire de l'utilisateur, et rend un calendrier qu'il peut expliquer, pas inventer.
+#
+# Chaque fiche porte :
+#   family            famille botanique (rotation : jamais deux ans de suite au même endroit)
+#   sun               full | partial — exposition minimale
+#   frost_hardy       true si la plante supporte les gelées légères
+#   sow               fenêtres en SEMAINES par rapport à la dernière gelée (négatif = avant) ;
+#                     `indoor` = semis au chaud puis `transplant` ; `direct` = semis en place ;
+#                     `anchor: first_frost` = plantation d'automne (ail), comptée avant la 1re gelée
+#   spacing_cm        rang × plant ; sert à convertir un nombre de plants en surface
+#   days_to_harvest   jours entre plantation (repiquage ou semis direct) et première récolte
+#   harvest_weeks     durée de la fenêtre de récolte
+#   succession_weeks  intervalle de semis échelonnés (radis, laitue, haricot) — facultatif
+#   yield_kg_per_m2   fourchette de rendement amateur, climat tempéré
+#   plants_per_person nombre de plants « raisonnable » par personne et par an, quand l'inventaire
+#                     donne des semences sans quantité
+#   source            { resource, path, quote } : le locator vers le corpus (fiche OpenFarm, manuel…)
+#                     qui couvre les nombres de la fiche ; une valeur peut porter le sien (M4-1)
+#   unsourced         true, explicite, tant qu'aucun locator n'est écrit — compté, publié (période
+#                     de grâce, M4-2) ; `verified` n'est jamais écrit : `arche knowledge verify` le calcule
+#
+# Sources : espacement et exposition dérivés d'OpenFarm (CC0, ressource `openfarm-crops-rescue`) ;
+# fenêtres de semis, durées et rendements : pratique maraîchère tempérée (France, plaine), ordres de
+# grandeur ±30 %. Toute fiche `unsourced: true` est signalée comme telle dans le plan produit.
+# Climat de référence : tempéré, dernière gelée ~10 mai, première gelée ~25 octobre (Île-de-France).
+
+version: 1
+updated: 2026-09-11
+climate: temperate
+defaults:
+  last_frost: "05-10"
+  first_frost: "10-25"
+  people: 2
+uncertainty: "±30 % sur les dates, ±50 % sur les rendements — à corriger par l'observation locale"
+
+crops:
+  tomato:
+    name: { fr: Tomate, en: Tomato }
+    family: Solanaceae
+    sun: full
+    frost_hardy: false
+    sow: { indoor: -7, transplant: 1 }
+    spacing_cm: { row: 80, plant: 50 }
+    days_to_harvest: 70
+    harvest_weeks: 10
+    yield_kg_per_m2: { lo: 3, hi: 6 }
+    plants_per_person: 4
+    unsourced: true
+  pepper:
+    name: { fr: Poivron / piment, en: Pepper }
+    family: Solanaceae
+    sun: full
+    frost_hardy: false
+    sow: { indoor: -9, transplant: 2 }
+    spacing_cm: { row: 60, plant: 50 }
+    days_to_harvest: 80
+    harvest_weeks: 8
+    yield_kg_per_m2: { lo: 1.5, hi: 3 }
+    plants_per_person: 2
+    unsourced: true
+  potato:
+    name: { fr: Pomme de terre, en: Potato }
+    family: Solanaceae
+    sun: full
+    frost_hardy: false
+    sow: { direct: -2 }
+    spacing_cm: { row: 70, plant: 35 }
+    days_to_harvest: 100
+    harvest_weeks: 4
+    yield_kg_per_m2: { lo: 2, hi: 4 }
+    plants_per_person: 15
+    unsourced: true
+  zucchini:
+    name: { fr: Courgette, en: Zucchini }
+    family: Cucurbitaceae
+    sun: full
+    frost_hardy: false
+    sow: { indoor: -3, transplant: 1, direct: 1 }
+    spacing_cm: { row: 100, plant: 100 }
+    days_to_harvest: 50
+    harvest_weeks: 10
+    yield_kg_per_m2: { lo: 4, hi: 8 }
+    plants_per_person: 1
+    unsourced: true
+  winter_squash:
+    name: { fr: Courge (potimarron, butternut), en: Winter squash }
+    family: Cucurbitaceae
+    sun: full
+    frost_hardy: false
+    sow: { indoor: -3, transplant: 1, direct: 1 }
+    spacing_cm: { row: 150, plant: 100 }
+    days_to_harvest: 100
+    harvest_weeks: 3
+    yield_kg_per_m2: { lo: 2, hi: 4 }
+    plants_per_person: 2
+    unsourced: true
+  cucumber:
+    name: { fr: Concombre, en: Cucumber }
+    family: Cucurbitaceae
+    sun: full
+    frost_hardy: false
+    sow: { indoor: -3, transplant: 1 }
+    spacing_cm: { row: 100, plant: 40 }
+    days_to_harvest: 60
+    harvest_weeks: 8
+    yield_kg_per_m2: { lo: 3, hi: 5 }
+    plants_per_person: 2
+    unsourced: true
+  bush_bean:
+    name: { fr: Haricot nain, en: Bush bean }
+    family: Fabaceae
+    sun: full
+    frost_hardy: false
+    sow: { direct: 1 }
+    spacing_cm: { row: 50, plant: 8 }
+    days_to_harvest: 60
+    harvest_weeks: 4
+    succession_weeks: 3
+    yield_kg_per_m2: { lo: 1, hi: 2 }
+    plants_per_person: 20
+    unsourced: true
+  pea:
+    name: { fr: Petit pois, en: Pea }
+    family: Fabaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -6 }
+    spacing_cm: { row: 50, plant: 5 }
+    days_to_harvest: 65
+    harvest_weeks: 4
+    yield_kg_per_m2: { lo: 0.5, hi: 1.5 }
+    plants_per_person: 30
+    unsourced: true
+  broad_bean:
+    name: { fr: Fève, en: Broad bean }
+    family: Fabaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -8 }
+    spacing_cm: { row: 40, plant: 15 }
+    days_to_harvest: 90
+    harvest_weeks: 4
+    yield_kg_per_m2: { lo: 1, hi: 2 }
+    plants_per_person: 10
+    unsourced: true
+  carrot:
+    name: { fr: Carotte, en: Carrot }
+    family: Apiaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -4 }
+    spacing_cm: { row: 30, plant: 5 }
+    days_to_harvest: 80
+    harvest_weeks: 8
+    succession_weeks: 4
+    yield_kg_per_m2: { lo: 2, hi: 4 }
+    plants_per_person: 40
+    unsourced: true
+  parsley:
+    name: { fr: Persil, en: Parsley }
+    family: Apiaceae
+    sun: partial
+    frost_hardy: true
+    sow: { direct: -2 }
+    spacing_cm: { row: 30, plant: 15 }
+    days_to_harvest: 75
+    harvest_weeks: 20
+    yield_kg_per_m2: { lo: 0.5, hi: 1 }
+    plants_per_person: 3
+    unsourced: true
+  beet:
+    name: { fr: Betterave, en: Beet }
+    family: Amaranthaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -2 }
+    spacing_cm: { row: 30, plant: 10 }
+    days_to_harvest: 60
+    harvest_weeks: 8
+    yield_kg_per_m2: { lo: 2, hi: 4 }
+    plants_per_person: 15
+    unsourced: true
+  spinach:
+    name: { fr: Épinard, en: Spinach }
+    family: Amaranthaceae
+    sun: partial
+    frost_hardy: true
+    sow: { direct: -6 }
+    spacing_cm: { row: 30, plant: 8 }
+    days_to_harvest: 45
+    harvest_weeks: 4
+    succession_weeks: 3
+    yield_kg_per_m2: { lo: 1, hi: 2 }
+    plants_per_person: 15
+    unsourced: true
+  chard:
+    name: { fr: Bette / blette, en: Chard }
+    family: Amaranthaceae
+    sun: partial
+    frost_hardy: true
+    sow: { direct: -2 }
+    spacing_cm: { row: 40, plant: 30 }
+    days_to_harvest: 60
+    harvest_weeks: 16
+    yield_kg_per_m2: { lo: 3, hi: 5 }
+    plants_per_person: 3
+    unsourced: true
+  lettuce:
+    name: { fr: Laitue, en: Lettuce }
+    family: Asteraceae
+    sun: partial
+    frost_hardy: true
+    sow: { indoor: -6, transplant: -2, direct: -3 }
+    spacing_cm: { row: 30, plant: 30 }
+    days_to_harvest: 50
+    harvest_weeks: 3
+    succession_weeks: 2
+    yield_kg_per_m2: { lo: 2, hi: 3 }
+    plants_per_person: 6
+    unsourced: true
+  sunflower:
+    name: { fr: Tournesol, en: Sunflower }
+    family: Asteraceae
+    sun: full
+    frost_hardy: false
+    sow: { direct: 1 }
+    spacing_cm: { row: 60, plant: 30 }
+    days_to_harvest: 90
+    harvest_weeks: 3
+    yield_kg_per_m2: { lo: 0.3, hi: 0.6 }
+    plants_per_person: 5
+    unsourced: true
+  onion:
+    name: { fr: Oignon (bulbilles), en: Onion (sets) }
+    family: Amaryllidaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -6 }
+    spacing_cm: { row: 25, plant: 10 }
+    days_to_harvest: 110
+    harvest_weeks: 4
+    yield_kg_per_m2: { lo: 2, hi: 4 }
+    plants_per_person: 20
+    unsourced: true
+  garlic:
+    name: { fr: Ail, en: Garlic }
+    family: Amaryllidaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -2, anchor: first_frost }
+    spacing_cm: { row: 15, plant: 10 }
+    days_to_harvest: 240
+    harvest_weeks: 3
+    yield_kg_per_m2: { lo: 1, hi: 2 }
+    plants_per_person: 20
+    unsourced: true
+  leek:
+    name: { fr: Poireau, en: Leek }
+    family: Amaryllidaceae
+    sun: full
+    frost_hardy: true
+    sow: { indoor: -8, transplant: 4 }
+    spacing_cm: { row: 30, plant: 12 }
+    days_to_harvest: 120
+    harvest_weeks: 16
+    yield_kg_per_m2: { lo: 2, hi: 3 }
+    plants_per_person: 20
+    unsourced: true
+  cabbage:
+    name: { fr: Chou pommé, en: Cabbage }
+    family: Brassicaceae
+    sun: full
+    frost_hardy: true
+    sow: { indoor: -6, transplant: -1 }
+    spacing_cm: { row: 60, plant: 50 }
+    days_to_harvest: 90
+    harvest_weeks: 4
+    yield_kg_per_m2: { lo: 3, hi: 5 }
+    plants_per_person: 4
+    unsourced: true
+  kale:
+    name: { fr: Chou kale, en: Kale }
+    family: Brassicaceae
+    sun: full
+    frost_hardy: true
+    sow: { indoor: -6, transplant: 0 }
+    spacing_cm: { row: 50, plant: 40 }
+    days_to_harvest: 60
+    harvest_weeks: 16
+    yield_kg_per_m2: { lo: 2, hi: 3 }
+    plants_per_person: 2
+    unsourced: true
+  radish:
+    name: { fr: Radis, en: Radish }
+    family: Brassicaceae
+    sun: partial
+    frost_hardy: true
+    sow: { direct: -4 }
+    spacing_cm: { row: 20, plant: 4 }
+    days_to_harvest: 30
+    harvest_weeks: 2
+    succession_weeks: 2
+    yield_kg_per_m2: { lo: 1, hi: 2 }
+    plants_per_person: 30
+    unsourced: true
+  turnip:
+    name: { fr: Navet, en: Turnip }
+    family: Brassicaceae
+    sun: full
+    frost_hardy: true
+    sow: { direct: -3 }
+    spacing_cm: { row: 30, plant: 10 }
+    days_to_harvest: 50
+    harvest_weeks: 4
+    yield_kg_per_m2: { lo: 2, hi: 3 }
+    plants_per_person: 10
+    unsourced: true
+  corn:
+    name: { fr: Maïs doux, en: Sweet corn }
+    family: Poaceae
+    sun: full
+    frost_hardy: false
+    sow: { direct: 1 }
+    spacing_cm: { row: 70, plant: 25 }
+    days_to_harvest: 90
+    harvest_weeks: 3
+    yield_kg_per_m2: { lo: 1, hi: 2 }
+    plants_per_person: 15
+    unsourced: true
+  basil:
+    name: { fr: Basilic, en: Basil }
+    family: Lamiaceae
+    sun: full
+    frost_hardy: false
+    sow: { indoor: -6, transplant: 2 }
+    spacing_cm: { row: 30, plant: 25 }
+    days_to_harvest: 60
+    harvest_weeks: 12
+    yield_kg_per_m2: { lo: 0.5, hi: 1 }
+    plants_per_person: 3
+    unsourced: true
+
+# Alias FR/EN acceptés dans un inventaire (`seeds[].crop`), résolus vers la clé ci-dessus.
+aliases:
+  tomate: tomato
+  poivron: pepper
+  piment: pepper
+  pomme_de_terre: potato
+  patate: potato
+  courgette: zucchini
+  courge: winter_squash
+  potimarron: winter_squash
+  butternut: winter_squash
+  squash: winter_squash
+  concombre: cucumber
+  haricot: bush_bean
+  haricot_nain: bush_bean
+  bean: bush_bean
+  pois: pea
+  petit_pois: pea
+  feve: broad_bean
+  fève: broad_bean
+  carotte: carrot
+  persil: parsley
+  betterave: beet
+  beetroot: beet
+  epinard: spinach
+  épinard: spinach
+  bette: chard
+  blette: chard
+  laitue: lettuce
+  salade: lettuce
+  tournesol: sunflower
+  oignon: onion
+  ail: garlic
+  poireau: leek
+  chou: cabbage
+  chou_kale: kale
+  radis: radish
+  navet: turnip
+  mais: corn
+  maïs: corn
+  basilic: basil

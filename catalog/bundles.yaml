@@ -1,0 +1,124 @@
+# Paquets thématiques : groupes de ressources que le wizard propose d'un bloc.
+# Thematic bundles: groups of resources the wizard offers as one checkbox.
+# Un bundle n'a pas de priorité propre : cocher un bundle coche ses ressources.
+
+- id: core
+  name: { fr: "Le socle (toujours)", en: "The core (always)" }
+  description: { fr: "Lecteur Kiwix, Arche lui-même, Wikipédia FR sans images, médecine, eau, alimentation, réparation.", en: "Kiwix reader, Arche itself, Wikipedia FR text-only, medicine, water, food, repair." }
+  resources: [kiwix-tools, git-arche, git-libzim, git-kiwix-tools-src, wikipedia-fr-nopic, wikipedia-fr-medicine, zimgit-medicine, zimgit-water, zimgit-food-preparation, zimgit-post-disaster, ifixit-fr, appropedia-en, pdf-ou-il-ny-a-pas-de-docteur, pdf-who-first-aid, fm-21-76-survival, who-psychological-first-aid, msf-medical-guidelines, who-mcpc-obstetric-complications, who-imci-chart-booklet, hesperian-where-no-dentist, wikivet-zim, cap-lille-champignons-syndromes, centres-antipoison-fr]
+
+- id: systems
+  name: { fr: "Réinstaller une machine", en: "Reinstall a machine" }
+  description: { fr: "Une clé USB Ventoy avec Debian, SystemRescue et Raspberry Pi OS, plus le miroir apt : ce qui permet de repartir quand l'ordinateur meurt.", en: "A Ventoy USB stick with Debian, SystemRescue and Raspberry Pi OS, plus the apt mirror: what lets you start over when the computer dies." }
+  resources: [ventoy, debian-dvd, systemrescue, raspios-lite, apt-mirror-debian, node-lts]
+
+- id: generators
+  name: { fr: "Produire des schémas, câblages et pièces", en: "Produce schematics, wiring and parts" }
+  description: { fr: "Les schémas sont du code : schemdraw (circuits), WireViz (câblage), Mermaid et Graphviz (diagrammes), OpenSCAD (pièces), draw.io (à la main), ngspice (simuler), KiCad (cartes).", en: "Diagrams are code: schemdraw (circuits), WireViz (wiring), Mermaid and Graphviz (diagrams), OpenSCAD (parts), draw.io (by hand), ngspice (simulate), KiCad (boards)." }
+  resources: [schemdraw, wireviz, graphviz, mermaid-cli, openscad, drawio-desktop, ngspice, skidl, cadquery, toolchain-kicad, python-standalone, pip-cache, node-lts]
+
+- id: health
+  name: { fr: "Santé", en: "Health" }
+  description: { fr: "Médecine d'urgence, santé grand public, manuels Hesperian.", en: "Emergency medicine, consumer health, Hesperian manuals." }
+  resources: [wikipedia-fr-medicine, wikipedia-en-medicine, mdwiki-en, wikem-en, medlineplus-en, libretexts-med, zimgit-medicine, pdf-ou-il-ny-a-pas-de-docteur, pdf-who-first-aid, pdf-sanitation-sphere-handbook, fm-4-25-11-first-aid, who-basic-emergency-care, who-psychological-first-aid, msf-medical-guidelines, ema-herbal-monographs, who-medicinal-plants-monographs, anses-plantes-toxiques, hesperian-green-pages, hesperian-book-for-midwives, hesperian-where-women-no-doctor, who-mcpc-obstetric-complications, who-imci-chart-booklet, hesperian-where-no-dentist, where-there-is-no-psychiatrist, ifrc-first-aid-guidelines-2020]
+
+- id: homestead
+  name: { fr: "Autonomie : cultiver, conserver, construire, produire de l'énergie", en: "Homestead: grow, preserve, build, make power" }
+  description: { fr: "Agriculture, conservation, énergie off-grid, low-tech, bricolage.", en: "Farming, preservation, off-grid energy, low-tech, DIY." }
+  resources: [appropedia-en, energypedia-en, lowtech-magazine-solar, git-lowtech-lab, git-open-source-ecology, git-farm-hack, stackexchange-gardening, stackexchange-diy, cuisine-libre-fr, zimgit-food-preparation, zimgit-knots, wikivet-zim, where-there-is-no-vet, fao-poultry-manual, fao-beekeeping]
+
+- id: library
+  name: { fr: "Bibliothèque générale", en: "General library" }
+  description: { fr: "Encyclopédies complètes, dictionnaires, livres, école à la maison.", en: "Full encyclopedias, dictionaries, books, homeschooling." }
+  resources: [wikipedia-fr-maxi, wikipedia-en-nopic, wiktionary-fr, wiktionary-en, vikidia-fr, wikibooks-fr, gutenberg-fr, phet-fr]
+
+- id: ai
+  name: { fr: "IA locale", en: "Local AI" }
+  description: { fr: "Ollama + llama.cpp (reclassement) + un modèle adapté à la machine + embeddings + voix (whisper.cpp, Piper) + Jan, un client de chat hors ligne branché sur `arche mcp` (ADR 0011). Arche n'est pas le client.", en: "Ollama + llama.cpp (reranking) + a model suited to the machine + embeddings + speech (whisper.cpp, Piper) + Jan, an offline chat client plugged into `arche mcp` (ADR 0011). Arche is not the client." }
+  resources: [ollama, llama-cpp, whisper-cpp, piper-tts, ollama-nomic-embed-text, jan]
+  dynamic: ai_tier   # le recommandeur ajoute les modèles du palier détecté / the recommender adds the detected tier's models
+
+- id: training
+  name: { fr: "Entraîner en local", en: "Train locally" }
+  description: { fr: "Croiser ses capteurs avec ses récoltes, affiner un modèle sur ses notes, entraîner une politique de robot — sans NVIDIA ni cloud : PyTorch CPU, scikit-learn, PEFT, LeRobot, tinygrad, TFLite Micro pour l'ESP32 (ADR 0013).", en: "Cross your sensors with your harvests, fine-tune a model on your notes, train a robot policy — without NVIDIA or cloud: PyTorch CPU, scikit-learn, PEFT, LeRobot, tinygrad, TFLite Micro for the ESP32 (ADR 0013)." }
+  resources: [pip-ml-cache, git-tinygrad, git-tflite-micro, git-lerobot, git-mujoco, llama-cpp]
+
+- id: automation
+  name: { fr: "Automatiser sans réseau", en: "Automate with no network" }
+  description: { fr: "Node-RED pour le monde physique (capteurs, arrosage, alertes — déterministe), Hermes Agent pour les tâches récurrentes avec un modèle local, tous deux branchés sur `arche mcp`. Aucun modèle de langue dans une boucle d'actionneur (ADR 0010).", en: "Node-RED for the physical world (sensors, watering, alerts — deterministic), Hermes Agent for recurring tasks with a local model, both plugged into `arche mcp`. No language model in an actuator loop (ADR 0010)." }
+  resources: [node-red, hermes-agent, git-home-assistant, git-esphome]
+
+- id: maker
+  name: { fr: "Atelier : électronique, impression 3D, CAO", en: "Workshop: electronics, 3D printing, CAD" }
+  description: { fr: "Toolchains ESP32/Arduino, KiCad, FreeCAD, firmwares d'imprimantes, Q/R électronique.", en: "ESP32/Arduino toolchains, KiCad, FreeCAD, printer firmwares, electronics Q&A." }
+  resources: [toolchain-platformio, toolchain-arduino-cli, toolchain-kicad, git-freecad, git-klipper, git-marlin, git-esphome, stackexchange-electronics, stackexchange-arduino, stackexchange-3dprinting, stackexchange-raspberrypi]
+
+- id: comms-weather
+  name: { fr: "Communiquer et prévoir : radio, LoRa, satellites météo", en: "Communicate and forecast: radio, LoRa, weather satellites" }
+  description: { fr: "Meshtastic, SatDump, radioamateurisme.", en: "Meshtastic, SatDump, ham radio." }
+  resources: [meshtastic-firmware, satdump, stackexchange-ham]
+
+- id: maps
+  name: { fr: "Cartes", en: "Maps" }
+  description: { fr: "OpenStreetMap France + application de navigation hors-ligne.", en: "OpenStreetMap France + offline navigation app." }
+  resources: [osm-france-pbf, organic-maps-app, openstreetmap-wiki-en]
+
+- id: dev
+  name: { fr: "Développement hors-ligne", en: "Offline development" }
+  description: { fr: "Forge Git locale, assistant de code, documentation des langages, Linux.", en: "Local Git forge, coding assistant, language docs, Linux." }
+  resources: [node-lts, python-standalone, verdaccio, gitea, aider, opencode, git-zimit, git-llama-cpp-src, devdocs-en, archlinux-wiki-en, stackexchange-unix, pip-cache, apt-mirror-debian, ollama-qwen2-5-coder-7b]
+
+- id: robotics-starter
+  name: { fr: "Robotique : débuter (< 500 $)", en: "Robotics: getting started (< $500)" }
+  description: { fr: "Bras SO-101 + LeRobot, base mobile LeKiwi, bipède Open Duck Mini, OpenBot (smartphone), Otto pour les enfants, contrôle moteur SimpleFOC, simulateur MuJoCo, OpenCV.", en: "SO-101 arm + LeRobot, LeKiwi mobile base, Open Duck Mini biped, OpenBot (smartphone), Otto for kids, SimpleFOC motor control, MuJoCo simulator, OpenCV." }
+  resources: [git-lerobot, git-so-arm101, git-koch-v1-1, git-lekiwi, git-open-duck-mini, git-openbot, git-otto-diy, git-opencat, git-spotmicro, git-dummy-robot, git-simplefoc, git-mujoco, git-opencv, stackexchange-robotics, stackexchange-arduino]
+
+- id: robotics-lab
+  name: { fr: "Robotique : laboratoire (humanoïdes, quadrupèdes, drones, ROS 2)", en: "Robotics: lab (humanoids, quadrupeds, drones, ROS 2)" }
+  description: { fr: "Poppy, Berkeley Humanoid Lite, K-Bot, OpenArm, ODRI Solo, Reachy Mini, ALOHA, rover JPL, Linorobot2, TurtleBot 4, PX4/ArduPilot/Betaflight/EdgeTX, ArduSub, moteus/VESC/ODrive, Gazebo, micro-ROS.", en: "Poppy, Berkeley Humanoid Lite, K-Bot, OpenArm, ODRI Solo, Reachy Mini, ALOHA, JPL rover, Linorobot2, TurtleBot 4, PX4/ArduPilot/Betaflight/EdgeTX, ArduSub, moteus/VESC/ODrive, Gazebo, micro-ROS." }
+  resources: [git-poppy-humanoid, git-berkeley-humanoid-lite, git-kscale-kbot, git-openarm, git-odri-solo, git-reachy-mini, git-inmoov, git-mobile-aloha, git-ar4, git-yale-openhand, git-stanford-pupper, git-open-source-rover, git-linorobot2, git-donkeycar, git-turtlebot4, git-acorn-rover, git-ros2, ros2-apt-mirror, ros2-docs, ubuntu-lts, git-ardupilot, git-px4, git-betaflight, git-edgetx, git-ardusub, git-moteus, git-vesc, git-odrive, git-gazebo, git-micro-ros-arduino, git-open-manipulator]
+
+- id: everything-big
+  name: { fr: "Les très gros morceaux (optionnels)", en: "The very big ones (optional)" }
+  description: { fr: "Wikipédia EN complet, Stack Overflow, Gutenberg EN, Khan Academy, Survivor Library. Plusieurs centaines de Go.", en: "Full Wikipedia EN, Stack Overflow, Gutenberg EN, Khan Academy, Survivor Library. Several hundred GB." }
+  resources: [wikipedia-en-maxi, stackoverflow, gutenberg-en, khanacademy-fr, survivor-library-en]
+
+- id: open-hardware
+  name: { fr: "Matériel libre : robots, machines, prothèses, énergie", en: "Open hardware: robots, machines, prosthetics, power" }
+  description: { fr: "Plans + firmware + docs de machines à fabriquer soi-même : bras SO-101 et LeRobot, Voron, Precious Plastic, FarmBot, Libre Solar, prothèses.", en: "Plans + firmware + docs of machines to build yourself: SO-101 arm and LeRobot, Voron, Precious Plastic, FarmBot, Libre Solar, prosthetics." }
+  resources: [git-lerobot, git-so-arm101, git-reachy-mini, git-inmoov, git-voron, git-prusa-firmware, git-precious-plastic, git-farmbot, git-libre-solar, git-openenergymonitor, git-openbionics, enable-prosthetics, reprap-wiki, git-open-source-ecology, git-farm-hack]
+
+- id: agriculture
+  name: { fr: "Agriculture et alimentation", en: "Agriculture and food" }
+  description: { fr: "Plans d'outils (Atelier Paysan, OSE, Farm Hack), autoguidage AgOpenGPS, serre automatisée, irrigation, ruches, météo, gestion de ferme, bases de plantes et d'aliments.", en: "Tool plans (Atelier Paysan, OSE, Farm Hack), AgOpenGPS autosteer, greenhouse automation, irrigation, beehives, weather, farm management, plant and food databases." }
+  resources: [atelier-paysan, git-open-source-ecology, git-farm-hack, git-farmbot, git-acorn-rover, git-agopengps, git-opensprinkler, git-mycodo, git-hiveeyes, git-weewx, git-farmos, git-tania, practical-plants, pfaf-database, open-food-facts, plantvillage-dataset, appropedia-en, stackexchange-gardening, cuisine-libre-fr, zimgit-food-preparation]
+
+- id: energy
+  name: { fr: "Énergie et eau", en: "Energy and water" }
+  description: { fr: "Solaire (Libre Solar, pvlib, SAM), batteries (diyBMS), onduleurs (OpenInverter), recharge VE, éolien/hydro/biogaz (plans), cuiseurs solaires, domotique locale (Home Assistant, Tasmota, ESPHome), mesure (OpenEnergyMonitor, Emoncms), eau (bélier, KnowFlow).", en: "Solar (Libre Solar, pvlib, SAM), batteries (diyBMS), inverters (OpenInverter), EV charging, wind/hydro/biogas (plans), solar cookers, local home automation (Home Assistant, Tasmota, ESPHome), metering (OpenEnergyMonitor, Emoncms), water (ram pump, KnowFlow)." }
+  resources: [git-libre-solar, git-openenergymonitor, git-emoncms, git-diybms, git-openinverter, git-openevse, git-pvlib, git-nrel-sam, git-energyplus, ose-wind-hydro-power, appropedia-energy-water-plans, solar-cooking-wiki, git-home-assistant, git-tasmota, git-esphome, git-openplc, git-knowflow, energypedia-en, lowtech-magazine-solar, git-lowtech-lab, zimgit-water]
+
+- id: library-en
+  name: { fr: "Bibliothèque anglophone de fond", en: "In-depth English library" }
+  description: { fr: "Manuels universitaires (LibreTexts, OpenStax), Wikibooks/Wikiversity EN, WikiMed EN, manuels de survie et premiers secours du domaine public, FEMA CERT, OMS, FAO, Practical Action, E4C, MIT OCW.", en: "College textbooks (LibreTexts, OpenStax), Wikibooks/Wikiversity EN, WikiMed EN, public-domain survival and first-aid manuals, FEMA CERT, WHO, FAO, Practical Action, E4C, MIT OCW." }
+  resources: [wikipedia-en-nopic, wikipedia-en-medicine, mdwiki-en, wikem-en, medlineplus-en, wikibooks-en, wikiversity-en, wiktionary-en, libretexts-med, libretexts-eng, libretexts-bio, libretexts-chem, libretexts-phys, libretexts-math, libretexts-k12, libretexts-workforce, openstax-textbooks, mit-ocw, nih-bookshelf-oa, fm-21-76-survival, fm-4-25-11-first-aid, fema-cert-manual, who-psychological-first-aid, who-basic-emergency-care, msf-medical-guidelines, fao-knowledge-repository, practical-action-briefs, e4c-solutions-library, cd3wd-library, appropedia-en, energypedia-en, stackexchange-outdoors, stackexchange-sustainability, stackexchange-cooking, stackexchange-engineering, stackexchange-medicalsciences, stackexchange-pets, ready-gov-en]
+
+- id: natural-medicine
+  name: { fr: "Médecine naturelle et pharmacie de maison", en: "Herbal medicine and home pharmacy" }
+  description: { fr: "Monographies OMS et EMA (doses, contre-indications), WikiPhyto, pages vertes Hesperian, liste OMS des médicaments essentiels, base ANSM, conservation réelle des médicaments, flore de France, Pl@ntNet hors-ligne, plantes toxiques ANSES, les 148 plantes en vente libre, herbiers classiques.", en: "WHO and EMA monographs (doses, contraindications), WikiPhyto, Hesperian Green Pages, WHO essential medicines list, ANSM database, real drug shelf life, flora of France, offline Pl@ntNet, ANSES toxic plants, the 148 freely sellable plants, classic herbals." }
+  resources: [who-medicinal-plants-monographs, ema-herbal-monographs, wikiphyto-fr, hesperian-green-pages, who-essential-medicines-list, bdpm-ansm, drug-shelf-life-slep, tela-botanica-eflore, plantnet-offline, anses-plantes-toxiques, wikipedia-fr-plantes-vente-libre, modern-herbal-grieve, henriettes-herbal-classics, kew-powo-wcvp, pfaf-database, practical-plants, wikipedia-fr-medicine, msf-medical-guidelines]
+
+- id: first-line-care
+  name: { fr: "Médecine d'appoint : naissance, enfants, dents, santé mentale", en: "First-line care: birth, children, teeth, mental health" }
+  description: { fr: "Guide des sages-femmes, Là où les femmes n'ont pas de docteur, urgences obstétricales OMS, PCIME (enfant malade), Là où il n'y a pas de dentiste, Where There Is No Psychiatrist, premiers secours IFRC, vidéos de soins.", en: "A Book for Midwives, Where Women Have No Doctor, WHO obstetric emergencies, IMCI (sick child), Where There Is No Dentist, Where There Is No Psychiatrist, IFRC first aid, care videos." }
+  resources: [hesperian-book-for-midwives, hesperian-where-women-no-doctor, who-mcpc-obstetric-complications, who-pcpnc-pregnancy-care, msf-obstetric-newborn-care, who-imci-chart-booklet, hesperian-disability-children, hesperian-where-no-dentist, who-oral-health-report, where-there-is-no-psychiatrist, ifrc-first-aid-guidelines-2020, global-health-media-videos, who-psychological-first-aid, pdf-ou-il-ny-a-pas-de-docteur, hesperian-green-pages]
+
+- id: veterinary
+  name: { fr: "Vétérinaire et élevage", en: "Veterinary and livestock" }
+  description: { fr: "WikiVet (54 Mo, tout le programme vétérinaire), Where There Is No Vet, Merck Vet Manual hors-ligne, manuels FAO (volailles, apiculture), normes d'élevage, surveillance Anses, code sanitaire WOAH.", en: "WikiVet (54 MB, the whole vet curriculum), Where There Is No Vet, offline Merck Vet Manual, FAO manuals (poultry, beekeeping), livestock standards, Anses surveillance, WOAH code." }
+  resources: [wikivet-zim, where-there-is-no-vet, merck-vet-manual, fao-poultry-manual, fao-family-poultry-decision-tools, fao-beekeeping, open-vet-textbooks, anses-bulletin-sante-animale, heifer-animal-wellbeing, woah-terrestrial-code, stackexchange-pets, git-hiveeyes]
+
+- id: identification
+  name: { fr: "Reconnaître : plantes et champignons (et ce qui tue)", en: "Identify: plants and mushrooms (and what kills)" }
+  description: { fr: "Syndromes toxiques du centre antipoison de Lille, rapport Anses, Société Mycologique de France, MycoDB (clés et photos), plantes toxiques Anses, flore de France, Pl@ntNet hors-ligne, référentiels taxonomiques.", en: "Lille poison centre toxic syndromes, ANSES report, Société Mycologique de France, MycoDB (keys and photos), ANSES toxic plants, flora of France, offline Pl@ntNet, taxonomic references." }
+  resources: [cap-lille-champignons-syndromes, anses-champignons-intoxications, mycofrance-syndromes, centres-antipoison-fr, mycodb, usfs-macrofungi-guide, anses-plantes-toxiques, tela-botanica-eflore, plantnet-offline, practical-plants, pfaf-database, wikispecies-zim, gbif-backbone, index-fungorum-checklist, cornell-poisonous-plants]

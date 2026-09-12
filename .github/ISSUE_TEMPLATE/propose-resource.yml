@@ -1,0 +1,36 @@
+name: "Proposer une ressource / Propose a resource"
+description: "Un contenu ou un outil utile SANS réseau, à ajouter au catalogue."
+labels: [proposal]
+body:
+  - type: input
+    id: url
+    attributes: { label: "URL de la source officielle / official source URL", placeholder: "https://…" }
+    validations: { required: true }
+  - type: dropdown
+    id: type
+    attributes: { label: "Type", options: [zim, ai-model, git-repo, toolchain, pdf, software, map, "site sans ZIM (à construire)"] }
+    validations: { required: true }
+  - type: dropdown
+    id: domain
+    attributes: { label: "Domaine / domain", options: [medical, water, food, agriculture, energy, construction, electronics, robotics, fabrication, radio, weather, maps, education, dev, legal, ai, society, survival, encyclopedia, reference] }
+    validations: { required: true }
+  - type: input
+    id: license
+    attributes: { label: "Licence affichée par la source / license shown by the source", placeholder: "CC BY-SA 4.0, GPL-3.0, inconnue…" }
+    validations: { required: true }
+  - type: textarea
+    id: why
+    attributes: { label: "Pourquoi c'est utile hors-ligne, et pour qui (débutant / high-tech / low-tech) ? / Why is it useful offline, and for whom?" }
+    validations: { required: true }
+  - type: input
+    id: size
+    attributes: { label: "Taille approximative / approximate size", placeholder: "500 Mo" }
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: "Je confirme / I confirm"
+      options:
+        - label: "La source est officielle (pas un ré-hébergement) / official source, not a re-host"
+          required: true
+        - label: "Ce n'est pas un contenu d'armes, d'explosifs ou de contournement de sécurité / not weapons, explosives or security-bypass content"
+          required: true

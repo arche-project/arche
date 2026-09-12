@@ -1,0 +1,13 @@
+# Paquets Python à mettre en cache AVANT la coupure (ressource `pip-cache`) :
+#   pip download -r requirements/offline.txt -d wheels/ --platform <cible> --python-version 3.12 --only-binary=:all:
+# puis, hors ligne :  pip install --no-index --find-links wheels/ <paquet>
+# Python packages to cache BEFORE the outage (`pip-cache` resource). Versions épinglées par le tracker pypi.
+open-webui
+aider-chat
+esphome
+pdal
+schemdraw
+wireviz
+cadquery
+paddleocr
+internetarchive

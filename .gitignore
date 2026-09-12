@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+# État local du wizard et téléchargements : jamais dans le dépôt
+.arche/
+library/
+*.part
+.env
+.catalog-reports/
+public/
+build/
+tmp-lib/
+
+# Orchestrateur : journaux des agents (les rapports, eux, sont versionnés)
+backlog/logs/

@@ -1,0 +1,112 @@
+# Taxonomie des vues : ce qu'il faut VOIR pour comprendre ou reconnaître un concept, par domaine.
+# View taxonomy: what one must SEE to understand or identify a concept, per domain.
+#
+# C'est ce qui transforme « il faut des milliers d'images » en une mesure : pour chaque concept, la
+# liste des vues requises est finie et connue d'avance. `arche visuals coverage` compte celles qui
+# manquent. `diagnostic: true` marque les vues sans lesquelles on ne peut PAS identifier — pour
+# celles-là, seule une photographie ou une planche réelle avec provenance est admise ; jamais une
+# image générée (voir docs/fr/VISUELS.md).
+#
+# This turns "thousands of images" into a metric. `diagnostic: true` views admit only real
+# photographs or plates with provenance — never generated images.
+
+version: 1
+updated: 2026-09-11
+
+kinds:
+  plant:
+    label: { fr: "Plante", en: "Plant" }
+    views:
+      habit:        { label: { fr: "Port général", en: "Habit" }, required: true, diagnostic: true }
+      leaf:         { label: { fr: "Feuille (face et revers)", en: "Leaf (both sides)" }, required: true, diagnostic: true }
+      flower:       { label: { fr: "Fleur", en: "Flower" }, required: true, diagnostic: true }
+      fruit_seed:   { label: { fr: "Fruit et graine", en: "Fruit and seed" }, required: true, diagnostic: true }
+      stem_bark:    { label: { fr: "Tige ou écorce", en: "Stem or bark" }, required: true, diagnostic: true }
+      root:         { label: { fr: "Racine, bulbe ou rhizome", en: "Root, bulb or rhizome" }, required: false, diagnostic: true }
+      seedling:     { label: { fr: "Plantule", en: "Seedling" }, required: false, diagnostic: true }
+      cross_section: { label: { fr: "Coupe (tige, fruit)", en: "Cross-section" }, required: false, diagnostic: false }
+      micrograph:   { label: { fr: "Microscopie (pollen, épiderme) quand c'est discriminant", en: "Micrograph when diagnostic" }, required: false, diagnostic: true }
+      lookalike:    { label: { fr: "Sosie dangereux, côte à côte", en: "Dangerous lookalike, side by side" }, required: true, diagnostic: true }
+      plate:        { label: { fr: "Planche botanique (dessin d'ensemble)", en: "Botanical plate" }, required: false, diagnostic: false }
+      range_map:    { label: { fr: "Aire et habitat", en: "Range and habitat" }, required: false, diagnostic: false }
+
+  fungus:
+    label: { fr: "Champignon", en: "Fungus" }
+    views:
+      habit:        { label: { fr: "In situ, dans son habitat", en: "In situ" }, required: true, diagnostic: true }
+      cap:          { label: { fr: "Chapeau (dessus)", en: "Cap (top)" }, required: true, diagnostic: true }
+      hymenium:     { label: { fr: "Lames, pores ou aiguillons (dessous)", en: "Gills, pores or spines" }, required: true, diagnostic: true }
+      stem_base:    { label: { fr: "Pied entier, base déterrée : anneau, volve", en: "Whole stem, dug base: ring, volva" }, required: true, diagnostic: true }
+      cross_section: { label: { fr: "Coupe longitudinale, changement de couleur", en: "Longitudinal section, colour change" }, required: true, diagnostic: true }
+      spore_print:  { label: { fr: "Sporée", en: "Spore print" }, required: true, diagnostic: true }
+      micrograph:   { label: { fr: "Spores au microscope", en: "Spores under microscope" }, required: false, diagnostic: true }
+      lookalike:    { label: { fr: "Confusion mortelle, côte à côte", en: "Deadly lookalike, side by side" }, required: true, diagnostic: true }
+      age_series:   { label: { fr: "Jeune → mûr → vieux", en: "Young → mature → old" }, required: false, diagnostic: true }
+
+  animal:
+    label: { fr: "Animal (élevage, gibier, nuisible)", en: "Animal" }
+    views:
+      habit:        { label: { fr: "Animal entier", en: "Whole animal" }, required: true, diagnostic: true }
+      tracks_signs: { label: { fr: "Traces, fientes, dégâts", en: "Tracks, droppings, damage" }, required: false, diagnostic: true }
+      anatomy:      { label: { fr: "Anatomie (planche)", en: "Anatomy plate" }, required: false, diagnostic: false }
+      health_signs: { label: { fr: "Signes de maladie visibles", en: "Visible disease signs" }, required: false, diagnostic: true }
+      butchery:     { label: { fr: "Découpe", en: "Butchery cuts" }, required: false, diagnostic: false }
+
+  pest_disease:
+    label: { fr: "Ravageur ou maladie des cultures", en: "Crop pest or disease" }
+    views:
+      symptom_leaf: { label: { fr: "Symptôme sur feuille", en: "Symptom on leaf" }, required: true, diagnostic: true }
+      symptom_fruit: { label: { fr: "Symptôme sur fruit ou tige", en: "Symptom on fruit or stem" }, required: false, diagnostic: true }
+      organism:     { label: { fr: "L'organisme lui-même (insecte, champignon)", en: "The organism itself" }, required: true, diagnostic: true }
+      lookalike:    { label: { fr: "Carence ou stress qui y ressemble", en: "Deficiency or stress that mimics it" }, required: false, diagnostic: true }
+
+  tool:
+    label: { fr: "Outil à main", en: "Hand tool" }
+    views:
+      whole:        { label: { fr: "Outil entier, nommé", en: "Whole tool, named" }, required: true, diagnostic: false }
+      parts:        { label: { fr: "Pièces nommées (éclaté)", en: "Named parts (exploded)" }, required: true, diagnostic: false }
+      use:          { label: { fr: "Geste d'utilisation", en: "Gesture in use" }, required: true, diagnostic: false }
+      sharpening:   { label: { fr: "Affûtage / entretien", en: "Sharpening / maintenance" }, required: false, diagnostic: false }
+
+  machine:
+    label: { fr: "Machine ou dispositif à construire", en: "Machine or device to build" }
+    views:
+      whole:        { label: { fr: "Vue d'ensemble", en: "Overview" }, required: true, diagnostic: false }
+      exploded:     { label: { fr: "Éclaté avec nomenclature", en: "Exploded view with BOM" }, required: true, diagnostic: false }
+      principle:    { label: { fr: "Schéma de principe", en: "Principle diagram" }, required: true, diagnostic: false }
+      dimensions:   { label: { fr: "Plan coté", en: "Dimensioned drawing" }, required: true, diagnostic: false }
+      steps:        { label: { fr: "Étapes de montage", en: "Assembly steps" }, required: false, diagnostic: false }
+      failure:      { label: { fr: "Pannes typiques, à quoi ça ressemble", en: "Typical failures, what they look like" }, required: false, diagnostic: false }
+
+  circuit:
+    label: { fr: "Électronique", en: "Electronics" }
+    views:
+      schematic:    { label: { fr: "Schéma électrique", en: "Schematic" }, required: true, diagnostic: false }
+      board:        { label: { fr: "Photo de la carte montée", en: "Assembled board photo" }, required: true, diagnostic: false }
+      pcb:          { label: { fr: "Typon / PCB", en: "PCB layout" }, required: false, diagnostic: false }
+      wiring:       { label: { fr: "Câblage réel (pinout)", en: "Real wiring (pinout)" }, required: true, diagnostic: false }
+
+  construction:
+    label: { fr: "Bâtiment, technique de construction", en: "Building technique" }
+    views:
+      section:      { label: { fr: "Coupe de principe", en: "Section" }, required: true, diagnostic: false }
+      detail:       { label: { fr: "Détail constructif (jonction, appui)", en: "Construction detail" }, required: true, diagnostic: false }
+      steps:        { label: { fr: "Étapes", en: "Steps" }, required: true, diagnostic: false }
+      failure:      { label: { fr: "Pathologies (humidité, fissure)", en: "Pathologies" }, required: false, diagnostic: true }
+
+  procedure:
+    label: { fr: "Geste technique ou médical", en: "Technical or medical procedure" }
+    views:
+      steps:        { label: { fr: "Étapes numérotées", en: "Numbered steps" }, required: true, diagnostic: false }
+      hands:        { label: { fr: "Position des mains / de l'outil", en: "Hand / tool position" }, required: true, diagnostic: false }
+      landmarks:    { label: { fr: "Repères (anatomiques, sur la pièce)", en: "Landmarks" }, required: false, diagnostic: true }
+      wrong:        { label: { fr: "Ce qu'il ne faut pas faire", en: "What not to do" }, required: false, diagnostic: false }
+
+# Provenance admise par type de vue. `generated` n'est JAMAIS admis pour une vue diagnostique.
+provenance:
+  photo:      { label: { fr: "Photographie", en: "Photograph" }, diagnostic_ok: true }
+  micrograph: { label: { fr: "Microscopie", en: "Micrograph" }, diagnostic_ok: true }
+  plate:      { label: { fr: "Planche scientifique historique (BHL, Commons)", en: "Historical scientific plate" }, diagnostic_ok: true }
+  drawing:    { label: { fr: "Dessin technique / schéma", en: "Technical drawing / diagram" }, diagnostic_ok: false }
+  render:     { label: { fr: "Rendu CAO (FreeCAD, OpenSCAD, KiCad)", en: "CAD render" }, diagnostic_ok: false }
+  generated:  { label: { fr: "Image générée par IA — étiquetée, jamais pour identifier", en: "AI-generated — labelled, never for identification" }, diagnostic_ok: false }

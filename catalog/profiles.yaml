@@ -1,0 +1,89 @@
+# Profils utilisateurs, presets matériels et paliers IA.
+# User profiles, hardware presets and AI tiers.
+# Validé par catalog/schema/profile.schema.json
+
+profiles:
+  - id: novice
+    name: { fr: "Je débute", en: "I'm new to this" }
+    tagline:
+      fr: "Une bibliothèque hors-ligne prête à l'emploi, guidée pas à pas. Aucune ligne de commande."
+      en: "A ready-to-use offline library, step by step. No command line."
+    default_priorities: [essential, recommended]
+    disk_budget_ratio: 0.6
+    prefer_printable: false
+    hide_types: [git-repo, toolchain, dataset]
+    hide_categories: [dev, robotics]
+
+  - id: bunker
+    name: { fr: "Installation complète (high-tech)", en: "Full stack (high-tech)" }
+    tagline:
+      fr: "Kiwix, IA locale, miroirs Git, toolchains, capteurs, cartes. Tout ce qui tient sur le disque."
+      en: "Kiwix, local AI, Git mirrors, toolchains, sensors, maps. Everything that fits on disk."
+    default_priorities: [essential, recommended, optional]
+    disk_budget_ratio: 0.85
+    prefer_printable: false
+    hide_types: []
+    hide_categories: []
+
+  - id: lowtech
+    name: { fr: "Low-tech / papier", en: "Low-tech / paper" }
+    tagline:
+      fr: "Les mêmes savoirs en versions imprimables. Zéro dépendance électronique après impression."
+      en: "The same knowledge as printable documents. No electronics needed once printed."
+    default_priorities: [essential]
+    disk_budget_ratio: 0.3
+    prefer_printable: true
+    hide_types: [ai-model, git-repo, toolchain, software, dataset, map]
+    hide_categories: [dev, robotics, ai, platform]
+
+hardware_presets:
+  - id: laptop-usb-ssd
+    name: { fr: "PC/Mac portable + SSD USB (1 To)", en: "Laptop + 1 TB USB SSD" }
+    description:
+      fr: "La bibliothèque vit sur un SSD externe qu'on branche sur n'importe quel ordinateur."
+      en: "The library lives on an external SSD you can plug into any computer."
+    assumed: { disk_gb: 900, ram_gb: 16, vram_gb: 0, arch: x64 }
+  - id: raspberry-pi-5
+    name: { fr: "Raspberry Pi 5 + SSD", en: "Raspberry Pi 5 + SSD" }
+    description:
+      fr: "Serveur familial basse consommation, toujours allumé, accessible en Wi-Fi local."
+      en: "Low-power always-on family server, reachable over local Wi-Fi."
+    assumed: { disk_gb: 450, ram_gb: 8, vram_gb: 0, arch: arm64, os: linux }
+  - id: desktop-gpu
+    name: { fr: "PC fixe avec GPU", en: "Desktop with a GPU" }
+    description:
+      fr: "Poste de travail avec carte graphique : IA locale confortable, modèles 14B–32B."
+      en: "Workstation with a graphics card: comfortable local AI, 14B–32B models."
+    assumed: { disk_gb: 1800, ram_gb: 32, vram_gb: 12, arch: x64 }
+  - id: old-laptop
+    name: { fr: "Vieux portable (8 Go RAM, 256 Go)", en: "Old laptop (8 GB RAM, 256 GB)" }
+    description:
+      fr: "Le strict nécessaire : Wikipédia sans images, médecine, eau, premiers secours, un petit modèle IA."
+      en: "The bare essentials: Wikipedia without pictures, medicine, water, first aid, a small AI model."
+    assumed: { disk_gb: 150, ram_gb: 8, vram_gb: 0, arch: x64 }
+
+# Paliers IA : le recommandeur prend le plus grand palier satisfait par la RAM (ou la VRAM si GPU).
+# Le premier modèle de chaque palier est le modèle de chat par défaut ; les suivants sont proposés.
+ai_tiers:
+  # Paliers revus le 2026-09-11 (docs/fr/MODELES.md) : Qwen3.5 multimodal à toutes les tailles,
+  # MoE 35B-A3B dès 32 Go sans GPU, reclasseur et OCR à partir de 16 Go.
+  - id: tiny
+    min_ram_gb: 4
+    min_vram_gb: null
+    models: [ollama-qwen3-1-7b, ollama-nomic-embed-text]
+  - id: small
+    min_ram_gb: 8
+    min_vram_gb: null
+    models: [ollama-qwen3-5-4b, ollama-gemma3-4b, ollama-nomic-embed-text]
+  - id: medium
+    min_ram_gb: 16
+    min_vram_gb: 8
+    models: [ollama-qwen3-5-9b, ollama-qwen2-5-coder-7b, ollama-bge-m3, qwen3-reranker-0-6b, ollama-deepseek-ocr]
+  - id: large
+    min_ram_gb: 32
+    min_vram_gb: 12
+    models: [ollama-qwen3-5-35b-a3b, ollama-qwen3-6-27b, ollama-qwen3-14b, ollama-bge-m3, qwen3-reranker-0-6b, ollama-deepseek-ocr]
+  - id: xlarge
+    min_ram_gb: 64
+    min_vram_gb: 24
+    models: [ollama-qwen3-6-27b, ollama-qwen3-5-35b-a3b, ollama-qwen3-32b, ollama-gemma3-27b, ollama-qwen2-5-coder-32b, ollama-bge-m3, qwen3-reranker-0-6b, ollama-deepseek-ocr]

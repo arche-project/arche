@@ -1,0 +1,93 @@
+# Mise à jour automatique du catalogue : lundi et jeudi 04:00 UTC (et à la demande).
+# Si le catalogue change, ouvre (ou met à jour) une PR "catalog/auto-update" qu'un humain relit et fusionne.
+# Le robot ne fusionne JAMAIS (audit erreur 7, M2-3) : si source.*, checksum, size_bytes, license ou index.url/sha256
+# changent, la PR porte l'étiquette `catalog-sensitive` et son corps commence par le tableau de ces champs.
+# Automatic catalog update (Mon/Thu 04:00 UTC, on demand). Opens/updates a PR; never merges it. Sensitive
+# fields (url, checksum, size, licence) are labelled `catalog-sensitive` and listed at the top of the PR body.
+name: catalog-update
+
+on:
+  schedule:
+    - cron: "0 4 * * 1,4"   # lundi et jeudi : deux passes par semaine, pour que « souvent mis à jour » soit vrai
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Ne rien écrire, seulement rapporter / report only"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: catalog-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run all checkers
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # 5 000 req/h pour l'API GitHub
+        run: npx tsx scripts/catalog/update-all.ts ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Full schema validation (Ajv)
+        run: npx tsx scripts/catalog/check-schema-ajv.ts
+
+      # Le vrai garde-fou : après avoir tout vérifié, au moins 70 % des ressources suivies doivent
+      # porter une date `checked` du jour ou de leur intervalle. En dessous, les vérificateurs ont
+      # échoué en silence (quota API, réseau, format amont changé) et le workflow doit le dire.
+      # The real gate: after running every checker, ≥ 70 % of tracked resources must be fresh.
+      - name: Freshness gate
+        run: |
+          node --import tsx src/cli.ts catalog freshness --json > .catalog-reports/freshness.json
+          node --import tsx src/cli.ts catalog freshness --stale | tee .catalog-reports/freshness.md
+          node --import tsx src/cli.ts catalog freshness --min 70
+
+      - name: Regenerate flat index (published for third-party tools)
+        run: mkdir -p public && node --import tsx src/cli.ts catalog index > public/catalog.json
+
+      # Champs sensibles (url, checksum, size, licence, index) : comparés à HEAD (l'état avant les
+      # vérificateurs), écrits en tête de PR_BODY.md, et `sensitive=true` pose l'étiquette ci-dessous.
+      # Sensitive fields vs HEAD: prepended to the PR body; `sensitive=true` drives the label below.
+      - name: Sensitive fields (url, checksum, size, licence)
+        id: sensitive
+        run: npx tsx scripts/catalog/sensitive-diff.ts --base HEAD --pr-body .catalog-reports/PR_BODY.md
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-reports
+          path: .catalog-reports/
+
+      - name: Create or update the PR
+        if: ${{ !inputs.dry_run }}
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: catalog/auto-update
+          delete-branch: true
+          commit-message: "catalog: automatic update (${{ github.run_id }})"
+          title: "catalog: mise à jour automatique / automatic update"
+          body-path: .catalog-reports/PR_BODY.md
+          labels: ${{ steps.sensitive.outputs.sensitive == 'true' && 'catalog, automated, catalog-sensitive' || 'catalog, automated' }}
+          add-paths: |
+            catalog/**
+            public/catalog.json
+          # Le mainteneur relit ; une PR `catalog-sensitive` attend deux paires d'yeux (CONTRIBUTING.md).
+          # Remplacer par un handle ou une team.
+          reviewers: florianclabau

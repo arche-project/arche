@@ -1,0 +1,67 @@
+# Type de projet : la maison bioclimatique — « j'ai telles et telles ressources à disposition ».
+# Project type: the bioclimatic house. Schéma et règles : ADR 0010.
+
+id: maison-bioclimatique
+name: { fr: "Maison bioclimatique : concevoir avec ce qu'on a", en: "Bioclimatic house: design with what is at hand" }
+scenario:
+  fr: "J'ai besoin de construire une maison bioclimatique. J'ai tel terrain, tels matériaux, tels outils et telles compétences à disposition. Aide-moi à la concevoir."
+  en: "I need to build a bioclimatic house. I have this land, these materials, these tools and these skills available. Help me design it."
+status: recipe
+
+inventory:
+  required: [ site, materials, people ]
+  recommended: [ tools, machines, climate, budget_days ]
+
+corpus:
+  - appropedia-en
+  - appropedia-energy-water-plans
+  - git-lowtech-lab
+  - lowtech-magazine-solar
+  - energypedia-en
+  - git-energyplus
+  - sweethome3d
+  - git-freecad
+  - stackexchange-diy
+  - stackexchange-engineering
+  - stackexchange-sustainability
+  - wikipedia-fr-nopic
+  - wikihow-fr
+
+solvers: [ solaire, bois_chauffage, eau_pluie, citerne ]
+generators: [ openscad, mermaid, graphviz ]
+
+deliverables:
+  - id: implantation
+    title: { fr: "Implantation : orientation, masques solaires, vents, pente, eau", en: "Siting: orientation, solar masks, winds, slope, water" }
+    format: [ md ]
+    by: assistant
+  - id: enveloppe
+    title: { fr: "Enveloppe : parois, isolation, inertie, vitrages — dimensionnées par calculateur", en: "Envelope: walls, insulation, thermal mass, glazing — sized by calculator" }
+    format: [ md, csv ]
+    by: solver
+  - id: plan
+    title: { fr: "Plan de masse et plans (Sweet Home 3D / FreeCAD), pièces paramétriques (OpenSCAD)", en: "Site plan and floor plans (Sweet Home 3D / FreeCAD), parametric parts (OpenSCAD)" }
+    format: [ sh3d, FCStd, scad ]
+    by: human
+  - id: materiaux
+    title: { fr: "Quantitatif : ce que l'inventaire couvre, ce qui manque, les substitutions locales (terre, paille, bois, pierre)", en: "Bill of materials: what the inventory covers, what is missing, local substitutions (earth, straw, wood, stone)" }
+    format: [ md, csv ]
+    by: solver
+  - id: phasage
+    title: { fr: "Phasage du chantier en fonction des bras et de la saison", en: "Build phasing by available hands and season" }
+    format: [ md, mermaid ]
+    by: assistant
+
+gates:
+  - fr: "Tout élément porteur (poutre, linteau, fondation, charpente) est dimensionné par un humain qualifié ou une abaque citée ; l'assistant donne les ordres de grandeur et la source, jamais la section finale."
+    en: "Every load-bearing element (beam, lintel, foundation, roof frame) is sized by a qualified human or a cited table; the assistant gives orders of magnitude and the source, never the final section."
+  - fr: "Feu, fumées, électricité : les règles de sécurité minimales (distances, tirage, section de câble) viennent des calculateurs et des fiches, pas du modèle."
+    en: "Fire, flue gases, electricity: minimum safety rules (clearances, draught, cable gauge) come from calculators and sheets, not from the model."
+
+never:
+  - fr: "Prétendre qu'un plan est conforme à une réglementation : Arche est fait pour un monde où elle ne répond plus, et le dit."
+    en: "Claim a plan complies with a building code: Arche is built for a world where the code no longer answers, and says so."
+
+limits:
+  fr: "Le calcul thermique fin (EnergyPlus) demande un fichier météo local et une modélisation que le MVP n'automatise pas ; le MVP donne les règles bioclimatiques chiffrées (surface vitrée sud, inertie, isolation) via calculateurs et renvoie aux plans de référence."
+  en: "Fine thermal simulation (EnergyPlus) needs a local weather file and a model the MVP does not automate; the MVP gives quantified bioclimatic rules (south glazing area, thermal mass, insulation) via calculators and points to reference plans."

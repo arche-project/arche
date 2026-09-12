@@ -1,0 +1,33 @@
+# Configuration déclarative d'Arche (mode expert). Copier en arche.yaml puis :
+#   arche plan --config arche.yaml          # aperçu, sans rien télécharger
+#   arche download --config arche.yaml -y   # non-interactif, scriptable, reprend là où il s'est arrêté
+#
+# Declarative Arche config (expert mode). Copy to arche.yaml then:
+#   arche plan --config arche.yaml          # dry run
+#   arche download --config arche.yaml -y   # non-interactive, scriptable, resumes where it stopped
+
+library: /media/usb/arche          # Windows : D:\arche
+profile: bunker                    # novice | bunker | lowtech
+languages: [fr, en]                # ordre = préférence
+lang: fr                           # langue de l'interface
+
+# Paquets thématiques (voir catalog/bundles.yaml). "core" est toujours conseillé.
+bundles: [core, health, homestead, ai, maker, comms-weather, maps, dev]
+
+# Ressources forcées / exclues par id (voir catalog/resources/*.yaml)
+include: [wikipedia-fr-maxi, ollama-qwen2-5-coder-14b]
+exclude: [survivor-library-en, stackoverflow]
+
+# Budget disque explicite (Go). Sinon : espace libre × disk_budget_ratio du profil.
+disk_budget_gb: 1500
+
+# Priorités autorisées pour la sélection automatique.
+priorities: [essential, recommended, optional]
+
+serve:
+  port: 8765          # interface Arche
+  kiwix_port: 8080    # kiwix-serve
+  bind: 0.0.0.0       # 0.0.0.0 pour servir tout le réseau local (Pi), 127.0.0.1 pour la machine seule
+
+ollama:
+  host: http://127.0.0.1:11434

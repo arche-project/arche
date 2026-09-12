@@ -1,0 +1,273 @@
+# Recettes de construction des ZIM hébergés par Arche (source.kind: arche-hosted).
+# Recipes for the ZIMs Arche builds and hosts.
+#
+# Règle d'or : une recette ne tourne QUE si `permission` vaut `license` (la licence seule autorise la publication)
+# ou `written` (accord écrit archivé dans docs/permissions/<id>.md). `pending` et `none` = construction refusée par le workflow.
+# Golden rule: a recipe only runs when `permission` is `license` or `written`. `pending`/`none` are refused by the workflow.
+#
+# tool: mwoffliner (MediaWiki, via l'API — propre et incrémental) | zimit (n'importe quel site, crawl navigateur) | zimwriterfs (dossier HTML)
+# Le workflow zim-build.yml lit ce fichier, construit dans GitHub Actions, envoie sur Internet Archive, puis ouvre une PR
+# qui met à jour l'entrée de catalogue `resource` avec l'URL IA, la taille, le sha256, la date.
+
+- id: opensourceecology-en
+  resource: git-open-source-ecology          # id de la ressource de catalogue à mettre à jour / catalog resource to update
+  tool: mwoffliner
+  url: https://wiki.opensourceecology.org
+  lang: eng
+  name: opensourceecology_en_all
+  title: "Open Source Ecology"
+  description: "Global Village Construction Set: 50 open-source industrial machines"
+  license: CC-BY-SA-4.0
+  permission: license
+  schedule: quarterly
+  ia_item: arche-opensourceecology-en
+  mwoffliner_args: ["--format=nopic", "--format=novid:maxi"]
+  size_estimate_gb: 1.5
+
+- id: lowtechlab-fr
+  resource: git-lowtech-lab
+  tool: mwoffliner
+  url: https://wiki.lowtechlab.org
+  lang: fra
+  name: lowtechlab_fr_all
+  title: "Low-tech Lab"
+  description: "Tutoriels low-tech : énergie, eau, alimentation, habitat, hygiène"
+  license: CC-BY-NC-SA-4.0
+  permission: pending                         # NC : demander l'accord écrit de l'association avant toute publication
+  permission_ref: docs/permissions/lowtechlab-fr.md
+  schedule: quarterly
+  ia_item: arche-lowtechlab-fr
+  mwoffliner_args: ["--format=novid:maxi"]
+  size_estimate_gb: 2
+
+- id: reprap-en
+  resource: reprap-wiki
+  tool: mwoffliner
+  url: https://reprap.org
+  lang: eng
+  name: reprap_en_all
+  title: "RepRap"
+  description: "Self-replicating open 3D printers"
+  license: GFDL-1.2-or-later
+  permission: license
+  schedule: yearly
+  ia_item: arche-reprap-en
+  mwoffliner_args: ["--format=novid:maxi"]
+  size_estimate_gb: 2
+
+- id: farmhack-en
+  resource: git-farm-hack
+  tool: zimit
+  url: https://farmhack.org/tools
+  lang: eng
+  name: farmhack_en_all
+  title: "Farm Hack"
+  description: "Open-source farm tools"
+  license: unknown
+  permission: none                            # licence non établie : ne pas construire tant que ce n'est pas clarifié
+  schedule: yearly
+  ia_item: arche-farmhack-en
+  zimit_args: ["--scopeType", "host", "--workers", "4", "--sizeLimit", "4000000000"]
+  size_estimate_gb: 0.5
+
+- id: enable-en
+  resource: enable-prosthetics
+  tool: zimit
+  url: https://enablingthefuture.org
+  lang: eng
+  name: enablingthefuture_en_all
+  title: "e-NABLE"
+  description: "3D-printed prosthetic hands and arms"
+  license: mixed
+  permission: pending
+  schedule: yearly
+  ia_item: arche-enable-en
+  zimit_args: ["--scopeType", "host", "--workers", "4"]
+  size_estimate_gb: 1
+
+- id: inmoov-mul
+  resource: git-inmoov
+  tool: zimit
+  url: https://inmoov.fr
+  lang: mul
+  name: inmoov_mul_all
+  title: "InMoov"
+  description: "Open-source 3D-printed life-size humanoid"
+  license: CC-BY-NC-3.0
+  permission: pending
+  schedule: yearly
+  ia_item: arche-inmoov-mul
+  zimit_args: ["--scopeType", "host", "--workers", "4", "--sizeLimit", "6000000000"]
+  size_estimate_gb: 2
+
+# Contenus produits par Arche lui-même (zimwriterfs) : fiches imprimables + guides, pour les lire dans Kiwix comme le reste.
+- id: arche-docs-mul
+  resource: arche-docs
+  tool: zimwriterfs
+  url: https://github.com/arche-project/arche/tree/main/docs
+  lang: mul
+  name: arche_docs_mul_all
+  title: "Arche — guides et fiches"
+  description: "Guides Arche FR/EN et fiches imprimables"
+  license: CC-BY-SA-4.0
+  permission: license
+  schedule: monthly
+  ia_item: arche-docs-mul
+  source_dir: docs
+  size_estimate_gb: 0.01
+
+# --- Agriculture / énergie (ajoutés 2026-09-11) ---
+- id: atelierpaysan-fr
+  resource: atelier-paysan
+  tool: zimit
+  url: https://www.latelierpaysan.org/Outils-et-plans
+  lang: fra
+  name: atelierpaysan_fr_all
+  title: "L'Atelier Paysan"
+  description: "Plans d'outils agricoles en autoconstruction"
+  license: CC-BY-NC-SA-4.0
+  permission: pending                         # coopérative en liquidation : demander vite, et copie personnelle sans attendre
+  permission_ref: docs/permissions/atelierpaysan-fr.md
+  schedule: asap                              # construit à chaque run dès que la permission est enregistrée
+  ia_item: arche-atelierpaysan-fr
+  zimit_args: ["--scopeType", "host", "--workers", "4", "--sizeLimit", "8000000000"]
+  size_estimate_gb: 2
+
+- id: practicalplants-en
+  resource: practical-plants
+  tool: mwoffliner
+  url: https://practicalplants.org
+  lang: eng
+  name: practicalplants_en_all
+  title: "Practical Plants"
+  description: "Encyclopedia of useful plants for permaculture"
+  license: CC-BY-NC-SA-3.0
+  permission: pending
+  schedule: asap
+  ia_item: arche-practicalplants-en
+  mwoffliner_args: ["--format=novid:maxi"]
+  size_estimate_gb: 1
+
+- id: pfaf-en
+  resource: pfaf-database
+  tool: zimit
+  url: https://pfaf.org
+  lang: eng
+  name: pfaf_en_all
+  title: "Plants For A Future"
+  description: "7,000 edible and medicinal plants (text CC BY 4.0)"
+  license: CC-BY-4.0
+  permission: license                         # texte CC BY ; images exclues (CC BY-NC-ND)
+  schedule: yearly
+  ia_item: arche-pfaf-en
+  zimit_args: ["--scopeType", "host", "--workers", "2", "--exclude", ".*\\.(jpg|jpeg|png|gif)$", "--sizeLimit", "3000000000"]
+  size_estimate_gb: 0.5
+
+- id: solarcooking-en
+  resource: solar-cooking-wiki
+  tool: zimit
+  url: https://solarcooking.fandom.com/wiki/Category:Solar_cooker_plans
+  lang: eng
+  name: solarcooking_en_all
+  title: "Solar Cooking"
+  description: "Solar cooker designs and plans"
+  license: CC-BY-SA-3.0
+  permission: pending                         # licence Fandom présumée CC BY-SA 3.0 : confirmer sur la page Copyrights
+  schedule: yearly
+  ia_item: arche-solarcooking-en
+  zimit_args: ["--scopeType", "host", "--workers", "4", "--sizeLimit", "4000000000"]
+  size_estimate_gb: 1
+
+- id: e4c-en
+  resource: e4c-solutions-library
+  tool: zimit
+  url: https://www.engineeringforchange.org/solutions/
+  lang: eng
+  name: e4c_solutions_en_all
+  title: "Engineering for Change — Solutions Library"
+  description: "Vetted appropriate-technology products"
+  license: CC-BY-SA-3.0
+  permission: license
+  schedule: yearly
+  ia_item: arche-e4c-en
+  zimit_args: ["--scopeType", "prefix", "--workers", "4", "--sizeLimit", "4000000000"]
+  size_estimate_gb: 0.5
+
+# --- Médecine d'appoint : seules les sources à licence redistribuable (les Hesperian exigent un accord écrit) ---
+- id: who-mcpc-en
+  resource: who-mcpc-obstetric-complications
+  tool: zimwriterfs
+  url: https://www.who.int/publications/i/item/9789241565493
+  lang: eng
+  name: who_mcpc_mul_all
+  title: "WHO — Managing Complications in Pregnancy and Childbirth"
+  description: "Obstetric emergency manual (CC BY-NC-SA 3.0 IGO)"
+  license: CC-BY-NC-SA-3.0-IGO
+  permission: license
+  schedule: yearly
+  ia_item: arche-who-mcpc
+  source_dir: build/who-mcpc          # PDF EN+FR téléchargés puis convertis
+  size_estimate_gb: 0.01
+
+- id: wtnp-en
+  resource: where-there-is-no-psychiatrist
+  tool: zimit
+  url: https://www.cambridge.org/core/books/where-there-is-no-psychiatrist/47578A845CAFC7E23A181749A4190B54
+  lang: eng
+  name: wtnp_en_all
+  title: "Where There Is No Psychiatrist"
+  description: "Mental health care without a specialist (CC BY-NC-ND 4.0, verbatim only)"
+  license: CC-BY-NC-ND-4.0
+  permission: license
+  schedule: yearly
+  ia_item: arche-wtnp-en
+  zimit_args: ["--scopeType", "page", "--workers", "2"]
+  size_estimate_gb: 0.05
+
+- id: hesperian-fr
+  resource: hesperian-book-for-midwives
+  tool: mwoffliner
+  url: https://fr.hesperian.org
+  lang: fra
+  name: hesperian_fr_all
+  title: "Hesperian — HealthWiki francophone"
+  description: "Guide des sages-femmes, Là où les femmes n'ont pas de docteur, Là où il n'y a pas de dentiste (FR)"
+  license: LicenseRef-Hesperian-Open-Copyright
+  permission: pending                         # accord écrit OBLIGATOIRE pour tout format numérique — voir docs/permissions/hesperian-fr.md
+  permission_ref: docs/permissions/hesperian-fr.md
+  schedule: asap
+  ia_item: arche-hesperian-fr
+  mwoffliner_args: ["--format=novid:maxi"]
+  size_estimate_gb: 0.5
+
+- id: mycodb-fr
+  resource: mycodb
+  tool: zimit
+  url: https://www.mycodb.fr/
+  lang: fra
+  name: mycodb_fr_all
+  title: "MycoDB"
+  description: "Base mycologique francophone : 8 500 espèces, clés, photos"
+  license: unknown
+  permission: pending                         # aucune licence affichée : demander à l'auteur (Guillaume Péan)
+  permission_ref: docs/permissions/mycodb-fr.md
+  schedule: yearly
+  ia_item: arche-mycodb-fr
+  zimit_args: ["--scopeType", "host", "--workers", "2", "--sizeLimit", "8000000000"]
+  size_estimate_gb: 3
+
+# --- Développement / Development (ajouté 2026-09-11) ---
+- id: ros2-docs-en
+  resource: ros2-docs
+  tool: zimit
+  url: https://docs.ros.org/en/jazzy/
+  lang: eng
+  name: ros2_docs_en_all
+  title: "ROS 2 documentation (Jazzy)"
+  description: "Official ROS 2 docs: installation, tutorials, concepts"
+  license: CC-BY-4.0
+  permission: license
+  schedule: quarterly                          # la distribution change tous les deux ans ; l'URL suit `version` de la ressource
+  ia_item: arche-ros2-docs-en
+  zimit_args: ["--scopeType", "prefix", "--workers", "4", "--sizeLimit", "3000000000"]
+  size_estimate_gb: 0.5

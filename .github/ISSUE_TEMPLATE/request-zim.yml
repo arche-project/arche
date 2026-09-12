@@ -1,0 +1,26 @@
+name: "Demander un ZIM / Request a ZIM"
+description: "Un site utile qui n'existe pas en ZIM : Arche peut le construire si la licence le permet."
+labels: [zim-request]
+body:
+  - type: input
+    id: url
+    attributes: { label: "URL du site / site URL" }
+    validations: { required: true }
+  - type: dropdown
+    id: kind
+    attributes: { label: "Type de site / site type", options: ["MediaWiki (wiki)", "Site classique", "Forum", "Documentation"] }
+    validations: { required: true }
+  - type: input
+    id: license
+    attributes: { label: "Licence du contenu / content license", placeholder: "CC BY-SA, CC BY-NC-SA, aucune…" }
+    validations: { required: true }
+  - type: input
+    id: contact
+    attributes: { label: "Contact de l'éditeur (pour demander l'accord si nécessaire) / publisher contact" }
+  - type: textarea
+    id: why
+    attributes: { label: "Pourquoi ce contenu compte hors-ligne / why it matters offline" }
+    validations: { required: true }
+  - type: markdown
+    attributes:
+      value: "Avant d'ouvrir : vérifiez sur https://library.kiwix.org que le ZIM n'existe pas déjà, et pensez à demander à Kiwix d'abord (openzim/zim-requests). Voir docs/fr/HEBERGEMENT.md."

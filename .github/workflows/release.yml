@@ -1,0 +1,43 @@
+# Sur tag vX.Y.Z : construit les exécutables autonomes (Node SEA) pour Linux x64/arm64, macOS arm64, Windows x64
+# et les attache à la release GitHub. Un néophyte télécharge un seul fichier, sans installer Node.
+# On tag vX.Y.Z: builds self-contained executables and attaches them to the GitHub release.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { os: ubuntu-latest,     name: linux-x64 }
+          - { os: ubuntu-24.04-arm,  name: linux-arm64 }
+          - { os: macos-latest,      name: macos-arm64 }
+          - { os: windows-latest,    name: windows-x64 }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci && npm run build
+      - run: npm i -D esbuild postject
+      - run: npm run package:sea
+        shell: bash
+      - name: Package
+        shell: bash
+        run: |
+          mkdir -p out
+          cp -r catalog locales docs README.md LICENSE out/
+          cp build/arche* out/ 2>/dev/null || true
+          cd out && (command -v zip >/dev/null && zip -r ../arche-${{ matrix.name }}.zip . || tar czf ../arche-${{ matrix.name }}.tar.gz .)
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            arche-${{ matrix.name }}.zip
+            arche-${{ matrix.name }}.tar.gz
+          generate_release_notes: true

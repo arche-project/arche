@@ -1,0 +1,276 @@
+# Bibliothèques et registres de développement, hors-ligne.
+# Development libraries and package registries, offline.
+#
+# Principe : un dépôt de code sans ses dépendances ne se compile pas. Ce fichier couvre ce qu'il
+# faut pour qu'un `npm install`, un `pip install`, un `cargo build` ou un `apt install ros-jazzy-*`
+# réussissent sans réseau. Chaque entrée suit la DERNIÈRE VERSION STABLE de son écosystème via
+# `update.tracker` (npm, pypi, crates, dockerhub, rosdistro, node-lts, debian) — jamais « la plus
+# récente ». Voir src/core/versions.ts et docs/fr/FRAICHEUR.md.
+#
+# Principle: a code repo without its dependencies does not build. Every entry tracks the LATEST
+# STABLE of its ecosystem, never merely the newest.
+
+# --- Runtimes : sans eux, rien ne tourne / Runtimes: nothing runs without them -----------------
+
+- id: node-lts
+  type: software
+  category: dev
+  name: { fr: "Node.js LTS (binaires autonomes)", en: "Node.js LTS (standalone binaries)" }
+  description:
+    fr: "Node.js en ligne de maintenance longue (LTS), archives autonomes pour Linux x64/arm64, macOS et Windows. C'est ce qui fait tourner Arche lui-même : à mettre sur le disque avant tout le reste."
+    en: "Node.js long-term-support line, standalone archives for Linux x64/arm64, macOS and Windows. It is what runs Arche itself: put it on the disk before anything else."
+  tags: [ nodejs, runtime, javascript ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 0.3
+  source: { kind: http, url: https://nodejs.org/dist/index.json, homepage: https://nodejs.org }
+  license: { spdx: MIT, redistribution: allowed }
+  update: { tracker: node-lts, stability: lts, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Télécharger les archives de la version affichée dans `version` pour chaque plateforme cible : https://nodejs.org/dist/<version>/. Le tracker suit la LTS, pas la version « current »."
+    en: "Download the archives of the version shown in `version` for each target platform from https://nodejs.org/dist/<version>/. The tracker follows the LTS line, not 'current'."
+  runtime: static-binary
+
+- id: python-standalone
+  type: software
+  category: dev
+  name: { fr: "Python autonome (python-build-standalone)", en: "Standalone Python (python-build-standalone)" }
+  description:
+    fr: "Interpréteurs Python prêts à décompresser, sans installation système, pour Linux, macOS et Windows. C'est ce qu'utilise uv. Indispensable pour Aider, Open WebUI, ESPHome et les scripts de la bibliothèque sur une machine vierge."
+    en: "Ready-to-unpack Python interpreters, no system install, for Linux, macOS and Windows. What uv uses. Required for Aider, Open WebUI, ESPHome and the library's scripts on a bare machine."
+  tags: [ python, runtime ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-release, github_repo: astral-sh/python-build-standalone, url: https://github.com/astral-sh/python-build-standalone/releases, github_asset_pattern: "cpython-3\\.1[2-9].*install_only.*\\.tar\\.gz$" }
+  license: { spdx: PSF-2.0, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: rustup-offline
+  type: software
+  category: dev
+  name: { fr: "Rust (installeurs autonomes)", en: "Rust (standalone installers)" }
+  description:
+    fr: "Toolchain Rust stable en archives autonomes (`rust-<version>-<cible>.tar.xz`), installable sans réseau. Nécessaire pour compiler Meshtastic (partiellement), SatDump, panamax et un nombre croissant d'outils."
+    en: "Stable Rust toolchain as standalone archives (`rust-<version>-<target>.tar.xz`), installable offline. Needed to build SatDump, panamax and a growing number of tools."
+  tags: [ rust, toolchain ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1.5
+  source: { kind: github-release, github_repo: rust-lang/rust, url: https://forge.rust-lang.org/infra/other-installation-methods.html, homepage: https://www.rust-lang.org }
+  license: { spdx: "MIT OR Apache-2.0", redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Archives sur https://static.rust-lang.org/dist/rust-<version>-<cible>.tar.xz. Le tag GitHub donne la version ; les archives elles-mêmes ne sont pas sur GitHub."
+    en: "Archives at https://static.rust-lang.org/dist/rust-<version>-<target>.tar.xz. The GitHub tag gives the version; the archives are not on GitHub."
+  runtime: static-binary
+
+# --- Registres de paquets : proxys-cache locaux / Package registries: local caching proxies -------
+
+- id: verdaccio
+  type: software
+  category: dev
+  name: { fr: "Verdaccio — registre npm local (cache hors-ligne)", en: "Verdaccio — local npm registry (offline cache)" }
+  description:
+    fr: "Registre npm privé qui met en cache tout ce qu'on installe à travers lui. Recette : le lancer tant que le réseau est là, faire `npm install` des projets à garder (Arche, Gitea, Open WebUI…), puis il sert tout depuis son dossier `storage/` sans réseau. Le seul moyen réaliste d'avoir « npm » hors-ligne."
+    en: "Private npm registry that caches everything installed through it. Recipe: run it while the network is up, `npm install` the projects to keep, then it serves everything from `storage/` offline. The only realistic way to have npm offline."
+  tags: [ npm, registry, cache, javascript ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 5
+  source: { kind: manual, url: https://verdaccio.org/docs/installation, homepage: https://verdaccio.org }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ node, npm ] }
+  depends_on: [ node-lts ]
+  update: { tracker: npm, package: verdaccio, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Le cache ne contient que ce qu'on a installé : Arche fournit `requirements/npm-offline.txt`, la liste des paquets à réchauffer. La taille dépend entièrement de cette liste."
+    en: "The cache only holds what was installed through it: Arche ships `requirements/npm-offline.txt`, the list of packages to warm. Size depends entirely on that list."
+  runtime: node
+
+- id: devpi
+  type: software
+  category: dev
+  name: { fr: "devpi — miroir PyPI local (cache hors-ligne)", en: "devpi — local PyPI mirror (offline cache)" }
+  description:
+    fr: "Serveur PyPI privé qui met en cache les paquets installés à travers lui, avec leurs wheels par plateforme. Complète `pip-cache` (le wheelhouse statique) quand on veut pouvoir installer des paquets non prévus à l'avance."
+    en: "Private PyPI server caching packages installed through it, with per-platform wheels. Complements `pip-cache` (the static wheelhouse) when unplanned packages must remain installable."
+  tags: [ python, pypi, registry, cache ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 8
+  source: { kind: manual, url: https://devpi.net/docs/devpi/devpi/stable/+d/quickstart-pypimirror.html, homepage: https://devpi.net }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone ]
+  update: { tracker: pypi, package: devpi-server, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  runtime: python
+
+- id: panamax
+  type: software
+  category: dev
+  name: { fr: "panamax — miroir crates.io (Rust)", en: "panamax — crates.io mirror (Rust)" }
+  description:
+    fr: "Miroir complet ou partiel de crates.io et des toolchains rustup. Un miroir complet fait ~200 Go ; en pratique on ne garde que les crates des projets à compiler."
+    en: "Full or partial mirror of crates.io and rustup toolchains. A full mirror is ~200 GB; in practice keep only the crates of the projects to build."
+  tags: [ rust, crates, registry, mirror ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 20
+  source: { kind: github-release, github_repo: panamax-rs/panamax, url: https://github.com/panamax-rs/panamax/releases, homepage: https://github.com/panamax-rs/panamax }
+  license: { spdx: "MIT OR Apache-2.0", redistribution: allowed }
+  depends_on: [ rustup-offline ]
+  update: { tracker: github-release, check_interval_days: 30 }
+  status: unverified
+  reliability: community
+  runtime: static-binary
+
+- id: athens
+  type: software
+  category: dev
+  name: { fr: "Athens — proxy de modules Go (cache hors-ligne)", en: "Athens — Go module proxy (offline cache)" }
+  description:
+    fr: "Proxy GOPROXY qui met en cache les modules Go traversés. Utile pour Gitea, Meshtastic (outils), et tout ce qui est écrit en Go."
+    en: "GOPROXY server caching every Go module fetched through it. Useful for Gitea, Meshtastic tooling and anything written in Go."
+  tags: [ go, registry, cache ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 3
+  source: { kind: github-release, github_repo: gomods/athens, url: https://github.com/gomods/athens/releases, homepage: https://docs.gomods.io }
+  license: { spdx: MIT, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 30 }
+  status: unverified
+  reliability: community
+  runtime: static-binary
+
+- id: arduino-library-index
+  type: dataset
+  category: dev
+  name: { fr: "Index des bibliothèques et cœurs Arduino", en: "Arduino library and core index" }
+  description:
+    fr: "`library_index.json` et `package_index.json` officiels, plus les archives des bibliothèques et cœurs utilisés (ESP32, AVR, RP2040) via `arduino-cli lib download` / `core download`. Sans l'index, arduino-cli ne sait même pas ce qui existe."
+    en: "Official `library_index.json` and `package_index.json`, plus the archives of the libraries and cores in use (ESP32, AVR, RP2040) via `arduino-cli lib download` / `core download`. Without the index arduino-cli does not even know what exists."
+  tags: [ arduino, esp32, electronics, index ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 4
+  source: { kind: http, url: https://downloads.arduino.cc/libraries/library_index.json, homepage: https://arduino.github.io/arduino-cli/latest/ }
+  license: { spdx: mixed, redistribution: allowed }
+  depends_on: [ toolchain-arduino-cli ]
+  update: { tracker: http-head, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+
+# --- ROS 2 : la distribution est l'unité stable / ROS 2: the distribution is the stable unit ------
+
+- id: ros2-apt-mirror
+  type: toolchain
+  category: robotics
+  name: { fr: "ROS 2 — miroir apt de la distribution LTS courante", en: "ROS 2 — apt mirror of the current LTS distribution" }
+  description:
+    fr: "Paquets Debian de la distribution ROS 2 LTS en cours (`version`), pour Ubuntu, amd64 et arm64, via apt-mirror de packages.ros.org. C'est la seule façon d'installer ROS 2 sans réseau ; les dépôts Git seuls ne suffisent pas. Le tracker suit rosdistro et signale quand la distribution passe en fin de vie ou qu'une LTS plus récente est active."
+    en: "Debian packages of the current ROS 2 LTS distribution (`version`), Ubuntu amd64 and arm64, via apt-mirror of packages.ros.org. The only way to install ROS 2 offline; Git repos alone are not enough. The tracker follows rosdistro and flags end-of-life or a newer active LTS."
+  tags: [ robotics, ros, apt, mirror ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 25
+  version: jazzy
+  source: { kind: manual, url: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html, homepage: https://packages.ros.org/ros2/ubuntu/ }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { os: [ linux ], tools: [ apt ] }
+  depends_on: [ apt-mirror-debian ]
+  update: { tracker: rosdistro, package: jazzy, stability: lts, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Une LTS ROS 2 sort les années paires en mai et vit cinq ans (Humble → 2027, Jazzy → 2029). Changer de distribution = changer `update.package` et `version` ensemble."
+    en: "A ROS 2 LTS ships in May of even years and lives five years (Humble → 2027, Jazzy → 2029). Switching distribution = changing `update.package` and `version` together."
+  runtime: none
+
+- id: ros2-docs
+  type: zim
+  category: robotics
+  name: { fr: "ROS 2 — documentation officielle (ZIM)", en: "ROS 2 — official documentation (ZIM)" }
+  description:
+    fr: "docs.ros.org pour la distribution LTS courante : installation, tutoriels, concepts, API. CC BY 4.0, construit par Arche (recette `ros2-docs-en`)."
+    en: "docs.ros.org for the current LTS distribution: installation, tutorials, concepts, API. CC BY 4.0, built by Arche (recipe `ros2-docs-en`)."
+  tags: [ robotics, ros, docs ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  version: jazzy
+  source:
+    kind: arche-hosted
+    ia_item: arche-ros2-docs-en
+    url: https://archive.org/download/arche-ros2-docs-en/ros2_docs_en_all.zim
+    torrent: https://archive.org/download/arche-ros2-docs-en/arche-ros2-docs-en_archive.torrent
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: CC-BY-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  built_from: { url: https://docs.ros.org/en/jazzy/, tool: zimit, recipe: ros2-docs-en, built_at: null, permission: license }
+  update: { tracker: rosdistro, package: jazzy, stability: lts, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+
+# --- Images de conteneurs / Container images ---------------------------------------------------
+
+- id: docker-kiwix-serve
+  type: software
+  category: dev
+  name: { fr: "Image Docker kiwix-serve", en: "kiwix-serve Docker image" }
+  description:
+    fr: "Image officielle `ghcr.io/kiwix/kiwix-serve`, exportée en archive (`skopeo copy docker://… docker-archive:kiwix-serve.tar`) pour être chargée sans registre. Le tracker suit Docker Hub, où la même image est publiée."
+    en: "Official `ghcr.io/kiwix/kiwix-serve` image, exported as an archive (`skopeo copy docker://… docker-archive:kiwix-serve.tar`) to load without a registry. Tracked on Docker Hub, where the same image is published."
+  tags: [ docker, kiwix, container ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: manual, url: https://hub.docker.com/r/kiwix/kiwix-serve, homepage: https://github.com/kiwix/kiwix-tools }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { tools: [ docker ] }
+  update: { tracker: dockerhub, package: kiwix/kiwix-serve, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  runtime: container
+
+- id: docker-gitea
+  type: software
+  category: dev
+  name: { fr: "Image Docker Gitea", en: "Gitea Docker image" }
+  description:
+    fr: "Image officielle `gitea/gitea` en archive chargeable hors-ligne. Alternative au binaire Gitea quand Docker est déjà là."
+    en: "Official `gitea/gitea` image as an offline-loadable archive. Alternative to the Gitea binary when Docker is already present."
+  tags: [ docker, git, container ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: manual, url: https://hub.docker.com/r/gitea/gitea, homepage: https://gitea.io }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ docker ] }
+  update: { tracker: dockerhub, package: gitea/gitea, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  runtime: container

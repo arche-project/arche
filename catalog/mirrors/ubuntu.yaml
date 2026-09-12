@@ -1,0 +1,27 @@
+# Ubuntu LTS — uniquement parce que ROS 2 le cible. Le miroir Ubuntu lui-même (main + universe)
+# est ici ; les paquets ros-jazzy-* viennent du dépôt packages.ros.org, recette séparée.
+id: ubuntu-lts
+resource: ubuntu-lts
+type: apt
+base_url: http://archive.ubuntu.com/ubuntu
+suite: noble                      # résolu par le tracker `ubuntu-lts` (dernière LTS supportée)
+components: [main, universe]
+architectures: [amd64]
+recommends: true                  # ROS s'attend au comportement apt par défaut
+size_estimate_gb: 12
+packages:
+  - ubuntu-desktop-minimal
+  - openssh-server
+  - git
+  - curl
+  - build-essential
+  - cmake
+  - python3-pip
+  - python3-venv
+  - python3-colcon-common-extensions
+  - python3-rosdep
+  - python3-vcstool
+  - locales
+note:
+  fr: "Pour arm64 (Pi, Jetson), l'URL de base est http://ports.ubuntu.com/ubuntu-ports — dupliquez la recette."
+  en: "For arm64 (Pi, Jetson) the base URL is http://ports.ubuntu.com/ubuntu-ports — duplicate the recipe."

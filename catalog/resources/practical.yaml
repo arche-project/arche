@@ -1,0 +1,339 @@
+# Savoirs pratiques : santé, eau, alimentation, réparation, agriculture, énergie, construction, survie.
+# Practical knowledge: health, water, food, repair, farming, energy, building, survival.
+
+- id: wikipedia-fr-medicine
+  type: zim
+  category: medical
+  name: { fr: "WikiMed FR (médecine)", en: "WikiMed FR (medicine)" }
+  description:
+    fr: "Sélection médicale de Wikipédia FR : maladies, symptômes, médicaments, anatomie. Légère et à jour."
+    en: "Medical subset of French Wikipedia: diseases, symptoms, drugs, anatomy. Small and current."
+  tags: [ medicine, health, first-aid ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 1.5
+  source: { kind: kiwix, kiwix_name: wikipedia_fr_medicine_maxi, url: https://download.kiwix.org/zim/wikipedia/wikipedia_fr_medicine_maxi.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+  printable: { available: false, note: { fr: "Voir docs/printables pour les fiches premiers secours.", en: "See docs/printables for the first-aid sheets." } }
+
+- id: mdwiki-en
+  type: zim
+  category: medical
+  name: { fr: "MDWiki / WikiMed EN", en: "MDWiki / WikiMed EN" }
+  description:
+    fr: "Encyclopédie médicale anglophone maintenue par des médecins (WikiProject Medicine)."
+    en: "English medical encyclopedia maintained by physicians (WikiProject Medicine)."
+  tags: [ medicine, health ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 2.1
+  source: { kind: kiwix, kiwix_name: mdwiki_en_all_maxi, url: https://download.kiwix.org/zim/other/mdwiki_en_all_maxi.zim, homepage: https://mdwiki.org }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: wikem-en
+  type: zim
+  category: medical
+  name: { fr: "WikEM (médecine d'urgence)", en: "WikEM (emergency medicine)" }
+  description:
+    fr: "Référence de médecine d'urgence utilisée par les urgentistes. Protocoles, doses, conduite à tenir."
+    en: "Emergency medicine reference used by ER physicians. Protocols, doses, management."
+  tags: [ medicine, emergency, protocols ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.36
+  source: { kind: kiwix, kiwix_name: wikem_en_all_maxi, url: https://download.kiwix.org/zim/other/wikem_en_all_maxi.zim, homepage: https://wikem.org }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: medlineplus-en
+  type: zim
+  category: medical
+  name: { fr: "MedlinePlus (santé grand public, EN)", en: "MedlinePlus (consumer health, EN)" }
+  description:
+    fr: "Site de santé grand public de la National Library of Medicine (US). Vulgarisé et fiable."
+    en: "Consumer health site of the US National Library of Medicine. Plain language, reliable."
+  tags: [ health, consumer ]
+  languages: [ en, es ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 1.8
+  source: { kind: kiwix, kiwix_name: medlineplus.gov_en_all, url: https://download.kiwix.org/zim/zimit/medlineplus.gov_en_all.zim }
+  license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: zimgit-post-disaster
+  type: zim
+  category: survival
+  name: { fr: "Guides post-catastrophe (zimgit)", en: "Post-disaster guides (zimgit)" }
+  description:
+    fr: "Collection de manuels de crise : abris, assainissement, gestion de camp, secours. Compilée par Kiwix."
+    en: "Collection of crisis manuals: shelter, sanitation, camp management, rescue. Compiled by Kiwix."
+  tags: [ disaster, survival, sanitation ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.62
+  source: { kind: kiwix, kiwix_name: zimgit-post-disaster_en, url: https://download.kiwix.org/zim/other/zimgit-post-disaster_en.zim }
+  license: { spdx: mixed, redistribution: unclear, note: { fr: "Licences variables selon les documents inclus (souvent gouvernementales ou ONG).", en: "Licenses vary per included document (mostly government or NGO)." } }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: curated
+
+- id: zimgit-water
+  type: zim
+  category: water
+  name: { fr: "Eau potable (zimgit)", en: "Drinking water (zimgit)" }
+  description:
+    fr: "Traitement, filtration, désinfection et stockage de l'eau en situation dégradée."
+    en: "Treatment, filtration, disinfection and storage of water in degraded conditions."
+  tags: [ water, sanitation ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.02
+  source: { kind: kiwix, kiwix_name: zimgit-water_en, url: https://download.kiwix.org/zim/other/zimgit-water_en.zim }
+  license: { spdx: mixed, redistribution: unclear }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: curated
+
+- id: zimgit-medicine
+  type: zim
+  category: medical
+  name: { fr: "Médecine de terrain (zimgit)", en: "Field medicine (zimgit)" }
+  description:
+    fr: "Manuels de médecine sans infrastructure, dont « Where There Is No Doctor » et « Where There Is No Dentist »."
+    en: "Medicine-without-infrastructure manuals, including 'Where There Is No Doctor' and 'Where There Is No Dentist'."
+  tags: [ medicine, hesperian, first-aid ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.07
+  source: { kind: kiwix, kiwix_name: zimgit-medicine_en, url: https://download.kiwix.org/zim/other/zimgit-medicine_en.zim }
+  license: { spdx: mixed, redistribution: unclear, note: { fr: "Les manuels Hesperian sont sous licence ouverte (usage non commercial). Vérifier avant reproduction.", en: "Hesperian manuals are under an open non-commercial license. Check before copying." } }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+  printable: { available: true, url: https://hesperian.org/books-and-resources/, note: { fr: "Hesperian vend les versions papier ; les PDF FR (« Là où il n'y a pas de docteur ») existent.", en: "Hesperian sells print editions; French PDFs ('Là où il n'y a pas de docteur') exist." } }
+
+- id: zimgit-food-preparation
+  type: zim
+  category: food
+  name: { fr: "Préparation et conservation des aliments (zimgit)", en: "Food preparation and preservation (zimgit)" }
+  description:
+    fr: "Conservation, fermentation, séchage, mise en conserve, cuisson sans électricité."
+    en: "Preservation, fermentation, drying, canning, cooking without electricity."
+  tags: [ food, preservation ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.09
+  source: { kind: kiwix, kiwix_name: zimgit-food-preparation_en, url: https://download.kiwix.org/zim/other/zimgit-food-preparation_en.zim }
+  license: { spdx: mixed, redistribution: unclear }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: curated
+
+- id: zimgit-knots
+  type: zim
+  category: survival
+  name: { fr: "Nœuds (zimgit)", en: "Knots (zimgit)" }
+  description: { fr: "Nœuds utiles illustrés.", en: "Illustrated useful knots." }
+  tags: [ knots, outdoors ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.03
+  source: { kind: kiwix, kiwix_name: zimgit-knots_en, url: https://download.kiwix.org/zim/other/zimgit-knots_en.zim }
+  license: { spdx: mixed, redistribution: unclear }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: curated
+
+- id: ifixit-fr
+  type: zim
+  category: fabrication
+  name: { fr: "iFixit FR (réparation)", en: "iFixit FR (repair)" }
+  description:
+    fr: "Guides de réparation illustrés pas à pas : téléphones, ordinateurs, électroménager, vélos, outils."
+    en: "Step-by-step illustrated repair guides: phones, computers, appliances, bikes, tools."
+  tags: [ repair, howto ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 3.4
+  source: { kind: kiwix, kiwix_name: ifixit_fr_all, url: https://download.kiwix.org/zim/ifixit/ifixit_fr_all.zim, homepage: https://fr.ifixit.com }
+  license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: ifixit-en
+  type: zim
+  category: fabrication
+  name: { fr: "iFixit EN (réparation)", en: "iFixit EN (repair)" }
+  description: { fr: "Version anglophone, plus complète.", en: "English version, more complete." }
+  tags: [ repair, howto ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 3.3
+  source: { kind: kiwix, kiwix_name: ifixit_en_all, url: https://download.kiwix.org/zim/ifixit/ifixit_en_all.zim }
+  license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: appropedia-en
+  type: zim
+  category: agriculture
+  name: { fr: "Appropedia (technologies appropriées)", en: "Appropedia (appropriate technology)" }
+  description:
+    fr: "Wiki de la technologie appropriée : eau, énergie, agriculture, construction, santé dans les pays à faibles ressources."
+    en: "Appropriate-technology wiki: water, energy, farming, building, health in low-resource settings."
+  tags: [ appropriate-technology, permaculture, energy, water ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.56
+  source: { kind: kiwix, kiwix_name: appropedia_en_all_maxi, url: https://download.kiwix.org/zim/other/appropedia_en_all_maxi.zim, homepage: https://www.appropedia.org }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: energypedia-en
+  type: zim
+  category: energy
+  name: { fr: "Energypedia (énergie off-grid)", en: "Energypedia (off-grid energy)" }
+  description:
+    fr: "Solaire, micro-hydraulique, biogaz, mini-réseaux : le wiki des énergies renouvelables en zones non raccordées."
+    en: "Solar, micro-hydro, biogas, mini-grids: the wiki for renewable energy in off-grid areas."
+  tags: [ energy, solar, off-grid ]
+  languages: [ en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.76
+  source: { kind: kiwix, kiwix_name: energypedia_en_all_maxi, url: https://download.kiwix.org/zim/other/energypedia_en_all_maxi.zim, homepage: https://energypedia.info }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: lowtech-magazine-solar
+  type: zim
+  category: energy
+  name: { fr: "Low-tech Magazine (édition solaire)", en: "Low-tech Magazine (solar edition)" }
+  description:
+    fr: "Articles de fond sur les technologies sobres : chauffage, transport, fabrication, énergie musculaire. Multilingue (FR inclus)."
+    en: "In-depth articles on low-tech: heating, transport, making, human power. Multilingual (FR included)."
+  tags: [ low-tech, energy, essays ]
+  languages: [ mul, en, fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.67
+  source: { kind: kiwix, kiwix_name: solar.lowtechmagazine.com_mul_all, url: https://download.kiwix.org/zim/zimit/solar.lowtechmagazine.com_mul_all.zim, homepage: https://solar.lowtechmagazine.com }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: curated
+
+- id: cuisine-libre-fr
+  type: zim
+  category: food
+  name: { fr: "Cuisine Libre (recettes FR)", en: "Cuisine Libre (French recipes)" }
+  description: { fr: "Recettes sous licence libre, cuisine de saison et de conservation.", en: "Free-licensed recipes, seasonal and preservation cooking." }
+  tags: [ food, recipes ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.25
+  source: { kind: kiwix, kiwix_name: cuisinelibre.org_fr_all, url: https://download.kiwix.org/zim/other/cuisinelibre.org_fr_all.zim }
+  license: { spdx: CC-BY-SA-3.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: ready-gov-en
+  type: zim
+  category: survival
+  name: { fr: "Ready.gov (préparation aux urgences, US)", en: "Ready.gov (emergency preparedness, US)" }
+  description: { fr: "Plans d'urgence familiaux, kits, conduite à tenir par type de catastrophe. Contexte américain.", en: "Family emergency plans, kits, what to do per disaster type. US context." }
+  tags: [ preparedness, disaster ]
+  languages: [ en, es ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 2.3
+  source: { kind: kiwix, kiwix_name: www.ready.gov_en, url: https://download.kiwix.org/zim/zimit/www.ready.gov_en.zim }
+  license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: survivor-library-en
+  type: zim
+  category: survival
+  name: { fr: "Survivor Library (manuels anciens)", en: "Survivor Library (old manuals)" }
+  description:
+    fr: "Des milliers de manuels techniques du XIXe–début XXe (forge, tannerie, agriculture, mécanique). Énorme, à ne prendre que si le disque le permet."
+    en: "Thousands of 19th/early-20th-century technical manuals (blacksmithing, tanning, farming, mechanics). Huge; only if disk allows."
+  tags: [ manuals, blacksmithing, historical, metallurgy, textile ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 235
+  source: { kind: kiwix, kiwix_name: survivorlibrary.com_en_all, url: https://download.kiwix.org/zim/zimit/survivorlibrary.com_en_all.zim, homepage: https://www.survivorlibrary.com }
+  license: { spdx: LicenseRef-PublicDomain, redistribution: allowed, note: { fr: "Scans de documents du domaine public ; le site lui-même n'est pas sous licence libre.", en: "Scans of public-domain documents; the site itself is not free-licensed." } }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: unknown
+
+- id: wikihow-fr
+  type: zim
+  category: reference
+  name: { fr: "WikiHow FR", en: "WikiHow FR" }
+  description: { fr: "Tutoriels pas à pas grand public.", en: "General-audience step-by-step tutorials." }
+  tags: [ howto ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: null
+  source: { kind: kiwix, kiwix_name: wikihow_fr_all_maxi, homepage: https://fr.wikihow.com }
+  license: { spdx: CC-BY-NC-SA-3.0, redistribution: allowed-nc }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: missing
+  reliability: community
+  notes:
+    fr: "Au 2026-09-11, aucun ZIM WikiHow n'apparaît sur download.kiwix.org (ni FR ni EN). À arbitrer : retirer, ou produire soi-même via Zimit (licence NC : pas de redistribution, chaque utilisateur le fait pour lui)."
+    en: "As of 2026-09-11 no WikiHow ZIM is listed on download.kiwix.org (FR or EN). Decision needed: drop it, or let each user build it with Zimit (NC license: no redistribution)."

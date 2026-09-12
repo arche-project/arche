@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arche.local/schema/eval.schema.json",
+  "title": "Arche — jeu d'évaluation de la base (knowledge/eval.yaml) / retrieval evaluation set",
+  "description": "Une question = ce qu'un utilisateur tape, les corpus qui doivent remonter, où est la réponse (locator, ADR 0014), les mots obligatoires, le garde-fou attendu. Négative = hors base, la bonne réponse est « je ne trouve pas ». Vérifié par tests/eval.test.ts (src/core/schema.ts, sous-ensemble draft 2020-12).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "updated", "threshold", "questions"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 2 },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "threshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recall_at_5"],
+      "description": "Seuil CI de `arche eval` (M1-7), taux 0–1 sur les positives mesurables : recall_at_5 obligatoire, must_at_5 (mots obligatoires dans les 5 premiers extraits) optionnel.",
+      "properties": {
+        "recall_at_5": { "type": "number", "minimum": 0, "maximum": 1 },
+        "must_at_5": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 60,
+      "items": { "$ref": "#/$defs/question" }
+    }
+  },
+  "$defs": {
+    "resourceId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "q", "lang", "topic", "expect", "must", "why"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z-]+-\\d{2}$" },
+        "q": { "type": "string", "pattern": "\\S" },
+        "lang": { "type": "string", "enum": ["fr", "en"] },
+        "topic": {
+          "type": "string",
+          "enum": ["eau", "energie", "culture", "construction", "electronique", "entrainement", "premiers-secours", "plantes", "veterinaire", "hors-base"]
+        },
+        "expect": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/resourceId" } },
+        "locator": { "$ref": "#/$defs/locator" },
+        "must": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "\\S" } },
+        "flag": { "type": "string", "enum": ["emergency", "identification", "dosage", "diagnosis"] },
+        "negative": { "type": "boolean" },
+        "calculator": { "type": "string", "pattern": "^[a-z_]+$" },
+        "why": { "type": "string", "pattern": "\\S" }
+      }
+    },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource", "where", "status"],
+      "properties": {
+        "resource": { "$ref": "#/$defs/resourceId" },
+        "where": { "type": "string", "pattern": "\\S", "description": "Repère humain : chapitre, section, page. / Human pointer." },
+        "article": { "type": "string", "pattern": "^[^#\\s]+$", "description": "Chemin dans la source quand il est connu (fichier de docs/ pour arche-docs, pNN pour un PDF, chemin ZIM)." },
+        "status": { "type": "string", "enum": ["pending", "resolved"] },
+        "chunk": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*/[^#\\s]+#\\d+$", "description": "resource/path#byte_offset (ADR 0014, vue passages.locator) — obligatoire quand status = resolved." }
+      }
+    }
+  }
+}

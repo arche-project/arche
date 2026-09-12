@@ -1,0 +1,652 @@
+# Robotique open source : plateformes complètes (plans + firmware + docs), actionneurs, autopilotes, simulateurs.
+# Open-source robotics: full platforms (plans + firmware + docs), actuators, autopilots, simulators.
+# Licences et présence des fichiers matériels vérifiées sur les dépôts le 2026-09-11 (agents de vérification).
+# Le tag `tier:*` donne l'ordre de grandeur du coût : entry (< 500 $), mid (500–2 000 $), lab (> 2 000 $).
+# Voir aussi open-hardware.yaml (LeRobot, SO-101, Reachy Mini, InMoov) et git-mirrors.yaml (ROS 2, ArduPilot).
+
+# ---------- Débuter : moins de 500 $ / Getting started: under $500 ----------
+
+- id: git-koch-v1-1
+  type: git-repo
+  category: robotics
+  name: { fr: "Koch v1.1 — bras leader/follower (~480 $)", en: "Koch v1.1 — leader/follower arm (~$480)" }
+  description: { fr: "Le premier bras de LeRobot : CAD SolidWorks, STL, nomenclature avec liens fournisseurs. Le SO-101 l'a remplacé mais il reste très documenté.", en: "LeRobot's first arm: SolidWorks CAD, STL, BOM with supplier links. Superseded by SO-101 but still very well documented." }
+  tags: [ arm, lerobot, 3dprinting, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: jess-moss/koch-v1-1, url: https://github.com/jess-moss/koch-v1-1.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-lerobot ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-lekiwi
+  type: git-repo
+  category: robotics
+  name: { fr: "LeKiwi — base mobile pour bras SO-101", en: "LeKiwi — mobile base for the SO-101 arm" }
+  description: { fr: "Robot mobile à roues omni + bras SO-101, piloté par un Raspberry Pi. Maillages 3D, URDF, nomenclature. Le manipulateur mobile le moins cher qui existe.", en: "Omni-wheel mobile robot + SO-101 arm on a Raspberry Pi. 3D meshes, URDF, BOM. The cheapest mobile manipulator there is." }
+  tags: [ mobile, arm, lerobot, 3dprinting, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: SIGRobotics-UIUC/LeKiwi, url: https://github.com/SIGRobotics-UIUC/LeKiwi.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-so-arm101 ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-open-duck-mini
+  type: git-repo
+  category: robotics
+  name: { fr: "Open Duck Mini — bipède imprimable (< 400 $)", en: "Open Duck Mini — printable biped (< $400)" }
+  description: { fr: "Petit droïde bipède de 42 cm inspiré du BDX de Disney : STL, CAD OnShape, nomenclature, entraînement par apprentissage par renforcement (MuJoCo).", en: "42 cm biped droid inspired by Disney's BDX: STLs, OnShape CAD, BOM, reinforcement-learning training (MuJoCo)." }
+  tags: [ biped, legged, 3dprinting, rl, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: apirrone/Open_Duck_Mini, url: https://github.com/apirrone/Open_Duck_Mini.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-openbot
+  type: git-repo
+  category: robotics
+  name: { fr: "OpenBot — un smartphone comme cerveau (~50 $)", en: "OpenBot — a smartphone as the brain (~$50)" }
+  description: { fr: "Châssis imprimé + Arduino + le téléphone qu'on a déjà : suivi de personne, navigation autonome par réseau de neurones. L'entrée en robotique la moins chère.", en: "Printed chassis + Arduino + the phone you already own: person following, neural-network navigation. The cheapest entry into robotics." }
+  tags: [ mobile, smartphone, 3dprinting, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.8
+  source: { kind: github-repo, github_repo: ob-f/OpenBot, url: https://github.com/ob-f/OpenBot.git, homepage: https://www.openbot.org }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-otto-diy
+  type: git-repo
+  category: robotics
+  name: { fr: "Otto DIY — robot éducatif pour enfants", en: "Otto DIY — educational robot for kids" }
+  description: { fr: "Petit robot bipède imprimable programmable par blocs ou Arduino. Pour l'école à la maison. Code MIT, designs CC BY-SA.", en: "Small printable biped programmable with blocks or Arduino. For homeschooling. MIT code, CC BY-SA designs." }
+  tags: [ education, kids, 3dprinting, "tier:entry" ]
+  languages: [ en, mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: OttoDIY/OttoNinja, url: https://github.com/OttoDIY/OttoNinja.git, homepage: https://www.ottodiy.com }
+  license: { spdx: "MIT AND CC-BY-SA-4.0", redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+  notes: { fr: "Les fichiers STL sont sur le site/Thingiverse d'Otto, pas dans ce dépôt : recette Zimit à ajouter pour ottodiy.com.", en: "STL files live on Otto's site/Thingiverse, not in this repo: add a Zimit recipe for ottodiy.com." }
+
+- id: git-opencat
+  type: git-repo
+  category: robotics
+  name: { fr: "OpenCat (Petoi) — quadrupède de poche", en: "OpenCat (Petoi) — pocket quadruped" }
+  description: { fr: "Framework de robot-animal quadrupède (Nybble, Bittle) : firmware, bibliothèque de mouvements, tests. Kits vendus par Petoi ; le code est MIT.", en: "Quadruped robot-pet framework (Nybble, Bittle): firmware, skill library, tests. Kits sold by Petoi; code is MIT." }
+  tags: [ quadruped, education, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: PetoiCamp/OpenCat, url: https://github.com/PetoiCamp/OpenCat.git }
+  license: { spdx: MIT, redistribution: allowed, note: { fr: "Firmware seulement ; les fichiers mécaniques ne sont pas dans le dépôt.", en: "Firmware only; mechanical files are not in the repo." } }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+
+- id: git-dummy-robot
+  type: git-repo
+  category: robotics
+  name: { fr: "Dummy Robot — mini bras 6 axes (~280 $)", en: "Dummy Robot — compact 6-axis arm (~$280)" }
+  description: { fr: "Bras 6 axes très compact de Peng Zhihui : CAD, PCB (Altium/Gerber), drivers pas-à-pas, firmware. Très documenté en vidéo ; licence non précisée.", en: "Very compact 6-axis arm by Peng Zhihui: CAD, PCBs (Altium/Gerber), stepper drivers, firmware. Well documented on video; license not stated." }
+  tags: [ arm, pcb, "tier:entry" ]
+  languages: [ zh, en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: peng-zhihui/Dummy-Robot, url: https://github.com/peng-zhihui/Dummy-Robot.git }
+  license: { spdx: unknown, redistribution: unclear }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-spotmicro
+  type: git-repo
+  category: robotics
+  name: { fr: "SpotMicro — quadrupède imprimable (logiciel ROS)", en: "SpotMicro — printable quadruped (ROS software)" }
+  description: { fr: "Contrôle de marche (assis, debout, marche) d'un quadrupède à servos imprimé en 3D. Les STL du châssis viennent du design KDY0523 (Thingiverse).", en: "Gait control (sit, stand, walk) for a 3D-printed servo quadruped. Frame STLs come from the KDY0523 design (Thingiverse)." }
+  tags: [ quadruped, ros, 3dprinting, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: mike4192/spotMicro, url: https://github.com/mike4192/spotMicro.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+# ---------- Intermédiaire : 500–2 000 $ / Mid-range ----------
+
+- id: git-stanford-pupper
+  type: git-repo
+  category: robotics
+  name: { fr: "Stanford Pupper / Woofer — quadrupèdes Raspberry Pi", en: "Stanford Pupper / Woofer — Raspberry Pi quadrupeds" }
+  description: { fr: "Quadrupèdes qui trottent, marchent et sautent, pilotés par un Pi. Dossiers pupper/ et woofer/ (fin de vie ; Pupper v3 ≈ 1 000 $ documenté séparément).", en: "Quadrupeds that trot, walk and jump on a Pi. pupper/ and woofer/ folders (end-of-life; Pupper v3 ≈ $1,000 documented separately)." }
+  tags: [ quadruped, raspberrypi, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: stanfordroboticsclub/StanfordQuadruped, url: https://github.com/stanfordroboticsclub/StanfordQuadruped.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-open-source-rover
+  type: git-repo
+  category: robotics
+  name: { fr: "NASA JPL Open Source Rover (~1 600 $)", en: "NASA JPL Open Source Rover (~$1,600)" }
+  description: { fr: "Rover 6 roues à bogies inspiré des rovers martiens : mécanique, électronique, liste de pièces, CAD OnShape. Certifié OSHWA.", en: "6-wheel rocker-bogie rover inspired by the Mars rovers: mechanical, electrical, parts list, OnShape CAD. OSHWA-certified." }
+  tags: [ rover, mobile, raspberrypi, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: nasa-jpl/open-source-rover, url: https://github.com/nasa-jpl/open-source-rover.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-mobile-aloha
+  type: git-repo
+  category: robotics
+  name: { fr: "ALOHA / Mobile ALOHA — téléopération bimanuelle", en: "ALOHA / Mobile ALOHA — bimanual teleoperation" }
+  description: { fr: "Le système de téléopération à deux bras qui a lancé la vague de l'apprentissage par imitation (Stanford). Tutoriel d'assemblage, dossier hardware/.", en: "The two-arm teleoperation system that started the imitation-learning wave (Stanford). Assembly tutorial, hardware/ folder." }
+  tags: [ arm, bimanual, imitation-learning, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: MarkFzp/mobile-aloha, url: https://github.com/MarkFzp/mobile-aloha.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-lerobot ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+- id: git-ar4
+  type: git-repo
+  category: robotics
+  name: { fr: "AR4 (Annin Robotics) — bras 6 axes de table", en: "AR4 (Annin Robotics) — desktop 6-axis arm" }
+  description: { fr: "Bras à moteurs pas-à-pas et réducteurs imprimés, logiciel de commande, STL. Licence maison non commerciale (usage perso, éducation, recherche).", en: "Stepper-motor arm with printed reducers, control software, STLs. Custom non-commercial license (personal, education, research)." }
+  tags: [ arm, stepper, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: Annin-Robotics/ar4-hmi, url: https://github.com/Annin-Robotics/ar4-hmi.git, homepage: https://www.anninrobotics.com }
+  license: { spdx: LicenseRef-Annin-NC-1.1, redistribution: allowed-nc }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-yale-openhand
+  type: git-repo
+  category: robotics
+  name: { fr: "Yale OpenHand — mains et pinces imprimables", en: "Yale OpenHand — printable hands and grippers" }
+  description: { fr: "Fichiers CAD/STL des mains sous-actionnées de Yale (modèles T, T42, M2, O, Q). CC BY-NC.", en: "CAD/STL files of Yale's underactuated hands (T, T42, M2, O, Q models). CC BY-NC." }
+  tags: [ gripper, hand, 3dprinting, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: grablab/openhand-hardware, url: https://github.com/grablab/openhand-hardware.git }
+  license: { spdx: CC-BY-NC-3.0, redistribution: allowed-nc }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+# ---------- Laboratoire : humanoïdes et quadrupèdes de recherche / Lab: research humanoids and quadrupeds ----------
+
+- id: git-poppy-humanoid
+  type: git-repo
+  category: robotics
+  name: { fr: "Poppy Humanoid (INRIA, France)", en: "Poppy Humanoid (INRIA, France)" }
+  description: { fr: "Humanoïde imprimable de 83 cm né à l'INRIA Bordeaux : CAD, STL/STEP en releases, nomenclature, logiciel Python. Logiciel GPL-3.0, matériel CC BY-SA 4.0. ~8 000 $ (25 servos Dynamixel).", en: "83 cm printable humanoid born at INRIA Bordeaux: CAD, STL/STEP in releases, BOM, Python software. GPL-3.0 software, CC BY-SA 4.0 hardware. ~$8,000 (25 Dynamixel servos)." }
+  tags: [ humanoid, 3dprinting, fr, education, "tier:lab" ]
+  languages: [ en, fr ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: poppy-project/poppy-humanoid, url: https://github.com/poppy-project/poppy-humanoid.git, homepage: https://www.poppy-project.org, include_releases: true, github_asset_pattern: "\\.(zip|stl|step)$" }
+  license: { spdx: "GPL-3.0-only AND CC-BY-SA-4.0", redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Mirrorer aussi poppy-project/poppy-ergo-jr (bras éducatif à 350 $, très utilisé dans les écoles françaises) et pypot.", en: "Also mirror poppy-project/poppy-ergo-jr ($350 educational arm, widely used in French schools) and pypot." }
+
+- id: git-berkeley-humanoid-lite
+  type: git-repo
+  category: robotics
+  name: { fr: "Berkeley Humanoid Lite (< 5 000 $)", en: "Berkeley Humanoid Lite (< $5,000)" }
+  description: { fr: "Humanoïde à réducteurs cycloïdaux imprimés en 3D, entièrement ouvert : CAD et fichiers d'impression en releases, code MIT, assets CC BY-SA.", en: "Humanoid with 3D-printed cycloidal gearboxes, fully open: CAD and print files in releases, MIT code, CC BY-SA assets." }
+  tags: [ humanoid, 3dprinting, rl, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: HybridRobotics/Berkeley-Humanoid-Lite, url: https://github.com/HybridRobotics/Berkeley-Humanoid-Lite.git, include_releases: true, github_asset_pattern: "\\.(zip|7z|step|stl)$" }
+  license: { spdx: "MIT AND CC-BY-SA-4.0", redistribution: attribution }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-kscale-kbot
+  type: git-repo
+  category: robotics
+  name: { fr: "K-Scale K-Bot — humanoïde open hardware (CERN-OHL-S)", en: "K-Scale K-Bot — open-hardware humanoid (CERN-OHL-S)" }
+  description: { fr: "Humanoïde grandeur nature : dossiers mechanical/ et electrical/, logiciel MIT/GPL, matériel sous CERN-OHL-S 2.0 (copyleft matériel fort).", en: "Full-size humanoid: mechanical/ and electrical/ folders, MIT/GPL software, hardware under CERN-OHL-S 2.0 (strong hardware copyleft)." }
+  tags: [ humanoid, cern-ohl, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: kscalelabs/kbot, url: https://github.com/kscalelabs/kbot.git, homepage: https://kscale.dev }
+  license: { spdx: "MIT AND GPL-3.0-only AND CERN-OHL-S-2.0", redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-openarm
+  type: git-repo
+  category: robotics
+  name: { fr: "OpenArm (Enactic) — bras humanoïde (6 500 $ bimanuel)", en: "OpenArm (Enactic) — humanoid arm ($6,500 bimanual)" }
+  description: { fr: "Bras humanoïde pour l'IA physique : logiciel Apache-2.0, matériel CERN-OHL-S (STL/STEP/Fusion 360 dans enactic/openarm_hardware).", en: "Humanoid arm for physical AI: Apache-2.0 software, CERN-OHL-S hardware (STL/STEP/Fusion 360 in enactic/openarm_hardware)." }
+  tags: [ arm, humanoid, cern-ohl, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: enactic/openarm_hardware, url: https://github.com/enactic/openarm_hardware.git, homepage: https://openarm.dev }
+  license: { spdx: "Apache-2.0 AND CERN-OHL-S-2.0", redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-odri-solo
+  type: git-repo
+  category: robotics
+  name: { fr: "Open Dynamic Robot Initiative — actionneurs et quadrupèdes Solo 8/12", en: "Open Dynamic Robot Initiative — actuators and Solo 8/12 quadrupeds" }
+  description: { fr: "Actionneur à faible réduction imprimable + jambes + quadrupèdes Solo et bipède Bolt (Max-Planck / NYU / LAAS Toulouse). Mécanique et électronique, BSD-3.", en: "Printable low-gear actuator + legs + Solo quadrupeds and Bolt biped (Max Planck / NYU / LAAS Toulouse). Mechanics and electronics, BSD-3." }
+  tags: [ actuator, quadruped, biped, research, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: open-dynamic-robot-initiative/open_robot_actuator_hardware, url: https://github.com/open-dynamic-robot-initiative/open_robot_actuator_hardware.git }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+# ---------- Bases mobiles et véhicules / Mobile bases and vehicles ----------
+
+- id: git-linorobot2
+  type: git-repo
+  category: robotics
+  name: { fr: "Linorobot2 — base mobile ROS 2 (2WD/4WD/mecanum)", en: "Linorobot2 — ROS 2 mobile base (2WD/4WD/mecanum)" }
+  description: { fr: "Construire un robot mobile autonome avec navigation ROS 2 à partir de moteurs et d'un lidar du commerce. Firmware micro-ROS dans linorobot2_hardware.", en: "Build an autonomous mobile robot with ROS 2 navigation from off-the-shelf motors and a lidar. micro-ROS firmware in linorobot2_hardware." }
+  tags: [ mobile, ros2, navigation, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: linorobot/linorobot2, url: https://github.com/linorobot/linorobot2.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-ros2 ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+  notes: { fr: "Mirrorer aussi linorobot/linorobot2_hardware (firmware).", en: "Also mirror linorobot/linorobot2_hardware (firmware)." }
+
+- id: git-donkeycar
+  type: git-repo
+  category: robotics
+  name: { fr: "Donkeycar — voiture RC autonome", en: "Donkeycar — autonomous RC car" }
+  description: { fr: "Conduite autonome par apprentissage sur une voiture RC à 1/16 avec Raspberry Pi ou Jetson. La doc de construction est sur docs.donkeycar.com (recette Zimit).", en: "Learning-based autonomous driving on a 1/16 RC car with a Raspberry Pi or Jetson. Build docs on docs.donkeycar.com (Zimit recipe)." }
+  tags: [ car, autonomous, raspberrypi, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: autorope/donkeycar, url: https://github.com/autorope/donkeycar.git, homepage: https://docs.donkeycar.com }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+
+- id: git-acorn-rover
+  type: git-repo
+  category: agriculture
+  name: { fr: "Acorn — rover agricole solaire (Twisted Fields)", en: "Acorn — solar farming rover (Twisted Fields)" }
+  description: { fr: "Rover de précision pour petites fermes, alimenté au solaire. Code Apache-2.0 ; détails matériels sur le blog du projet.", en: "Precision rover for small farms, solar-powered. Apache-2.0 code; hardware details on the project blog." }
+  tags: [ agriculture, rover, solar, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: Twisted-Fields/acorn-precision-farming-rover, url: https://github.com/Twisted-Fields/acorn-precision-farming-rover.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: community
+
+- id: git-turtlebot4
+  type: git-repo
+  category: robotics
+  name: { fr: "TurtleBot 4 (paquets ROS 2)", en: "TurtleBot 4 (ROS 2 packages)" }
+  description: { fr: "La plateforme d'apprentissage ROS 2 de référence : description, navigation, exemples. Le robot lui-même est commercial (Clearpath / iRobot Create 3).", en: "The reference ROS 2 learning platform: description, navigation, examples. The robot itself is commercial (Clearpath / iRobot Create 3)." }
+  tags: [ mobile, ros2, education, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: turtlebot/turtlebot4, url: https://github.com/turtlebot/turtlebot4.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-ros2 ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+# ---------- Drones, bateaux, sous-marins / Drones, boats, ROVs ----------
+
+- id: git-px4
+  type: git-repo
+  category: robotics
+  name: { fr: "PX4 Autopilot", en: "PX4 Autopilot" }
+  description: { fr: "L'autre grand autopilote libre (avec ArduPilot) : drones, avions, rovers, bateaux. BSD-3.", en: "The other major open autopilot (with ArduPilot): drones, planes, rovers, boats. BSD-3." }
+  tags: [ drone, autopilot, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: github-repo, github_repo: PX4/PX4-Autopilot, url: https://github.com/PX4/PX4-Autopilot.git, homepage: https://px4.io }
+  license: { spdx: BSD-3-Clause, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-betaflight
+  type: git-repo
+  category: robotics
+  name: { fr: "Betaflight — firmware de drones FPV", en: "Betaflight — FPV drone firmware" }
+  description: { fr: "Le firmware de contrôleur de vol le plus répandu pour les drones de course et de loisir. Réparer/refaire voler n'importe quel quad.", en: "The most widespread flight-controller firmware for racing and hobby drones. Repair/refly any quad." }
+  tags: [ drone, firmware, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: betaflight/betaflight, url: https://github.com/betaflight/betaflight.git, include_releases: true }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-edgetx
+  type: git-repo
+  category: radio
+  name: { fr: "EdgeTX — firmware de radiocommandes", en: "EdgeTX — R/C transmitter firmware" }
+  description: { fr: "Firmware libre des radios RC (RadioMaster, FrSky, Jumper…). Indispensable pour piloter drones, rovers, bateaux.", en: "Open firmware for R/C radios (RadioMaster, FrSky, Jumper…). Needed to fly/drive drones, rovers, boats." }
+  tags: [ radio, firmware, "tier:entry" ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: EdgeTX/edgetx, url: https://github.com/EdgeTX/edgetx.git, include_releases: true }
+  license: { spdx: GPL-2.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-ardusub
+  type: git-repo
+  category: robotics
+  name: { fr: "ArduSub — ROV sous-marins (BlueROV2)", en: "ArduSub — underwater ROVs (BlueROV2)" }
+  description: { fr: "Système de contrôle de ROV, désormais partie d'ArduPilot. Le BlueROV2 (Blue Robotics) publie ses STEP/STL sur son site, licence matérielle non précisée.", en: "ROV control system, now part of ArduPilot. The BlueROV2 (Blue Robotics) publishes STEP/STL on its site, hardware license unstated." }
+  tags: [ rov, underwater, "tier:lab" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: bluerobotics/ardusub, url: https://github.com/bluerobotics/ardusub.git, homepage: https://www.ardusub.com }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-ardupilot ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+# ---------- Actionneurs et contrôle moteur / Actuators and motor control ----------
+
+- id: git-simplefoc
+  type: git-repo
+  category: electronics
+  name: { fr: "SimpleFOC — contrôle de moteurs brushless sur Arduino/ESP32", en: "SimpleFOC — brushless motor control on Arduino/ESP32" }
+  description: { fr: "Bibliothèque FOC pour moteurs BLDC et pas-à-pas, avec cartes communautaires. La base de tout actionneur maison.", en: "FOC library for BLDC and stepper motors, with community boards. The basis of any home-made actuator." }
+  tags: [ motor, bldc, foc, arduino, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: simplefoc/Arduino-FOC, url: https://github.com/simplefoc/Arduino-FOC.git, homepage: https://docs.simplefoc.com }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, toolchain-platformio ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-moteus
+  type: git-repo
+  category: electronics
+  name: { fr: "moteus (mjbots) — contrôleur brushless, PCB ouverts", en: "moteus (mjbots) — brushless controller, open PCBs" }
+  description: { fr: "Contrôleur de moteur brushless de qualité robotique : firmware et dessins de PCB sous Apache-2.0 (contrôleurs c1/n1/x1, mécanique dans hw/).", en: "Robotics-grade brushless motor controller: firmware and PCB designs under Apache-2.0 (c1/n1/x1 controllers, mechanics in hw/)." }
+  tags: [ motor, bldc, pcb, actuator, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: mjbots/moteus, url: https://github.com/mjbots/moteus.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-vesc
+  type: git-repo
+  category: electronics
+  name: { fr: "VESC — firmware de contrôleur moteur (e-skate, vélos, robots)", en: "VESC — motor controller firmware (e-skate, bikes, robots)" }
+  description: { fr: "Firmware du contrôleur brushless le plus répandu en mobilité légère. Les schémas matériels sont dans vedderb/vesc_hw (à mirrorer aussi).", en: "Firmware of the most widespread brushless controller in light mobility. Hardware schematics in vedderb/vesc_hw (mirror it too)." }
+  tags: [ motor, bldc, mobility, "tier:entry" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: vedderb/bldc, url: https://github.com/vedderb/bldc.git }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-odrive
+  type: git-repo
+  category: electronics
+  name: { fr: "ODrive v3 — contrôleur de moteurs brushless (firmware MIT)", en: "ODrive v3 — brushless motor controller (MIT firmware)" }
+  description: { fr: "Firmware et outils ODrive. Attention : seule la génération v3.x est ouverte ; Pro/S1/Micro sont fermés.", en: "ODrive firmware and tools. Note: only the v3.x generation is open; Pro/S1/Micro are closed." }
+  tags: [ motor, bldc, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: odriverobotics/ODrive, url: https://github.com/odriverobotics/ODrive.git }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference
+
+# ---------- Simulation, perception, middleware / Simulation, perception, middleware ----------
+
+- id: git-mujoco
+  type: git-repo
+  category: robotics
+  name: { fr: "MuJoCo — simulateur physique (DeepMind)", en: "MuJoCo — physics simulator (DeepMind)" }
+  description: { fr: "Le simulateur de référence pour entraîner des politiques de marche et de manipulation avant de les mettre sur le vrai robot (Open Duck, Berkeley Humanoid, LeRobot).", en: "The reference simulator to train locomotion and manipulation policies before deploying on the real robot (Open Duck, Berkeley Humanoid, LeRobot)." }
+  tags: [ simulation, rl ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: google-deepmind/mujoco, url: https://github.com/google-deepmind/mujoco.git, include_releases: true, github_asset_pattern: "^mujoco-.*\\.(tar\\.gz|zip|dmg)$" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-gazebo
+  type: git-repo
+  category: robotics
+  name: { fr: "Gazebo (gz-sim) — simulateur ROS", en: "Gazebo (gz-sim) — ROS simulator" }
+  description: { fr: "Simulateur robotique intégré à ROS 2. Lourd à compiler hors-ligne : prévoir le miroir apt.", en: "Robotics simulator integrated with ROS 2. Heavy to build offline: plan the apt mirror." }
+  tags: [ simulation, ros2 ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: gazebosim/gz-sim, url: https://github.com/gazebosim/gz-sim.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-ros2, apt-mirror-debian ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-opencv
+  type: git-repo
+  category: ai
+  name: { fr: "OpenCV — vision par ordinateur", en: "OpenCV — computer vision" }
+  description: { fr: "La bibliothèque de vision de tous les robots : caméras, détection, calibration, suivi.", en: "Every robot's vision library: cameras, detection, calibration, tracking." }
+  tags: [ vision, library ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: opencv/opencv, url: https://github.com/opencv/opencv.git, include_releases: true, github_asset_pattern: "\\.(zip|exe)$" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, pip-cache ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-micro-ros-arduino
+  type: git-repo
+  category: robotics
+  name: { fr: "micro-ROS pour Arduino/ESP32", en: "micro-ROS for Arduino/ESP32" }
+  description: { fr: "Faire parler un microcontrôleur en ROS 2 : le pont entre les capteurs ESP32 et le cerveau du robot.", en: "Make a microcontroller speak ROS 2: the bridge between ESP32 sensors and the robot's brain." }
+  tags: [ ros2, esp32, microcontroller ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: micro-ROS/micro_ros_arduino, url: https://github.com/micro-ROS/micro_ros_arduino.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-ros2, toolchain-arduino-cli ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+
+- id: git-open-manipulator
+  type: git-repo
+  category: robotics
+  name: { fr: "OpenMANIPULATOR (ROBOTIS) — paquets ROS 2", en: "OpenMANIPULATOR (ROBOTIS) — ROS 2 packages" }
+  description: { fr: "Bras Dynamixel de ROBOTIS : description URDF, MoveIt, exemples. Bras commercial mais logiciel ouvert.", en: "ROBOTIS Dynamixel arm: URDF description, MoveIt, examples. Commercial arm, open software." }
+  tags: [ arm, ros2, dynamixel, "tier:mid" ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: ROBOTIS-GIT/open_manipulator, url: https://github.com/ROBOTIS-GIT/open_manipulator.git }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ git ] }
+  depends_on: [ gitea, git-ros2 ]
+  update: { tracker: github-commit }
+  status: unverified
+  reliability: reference

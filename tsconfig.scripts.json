@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "rootDir": ".", "noEmit": true },
+  "include": ["scripts/catalog/*.ts", "src/**/*.ts"],
+  "exclude": ["scripts/catalog/check-schema-ajv.ts"]
+}

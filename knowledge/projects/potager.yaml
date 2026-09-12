@@ -1,0 +1,61 @@
+# Type de projet : le potager — « j'ai X semences et telles parcelles, fais-moi le planning ».
+# Project type: the vegetable garden — "I have these seeds and these plots, make me the plan".
+# Schéma et règles : ADR 0010. Validé par `arche project types` et tests/project.test.ts.
+
+id: potager
+name: { fr: "Potager : planifier ses parcelles", en: "Vegetable garden: plan the plots" }
+scenario:
+  fr: "Je suis autonomiste, j'ai des parcelles et des semences ; fais-moi le planning de l'année : quoi semer où, quand, et ce que ça donnera."
+  en: "I am self-reliant, I have plots and seeds; make me the year's plan: what to sow where, when, and what it will yield."
+status: solver
+
+inventory:
+  required: [ plots, seeds ]
+  recommended: [ climate.last_frost, climate.first_frost, people, plots.sun, plots.last_family ]
+
+# Ce que l'assistant lit d'abord quand la question dépasse le plan (ravageurs, sol, conservation).
+corpus:
+  - openfarm-crops-rescue
+  - stackexchange-gardening
+  - practical-plants
+  - pfaf-database
+  - appropedia-en
+  - wikipedia-fr-nopic
+  - zimgit-food-preparation
+
+solvers: [ garden_plan, surface_nourriciere, semences_effectif ]
+generators: [ mermaid ]
+
+deliverables:
+  - id: planning
+    title: { fr: "Calendrier de l'année (semis, repiquage, récolte)", en: "Year calendar (sowing, transplanting, harvest)" }
+    format: [ md, ics, json ]
+    by: solver
+  - id: parcelles
+    title: { fr: "Attribution des parcelles avec la rotation des familles", en: "Plot assignment with family rotation" }
+    format: [ md ]
+    by: solver
+  - id: rendements
+    title: { fr: "Rendements estimés et surface manquante", en: "Estimated yields and missing area" }
+    format: [ md ]
+    by: solver
+  - id: explications
+    title: { fr: "Pourquoi ce plan, et quoi lire pour chaque culture (sourcé)", en: "Why this plan, and what to read per crop (sourced)" }
+    format: [ md ]
+    by: assistant
+
+gates:
+  - fr: "Les dates de gel sont celles de l'utilisateur ou un défaut régional signalé comme tel ; l'observation locale prime toujours."
+    en: "Frost dates are the user's or a regional default flagged as such; local observation always wins."
+  - fr: "Une culture inconnue du fichier crops.yaml n'est pas planifiée : elle est listée à part, jamais devinée."
+    en: "A crop unknown to crops.yaml is not planned: it is listed apart, never guessed."
+
+never:
+  - fr: "Déclarer une plante comestible ou une baie sans danger — l'identification reste un garde-fou (ADR 0007)."
+    en: "Declare a plant edible or a berry safe — identification stays a guard rail (ADR 0007)."
+  - fr: "Inventer une date ou un rendement hors du fichier crops.yaml."
+    en: "Invent a date or a yield outside crops.yaml."
+
+limits:
+  fr: "Le solveur ne connaît ni le sol, ni la pente, ni l'eau disponible : il place et date, il ne garantit pas. Les rendements sont des ordres de grandeur amateurs (±50 %). Les valeurs non vérifiées sont marquées dans le plan."
+  en: "The solver knows neither soil, slope nor available water: it places and dates, it does not guarantee. Yields are amateur orders of magnitude (±50 %). Unverified values are flagged in the plan."

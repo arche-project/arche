@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "Kiwix — demander un ZIM officiel / request an official ZIM"
+    url: https://github.com/openzim/zim-requests/issues
+    about: "Souvent la meilleure option : Kiwix construit, héberge et met à jour."

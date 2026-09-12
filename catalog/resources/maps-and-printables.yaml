@@ -1,0 +1,90 @@
+# Cartes et documents imprimables.
+# Maps and printable documents.
+
+- id: osm-france-pbf
+  type: map
+  category: maps
+  name: { fr: "OpenStreetMap France (données brutes .pbf)", en: "OpenStreetMap France (raw .pbf data)" }
+  description: { fr: "Extrait Geofabrik de la France entière. À rendre avec un serveur de tuiles local ou à convertir pour Organic Maps / OsmAnd.", en: "Geofabrik extract of all France. Render with a local tile server or convert for Organic Maps / OsmAnd." }
+  tags: [ osm, maps, france ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 4.5
+  source: { kind: http, url: https://download.geofabrik.de/europe/france-latest.osm.pbf, homepage: https://download.geofabrik.de/europe/france.html }
+  checksum: { algo: md5, value: null, url: https://download.geofabrik.de/europe/france-latest.osm.pbf.md5 }
+  license: { spdx: ODbL-1.0, url: https://www.openstreetmap.org/copyright, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+
+- id: organic-maps-app
+  type: software
+  category: maps
+  name: { fr: "Organic Maps (cartes hors-ligne, mobile + desktop)", en: "Organic Maps (offline maps, mobile + desktop)" }
+  description: { fr: "Application de cartes hors-ligne la plus simple pour un néophyte. Les fichiers .mwm par région se téléchargent depuis l'app (en ligne) — les mettre en cache avant la coupure.", en: "Simplest offline maps app for a beginner. Per-region .mwm files download from the app (online) — cache them before the outage." }
+  tags: [ maps, mobile ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.1
+  source: { kind: github-release, github_repo: organicmaps/organicmaps, github_asset_pattern: "\\.(apk|AppImage|dmg|exe)$", homepage: https://organicmaps.app }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Arbitrage : documenter la récupération manuelle des .mwm (URL non stable, servie par CDN) ou renvoyer vers OsmAnd dont les .obf sont téléchargeables directement.", en: "Decision: document manual .mwm retrieval (unstable CDN URLs) or point to OsmAnd whose .obf files are directly downloadable." }
+  runtime: static-binary
+
+- id: pdf-ou-il-ny-a-pas-de-docteur
+  type: pdf
+  category: medical
+  name: { fr: "Là où il n'y a pas de docteur (Hesperian, FR)", en: "Where There Is No Doctor (Hesperian, FR edition)" }
+  description: { fr: "Le manuel de santé communautaire de référence, en français. À imprimer et relier : c'est la pièce maîtresse du profil low-tech.", en: "The reference community-health manual, in French. Print and bind it: the centrepiece of the low-tech profile." }
+  tags: [ medicine, printable, hesperian ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source: { kind: manual, homepage: https://hesperian.org/books-and-resources/, url: https://fr.hesperian.org }
+  license: { spdx: LicenseRef-Hesperian-Open-Copyright, url: https://hesperian.org/about/open-copyright/, redistribution: allowed-nc, note: { fr: "Copie et impression autorisées à des fins non commerciales, avec attribution.", en: "Copying and printing allowed for non-commercial purposes, with attribution." } }
+  printable: { available: true, pages_estimate: 500 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "URL directe du PDF FR à confirmer (Hesperian héberge les PDF derrière un formulaire). Sinon : édition papier à acheter avant.", en: "Direct FR PDF URL to confirm (Hesperian serves PDFs behind a form). Otherwise: buy the print edition beforehand." }
+
+- id: pdf-sanitation-sphere-handbook
+  type: pdf
+  category: society
+  name: { fr: "Manuel Sphère (normes humanitaires, FR)", en: "Sphere Handbook (humanitarian standards, FR)" }
+  description: { fr: "Standards minimaux : eau, assainissement, abris, nourriture, santé pour une population déplacée. Le manuel d'organisation d'un groupe en crise.", en: "Minimum standards: water, sanitation, shelter, food, health for a displaced population. The manual for organizing a group in crisis." }
+  tags: [ humanitarian, sanitation, printable, organisation ]
+  languages: [ fr, en ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.02
+  source: { kind: http, url: https://spherestandards.org/wp-content/uploads/Sphere-Handbook-2018-FR.pdf, homepage: https://spherestandards.org/handbook/ }
+  license: { spdx: CC-BY-NC-SA-4.0, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 460 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: pdf-who-first-aid
+  type: pdf
+  category: medical
+  name: { fr: "Guide des premiers secours (Croix-Rouge / IFRC)", en: "First aid guidelines (Red Cross / IFRC)" }
+  description: { fr: "Recommandations internationales de premiers secours de l'IFRC, en accès libre.", en: "IFRC international first aid guidelines, freely accessible." }
+  tags: [ first-aid, printable ]
+  languages: [ en, fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.03
+  source: { kind: manual, homepage: https://www.globalfirstaidcentre.org/first-aid-guidelines-2020/, url: https://www.globalfirstaidcentre.org/first-aid-guidelines-2020/ }
+  license: { spdx: LicenseRef-IFRC, redistribution: unclear }
+  printable: { available: true, pages_estimate: 300 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "URL du PDF FR à confirmer.", en: "FR PDF URL to confirm." }

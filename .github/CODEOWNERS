@@ -1,0 +1,9 @@
+# Routage des relectures par domaine. Remplacer les handles par les curateurs réels (docs/fr/COMMUNAUTE.md).
+# Review routing per domain. Replace handles with actual curators.
+*                                       @florianclabau
+catalog/resources/practical.yaml        @florianclabau   # santé/eau/alimentation : règle des deux relecteurs
+catalog/resources/ai-models.yaml        @florianclabau
+catalog/resources/open-hardware.yaml    @florianclabau
+catalog/zim-recipes.yaml                @florianclabau   # toute recette engage la responsabilité d'hébergement
+docs/permissions/                       @florianclabau
+.github/workflows/                      @florianclabau

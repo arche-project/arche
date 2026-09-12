@@ -1,0 +1,740 @@
+# Backlog d'Arche v2 — source de vérité des tickets.
+#
+# Dérivé de docs/fr/AUDIT-ARCHITECTURE.md (les six décisions) et docs/fr/MVP.md (G1–G7).
+# Miroir Trello : https://trello.com/b/ffaRr5aF/arche-v2-la-base-pas-le-logiciel
+# Orchestrateur : scripts/orchestrate/run.mjs (lit ce fichier, exécute les tickets `todo`
+# dont les dépendances sont `done`, vérifie, écrit backlog/reports/<id>.md, met à jour `status`).
+#
+# Champs : id, list (colonne Trello), title, status (todo | doing | done | blocked | decision),
+# depends_on, decision (D-xx bloquante), size (S | M | L), desc, accept (critères, un par ligne),
+# verify (commandes qui doivent réussir — en plus de `npm test` et `catalog:validate`).
+
+lists:
+  decisions: "🔀 Décisions à trancher (Florian)"
+  m0: "M0 · Exister"
+  m1: "M1 · Format SQLite & mesure"
+  m2: "M2 · Confiance"
+  m3: "M3 · Noyau & soustraction"
+  m4: "M4 · Base & connaissance"
+
+rules: |
+  Règles valables pour tout ticket (relire avant d'écrire une ligne) :
+  - ADR 0013 : on crée la base, pas le logiciel. Tout code ajouté doit servir la base hors ligne.
+  - Node 22, TypeScript strict ESM ; dépendances d'exécution : commander, yaml (ADR 0002) —
+    une dépendance vendue (copiée dans vendor/, licence incluse) est préférée à une réécriture.
+  - Pas de client IA, pas de Docker dans le chemin recommandé, pas de client cloud, jamais un
+    LLM dans une boucle d'actionneur. Armes hors périmètre. Médecine 100 % naturelle.
+  - Aucune donnée téléchargée ou hébergée sur la machine de Florian : texte seulement.
+  - Chaque ticket : code + tests + doc FR (EN si D22 le demande) ; `npm test` et
+    `npm run catalog:validate` verts ; rapport dans backlog/reports/<id>.md.
+
+tickets:
+  # ─────────────────────────── Décisions ───────────────────────────
+  - id: D6
+    list: decisions
+    title: "D6 — Nom et URL du dépôt GitHub"
+    status: done
+    size: S
+    desc: |
+      Tranché le 12 septembre 2026 : github.com/arche-project/arche — organisation dédiée arche-project, dépôt arche. Références du dépôt mises à jour, package.json renseigné. Procédure : docs/fr/PUBLICATION.md.
+    accept:
+      - "URL choisie et écrite dans README.md, package.json (repository) et docs/fr/DECISIONS.md"
+      - "Nom réservé sur GitHub"
+
+  - id: D11
+    list: decisions
+    title: "D11 — Compte Internet Archive (hébergement des shards)"
+    status: done
+    size: S
+    desc: |
+      Tranché le 12 septembre 2026 : compte Internet Archive créé, clés S3 générées et gardées hors du dépôt (gestionnaire de mots de passe). Reste à les coller dans les secrets GitHub IA_ACCESS_KEY / IA_SECRET_KEY quand le dépôt existera (D6, M0-1), et `ia configure` sur le Mac pour le test manuel M0-3.
+    accept:
+      - "Compte créé, clés en secrets GitHub, jamais dans le dépôt"
+      - "Un item de test `arche-index-test` uploadé et téléchargé par `arche index fetch`"
+
+  - id: D20
+    list: decisions
+    title: "D20 — Périmètre de l'Édition Autonomiste (~100 Go)"
+    status: decision
+    size: S
+    desc: |
+      Bloque M4-8. Proposition actuelle : profil novice + corpus des cinq exemples + bundles
+      `training` et `automation` = 111 ressources ≈ 96 Go, cible SSD 128 Go.
+    accept:
+      - "Liste des bundles/ressources validée ou amendée"
+      - "Taille cible du SSD confirmée (128 Go) ou changée"
+
+  - id: D21
+    list: decisions
+    title: "D21 — Machine GPU pour les gros corpus (Wikipedia FR)"
+    status: decision
+    size: S
+    desc: |
+      Bloque M4-7. Trois options : runner auto-hébergé chez une personne de confiance ; location
+      ponctuelle (quelques heures de GPU par corpus) ; attendre — Wikipedia reste cherchable par
+      Xapian seul, sans canal dense.
+    accept:
+      - "Option choisie et budget (temps ou euros) écrit dans docs/fr/DECISIONS.md"
+
+  - id: D22
+    list: decisions
+    title: "D22 — Une seule langue source pour la doc"
+    status: done
+    size: S
+    desc: |
+      Tranché le 12 septembre 2026 : le dépôt est mondial, l'anglais est la langue source. docs/en/, README.md et locales/en sont édités ; docs/fr/ et les autres langues sont générés (script + relecture), marqués « traduit de docs/en/… — ne pas éditer », vérifiés en CI. Mise en place : ticket M3-5. Écrit dans docs/fr/DECISIONS.md.
+    accept:
+      - "Langue source choisie"
+      - "Règle écrite dans CONTRIBUTING.md"
+
+  - id: D23
+    list: decisions
+    title: "D23 — Deuxième et troisième hébergeurs des shards"
+    status: decision
+    size: S
+    desc: |
+      Audit, erreur 8 : un seul hébergeur (Internet Archive) pour ce qu'Arche fabrique.
+      Candidats : GitHub Releases (≤ 2 Go par fichier), Zenodo (DOI, 50 Go), Hugging Face
+      datasets, un miroir IPFS. Il en faut deux en plus d'IA, avec des licences compatibles.
+    accept:
+      - Deux hébergeurs choisis
+      - Champ `index.mirrors[]` accepté par le schéma du catalogue
+      - "Candidat sans coût : le torrent qu'Internet Archive génère pour chaque item"
+
+  # ─────────────────────────── M0 · Exister ───────────────────────────
+  - id: M0-1
+    list: m0
+    title: "Publier le dépôt sur GitHub, ci.yml vert"
+    status: todo
+    size: S
+    decision: D6
+    desc: |
+      Zéro code. Pousser le dépôt tel quel, activer Actions, vérifier que `ci.yml` (build,
+      test, catalog:validate) passe sur `main`.
+    accept:
+      - "Dépôt public à l'URL de D6, licence MIT visible"
+      - "Badge CI vert dans README.md"
+      - "Protection de branche : PR obligatoire sur main"
+
+  - id: M0-2
+    list: m0
+    title: "Lancer catalog-update.yml une fois — fraîcheur non nulle"
+    status: todo
+    size: S
+    depends_on: [ M0-1 ]
+    desc: |
+      Exécuter le workflow de fraîcheur du catalogue une première fois. C'est le critère de
+      G1 : `arche catalog freshness` rend un chiffre non nul.
+    accept:
+      - "Le workflow s'exécute sans erreur et ouvre une PR (pas d'automerge — voir M2-3)"
+      - "`arche catalog freshness` affiche une date de vérification pour ≥ 50 % des ressources"
+
+  - id: M0-3
+    list: m0
+    title: "Premier item Internet Archive : upload manuel d'un shard de test"
+    status: todo
+    size: S
+    decision: D11
+    depends_on: [ M0-1 ]
+    desc: |
+      Vérifier toute la chaîne d'hébergement à la main avant de l'automatiser :
+      `scripts/index/upload-ia.sh` sur un shard minuscule (ex. `who-poison-centres`), puis
+      `arche index fetch` sur une machine vierge.
+    accept:
+      - "Item `arche-index-<id>` visible sur archive.org avec sha256 et licence"
+      - "`arche index fetch <id>` télécharge, vérifie le hachage et installe le shard"
+
+  # ─────────────────── M1 · Format SQLite & mesure ───────────────────
+  - id: M1-1
+    list: m1
+    title: "ADR 0014 — le format de corpus : une base SQLite par corpus"
+    status: done
+    size: M
+    desc: |
+      Décision 1 de l'audit. Spécifier `<resource>.arche.sqlite` : tables `meta` (resource_id,
+      source sha256, licence héritée, langue, built_at, version du format), `articles` (path,
+      title, url), `chunks` (id, article, ordinal, text, locator), `chunks_fts` (FTS5 sur text,
+      tokenizer unicode61 + porter FR/EN), `vectors_<model>` (chunk_id, dims, blob int8 ou f16,
+      norme) — une table par modèle d'embedding, ajoutable sans republier le texte. Lisible
+      avec `sqlite3` seul. Transport : zstd (`.arche.sqlite.zst`). Le texte local
+      (`index/text/`) et le `.arche-idx` disparaissent : le SQLite les contient.
+    accept:
+      - "docs/adr/0014-format-sqlite.md écrit, avec le schéma SQL complet et les requêtes de référence (FTS5 + cosinus)"
+      - "Une requête d'exemple `sqlite3` qui répond à une question sans Arche est dans l'ADR"
+      - "docs/fr/ARCHITECTURE.md et BASE-CONNAISSANCE.md renvoient à l'ADR"
+
+  - id: M1-2
+    list: m1
+    title: "Writer SQLite dans build.ts (remplace .arche-idx + index/text)"
+    status: done
+    size: L
+    depends_on: [ M1-1 ]
+    desc: |
+      `buildShard` écrit une base SQLite via `node:sqlite` (vérifié : FTS5 disponible sur Node
+      22.22). Chunks, articles, meta, FTS5, vecteurs du modèle courant. Reprise après coupure
+      conservée (checkpoint = dernière ligne committée, transactions par lot). Compression zstd
+      en sortie (`zstd` CLI si présent, sinon `--no-compress`).
+    accept:
+      - "`arche index build <id> --out x.arche.sqlite` produit une base ouvrable par sqlite3 avec les 5 tables"
+      - "Un build interrompu (SIGTERM au milieu) reprend au dernier lot sans doublon (test)"
+      - "`arche index estimate` prédit la taille SQLite (texte + vecteurs int8) à ±30 %"
+      - "Le format .arche-idx n'est plus écrit ; un test de non-régression sur le corpus fixture passe"
+    verify:
+      - "node --test tests/index.test.ts"
+
+  - id: M1-3
+    list: m1
+    title: "retrieve.ts lit SQLite : FTS5 + vecteurs, plus de parseur maison"
+    status: done
+    size: L
+    depends_on: [ M1-2 ]
+    desc: |
+      Les canaux `dense` et `local` deviennent un seul canal `sqlite` par corpus : BM25 par FTS5
+      (rank), cosinus sur les vecteurs de la table du modèle demandé (brute force par blocs,
+      mmap). Le canal `xapian` (kiwix-serve) reste. RRF + diversification inchangés.
+      `read_article` et `arche://article/...` lisent `articles`/`chunks`.
+    accept:
+      - "`search` répond sur un corpus SQLite sans index/text ni .arche-idx"
+      - "Les canaux rapportés deviennent xapian | sqlite | (error)"
+      - "Les parseurs de .arche-idx et le BM25 maison sont supprimés (diff négatif)"
+      - "Latence mesurée sur 100 k chunks < 300 ms sur CPU portable, écrite dans le rapport"
+
+  - id: M1-4
+    list: m1
+    title: "Vecteurs dérivés : `arche index embed <corpus> --model` sans republier le texte"
+    status: todo
+    size: M
+    depends_on: [ M1-2 ]
+    desc: |
+      Un corpus publié sans vecteurs (ou avec ceux d'un autre modèle) reçoit une table
+      `vectors_<model>` calculée localement. C'est ce qui rend les shards indépendants du
+      modèle d'embedding (audit, erreur 2) et utilisables par un modèle plus léger demain.
+    accept:
+      - "`arche index embed <id> --model nomic-embed-text` ajoute la table et met à jour meta"
+      - "Reprise après coupure (par lot) et estimation temps/Wh via compute.ts avant de lancer"
+      - "`search --model` choisit la table ; absente → FTS5 seul avec avertissement"
+
+  - id: M1-5
+    list: m1
+    title: "Brancher le reclasseur (rerank.ts) dans retrieve — et le mesurer"
+    status: todo
+    size: S
+    depends_on: [ M1-3, M1-7 ]
+    desc: |
+      Audit, erreur 10 : écrit, testé, jamais appelé. Le brancher après la fusion, optionnel
+      (`--rerank`, off par défaut sur < 16 Go), coût estimé par compute.ts. Le garder seulement
+      si `arche eval` montre un gain.
+    accept:
+      - "`search --rerank` passe par rerank.ts ; temps et Wh ajoutés à la réponse"
+      - "Tableau eval avec/sans reclasseur dans backlog/reports/M1-5.md ; décision gardé/retiré écrite"
+
+  - id: M1-6
+    list: m1
+    title: "knowledge/eval.yaml — 60 questions avec réponse attendue et locator"
+    status: done
+    size: M
+    desc: |
+      Le jeu d'évaluation avant tout ajout (décision 3). 60 questions couvrant les sujets
+      d'autonomie (eau, énergie, culture, construction, électronique, entraînement, premiers
+      secours) ; pour chacune : corpus attendu, locator (article/chunk) de la réponse, mots
+      obligatoires, et si un garde-fou (sensible) doit se déclencher. 15 questions doivent être
+      « négatives » (hors base → la réponse attendue est « je ne trouve pas »).
+    accept:
+      - "60 entrées validées par un schéma (tests/eval.test.ts)"
+      - "Chaque locator existe dans un shard de la première vague (M4-3) ou est marqué pending"
+      - "12 questions déclenchent un garde-fou attendu, 15 sont négatives"
+
+  - id: M1-7
+    list: m1
+    title: "`arche eval` — recall@5, garde-fous, canaux ; tableau publié ; seuil CI"
+    status: done
+    size: M
+    depends_on: [ M1-3, M1-6 ]
+    desc: |
+      ~120 lignes : lance chaque question de eval.yaml contre les shards installés, calcule
+      recall@5 et MRR par corpus et par canal, le taux de garde-fous justes, le taux de
+      « je ne trouve pas » juste sur les négatives. Sortie Markdown + JSON. En CI sur les
+      shards fixtures : échec sous le seuil (`eval.threshold`).
+    accept:
+      - "`arche eval --json` et `--markdown` ; docs/fr/EVAL.md publie le dernier tableau"
+      - "ci.yml échoue si recall@5 < seuil sur les fixtures"
+      - "Le tableau distingue xapian / sqlite / fusion / rerank"
+
+  - id: M1-8
+    list: m1
+    title: "Router puis chercher : index de corpus → bases choisies → recherche"
+    status: todo
+    size: M
+    depends_on: [ M1-3, M1-7 ]
+    desc: |
+      Décision 6. Avec des centaines de corpus, on ne cherche pas partout : un petit index de
+      routage (par corpus : résumé, vocabulaire top-N par TF-IDF, langue, sujets) choisit k
+      bases, puis la recherche s'y fait. Routage lexical d'abord ; dense seulement si mesuré
+      utile. Le client voit quels corpus ont été choisis et pourquoi.
+    accept:
+      - "`index/router.sqlite` construit par `arche index route-build` à partir des shards installés"
+      - "`search` renvoie `routed_to: [...]` ; `--all` désactive le routage"
+      - "eval : recall@5 avec routage ≥ 95 % du recall sans routage, temps divisé par ≥ 3 sur 20 corpus"
+
+  - id: M1-9
+    list: m1
+    title: "Vecteurs petits : int8 + 256 dims, mesurés par eval"
+    status: todo
+    size: M
+    depends_on: [ M1-4, M1-7 ]
+    desc: |
+      Audit, erreur 3 : 4,5 M de chunks × 768 f32 ne tiennent pas. Quantifier en int8, tronquer
+      à 256 dims (modèles Matryoshka : nomic-embed-text v1.5, bge-m3 tronqué), mesurer la perte
+      avec eval. Le format (M1-1) porte dims et type par table.
+    accept:
+      - Table `vectors_<model>` en int8 ; taille par chunk ≤ 300 octets à 256 dims
+      - Perte de recall@5 mesurée < 3 points sur eval ; tableau dans le rapport
+      - "`arche index estimate` reflète les nouvelles tailles"
+      - "Au-delà d'~1 M de chunks : index ANN à côté (sqlite-vec ou fichier IVF), choisi par eval, transparent pour le format"
+
+  - id: M1-10
+    list: m1
+    title: "index fetch et index-build.yml produisent et consomment le nouveau format"
+    status: todo
+    size: M
+    depends_on: [ M1-2, M1-3 ]
+    desc: |
+      Le workflow `index-build.yml`, `scripts/index/build.sh`, `upload-ia.sh` et
+      `update-catalog.ts` passent au `.arche.sqlite.zst` ; `arche index fetch` télécharge,
+      vérifie, décompresse, installe. Le schéma du catalogue (`index.*`) gagne `format`,
+      `dims`, `vector_type`, `mirrors[]`.
+    accept:
+      - "`arche index fetch` installe un shard SQLite publié et `search` y répond"
+      - "Schéma du catalogue mis à jour, catalog:validate vert"
+      - "Un run de index-build.yml sur un corpus fixture est vert (M0-1 requis pour le prouver)"
+  - id: M1-11
+    list: m1
+    title: "Mode simple : un seul outil MCP `arche_ask` pour les modèles ≤ 13 B"
+    status: todo
+    size: S
+    depends_on:
+      - M1-3
+      - M1-8
+    desc: |
+      openzim-mcp expose un seul outil parce que « les modèles ≤ 13B tirent profit du mode simple » ; Arche en expose 21, un modèle 4B s'y perd. `arche_ask(question)` : route (M1-8), cherche (M1-3), reclasse si activé (M1-5), renvoie un court contexte cité (≤ N passages, sources, garde-fous). `arche mcp --simple` n'expose que cet outil + read_article ; le mode complet reste pour les agents.
+    accept:
+      - "`arche mcp --simple` expose arche_ask + read_article seulement ; test MCP"
+      - arche_ask renvoie passages cités, corpus routés, garde-fous éventuels, en < 2 000 tokens
+      - "eval avec un modèle 4B dans un vrai client (M4-6) : taux de réponses citées ≥ mode complet"
+
+  # ─────────────────────────── M2 · Confiance ───────────────────────────
+  - id: M2-1
+    list: m2
+    title: "Signer le catalogue (minisign) — clé publique dans le dépôt"
+    status: todo
+    size: M
+    desc: |
+      Décision 5. À chaque release, `catalog/` est concaténé de façon déterministe, haché, et
+      signé par minisign (clé secrète en secret GitHub, clé publique dans `catalog/KEY.pub` et
+      dans README). Vérification en pur TypeScript (Ed25519 via `node:crypto`), sans dépendance.
+    accept:
+      - "`arche catalog verify` vérifie la signature de `catalog/catalog.minisig` et échoue sinon"
+      - "release.yml signe ; ci.yml vérifie"
+      - "docs/fr/CONFIANCE.md explique : qui signe, comment tourner la clé, quoi faire si elle fuit"
+
+  - id: M2-2
+    list: m2
+    title: "Téléchargeur qui vérifie : signature du catalogue + sha256 obligatoires"
+    status: todo
+    size: M
+    depends_on: [ M2-1 ]
+    desc: |
+      `arche download` refuse une ressource sans `checksum` (sauf `--insecure`, tracé) et refuse
+      de partir si le catalogue n'est pas signé/vérifié. Les shards passent par la même règle.
+    accept:
+      - "Une ressource sans checksum est refusée par défaut ; test"
+      - "Un hachage faux fait échouer le téléchargement et supprime le fichier partiel ; test"
+      - "Compteur `catalog:validate` : nombre de ressources sans checksum, publié"
+
+  - id: M2-3
+    list: m2
+    title: "Retirer l'automerge de source.url / checksum du workflow catalog-update"
+    status: done
+    size: S
+    desc: |
+      Audit, erreur 7 : un changement d'URL ou de hachage fusionné automatiquement, c'est la
+      porte d'entrée. Le workflow ouvre une PR, jamais ne la fusionne, et le diff met en
+      évidence les champs sensibles (url, checksum, size, licence).
+    accept:
+      - "Plus aucun `automerge` dans .github/workflows ; PR avec label `catalog-sensitive` si url/checksum changent"
+      - "CONTRIBUTING.md : règle de relecture à deux pour ces champs"
+
+  - id: M2-4
+    list: m2
+    title: "Manifeste d'édition : arche.lock enregistre ce qui est sur le SSD — un journal, pas un verrou"
+    status: todo
+    size: M
+    depends_on: [ M2-2 ]
+    desc: |
+      Règle de Florian : toujours la dernière version stable, jamais de version figée. `arche.lock` n'est pas un verrou mais un manifeste : `arche export` y écrit ce qu'il a réellement copié (ressource → version résolue, URL, sha256, taille, licence, date), signé avec la clé du catalogue. Il sert à vérifier plus tard l'intégrité d'un SSD hors ligne (`arche verify <disque>`) et à savoir ce qu'une édition contenait. Il ne contraint jamais un téléchargement : `arche download` reprend la dernière stable du moment.
+    accept:
+      - "`arche export` écrit arche.lock avec ce qu'il a réellement copié ; `arche verify <disque>` compare le SSD au manifeste ; test"
+      - "Le manifeste est signé avec la même clé que le catalogue ; il ne bloque jamais un `arche download` (test : un download après export prend une version plus récente si elle existe)"
+      - "examples/editions/autonomiste.lock : exemple de manifeste produit par un export (contenu selon D20)"
+
+  - id: M2-5
+    list: m2
+    title: "Vérifier le catalogue pour de vrai : verified_at calculé, pas déclaré"
+    status: todo
+    size: M
+    desc: |
+      Audit, erreur 6 : 317/317 non vérifiées. Un script mensuel (`catalog:verify`) fait un
+      HEAD + un GET partiel + le hachage complet pour les ressources < 2 Go, et écrit
+      `verified_at`, `verified_sha256`, `verified_size` dans un fichier séparé
+      (`catalog/verified.yaml`) que personne n'édite à la main.
+    accept:
+      - "`catalog/verified.yaml` généré par CI ; `arche catalog freshness` l'utilise"
+      - "README affiche : N ressources vérifiées / total, date"
+      - "Une ressource dont l'URL meurt passe `status: broken` automatiquement (PR)"
+
+  - id: M2-6
+    list: m2
+    title: "Multi-hébergeur des shards : IA + 2 miroirs, licence héritée"
+    status: todo
+    size: M
+    decision: D23
+    depends_on: [ M1-10 ]
+    desc: |
+      Chaque shard publié sur trois hébergeurs ; `index.mirrors[]` dans le catalogue ; `index
+      fetch` essaie dans l'ordre. La licence du shard est celle du corpus source (héritée,
+      écrite dans `meta`), jamais « MIT » par défaut (audit, erreur 8).
+    accept:
+      - "upload vers les trois hébergeurs dans index-build.yml"
+      - "`arche index fetch` bascule sur un miroir si le premier échoue ; test"
+      - "Licence héritée visible dans `arche index list` et dans meta du SQLite"
+  - id: M2-7
+    list: m2
+    title: "Résolution en direct : `arche download` prend toujours la dernière stable chez l'éditeur"
+    status: todo
+    size: M
+    depends_on:
+      - M2-2
+      - M2-4
+    desc: |
+      Règle de Florian : toujours la dernière version stable. `arche download` interroge l'éditeur à chaque téléchargement — mêmes résolveurs que catalog-update.yml (GitHub releases, OPDS Kiwix, Ollama, Hugging Face), même politique « stable » (src/core/versions.ts) — vérifie l'empreinte/signature fournie par l'amont, et note dans le manifeste (M2-4) ce qu'il a obtenu. Le catalogue devient une recette de recherche ; la PR mensuelle ne sert plus qu'à détecter les liens morts. Pas d'option pour figer une version.
+    accept:
+      - Résolution en direct par défaut pour github-release, kiwix, ollama, huggingface ; repli sur l'URL du catalogue seulement si l'éditeur ne répond pas (dit à l'écran)
+      - Résolveurs partagés avec scripts/catalog/check-*.ts (un seul code, une seule politique « stable »)
+      - Version, URL et sha256 obtenus notés dans le manifeste ; tests avec un faux serveur qui publie une version plus récente entre deux appels
+  - id: M2-8
+    list: m2
+    title: "Réduire `source.kind: manual` (66 fiches) : résolveurs GitLab, index pip, dépôts apt"
+    status: todo
+    size: M
+    depends_on:
+      - M2-7
+    desc: |
+      66 fiches sont `manual` (KiCad, PlatformIO, wheels PyTorch, apt-offline…). Ajouter des résolveurs pour ce qui a une API — GitLab releases, index pip simple, dépôts apt (Packages.gz), tarballs versionnés par motif d'URL — et reclasser. `manual` ne reste que pour ce qui n'a vraiment pas d'API, avec la raison écrite. Les paquets pip/npm/apt restent pris en charge par leurs gestionnaires (pip download, npm pack + verdaccio, apt-offline) à partir de requirements/*-offline.txt : Arche ne devient pas un gestionnaire de paquets de plus.
+    accept:
+      - "Nouveaux kinds dans le schéma : gitlab-release, pip-index, apt-repo, url-pattern ; catalog:validate vert"
+      - Moins de 15 fiches `manual` restantes, chacune avec `manual_reason`
+      - "catalog-update.yml couvre les nouveaux kinds ; README : N fiches résolues automatiquement / total"
+
+  # ─────────────────── M3 · Noyau & soustraction ───────────────────
+  - id: M3-1
+    list: m3
+    title: "Mesurer le noyau : scripts/loc.sh, seuil CI à 3 000 lignes dans src/"
+    status: done
+    size: S
+    desc: |
+      Décision 4. On ne peut pas soustraire sans mesurer. Un script compte les lignes de
+      `src/` (hors tests, hors vendor), publie le chiffre dans README, et ci.yml échoue
+      au-dessus de 3 000 une fois M3-2/M3-3/M3-6 faits (seuil progressif : 7 000 → 5 000 → 3 000).
+    accept:
+      - "`npm run loc` affiche src/, examples/, vendor/ séparément"
+      - "ci.yml applique le seuil courant ; README affiche la valeur"
+
+  - id: M3-2
+    list: m3
+    title: "Sortir solveurs et recettes vers examples/ (hors noyau)"
+    status: todo
+    size: M
+    depends_on: [ M3-1 ]
+    desc: |
+      garden.ts, bom.ts, recipes.ts, inventory.ts, knowledge/projects/*, knowledge/crops.yaml
+      deviennent `examples/projects/` : des exemples génériques (ADR 0013), avec leur README,
+      chargés par le MCP comme extension optionnelle (`arche mcp --examples`). Le noyau ne les
+      importe plus.
+    accept:
+      - "src/ ne contient plus src/core/project ; les 5 recettes tournent depuis examples/"
+      - "Les outils MCP garden_plan / bom_substitute / project_* n'apparaissent qu'avec --examples"
+      - "Tests déplacés et verts ; loc du noyau baisse d'au moins 1 200 lignes"
+
+  - id: M3-3
+    list: m3
+    title: "Sortir miroirs, visuels, schémas, wizard, calculateurs vers packages/"
+    status: todo
+    size: L
+    depends_on: [ M3-1 ]
+    desc: |
+      Audit, erreur 12. Le noyau = catalog · download · serve · index · search · mcp. Le reste
+      (miroirs git, visuels, render_diagram, wizard web, calc_*) devient des paquets sous
+      `packages/<nom>/` avec leur propre entrée, branchés par le MCP en extensions déclarées
+      dans `arche.yaml`.
+    accept:
+      - "src/ < 5 000 lignes après ce ticket ; packages/ listés dans README"
+      - "`arche mcp` sans extension expose : search, read_article, resources, prompts, estimate_pipeline, jobs_list"
+      - "Chaque paquet a ses tests et est chargé seulement s'il est déclaré"
+
+  - id: M3-4
+    list: m3
+    title: "Vendre au lieu de réécrire : zip, RSS, zstd — supprimer les parseurs maison"
+    status: todo
+    size: M
+    depends_on: [ M1-3 ]
+    desc: |
+      Audit, erreur 9. Le lecteur zip maison (EPUB), le parseur RSS par regex (kiwix), et tout
+      ce que M1 n'a pas déjà retiré sont remplacés par des dépendances vendues dans `vendor/`
+      (copie, licence, version, script de mise à jour), ou par des binaires déjà requis
+      (`zimdump`, `pdftotext`, `zstd`).
+    accept:
+      - "vendor/README.md liste chaque paquet, version, licence, raison"
+      - "src/core/rag/extract.ts n'a plus de lecteur zip ; retrieve.ts plus de regex RSS"
+      - "Diff net négatif d'au moins 400 lignes"
+
+  - id: M3-5
+    list: m3
+    title: "Une langue source pour la doc, l'autre générée et marquée"
+    status: todo
+    size: M
+    decision: D22
+    desc: |
+      Audit, erreur 11. Selon D22 (tranché : anglais) : docs/en/ est la source ; scripts/docs/translate.mjs produit docs/fr/ (et d'autres langues) via le modèle local choisi, ou un service en ligne côté mainteneur, avec un en-tête « Traduit de docs/en/… — ne pas éditer » et une empreinte du source. CI échoue si docs/fr a été édité à la main. README.md et locales/ suivent la même règle.
+    accept:
+      - "Script de génération + en-tête + vérification CI"
+      - "CONTRIBUTING.md : on n'édite que la langue source"
+      - "locales/ suit la même règle"
+
+  - id: M3-6
+    list: m3
+    title: "Découper le binaire : arche = noyau ; extensions déclarées dans arche.yaml"
+    status: todo
+    size: M
+    depends_on: [ M3-2, M3-3 ]
+    desc: |
+      Le CLI n'enregistre que les commandes du noyau ; les paquets s'enregistrent par une
+      interface unique (`register(cli, mcp)`), chargés depuis `arche.yaml: extensions: [...]`.
+      Le SEA (`build-sea.sh`) embarque le noyau seul par défaut.
+    accept:
+      - "`arche --help` sans extension : catalog download serve index search mcp eval jobs"
+      - "`arche.yaml: extensions: [calc, visuals]` les ajoute ; test"
+      - "src/ ≤ 3 000 lignes ; seuil CI passé à 3 000"
+
+  # ─────────────────── M4 · Base & connaissance ───────────────────
+  - id: M4-1
+    list: m4
+    title: "Règle de provenance : validateur knowledge/ — chaque valeur a un locator"
+    status: done
+    size: M
+    desc: |
+      Décision 2 : provenance ou rien. Un schéma commun pour `knowledge/*.yaml` : chaque valeur
+      numérique ou affirmation porte `source: {resource, path, quote}` ; `verified` est calculé
+      par le validateur (le locator existe dans le shard et la citation y figure), jamais écrit
+      à la main. `catalog:validate` inclut knowledge/.
+    accept:
+      - "tests/knowledge.test.ts : toute valeur sans source fait échouer la CI (période de grâce : `unsourced: true` explicite, compté et publié)"
+      - "`arche knowledge verify` calcule `verified` en ouvrant les shards installés"
+      - "README : N valeurs sourcées / total"
+
+  - id: M4-2
+    list: m4
+    title: "Rattacher figures.yaml, crops.yaml, compute.yaml à leurs sources — ou les sortir"
+    status: todo
+    size: L
+    depends_on: [ M4-1 ]
+    desc: |
+      Audit, erreur 4 : la connaissance a été écrite, pas extraite. Pour chaque valeur : trouver
+      la source dans le catalogue (openfarm-crops-rescue pour les cultures ; Sphere, OMS, guides
+      cités pour les figures ; fiches constructeur pour compute.yaml), écrire le locator, ou
+      retirer la valeur. Les valeurs de compute.yaml restent avec `measured: <machine, date>`.
+    accept:
+      - "0 valeur `unsourced` dans figures.yaml et crops.yaml"
+      - "compute.yaml : chaque bande passante/puissance a une source ou une mesure datée"
+      - "Rapport : valeurs retirées et pourquoi"
+
+  - id: M4-3
+    list: m4
+    title: "Les 20 premiers shards publiés (G2)"
+    status: todo
+    size: L
+    decision: D11
+    depends_on: [ M1-10, M0-3 ]
+    desc: |
+      Les vingt plus petits corpus du plan (centres antipoison, plantes toxiques, Sphere,
+      premiers secours, eau, énergie…) construits par index-build.yml, publiés (IA + miroirs),
+      référencés dans le catalogue avec licence héritée. ~2 Go de texte, une journée de CI.
+    accept:
+      - "20 entrées `index.url` + sha256 dans le catalogue ; catalog:validate vert"
+      - "`arche index fetch` des 20 sur une machine vierge, `search` répond, `eval` publié"
+      - "docs/fr/EVAL.md : premier tableau réel"
+
+  - id: M4-4
+    list: m4
+    title: "knowledge/methods/ — planifier, dériver, entraîner, estimer, reconstruire"
+    status: todo
+    size: L
+    desc: |
+      G6. Le savoir de méthode, en texte, qui permet à un modèle de 4 milliards de faire ce
+      qu'un solveur faisait : planifier avec la base (inventaire → corpus → plan), dériver un
+      design de référence, estimer sans se tromper (avec compute), l'ordre de lecture pour
+      reconstruire la technologie depuis zéro (métallurgie → électricité → électronique →
+      calcul). Chaque méthode cite ses sources (M4-1). Exposé par MCP en prompts.
+    accept:
+      - "≥ 5 méthodes dans knowledge/methods/*.md, sourcées, validées par M4-1"
+      - "MCP : prompt `arche_method` (liste + lecture) ; test"
+      - "Chaque méthode a un exemple de bout en bout relu avec un modèle 4B (rapport)"
+
+  - id: M4-5
+    list: m4
+    title: "Méthodes d'entraînement local : capteurs ESP32 × récoltes, politiques robot sans NVIDIA"
+    status: todo
+    size: L
+    depends_on: [ M4-4 ]
+    desc: |
+      Le besoin de premier rang de l'ADR 0013. Deux méthodes complètes : (1) régression /
+      classification sur ses propres logs de capteurs et de récoltes (préparation, split,
+      entraînement CPU avec les wheels de `pip-ml-cache`, export tflite-micro vers ESP32) ;
+      (2) une politique de robot désherbeur entraînée sur CPU/tinygrad à partir d'OWL, avec
+      validation humaine avant tout actionneur (ADR 0010 §6). Temps et Wh estimés par machine.
+    accept:
+      - "knowledge/methods/train-sensors.md et train-robot-policy.md, sourcés, avec estimation temps/Wh pour 3 machines"
+      - "examples/training/ : jeu de données jouet + script qui tourne hors ligne avec les wheels du bundle"
+      - "Le bundle `training` contient tout ce que la méthode requiert (catalog check)"
+
+  - id: M4-6
+    list: m4
+    title: "Un vrai client léger (G4) : Jan ou Open WebUI + Qwen 4B sur 8 Go"
+    status: todo
+    size: M
+    depends_on: [ M4-3 ]
+    desc: |
+      Une question d'eval obtient une réponse citée dans un client qu'on n'a pas écrit, sur une
+      machine 8 Go, et « combien de temps et de Wh ? » obtient un chiffre. Documenter la
+      configuration exacte (docs/fr/CLIENTS-IA.md), les pièges, et le temps mesuré.
+    accept:
+      - "Capture texte de la session (question → outils appelés → réponse citée) dans le rapport"
+      - "CLIENTS-IA.md : configuration copiable pour Jan et Open WebUI"
+      - "Temps de première réponse et Wh mesurés, comparés à l'estimation"
+
+  - id: M4-7
+    list: m4
+    title: "Les gros corpus (G5) : Wikipedia FR en shards dense — après D21"
+    status: todo
+    size: L
+    decision: D21
+    depends_on: [ M1-9, M1-10 ]
+    desc: |
+      ~4,5 M de chunks : runner GPU ou lots avec cache. Découpage en shards par plage
+      d'articles pour rester sous 2 Go par fichier, table de routage (M1-8) qui les traite comme
+      un seul corpus.
+    accept:
+      - "Wikipedia FR publié en N shards SQLite, routés comme un corpus"
+      - "Coût réel (heures GPU, Wh, euros) écrit dans le rapport et comparé à l'estimation"
+
+  - id: M4-8
+    list: m4
+    title: "L'objet (G7) : Édition Autonomiste figée, export SSD 128 Go, test hors ligne"
+    status: todo
+    size: M
+    decision: D20
+    depends_on: [ M2-4, M4-3 ]
+    desc: |
+      `examples/editions/autonomiste.yaml` + lock signé ; `arche export` vers un SSD ; test
+      réel : machine déconnectée, `arche serve`, client léger, une question d'eval, une
+      estimation. Fiches PDF générées.
+    accept:
+      - SSD préparé en ligne répond hors ligne (rapport avec les commandes exactes)
+      - Taille finale ≤ 128 Go ; liste des ressources dans le lock
+      - docs/fr/EDITIONS.md
+      - Échelle de packs nommés et dimensionnés (Premiers secours ~1,2 Go · Cultiver ~4 Go · Construire ~9 Go · Reconstruire la pile ~60 Go · Autonomiste ~100 Go), chacun avec plancher RAM et énergie annoncés
+
+  - id: M4-9
+    list: m4
+    title: "Profil autonomiste + fiche design de référence OWL (G8)"
+    status: todo
+    size: S
+    depends_on: [ M3-2 ]
+    desc: |
+      `autonomiste` dans profiles.yaml (les bundles de D20) ; première fiche
+      `examples/projects/designs/owl.yaml` (nomenclature d'OpenWeedLocator avec équivalents et
+      « ce qui change »), consommée par l'exemple bom_substitute.
+    accept:
+      - "`arche plan --profile autonomiste` produit le plan de D20"
+      - "bom_substitute sur la fiche OWL avec un inventaire d'exemple ; test"
+
+  - id: M4-10
+    list: m4
+    title: "Documents de l'utilisateur de bout en bout : index add → même format, mêmes garanties"
+    status: todo
+    size: M
+    depends_on: [ M1-2, M1-3 ]
+    desc: |
+      « Le gars puisse s'ajouter des PDF / ebooks » : `arche index add <fichier|dossier>` produit
+      un `.arche.sqlite` `user-<slug>` avec licence `private`, jamais exporté hors de sa
+      machine par défaut, cherchable et routable comme les autres, vecteurs calculables avec
+      M1-4. Guide utilisateur FR.
+    accept:
+      - "PDF, EPUB, Markdown, dossier → shard SQLite ; search + read_article y répondent"
+      - "`arche export` exclut les shards `private` sauf `--include-private`"
+      - "docs/fr/guide-debutant.md : section « ajouter mes documents »"
+  - id: M4-11
+    list: m4
+    title: "Cartes hors ligne, en agrégateur : bundle `maps` + recette d'extraction régionale (go-pmtiles)"
+    status: todo
+    size: S
+    depends_on:
+      - M2-7
+    desc: |
+      ADR 0015 : Arche n'affiche pas de carte. Il agrège : le catalogue référence la planète quotidienne Protomaps, go-pmtiles, MapLibre, Organic Maps/OsmAnd, licence ODbL héritée ; un bundle `maps` ; une méthode knowledge/methods/maps.md qui dit comment extraire une région par requêtes HTTP partielles (`pmtiles extract`) sans télécharger les 120 Go, et la déclarer comme jeu de données `field_map` de l'inventaire, servi par `arche serve`. Pas de code de rendu dans Arche.
+    accept:
+      - Bundle `maps` valide ; fiches Protomaps / go-pmtiles / MapLibre avec licences
+      - "knowledge/methods/maps.md : extraction d'une région testée sur un bbox de 20 km, taille et durée notées"
+      - Un `field_map` extrait apparaît dans `arche project check` et est servi par `arche serve`
+  - id: M4-12
+    list: m4
+    title: "Distribuer à travers eux : Arche en app NOMAD (Supply Depot) et en rôle IIAB"
+    status: todo
+    size: M
+    depends_on:
+      - M4-3
+      - M1-11
+    desc: |
+      Project NOMAD a 36 400 étoiles et pas de MCP ; IIAB héberge déjà Gitea, Jupyter, Node-RED ; Kiwix fournit les ZIM. Livrer `arche mcp` + les shards comme une app de leur catalogue : une image Docker arche-mcp (leur format, pas notre chemin recommandé — ADR 0008 reste) déclarée dans le Supply Depot de NOMAD, et un rôle Ansible `arche` pour IIAB. L'app lit les ZIM déjà présents sur l'hôte, installe les shards publiés, expose MCP sur le réseau local. Une PR ouverte chez chacun.
+    accept:
+      - Image `arche-mcp` construite en CI (Dockerfile minimal, noyau seul), testée contre un kiwix-serve local
+      - Déclaration Supply Depot NOMAD + rôle IIAB, chacun avec sa doc « Arche dans … »
+      - Une PR ouverte chez NOMAD et chez IIAB, liens dans le rapport
+  - id: M4-13
+    list: m4
+    title: "`arche compute bench` : un score, un tableau public, l'estimateur calibré"
+    status: todo
+    size: M
+    depends_on:
+      - M1-2
+    desc: |
+      Le score NOMAD (un chiffre, classement public) et Personal Codex qui benchmarke chaque unité sont simples et efficaces. Mesurer sur la machine : bande passante mémoire, tok/s réels sur un modèle de référence (Qwen 4B Q4), temps d'embedding de 1 000 chunks, puissance si lisible (RAPL, powermetrics, batterie). Produire un score et l'écart estimé/mesuré ; l'écrire dans knowledge/compute.yaml comme point `measured` (M4-2) ; tableau public docs/en/BENCH.md alimenté par PR.
+    accept:
+      - "`arche compute bench --json` : mesures + score + écart avec `arche compute estimate`"
+      - Point de référence `measured` ajouté à knowledge/compute.yaml avec machine et date
+      - docs/en/BENCH.md avec ≥ 3 machines
+  - id: M4-14
+    list: m4
+    title: "Store d'applications (agrégateur) : apps open source par domaine, Linux d'abord, priorité à celles qui ont un MCP"
+    status: todo
+    size: M
+    depends_on:
+      - M2-7
+      - M2-8
+    desc: |
+      Demande de Florian : un store d'apps open source — Linux d'abord, Windows et macOS aussi — en priorité celles qui ont un serveur MCP, pour que l'IA locale travaille avec les programmes dédiés (fonderie/usinage, planification agricole, hydraulique/eau, CAO/EDA, SIG, dev) au lieu de tout recoder. ADR 0015 : agrégation — le catalogue décrit, arche download va chercher la dernière stable, rien n'est hébergé. Schéma : `platforms[]`, `mcp{kind, repo, transport, offline}` ; reclasser et compléter par domaine ; recenser les serveurs MCP existants (blender-mcp, freecad-mcp, kicad-mcp, qgis_mcp… à vérifier) ; vue `arche apps` + docs/en/APPS.md ; bundles apps-*.
+    accept:
+      - "Schéma : `platforms[]` et `mcp{...}` validés ; toutes les fiches software/toolchain ont `platforms`"
+      - ≥ 40 apps sur fabrication/CAM, agriculture, eau, CAO/EDA, SIG, dev ; ≥ 10 avec un serveur MCP vérifié (maintenu, hors ligne, licence) catalogué
+      - "`arche apps --domain agriculture --mcp` et le filtre catalog_search répondent ; `arche download <app>` prend la dernière stable pour la plateforme courante"
+      - docs/en/APPS.md générée depuis le catalogue ; bundles apps-* valides
+      - "knowledge/methods/work-with-apps.md : exemple de bout en bout (QGIS ou FreeCAD avec un modèle 4B)"

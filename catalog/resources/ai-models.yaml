@@ -1,0 +1,425 @@
+# Modèles IA locaux (Ollama). Le champ requires.ram_gb est la RAM totale conseillée en quantification Q4_K_M.
+# Local AI models (Ollama). requires.ram_gb is the advised total RAM at Q4_K_M quantization.
+# Sizes are the Ollama default tag sizes (Q4_K_M) as of 2026-09; the updater refreshes them.
+
+- id: ollama-qwen3-1-7b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3 1.7B (minuscule)", en: "Qwen3 1.7B (tiny)" }
+  description: { fr: "Tourne sur 4 Go de RAM. Français correct, raisonnement limité. Pour vieux portables et Raspberry Pi 4.", en: "Runs in 4 GB RAM. Decent French, limited reasoning. For old laptops and Raspberry Pi 4." }
+  tags: [ llm, chat, multilingual, tiny ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 1.4
+  version: null
+  source: { kind: ollama, ollama_model: "qwen3:1.7b", homepage: https://ollama.com/library/qwen3 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 4, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-4b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3 4B (petit)", en: "Qwen3 4B (small)" }
+  description: { fr: "Bon compromis pour 8 Go de RAM et Raspberry Pi 5 (8 Go). Bon français, sait raisonner un peu.", en: "Good trade-off for 8 GB RAM and Raspberry Pi 5 (8 GB). Good French, some reasoning." }
+  tags: [ llm, chat, multilingual, small ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 2.6
+  source: { kind: ollama, ollama_model: "qwen3:4b", homepage: https://ollama.com/library/qwen3 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 8, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-gemma3-4b
+  type: ai-model
+  category: ai
+  name: { fr: "Gemma 3 4B (petit, vision)", en: "Gemma 3 4B (small, vision)" }
+  description: { fr: "Comprend les images : photographier une plante, une plaie, un circuit et demander. 8 Go de RAM.", en: "Understands images: photograph a plant, a wound, a circuit and ask. 8 GB RAM." }
+  tags: [ llm, chat, vision, small ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 3.3
+  source: { kind: ollama, ollama_model: "gemma3:4b", homepage: https://ollama.com/library/gemma3 }
+  license: { spdx: LicenseRef-Gemma-Terms, url: https://ai.google.dev/gemma/terms, redistribution: attribution, note: { fr: "Licence Gemma : usage libre avec conditions d'utilisation, pas OSI.", en: "Gemma license: free use under terms, not OSI." } }
+  requires: { ram_gb: 8, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-8b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3 8B (moyen) — modèle par défaut", en: "Qwen3 8B (medium) — default model" }
+  description: { fr: "Le modèle de chat par défaut pour 16 Go de RAM. Excellent en français, code, raisonnement.", en: "Default chat model for 16 GB RAM. Excellent in French, code, reasoning." }
+  tags: [ llm, chat, multilingual, medium, default ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 5.2
+  source: { kind: ollama, ollama_model: "qwen3:8b", homepage: https://ollama.com/library/qwen3 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 16, vram_gb: 8, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-llama3-1-8b
+  type: ai-model
+  category: ai
+  name: { fr: "Llama 3.1 8B", en: "Llama 3.1 8B" }
+  description: { fr: "Alternative généraliste bien connue, très documentée.", en: "Well-known, well-documented generalist alternative." }
+  tags: [ llm, chat, medium ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 4.9
+  source: { kind: ollama, ollama_model: "llama3.1:8b", homepage: https://ollama.com/library/llama3.1 }
+  license: { spdx: LicenseRef-Llama-3.1-Community, url: https://www.llama.com/llama3_1/license/, redistribution: attribution }
+  requires: { ram_gb: 16, vram_gb: 8, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen2-5-coder-7b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen2.5-Coder 7B (code)", en: "Qwen2.5-Coder 7B (code)" }
+  description: { fr: "Spécialisé programmation : le moteur d'Aider/OpenCode hors-ligne pour ESP32, Python, scripts.", en: "Programming specialist: the offline engine for Aider/OpenCode on ESP32, Python, scripts." }
+  tags: [ llm, code, medium ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 4.7
+  source: { kind: ollama, ollama_model: "qwen2.5-coder:7b", homepage: https://ollama.com/library/qwen2.5-coder }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 16, vram_gb: 8, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-gemma3-12b
+  type: ai-model
+  category: ai
+  name: { fr: "Gemma 3 12B (grand, vision)", en: "Gemma 3 12B (large, vision)" }
+  description: { fr: "Vision + texte de qualité. 32 Go de RAM ou GPU 12 Go.", en: "Quality vision + text. 32 GB RAM or a 12 GB GPU." }
+  tags: [ llm, chat, vision, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 8.1
+  source: { kind: ollama, ollama_model: "gemma3:12b" }
+  license: { spdx: LicenseRef-Gemma-Terms, redistribution: attribution }
+  requires: { ram_gb: 32, vram_gb: 12, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-14b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3 14B (grand)", en: "Qwen3 14B (large)" }
+  description: { fr: "Nettement plus fiable que le 8B pour les explications techniques longues.", en: "Noticeably more reliable than 8B for long technical explanations." }
+  tags: [ llm, chat, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 9.3
+  source: { kind: ollama, ollama_model: "qwen3:14b" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 32, vram_gb: 12, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen2-5-coder-14b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen2.5-Coder 14B (code)", en: "Qwen2.5-Coder 14B (code)" }
+  description: { fr: "Version plus capable du modèle de code.", en: "More capable code model." }
+  tags: [ llm, code, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 9
+  source: { kind: ollama, ollama_model: "qwen2.5-coder:14b" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 32, vram_gb: 12, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-32b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3 32B (très grand)", en: "Qwen3 32B (very large)" }
+  description: { fr: "Pour station avec GPU 24 Go. Qualité proche des services en ligne de 2025.", en: "For a 24 GB GPU workstation. Quality close to 2025 online services." }
+  tags: [ llm, chat, xlarge ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 20
+  source: { kind: ollama, ollama_model: "qwen3:32b" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 64, vram_gb: 24, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-gemma3-27b
+  type: ai-model
+  category: ai
+  name: { fr: "Gemma 3 27B (très grand, vision)", en: "Gemma 3 27B (very large, vision)" }
+  description: { fr: "Meilleur modèle vision de la liste.", en: "Best vision model on the list." }
+  tags: [ llm, chat, vision, xlarge ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 17
+  source: { kind: ollama, ollama_model: "gemma3:27b" }
+  license: { spdx: LicenseRef-Gemma-Terms, redistribution: attribution }
+  requires: { ram_gb: 64, vram_gb: 24, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen2-5-coder-32b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen2.5-Coder 32B (code)", en: "Qwen2.5-Coder 32B (code)" }
+  description: { fr: "Le meilleur modèle de code local raisonnable.", en: "The best reasonable local code model." }
+  tags: [ llm, code, xlarge ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 20
+  source: { kind: ollama, ollama_model: "qwen2.5-coder:32b" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 64, vram_gb: 24, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-nomic-embed-text
+  type: ai-model
+  category: ai
+  name: { fr: "nomic-embed-text (embeddings)", en: "nomic-embed-text (embeddings)" }
+  description: { fr: "Modèle d'embeddings pour la recherche sémantique dans les ZIM (RAG). Léger, anglais surtout.", en: "Embedding model for semantic search over ZIMs (RAG). Light, mostly English." }
+  tags: [ embeddings, rag ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.27
+  source: { kind: ollama, ollama_model: "nomic-embed-text" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 2, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-bge-m3
+  type: ai-model
+  category: ai
+  name: { fr: "bge-m3 (embeddings multilingues)", en: "bge-m3 (multilingual embeddings)" }
+  description: { fr: "Embeddings multilingues de qualité (français inclus) pour le RAG. Préférable à nomic pour le contenu FR.", en: "Quality multilingual embeddings (French included) for RAG. Preferable to nomic for FR content." }
+  tags: [ embeddings, rag, multilingual ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 1.2
+  source: { kind: ollama, ollama_model: "bge-m3" }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { ram_gb: 4, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+# Exemple de modèle GGUF direct (sans Ollama), pour llama.cpp seul.
+- id: hf-qwen3-8b-gguf
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3 8B GGUF (fichier brut pour llama.cpp)", en: "Qwen3 8B GGUF (raw file for llama.cpp)" }
+  description: { fr: "Le même modèle que ollama-qwen3-8b, en fichier unique copiable sur clé USB. Pour les machines sans Ollama.", en: "Same model as ollama-qwen3-8b as a single file you can copy to a USB stick. For machines without Ollama." }
+  tags: [ llm, gguf, portable ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 5.0
+  source: { kind: huggingface, hf_repo: "Qwen/Qwen3-8B-GGUF", hf_file: "Qwen3-8B-Q4_K_M.gguf", url: https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q4_K_M.gguf }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 16, gpu: optional, tools: [] }
+  depends_on: [ llama-cpp ]
+  update: { tracker: huggingface }
+  status: unverified
+  reliability: reference
+
+# --- Génération 2026 : Qwen3.5 / Qwen3.6 (vérifiés sur ollama.com le 2026-09-11) --------------------
+# Qwen3.5 est nativement multimodal (texte + image) à toutes les tailles et couvre 201 langues.
+# Les variantes MoE « A3B » (3 milliards de paramètres actifs) donnent la qualité d'un 30B à la
+# vitesse d'un 3B : c'est LE point d'équilibre pour une machine sans GPU — voir docs/fr/MODELES.md.
+
+- id: ollama-qwen3-5-4b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3.5 4B (petit, voit les images)", en: "Qwen3.5 4B (small, sees images)" }
+  description: { fr: "Remplaçant de Qwen3 4B : même empreinte (8 Go de RAM), mais lit aussi les images — une photo de panne, un schéma, une étiquette. Bon français, 201 langues, mode réflexion.", en: "Successor to Qwen3 4B: same footprint (8 GB RAM) but also reads images — a photo of a fault, a schematic, a label. Good French, 201 languages, thinking mode." }
+  tags: [ llm, chat, vision, multilingual, small ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 3.4
+  source: { kind: ollama, ollama_model: "qwen3.5:4b", homepage: https://ollama.com/library/qwen3.5 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 8, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-5-9b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3.5 9B (moyen, voit les images) — le défaut", en: "Qwen3.5 9B (medium, sees images) — the default" }
+  description: { fr: "Le modèle par défaut d'Arche pour 16 Go de RAM : texte et images, très bon français, raisonnement correct, contexte 256K. C'est lui qui lit un schéma existant ou une photo — jamais pour valider qu'une espèce est comestible (règle absolue).", en: "Arche's default model for 16 GB RAM: text and images, very good French, decent reasoning, 256K context. It is what reads an existing schematic or a photo — never to validate that a species is edible (absolute rule)." }
+  tags: [ llm, chat, vision, multilingual, medium ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 6.6
+  source: { kind: ollama, ollama_model: "qwen3.5:9b", homepage: https://ollama.com/library/qwen3.5 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 16, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-5-35b-a3b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3.5 35B-A3B (MoE : qualité 30B, vitesse 3B)", en: "Qwen3.5 35B-A3B (MoE: 30B quality, 3B speed)" }
+  description: { fr: "Mixture-of-experts : 35 milliards de paramètres sur le disque, 3 milliards actifs par mot. Résultat : sur un CPU avec 32 Go de RAM, il répond à la vitesse d'un petit modèle avec la qualité d'un gros. Le meilleur choix pour un nœud Arche sans carte graphique. Multimodal.", en: "Mixture-of-experts: 35 billion parameters on disk, 3 billion active per token. On a CPU with 32 GB RAM it answers at small-model speed with large-model quality. The best choice for an Arche node with no GPU. Multimodal." }
+  tags: [ llm, chat, vision, multilingual, moe, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 24
+  source: { kind: ollama, ollama_model: "qwen3.5:35b", homepage: https://ollama.com/library/qwen3.5 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 32, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-5-27b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3.5 27B (dense, multimodal)", en: "Qwen3.5 27B (dense, multimodal)" }
+  description: { fr: "Le dense de 27B : plus lent que le 35B-A3B sur CPU mais meilleur sur les tâches longues et l'écriture en français. À préférer avec un GPU de 24 Go.", en: "The 27B dense: slower than 35B-A3B on CPU but stronger on long tasks and French writing. Prefer it with a 24 GB GPU." }
+  tags: [ llm, chat, vision, multilingual, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 17
+  source: { kind: ollama, ollama_model: "qwen3.5:27b", homepage: https://ollama.com/library/qwen3.5 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 32, vram_gb: 20, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-6-27b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3.6 27B (code et raisonnement, multimodal)", en: "Qwen3.6 27B (code and reasoning, multimodal)" }
+  description: { fr: "La génération d'avril 2026 : conçu pour le code agentique et la préservation du raisonnement entre messages. C'est lui qui écrit les sources de schémas (schemdraw, OpenSCAD, WireViz) et le code des calculateurs quand on en ajoute. Multimodal, 256K de contexte.", en: "The April 2026 generation: built for agentic coding and preserving reasoning across turns. It is what writes diagram sources (schemdraw, OpenSCAD, WireViz) and calculator code when adding one. Multimodal, 256K context." }
+  tags: [ llm, chat, code, vision, multilingual, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 18
+  source: { kind: ollama, ollama_model: "qwen3.6:27b", homepage: https://ollama.com/library/qwen3.6 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 32, vram_gb: 20, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-6-35b-a3b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3.6 35B-A3B (MoE code/raisonnement pour CPU)", en: "Qwen3.6 35B-A3B (MoE code/reasoning for CPU)" }
+  description: { fr: "La même architecture MoE que Qwen3.5 35B-A3B, avec les progrès de la 3.6 en code et en raisonnement. Sur CPU 32 Go, c'est le meilleur modèle de code disponible sans GPU.", en: "Same MoE architecture as Qwen3.5 35B-A3B, with 3.6's gains in code and reasoning. On a 32 GB CPU box it is the best code model available without a GPU." }
+  tags: [ llm, chat, code, vision, multilingual, moe, large ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 23
+  source: { kind: ollama, ollama_model: "qwen3.6:35b", homepage: https://ollama.com/library/qwen3.6 }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 32, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-embedding-0-6b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3-Embedding 0.6B (embeddings, 100+ langues)", en: "Qwen3-Embedding 0.6B (embeddings, 100+ languages)" }
+  description: { fr: "Candidat pour remplacer bge-m3 comme modèle d'embedding de référence : plus petit (639 Mo), 100+ langues, dimensions ajustables (32 à 1024). Règle ADR 0007 : un index est lié à son modèle — on ne change de référence qu'après l'avoir mesuré sur knowledge/eval.yaml, et en republiant les shards.", en: "Candidate to replace bge-m3 as the reference embedding model: smaller (639 MB), 100+ languages, adjustable dimensions (32 to 1024). ADR 0007 rule: an index is bound to its model — the reference changes only after measuring on knowledge/eval.yaml, and by republishing the shards." }
+  tags: [ embeddings, rag, multilingual ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.65
+  source: { kind: ollama, ollama_model: "qwen3-embedding:0.6b", homepage: https://ollama.com/library/qwen3-embedding }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 4, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: ollama-qwen3-embedding-4b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3-Embedding 4B (embeddings, haut de gamme)", en: "Qwen3-Embedding 4B (embeddings, high end)" }
+  description: { fr: "La version 4B (2,5 Go, jusqu'à 2 560 dimensions) : parmi les meilleurs embeddings multilingues ouverts. Pour construire les shards en CI, où le temps compte moins que la qualité. Même règle : mesurer avant de remplacer.", en: "The 4B version (2.5 GB, up to 2,560 dimensions): among the best open multilingual embeddings. For building shards in CI, where time matters less than quality. Same rule: measure before replacing." }
+  tags: [ embeddings, rag, multilingual ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2.5
+  source: { kind: ollama, ollama_model: "qwen3-embedding:4b", homepage: https://ollama.com/library/qwen3-embedding }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 8, gpu: none, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference

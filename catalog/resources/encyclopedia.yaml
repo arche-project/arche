@@ -1,0 +1,230 @@
+# Encyclopédies et références générales (ZIM Kiwix)
+# Sizes: size_bytes is null until scripts/catalog/check-kiwix.ts fills it from the OPDS catalog.
+# size_estimate_gb comes from the public mirrors on 2026-09-11 and may be off by ±20 %.
+
+- id: wikipedia-fr-maxi
+  type: zim
+  category: encyclopedia
+  name: { fr: "Wikipédia FR (complet, avec images)", en: "Wikipedia FR (full, with pictures)" }
+  description:
+    fr: "Toute la Wikipédia francophone avec les images. La référence générale de la bibliothèque."
+    en: "The whole French Wikipedia with pictures. The library's general reference."
+  tags: [ wikipedia, encyclopedia, reference ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_bytes: null
+  size_estimate_gb: 52
+  version: null
+  updated: null
+  source:
+    kind: kiwix
+    kiwix_name: wikipedia_fr_all_maxi
+    url: https://download.kiwix.org/zim/wikipedia/wikipedia_fr_all_maxi.zim
+    homepage: https://fr.wikipedia.org
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: CC-BY-SA-4.0, url: https://creativecommons.org/licenses/by-sa/4.0/, redistribution: attribution }
+  requires: { tools: [] }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds, check_interval_days: 7 }
+  status: unverified
+  reliability: reference
+
+- id: wikipedia-fr-nopic
+  type: zim
+  category: encyclopedia
+  name: { fr: "Wikipédia FR (sans images)", en: "Wikipedia FR (no pictures)" }
+  description:
+    fr: "Wikipédia francophone, texte seul. Quatre fois plus léger que la version complète, même contenu textuel."
+    en: "French Wikipedia, text only. Four times smaller than the full version, same text."
+  tags: [ wikipedia, encyclopedia, reference, lightweight ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_bytes: null
+  size_estimate_gb: 13
+  source:
+    kind: kiwix
+    kiwix_name: wikipedia_fr_all_nopic
+    url: https://download.kiwix.org/zim/wikipedia/wikipedia_fr_all_nopic.zim
+    homepage: https://fr.wikipedia.org
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Le recommandeur remplace automatiquement cette ressource par wikipedia-fr-maxi si le disque le permet."
+    en: "The recommender swaps this for wikipedia-fr-maxi automatically when disk allows."
+
+- id: wikipedia-fr-mini
+  type: zim
+  category: encyclopedia
+  name: { fr: "Wikipédia FR (résumés)", en: "Wikipedia FR (summaries)" }
+  description:
+    fr: "Introduction de chaque article seulement. Pour les toutes petites machines."
+    en: "Only the lead section of each article. For very small machines."
+  tags: [ wikipedia, encyclopedia, lightweight ]
+  languages: [ fr ]
+  profiles: [ novice, lowtech ]
+  priority: optional
+  size_estimate_gb: 3.5
+  source: { kind: kiwix, kiwix_name: wikipedia_fr_all_mini, url: https://download.kiwix.org/zim/wikipedia/wikipedia_fr_all_mini.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: wikipedia-en-maxi
+  type: zim
+  category: encyclopedia
+  name: { fr: "Wikipédia EN (complet, avec images)", en: "Wikipedia EN (full, with pictures)" }
+  description:
+    fr: "La Wikipédia anglophone, la plus complète au monde. Indispensable pour les sujets techniques."
+    en: "The English Wikipedia, the most complete in the world. Indispensable for technical topics."
+  tags: [ wikipedia, encyclopedia, reference ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 115
+  source: { kind: kiwix, kiwix_name: wikipedia_en_all_maxi, url: https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi.zim, homepage: https://en.wikipedia.org }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: wikipedia-en-nopic
+  type: zim
+  category: encyclopedia
+  name: { fr: "Wikipédia EN (sans images)", en: "Wikipedia EN (no pictures)" }
+  description:
+    fr: "Wikipédia anglophone, texte seul."
+    en: "English Wikipedia, text only."
+  tags: [ wikipedia, encyclopedia, lightweight ]
+  languages: [ en ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 50
+  source: { kind: kiwix, kiwix_name: wikipedia_en_all_nopic, url: https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: wiktionary-fr
+  type: zim
+  category: reference
+  name: { fr: "Wiktionnaire FR", en: "French Wiktionary" }
+  description:
+    fr: "Dictionnaire de langue française, étymologie, conjugaison, traductions."
+    en: "French language dictionary, etymology, conjugation, translations."
+  tags: [ dictionary, language ]
+  languages: [ fr, mul ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 4.6
+  source: { kind: kiwix, kiwix_name: wiktionary_fr_all_nopic, url: https://download.kiwix.org/zim/wiktionary/wiktionary_fr_all_nopic.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: wiktionary-en
+  type: zim
+  category: reference
+  name: { fr: "Wiktionary EN", en: "English Wiktionary" }
+  description:
+    fr: "Dictionnaire anglophone multilingue : le meilleur outil de traduction hors-ligne disponible."
+    en: "Multilingual English dictionary: the best offline translation tool available."
+  tags: [ dictionary, language, translation ]
+  languages: [ en, mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 8.5
+  source: { kind: kiwix, kiwix_name: wiktionary_en_all_nopic, url: https://download.kiwix.org/zim/wiktionary/wiktionary_en_all_nopic.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: vikidia-fr
+  type: zim
+  category: education
+  name: { fr: "Vikidia (encyclopédie 8–13 ans)", en: "Vikidia (encyclopedia for ages 8–13)" }
+  description:
+    fr: "Encyclopédie écrite pour les enfants. Base de l'école à la maison."
+    en: "Encyclopedia written for children. A homeschooling foundation."
+  tags: [ children, school, encyclopedia ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: kiwix, kiwix_name: vikidia_fr_all_maxi, url: https://download.kiwix.org/zim/vikidia/vikidia_fr_all_maxi.zim, homepage: https://fr.vikidia.org }
+  license: { spdx: CC-BY-SA-3.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: wikibooks-fr
+  type: zim
+  category: education
+  name: { fr: "Wikilivres FR", en: "Wikibooks FR" }
+  description:
+    fr: "Manuels libres : cuisine, jardinage, électronique, langues, mathématiques."
+    en: "Free textbooks: cooking, gardening, electronics, languages, mathematics."
+  tags: [ textbooks, howto ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 1.5
+  source: { kind: kiwix, kiwix_name: wikibooks_fr_all_maxi, url: https://download.kiwix.org/zim/wikibooks/wikibooks_fr_all_maxi.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: community
+
+- id: gutenberg-fr
+  type: zim
+  category: education
+  name: { fr: "Projet Gutenberg (livres FR)", en: "Project Gutenberg (French books)" }
+  description:
+    fr: "Milliers de livres du domaine public en français : littérature, histoire, sciences anciennes."
+    en: "Thousands of public-domain books in French: literature, history, classic science."
+  tags: [ books, literature, public-domain ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 9.8
+  source: { kind: kiwix, kiwix_name: gutenberg_fr_all, url: https://download.kiwix.org/zim/gutenberg/gutenberg_fr_all.zim, homepage: https://www.gutenberg.org }
+  license: { spdx: LicenseRef-PublicDomain, redistribution: allowed }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: gutenberg-en
+  type: zim
+  category: education
+  name: { fr: "Projet Gutenberg (livres EN)", en: "Project Gutenberg (English books)" }
+  description:
+    fr: "70 000+ livres du domaine public en anglais. Très volumineux."
+    en: "70,000+ public-domain books in English. Very large."
+  tags: [ books, literature, public-domain ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 206
+  source: { kind: kiwix, kiwix_name: gutenberg_en_all, url: https://download.kiwix.org/zim/gutenberg/gutenberg_en_all.zim }
+  license: { spdx: LicenseRef-PublicDomain, redistribution: allowed }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference

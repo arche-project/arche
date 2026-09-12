@@ -1,0 +1,385 @@
+# Logiciels et plateformes (à installer, pas du contenu).
+# Software and platforms (to install, not content).
+
+- id: kiwix-tools
+  type: software
+  category: platform
+  name: { fr: "Kiwix (lecteur + serveur de ZIM)", en: "Kiwix (ZIM reader + server)" }
+  description:
+    fr: "kiwix-serve publie tous les ZIM sur le réseau local ; kiwix-desktop les lit sur un poste. C'est le socle de toute la bibliothèque."
+    en: "kiwix-serve publishes every ZIM on the local network; kiwix-desktop reads them on one machine. The foundation of the whole library."
+  tags: [ kiwix, server, reader ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source:
+    kind: github-release
+    github_repo: kiwix/kiwix-tools
+    github_asset_pattern: "kiwix-tools_(linux-x86_64|linux-aarch64|linux-armhf|macos-.*|win-.*)\\.(tar\\.gz|zip)$"
+    homepage: https://kiwix.org
+    url: https://download.kiwix.org/release/kiwix-tools/
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { os: [ linux, macos, windows ], arch: [ x64, arm64, armv7 ] }
+  provides: [ kiwix-serve ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: kiwix-desktop
+  type: software
+  category: platform
+  name: { fr: "Kiwix Desktop (lecteur graphique)", en: "Kiwix Desktop (graphical reader)" }
+  description: { fr: "Application de bureau pour lire les ZIM sans serveur. La voie la plus simple pour un néophyte.", en: "Desktop app to read ZIMs without a server. Simplest path for a beginner." }
+  tags: [ kiwix, reader ]
+  languages: [ mul ]
+  profiles: [ novice, bunker ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-release, github_repo: kiwix/kiwix-desktop, github_asset_pattern: "\\.(AppImage|exe|dmg)$", homepage: https://kiwix.org/en/applications/ }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { os: [ linux, windows, macos ], arch: [ x64 ] }
+  provides: [ kiwix-reader ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: ollama
+  type: software
+  category: ai
+  name: { fr: "Ollama (moteur d'IA locale)", en: "Ollama (local AI runtime)" }
+  description: { fr: "Fait tourner les modèles de langage sur la machine. Installe llama.cpp sous le capot.", en: "Runs language models on the machine. Bundles llama.cpp under the hood." }
+  tags: [ llm, runtime ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 1.5
+  source: { kind: github-release, github_repo: ollama/ollama, github_asset_pattern: "^ollama-(linux-amd64|linux-arm64|darwin|windows-amd64)\\.(tgz|zip|tar\\.zst)$|^OllamaSetup\\.exe$|^Ollama-darwin\\.zip$", homepage: https://ollama.com/download }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { os: [ linux, macos, windows ], arch: [ x64, arm64 ] }
+  provides: [ llm-runtime ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: llama-cpp
+  type: software
+  category: ai
+  name: { fr: "llama.cpp (moteur brut)", en: "llama.cpp (bare runtime)" }
+  description: { fr: "Moteur d'inférence minimal, binaires précompilés. Pour experts ou machines sans Ollama.", en: "Minimal inference engine, prebuilt binaries. For experts or machines without Ollama." }
+  tags: [ llm, runtime ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: github-release, github_repo: ggml-org/llama.cpp, github_asset_pattern: "^llama-b\\d+-bin-(ubuntu-x64|macos-arm64|win-cpu-x64|win-cuda.*)\\.(zip|tar\\.gz)$" }
+  license: { spdx: MIT, redistribution: allowed }
+  provides: [ llm-runtime ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: open-webui
+  type: software
+  category: ai
+  name: { fr: "Open WebUI (interface de chat)", en: "Open WebUI (chat interface)" }
+  description: { fr: "Interface web type ChatGPT branchée sur Ollama, avec RAG sur documents. Livrée en image Docker ou paquet Python.", en: "ChatGPT-like web UI on top of Ollama, with document RAG. Shipped as a Docker image or a Python package." }
+  tags: [ llm, ui, rag ]
+  languages: [ mul ]
+  profiles:
+    - bunker
+  priority: optional
+  size_estimate_gb: 4
+  source: { kind: github-release, github_repo: open-webui/open-webui, homepage: https://openwebui.com, url: https://github.com/open-webui/open-webui/pkgs/container/open-webui }
+  license: { spdx: BSD-3-Clause, url: https://github.com/open-webui/open-webui/blob/main/LICENSE, redistribution: allowed, note: { fr: "Licence modifiée depuis 2025 (clause sur le branding). Vérifier avant redistribution modifiée.", en: "License modified since 2025 (branding clause). Check before redistributing a modified build." } }
+  requires: { tools: [ python3, pip ], ram_gb: 4 }
+  depends_on:
+    - python-standalone
+    - pip-cache
+    - ollama
+  provides: [ chat-ui ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "ADR 0008 : installation par pip depuis le wheelhouse (`pip install --no-index --find-links wheels/ open-webui`), pas par Docker. L'interface principale d'Arche est `arche serve` ; Open WebUI est un confort pour qui le connaît déjà.", en: "ADR 0008: installed with pip from the wheelhouse (`pip install --no-index --find-links wheels/ open-webui`), not Docker. Arche's primary interface is `arche serve`; Open WebUI is a comfort for those who already know it." }
+  runtime: python
+
+- id: aider
+  type: software
+  category: dev
+  name: { fr: "Aider (assistant de code en terminal)", en: "Aider (terminal coding assistant)" }
+  description: { fr: "Alternative locale à Claude Code : édite le code d'un dépôt en dialoguant avec un modèle Ollama.", en: "Local alternative to Claude Code: edits a repo's code by chatting with an Ollama model." }
+  tags: [ code, assistant ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-repo, github_repo: Aider-AI/aider, url: https://github.com/Aider-AI/aider.git, homepage: https://aider.chat }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ ollama, ollama-qwen2-5-coder-7b ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Installer via `pip download aider-chat` dans un cache pip local (voir toolchains.yaml/pip-cache).", en: "Install via `pip download aider-chat` into a local pip cache (see toolchains.yaml/pip-cache)." }
+  runtime: python
+
+- id: opencode
+  type: software
+  category: dev
+  name: { fr: "OpenCode (agent de code en terminal)", en: "OpenCode (terminal coding agent)" }
+  description: { fr: "Agent de code open source, binaire unique, compatible Ollama.", en: "Open-source coding agent, single binary, Ollama-compatible." }
+  tags: [ code, assistant ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.1
+  source: { kind: github-release, github_repo: sst/opencode, github_asset_pattern: "^opencode-(linux|darwin|windows)-(x64|arm64)\\.(zip|tar\\.gz)$" }
+  license: { spdx: MIT, redistribution: allowed }
+  depends_on: [ ollama ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  runtime: static-binary
+
+- id: jan
+  type: software
+  category: ai
+  name: { fr: "Jan (client de chat hors ligne, MCP intégré)", en: "Jan (offline chat client, MCP built in)" }
+  description:
+    fr: "Application de bureau libre qui fait tourner des modèles en local (llama.cpp) et se branche sur des serveurs MCP — donc sur `arche mcp`. Aucun réseau requis. Le client le plus simple pour un non-développeur qui ne veut pas installer Python (ADR 0011)."
+    en: "Free desktop app that runs models locally (llama.cpp) and connects to MCP servers — hence to `arche mcp`. No network required. The simplest client for a non-developer who does not want to install Python (ADR 0011)."
+  tags: [ llm, ui, mcp, client, offline ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-release, github_repo: janhq/jan, homepage: https://jan.ai, github_asset_pattern: "\\.(dmg|AppImage|deb|exe)$" }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  provides: [ chat-ui ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  runtime: static-binary
+  notes: { fr: "Embarque son propre llama.cpp : peut charger les GGUF téléchargés pour Ollama ou les siens. Configurer Arche dans Paramètres → MCP Servers (voir docs/fr/CLIENTS-IA.md).", en: "Bundles its own llama.cpp: can load the GGUFs pulled for Ollama or its own. Configure Arche in Settings → MCP Servers (see docs/en/AI-CLIENTS.md)." }
+
+- id: hermes-agent
+  type: software
+  category: ai
+  name: { fr: "Hermes Agent (agent autonome local, MCP natif)", en: "Hermes Agent (local autonomous agent, native MCP)" }
+  description:
+    fr: "Agent open source (Nous Research, MIT, Python) qui tourne sur un modèle local (Ollama, llama.cpp), se branche nativement sur des serveurs MCP — donc sur `arche mcp` — et sait parler à Home Assistant. C'est l'orchestrateur qu'Arche recommande à qui veut des tâches récurrentes (« chaque matin, relève la station météo et dis-moi quoi arroser ») : Arche fournit les outils, l'agent enchaîne. ADR 0011."
+    en: "Open-source agent (Nous Research, MIT, Python) running on a local model (Ollama, llama.cpp), with native MCP server support — hence `arche mcp` — and a Home Assistant interface. The orchestrator Arche recommends for recurring tasks ('every morning, read the weather station and tell me what to water'): Arche provides the tools, the agent chains them. ADR 0011."
+  tags: [ agent, orchestrator, mcp, offline, llm ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: NousResearch/hermes-agent, url: https://github.com/NousResearch/hermes-agent.git, homepage: https://hermes-agent.nousresearch.com }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ python3, pip ], ram_gb: 16 }
+  depends_on: [ python-standalone, pip-cache, ollama ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  runtime: python
+  notes: { fr: "Installer depuis le wheelhouse (pas le script curl). Règles Arche : l'agent n'a que les outils MCP d'Arche et les fichiers locaux — aucun « skill » tiers téléchargé ; il ne pilote jamais un actionneur (ADR 0010) ; il tourne sous le superviseur comme un processus ordinaire. Ses canaux Telegram/Discord/WhatsApp sont inutiles hors ligne : rester en CLI ou Home Assistant.", en: "Install from the wheelhouse (not the curl script). Arche rules: the agent gets only Arche's MCP tools and local files — no third-party downloaded 'skills'; it never drives an actuator (ADR 0010); it runs under the supervisor as an ordinary process. Its Telegram/Discord/WhatsApp channels are useless offline: stay on CLI or Home Assistant." }
+
+- id: openclaw
+  type: software
+  category: ai
+  name: { fr: "OpenClaw (agent personnel autonome, Node)", en: "OpenClaw (autonomous personal agent, Node)" }
+  description:
+    fr: "Agent personnel open source (MIT, TypeScript) piloté depuis une messagerie, compatible Ollama. Populaire, mais conçu pour un monde connecté : ses interfaces sont Signal, Telegram, Discord, et son écosystème de « skills » téléchargés a connu des skills malveillants (exfiltration, injection de prompt). Au catalogue en `optional` pour qui le connaît déjà ; Hermes Agent est le choix par défaut d'Arche."
+    en: "Open-source personal agent (MIT, TypeScript) driven from a messaging app, Ollama-compatible. Popular, but built for a connected world: its interfaces are Signal, Telegram, Discord, and its downloaded 'skills' ecosystem has seen malicious skills (exfiltration, prompt injection). In the catalogue as `optional` for those who already know it; Hermes Agent is Arche's default choice."
+  tags: [ agent, orchestrator, offline, llm ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.5
+  source: { kind: github-repo, github_repo: openclaw/openclaw, url: https://github.com/openclaw/openclaw.git, homepage: https://openclaw.ai }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { tools: [ node ], ram_gb: 16 }
+  depends_on: [ node-lts, ollama ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  runtime: node
+  notes: { fr: "Passerelle en tâche de fond (port 18789) : la lancer sous le superviseur, jamais exposée au-delà de 127.0.0.1. Aucun skill tiers ; pas de pilotage d'actionneur (ADR 0010). Support MCP à vérifier au moment de l'installation.", en: "Background gateway (port 18789): run it under the supervisor, never exposed beyond 127.0.0.1. No third-party skills; no actuator control (ADR 0010). MCP support to verify at install time." }
+
+- id: node-red
+  type: software
+  category: dev
+  name: { fr: "Node-RED (automatisation à flux, Pi, MQTT, GPIO)", en: "Node-RED (flow automation, Pi, MQTT, GPIO)" }
+  description:
+    fr: "L'automatisation déterministe du monde physique : capteurs → règles → actionneurs, en flux visuels, sur un Raspberry Pi, avec MQTT, GPIO, Modbus, Home Assistant. Apache-2.0, `npm install -g node-red`, aucun réseau requis. C'est ce qui arrose, alerte et journalise — sans modèle de langue dans la boucle (ADR 0010). Peut appeler `arche mcp` en HTTP pour enrichir une alerte d'une fiche sourcée."
+    en: "Deterministic automation of the physical world: sensors → rules → actuators, as visual flows, on a Raspberry Pi, with MQTT, GPIO, Modbus, Home Assistant. Apache-2.0, `npm install -g node-red`, no network required. What waters, alerts and logs — with no language model in the loop (ADR 0010). Can call `arche mcp` over HTTP to enrich an alert with a sourced sheet."
+  tags: [ automation, iot, mqtt, raspberrypi, offline ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-repo, github_repo: node-red/node-red, url: https://github.com/node-red/node-red.git, homepage: https://nodered.org }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ node ] }
+  depends_on: [ node-lts ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: node
+  notes: { fr: "Installer depuis le miroir npm local (ressource verdaccio) : `npm install -g node-red --registry http://127.0.0.1:4873`. Les nœuds contrib s'installent de la même façon, à mettre en cache avant la coupure.", en: "Install from the local npm mirror (verdaccio resource): `npm install -g node-red --registry http://127.0.0.1:4873`. Contrib nodes install the same way; cache them before the outage." }
+
+- id: n8n
+  type: software
+  category: dev
+  name: { fr: "n8n (automatisation et agents à flux, fair-code)", en: "n8n (flow automation and agents, fair-code)" }
+  description:
+    fr: "Automatisation à flux avec nœuds IA : client ET serveur MCP, nœud Ollama, 1 500 intégrations dont la plupart supposent internet. `npx n8n`, sans Docker. Licence Sustainable Use (fair-code, pas OSI) : usage personnel et interne libre, pas de service commercial. Pour qui le connaît déjà ; Node-RED reste le choix par défaut pour le monde physique."
+    en: "Flow automation with AI nodes: MCP client AND server, Ollama node, 1,500 integrations most of which assume the internet. `npx n8n`, no Docker. Sustainable Use License (fair-code, not OSI): personal and internal use free, no commercial service. For those who already know it; Node-RED remains the default choice for the physical world."
+  tags: [ automation, agent, mcp, offline ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: github-repo, github_repo: n8n-io/n8n, url: https://github.com/n8n-io/n8n.git, homepage: https://n8n.io }
+  license: { spdx: LicenseRef-Sustainable-Use-1.0, redistribution: allowed-nc, note: { fr: "Fair-code : copie et usage personnel autorisés, pas d'hébergement commercial pour des tiers. Vérifier avant toute redistribution.", en: "Fair-code: personal copy and use allowed, no commercial hosting for third parties. Check before any redistribution." } }
+  requires: { tools: [ node ], ram_gb: 8 }
+  depends_on: [ node-lts ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: community
+  runtime: node
+  notes: { fr: "Brancher Arche : nœud « MCP Client » sur http://127.0.0.1:8765/mcp. Pas de modèle de langue dans une boucle d'actionneur (ADR 0010).", en: "Connect Arche: 'MCP Client' node on http://127.0.0.1:8765/mcp. No language model in an actuator loop (ADR 0010)." }
+
+- id: gitea
+  type: software
+  category: dev
+  name: { fr: "Gitea (forge Git locale)", en: "Gitea (local Git forge)" }
+  description: { fr: "Interface web pour parcourir les miroirs Git, avec wiki et issues. Binaire unique.", en: "Web UI to browse the Git mirrors, with wiki and issues. Single binary." }
+  tags: [ git, forge ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.15
+  source: { kind: github-release, github_repo: go-gitea/gitea, github_asset_pattern: "^gitea-[0-9.]+-(linux-amd64|linux-arm64|darwin-10.12-arm64|windows-4.0-amd64\\.exe)$", homepage: https://gitea.io }
+  license: { spdx: MIT, redistribution: allowed }
+  provides: [ git-forge ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: zim-tools
+  type: software
+  category: platform
+  name: { fr: "zim-tools (zimdump, zimcheck) — lire et exporter un ZIM sans Kiwix", en: "zim-tools (zimdump, zimcheck) — read and export a ZIM without Kiwix" }
+  description: { fr: "Binaires statiques d'openZIM : `zimdump dump` exporte tout un ZIM en HTML plat — c'est ce qu'`arche index build` utilise pour extraire le texte avant de l'embarquer (ADR 0013). `zimcheck` vérifie un fichier.", en: "openZIM static binaries: `zimdump dump` exports a whole ZIM as flat HTML — what `arche index build` uses to extract text before embedding (ADR 0013). `zimcheck` verifies a file." }
+  tags: [ zim, tools, index ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.02
+  source: { kind: github-release, github_repo: openzim/zim-tools, github_asset_pattern: "zim-tools_(linux-x86_64|linux-aarch64|linux-armhf|macos-.*|win-.*)[^/]*\\.(tar\\.gz|zip)$", homepage: https://github.com/openzim/zim-tools }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  requires: { os: [ linux, macos, windows ] }
+  provides: [ zimdump ]
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: poppler-utils
+  type: software
+  category: platform
+  name: { fr: "pdftotext (poppler / xpdf) — le texte des PDF", en: "pdftotext (poppler / xpdf) — text out of PDFs" }
+  description: { fr: "Extrait la couche texte d'un PDF, page par page : c'est ce qu'`arche index add` utilise pour indexer vos livres et manuels (ADR 0013). Paquet `poppler-utils` dans les miroirs apt/apk d'Arche ; `xpdf-tools` (binaires statiques) sur Windows et macOS. Un PDF scanné sans couche texte passe d'abord par l'OCR (deepseek-ocr, paddleocr-vl).", en: "Extracts a PDF's text layer page by page: what `arche index add` uses to index your books and manuals (ADR 0013). `poppler-utils` package in Arche's apt/apk mirrors; `xpdf-tools` (static binaries) on Windows and macOS. A scanned PDF without a text layer goes through OCR first (deepseek-ocr, paddleocr-vl)." }
+  tags: [ pdf, text, index ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.02
+  source: { kind: manual, homepage: https://poppler.freedesktop.org, url: https://www.xpdfreader.com/download.html }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  requires: { os: [ linux, macos, windows ] }
+  provides: [ pdftotext ]
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: satdump
+  type: software
+  category: weather
+  name: { fr: "SatDump (réception satellites météo)", en: "SatDump (weather satellite reception)" }
+  description: { fr: "Décode les images des satellites Meteor-M et GOES via une clé RTL-SDR. Seule météo « prévisionnelle » sans réseau.", en: "Decodes Meteor-M and GOES satellite imagery through an RTL-SDR dongle. The only forward-looking weather without a network." }
+  tags: [ weather, sdr, satellite ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.3
+  source: { kind: github-release, github_repo: SatDump/SatDump, github_asset_pattern: "\\.(AppImage|deb|dmg|zip|exe)$", homepage: https://www.satdump.org }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  requires: { os: [ linux, macos, windows ] }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Matériel : RTL-SDR v4 + antenne QFH ou V-dipôle 137 MHz (Meteor-M) ; parabole/grille + LNA pour GOES (1,69 GHz, GOES-19 visible depuis l'Europe de l'Ouest seulement en bord d'horizon, EUMETSAT Meteosat via EUMETCast nécessite abonnement).", en: "Hardware: RTL-SDR v4 + QFH or V-dipole at 137 MHz (Meteor-M); dish/grid + LNA for GOES (1.69 GHz; from Western Europe GOES-19 is barely above the horizon, Meteosat via EUMETCast needs a subscription)." }
+  runtime: static-binary
+
+- id: meshtastic-firmware
+  type: software
+  category: radio
+  name: { fr: "Meshtastic (messagerie LoRa maillée)", en: "Meshtastic (LoRa mesh messaging)" }
+  description: { fr: "Firmware pour modules LoRa (Heltec, LILYGO, RAK) : SMS sans réseau à plusieurs km. Firmware + app + flasher web.", en: "Firmware for LoRa modules (Heltec, LILYGO, RAK): text messages over several km without any network. Firmware + app + web flasher." }
+  tags: [ lora, mesh, comms ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.5
+  source: { kind: github-release, github_repo: meshtastic/firmware, github_asset_pattern: "^firmware-.*\\.zip$", homepage: https://meshtastic.org }
+  license: { spdx: GPL-3.0-only, redistribution: allowed }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "En France : bande 869 MHz (EU_868), puissance limitée. Mettre aussi en cache l'APK Android (meshtastic/Meshtastic-Android) et le flasher (esptool).", en: "In France: 869 MHz band (EU_868), limited power. Also cache the Android APK (meshtastic/Meshtastic-Android) and the flasher (esptool)." }
+  runtime: firmware
+
+- id: internet-in-a-box
+  type: software
+  category: platform
+  name: { fr: "Internet-in-a-Box (IIAB)", en: "Internet-in-a-Box (IIAB)" }
+  description: { fr: "Distribution clé-en-main pour Raspberry Pi qui installe Kiwix, cartes OSM, Moodle, etc. Alternative complète au wizard d'Arche sur Pi.", en: "Turn-key Raspberry Pi distribution installing Kiwix, OSM maps, Moodle, etc. A full alternative to the Arche wizard on a Pi." }
+  tags: [ platform, raspberrypi ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: github-repo, github_repo: iiab/iiab, url: https://github.com/iiab/iiab.git, homepage: https://internet-in-a-box.org }
+  license: { spdx: GPL-2.0-or-later, redistribution: allowed }
+  requires: { os: [ linux ], arch: [ arm64, x64 ] }
+  update: { tracker: github-release }
+  status: unverified
+  reliability: reference
+  notes: { fr: "IIAB s'installe en ligne (playbooks Ansible). Pour une installation hors-ligne, préparer une image SD complète à l'avance.", en: "IIAB installs online (Ansible playbooks). For offline installation, prepare a full SD image beforehand." }
+  runtime: source
+
+- id: rachel
+  type: software
+  category: platform
+  name: { fr: "RACHEL (World Possible)", en: "RACHEL (World Possible)" }
+  description: { fr: "Serveur éducatif hors-ligne avec modules prêts à l'emploi (surtout anglais/espagnol). Téléchargement manuel des modules.", en: "Offline education server with ready-made modules (mostly English/Spanish). Modules downloaded manually." }
+  tags: [ platform, education ]
+  languages: [ en, es, fr ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: manual, homepage: https://worldpossible.org/rachel, url: https://rachel.worldpossible.org }
+  license: { spdx: mixed, redistribution: unclear }
+  update: { tracker: http-head }
+  status: unverified
+  reliability: reference
+  runtime: source

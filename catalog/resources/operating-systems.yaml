@@ -1,0 +1,201 @@
+# Systèmes d'exploitation : réinstaller une machine sans réseau.
+# Operating systems: reinstalling a machine with no network.
+#
+# La bibliothèque vit sur un disque ; la machine qui le lit peut mourir. Sans système à réinstaller,
+# tout le reste est inaccessible. Deux règles, écrites ici parce qu'elles sont contre-intuitives :
+#
+#   1. UNE DISTRIBUTION SANS SON DÉPÔT DE PAQUETS EST UNE IMPASSE. L'ISO installe une base ; tout ce
+#      qu'on voudra ensuite (Docker, hostapd, KiCad, ROS…) vient du dépôt. Chaque entrée nomme donc
+#      son dépôt dans `depends_on`, ou explique pourquoi elle n'en a pas besoin.
+#   2. MOINS DE DISTRIBUTIONS, PAS PLUS. Chaque distribution coûte une ISO (2–6 Go) ET un miroir
+#      (15–80 Go) ET un tracker de version ET quelqu'un qui sait l'administrer. On choisit par USAGE,
+#      pas par goût : une pour le serveur et les vieux PC, une pour le Pi, une pour ROS 2, une pour
+#      réparer, une pour les routeurs. Exclus volontairement : Arch (rolling), Fedora (13 mois de
+#      vie), NixOS (excellent, mais le cache Nix hors-ligne est un projet en soi), Tails (autre sujet).
+#
+#   1. A DISTRIBUTION WITHOUT ITS PACKAGE REPOSITORY IS A DEAD END.
+#   2. FEWER DISTRIBUTIONS, NOT MORE. One per use, not per taste.
+#
+# Toutes suivent la DERNIÈRE VERSION STABLE (debian, ubuntu-lts, raspios, github-tag/release).
+
+- id: debian-dvd
+  type: software
+  category: platform
+  name: { fr: "Debian stable — image DVD-1 (amd64 + arm64)", en: "Debian stable — DVD-1 image (amd64 + arm64)" }
+  description:
+    fr: "Le système de référence d'Arche : serveur, nœud de bibliothèque, vieux PC de récupération. L'image DVD-1 (≈ 4 Go par architecture) installe un bureau complet SANS réseau, contrairement à la netinst. Pour tout ce qui vient après l'installation : `apt-mirror-debian`."
+    en: "Arche's reference system: server, library node, salvaged old PCs. The DVD-1 image (≈ 4 GB per architecture) installs a full desktop WITHOUT network, unlike the netinst. For everything after install: `apt-mirror-debian`."
+  tags: [ linux, debian, os, iso, server ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 8
+  source: { kind: http, url: https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/, homepage: https://www.debian.org/CD/, mirrors: [ https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/ ] }
+  checksum: { algo: sha256, value: null, url: https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/SHA256SUMS }
+  license: { spdx: mixed, redistribution: allowed }
+  depends_on: [ apt-mirror-debian, ventoy ]
+  update: { tracker: debian, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Prendre `debian-<version>-<arch>-DVD-1.iso` dans le dossier ; le tracker `debian` donne la version courante. Debian stable vit ~5 ans (dont 2 en LTS) : c'est le système qui change le moins, et c'est voulu."
+    en: "Take `debian-<version>-<arch>-DVD-1.iso` from the folder; the `debian` tracker gives the current version. Debian stable lives ~5 years: it is the system that changes least, on purpose."
+  runtime: none
+
+- id: raspios-lite
+  type: software
+  category: platform
+  name: { fr: "Raspberry Pi OS Lite (64 bits)", en: "Raspberry Pi OS Lite (64-bit)" }
+  description:
+    fr: "Le système du Raspberry Pi 4/5 : Debian + le noyau et le micrologiciel Pi. Sans bureau — c'est un nœud Arche, pas un poste de travail. Le tracker lit la même liste que Raspberry Pi Imager : URL, date et sha256 sont ceux de l'outil officiel. Dépôt : `apt-mirror-debian` + le dépôt `archive.raspberrypi.com` pour le noyau et les outils Pi."
+    en: "The Raspberry Pi 4/5 system: Debian plus the Pi kernel and firmware. No desktop — it is an Arche node, not a workstation. The tracker reads the same list as Raspberry Pi Imager. Repos: `apt-mirror-debian` plus `archive.raspberrypi.com` for the Pi kernel and tools."
+  tags: [ linux, raspberry-pi, os, arm64 ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 0.5
+  source: { kind: http, url: https://downloads.raspberrypi.com/raspios_lite_arm64/images/, homepage: https://www.raspberrypi.com/software/operating-systems/ }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: mixed, redistribution: allowed }
+  requires: { arch: [ arm64 ] }
+  depends_on: [ apt-mirror-debian ]
+  update: { tracker: raspios, package: "Raspberry Pi OS Lite \\(64-bit\\)", check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Écrire l'image avec `dd` ou Raspberry Pi Imager en mode hors-ligne (« Utiliser une image personnalisée »). Ajouter `deb http://archive.raspberrypi.com/debian/ <codename> main` au miroir apt, sinon pas de mises à jour du noyau."
+    en: "Write with `dd` or Raspberry Pi Imager offline ('Use custom image'). Add `deb http://archive.raspberrypi.com/debian/ <codename> main` to the apt mirror, or no kernel updates."
+  runtime: none
+
+- id: ubuntu-lts
+  type: software
+  category: platform
+  name: { fr: "Ubuntu LTS (Desktop + Server)", en: "Ubuntu LTS (Desktop + Server)" }
+  description:
+    fr: "Uniquement parce que ROS 2 cible Ubuntu LTS : les paquets binaires de `ros2-apt-mirror` n'existent que pour cette distribution. Si vous ne faites pas de robotique ROS, Debian suffit et vous épargne un deuxième miroir. Le tracker lit `meta-release-lts`, le fichier qu'Ubuntu consulte lui-même pour proposer une mise à niveau."
+    en: "Only because ROS 2 targets Ubuntu LTS: the binary packages of `ros2-apt-mirror` exist for this distribution alone. If you do not do ROS robotics, Debian is enough and spares you a second mirror. The tracker reads `meta-release-lts`, the file Ubuntu itself consults to offer upgrades."
+  tags: [ linux, ubuntu, os, iso, robotics ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 9
+  source: { kind: http, url: https://releases.ubuntu.com/, homepage: https://ubuntu.com/download, mirrors: [ https://cdimage.ubuntu.com/releases/ ] }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: mixed, redistribution: allowed }
+  depends_on: [ ros2-apt-mirror ]
+  update: { tracker: ubuntu-lts, stability: lts, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Prévoir aussi un miroir apt Ubuntu partiel (`apt-mirror` sur archive.ubuntu.com, sections main + universe pour amd64 et arm64) : ~60 Go. Sans lui, l'ISO installe et s'arrête là."
+    en: "Also plan a partial Ubuntu apt mirror (`apt-mirror` on archive.ubuntu.com, main + universe, amd64 and arm64): ~60 GB. Without it the ISO installs and stops there."
+  runtime: none
+
+- id: systemrescue
+  type: software
+  category: platform
+  name: { fr: "SystemRescue — réparer, récupérer, cloner", en: "SystemRescue — repair, recover, clone" }
+  description:
+    fr: "Système live qui démarre sur n'importe quel PC depuis une clé USB, sans rien installer : réparer une partition, récupérer les fichiers d'un disque qui ne démarre plus, cloner un disque, réinitialiser un mot de passe, tester la mémoire. C'est la trousse de secours ; elle sert avant toute réinstallation."
+    en: "Live system that boots any PC from a USB stick without installing: repair a partition, recover files from a disk that no longer boots, clone a drive, reset a password, test memory. The first-aid kit; used before any reinstall."
+  tags: [ linux, rescue, recovery, live-usb ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 1
+  source: { kind: http, url: https://www.system-rescue.org/Download/, homepage: https://www.system-rescue.org }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  depends_on: [ ventoy ]
+  update: { tracker: http-head, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Pas de dépôt à mettre en miroir : tout est dans l'ISO, c'est le but. Sur la clé Ventoy avec les autres. Le manuel (system-rescue.org/manual) vaut d'être imprimé : on s'en sert quand rien ne marche."
+    en: "No repository to mirror: everything is in the ISO, by design. Put it on the Ventoy stick with the others. The manual is worth printing: it is used when nothing works."
+  runtime: none
+
+- id: openwrt
+  type: software
+  category: platform
+  name: { fr: "OpenWrt — routeurs, points d'accès, mesh", en: "OpenWrt — routers, access points, mesh" }
+  description:
+    fr: "Le système des routeurs et points d'accès : c'est lui qui fait le Wi-Fi du nœud Arche, le réseau du hameau, le pont entre deux bâtiments, le mesh 802.11s. Images par appareil + ImageBuilder pour en fabriquer hors-ligne + le dépôt de paquets de la version stable. Le tracker lit les tags Git et ignore les rc."
+    en: "The router and access-point system: it provides the Arche node's Wi-Fi, the hamlet network, the bridge between two buildings, 802.11s mesh. Per-device images, the ImageBuilder to build them offline, and the stable release's package feed. The tracker reads Git tags and skips rcs."
+  tags: [ linux, openwrt, router, wifi, mesh, network ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 3
+  source: { kind: github-repo, github_repo: openwrt/openwrt, url: https://downloads.openwrt.org/releases/, homepage: https://openwrt.org }
+  license: { spdx: GPL-2.0-only, redistribution: allowed }
+  update: { tracker: github-tag, check_interval_days: 14 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Télécharger, pour la version stable : `targets/<cible>/<sous-cible>/` (images + ImageBuilder) et `packages/<arch>/` pour vos appareils. Le sélecteur firmware-selector.openwrt.org dit quelle cible correspond à quel routeur — le noter AVANT la coupure."
+    en: "For the stable release download `targets/<target>/<subtarget>/` (images + ImageBuilder) and `packages/<arch>/` for your devices. firmware-selector.openwrt.org maps routers to targets — write it down BEFORE the outage."
+  runtime: firmware
+
+- id: ventoy
+  type: software
+  category: platform
+  name: { fr: "Ventoy — une clé USB, toutes les ISO", en: "Ventoy — one USB stick, every ISO" }
+  description:
+    fr: "On installe Ventoy une fois sur une clé USB, puis on y COPIE les fichiers ISO comme des fichiers ordinaires : au démarrage, un menu propose chacun d'eux. Plus besoin de « graver » une clé par système. C'est l'objet physique que l'utilisateur novice doit avoir : une clé de 32 Go avec Debian, SystemRescue et Raspberry Pi OS, étiquetée."
+    en: "Install Ventoy once on a USB stick, then just COPY ISO files onto it like ordinary files: at boot, a menu offers each of them. No more 'burning' one stick per system. This is the physical object a beginner must own: a labelled 32 GB stick with Debian, SystemRescue and Raspberry Pi OS."
+  tags: [ usb, boot, iso, tool ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: essential
+  size_estimate_gb: 0.05
+  source: { kind: github-release, github_repo: ventoy/Ventoy, url: https://github.com/ventoy/Ventoy/releases, homepage: https://www.ventoy.net, github_asset_pattern: "ventoy-.*-(linux\\.tar\\.gz|windows\\.zip)$" }
+  license: { spdx: GPL-3.0-or-later, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  runtime: static-binary
+
+- id: primtux
+  type: software
+  category: education
+  name: { fr: "PrimTux — Linux pour l'école primaire (FR)", en: "PrimTux — Linux for primary school (FR)" }
+  description:
+    fr: "Distribution française basée sur Debian, pensée pour les 3–12 ans : bureau par âge, logiciels éducatifs libres préinstallés, pas de compte à créer. Répond au trou « école à la maison organisée » : un ordinateur d'enfant qui marche sans réseau et sans réglage."
+    en: "French Debian-based distribution for ages 3–12: per-age desktops, free educational software preinstalled, no account to create. Answers the 'organised home schooling' gap: a child's computer that works with no network and no setup."
+  tags: [ linux, education, children, french ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: optional
+  size_estimate_gb: 4
+  source: { kind: http, url: https://primtux.fr/telecharger-primtux/, homepage: https://primtux.fr }
+  license: { spdx: mixed, redistribution: allowed }
+  depends_on: [ apt-mirror-debian, ventoy ]
+  update: { tracker: http-head, check_interval_days: 60 }
+  status: unverified
+  reliability: community
+  runtime: none
+
+- id: alpine-standard
+  type: software
+  category: platform
+  name: { fr: "Alpine Linux — standard + miroir apk", en: "Alpine Linux — standard + apk mirror" }
+  description:
+    fr: "Petit (l'ISO fait ~200 Mo), musl, OpenRC, démarre en quelques secondes sur 512 Mo de RAM : un routeur, un vieux PC, un nœud très sobre, ou la base d'un conteneur reconverti en machine réelle. Son dépôt est plat et son index tient en quelques Mo — c'est la distribution la plus facile à mettre en miroir. Recette : `catalog/mirrors/alpine.yaml` ; `arche mirror plan` calcule la fermeture exacte (Alpine n'a pas de Recommends)."
+    en: "Small (~200 MB ISO), musl, OpenRC, boots in seconds on 512 MB of RAM: a router, an old PC, a very frugal node, or the base of a container turned into a real machine. Its repository is flat and its index a few MB — the easiest distribution to mirror. Recipe: `catalog/mirrors/alpine.yaml`; `arche mirror plan` computes the exact closure (Alpine has no Recommends)."
+  tags: [ linux, alpine, os, iso, musl, lightweight ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: github-repo, github_repo: alpinelinux/aports, url: https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/, homepage: https://alpinelinux.org/downloads/ }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: mixed, redistribution: allowed }
+  depends_on: [ ventoy ]
+  update: { tracker: github-tag, check_interval_days: 30 }
+  runtime: none
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Le tracker lit les tags du miroir GitHub alpinelinux/aports (v3.21.x…). musl ≠ glibc : les binaires précompilés d'Ollama, Node ou Gitea ont besoin de `gcompat` ou d'une version musl — vérifier avant de choisir Alpine pour le nœud Arche ; Debian reste le choix sûr pour ça."
+    en: "The tracker reads the tags of the alpinelinux/aports GitHub mirror (v3.21.x…). musl ≠ glibc: prebuilt Ollama, Node or Gitea binaries need `gcompat` or a musl build — check before choosing Alpine for the Arche node; Debian remains the safe choice there."

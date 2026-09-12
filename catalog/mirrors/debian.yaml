@@ -1,0 +1,59 @@
+# Debian stable — le socle d'Arche. Paquets racine choisis pour un nœud de bibliothèque et un
+# poste de travail d'atelier ; la fermeture ajoute leurs dépendances automatiquement.
+id: debian-stable
+resource: apt-mirror-debian
+type: apt
+base_url: https://deb.debian.org/debian
+suite: stable                     # résolu par le tracker `debian` ; figer sur `trixie` pour un miroir daté
+components: [main, contrib, non-free-firmware]
+architectures: [amd64, arm64]
+recommends: false                 # true = miroir plus gros, plus proche du comportement d'apt par défaut
+size_estimate_gb: 6
+packages:
+  # système et réseau du nœud
+  - openssh-server
+  - hostapd
+  - dnsmasq
+  - avahi-daemon
+  - nftables
+  - rsync
+  - tmux
+  - vim
+  - htop
+  - smartmontools
+  - lvm2
+  - cryptsetup
+  # ce qu'Arche et ses services attendent
+  - ca-certificates
+  - curl
+  - git
+  - python3
+  - python3-pip
+  - python3-venv
+  - build-essential
+  - cmake
+  - pkg-config
+  - libssl-dev
+  # atelier
+  - kicad
+  - freecad
+  - openscad
+  - prusa-slicer
+  - arduino
+  - avrdude
+  - dfu-util
+  - esptool
+  - minicom
+  # bureau léger pour un vieux PC
+  - task-xfce-desktop
+  - firefox-esr
+  - libreoffice
+  - gimp
+  - inkscape
+  - vlc
+  - qgis
+  - printer-driver-all
+  - cups
+note:
+  fr: "Ajuster `packages` à votre usage : chaque racine tire ses dépendances. `task-xfce-desktop` à lui seul représente ~1,5 Go."
+  en: "Adjust `packages` to your use: each root pulls its dependencies. `task-xfce-desktop` alone is ~1.5 GB."

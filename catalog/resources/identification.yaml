@@ -1,0 +1,183 @@
+# Identification : reconnaître ce qui tue avant de reconnaître ce qui se mange.
+# Identification: recognising what kills, before recognising what is edible.
+# Vérifié le 2026-09-11. Priorité au FRANÇAIS et à l'Europe : une clé américaine ne sert à rien dans l'Essonne.
+# Principe : ces ressources servent à ÉCARTER, pas à valider. Aucune ne remplace un pharmacien ou une société mycologique.
+
+# ---------- Mortels : les connaître par cœur / Deadly species: know them by heart ----------
+
+- id: cap-lille-champignons-syndromes
+  type: pdf
+  category: medical
+  name: { fr: "Centre antipoison de Lille — champignons et syndromes toxiques", en: "Lille Poison Centre — mushrooms and toxic syndromes" }
+  description:
+    fr: "La meilleure source européenne gratuite sur « lesquels tuent » : les espèces classées par syndrome clinique (phalloïdien, orellanien, gyromitrien…), avec le délai d'apparition des symptômes — le seul critère de tri qui compte aux urgences. Brochure PDF + page web."
+    en: "The best free European source on 'which ones kill': species grouped by clinical syndrome (phalloides, orellanus, gyromitra…), with symptom onset delay — the only triage criterion that matters in an emergency. PDF brochure + web page."
+  tags: [ mushrooms, toxic, poison, emergency, fr, printable ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.003
+  source: { kind: http, url: https://cap.chu-lille.fr/wp-content/uploads/sites/18/2021/05/CAP-champignons.pdf, homepage: https://www.cap.chu-lille.fr/champignons-syndromes/ }
+  license: { spdx: LicenseRef-CHU-Lille-Copyright, redistribution: unclear, note: { fr: "© CHU de Lille : téléchargement et impression pour soi. Demander avant redistribution.", en: "© CHU Lille: personal download and printing. Ask before redistributing." } }
+  printable: { available: true, pages_estimate: 12 }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: anses-champignons-intoxications
+  type: pdf
+  category: medical
+  name: { fr: "Anses — intoxications par les champignons : rapport de toxicovigilance", en: "Anses — mushroom poisonings: toxicovigilance report" }
+  description:
+    fr: "Les cas réels de l'année en France : quelles espèces, quelles confusions, quelles circonstances. Dit explicitement de ne PAS se fier aux applications de reconnaissance pour décider de manger. 39 pages, CC BY-NC-ND."
+    en: "Real French cases of the year: which species, which confusions, which circumstances. Explicitly says NOT to rely on identification apps to decide to eat. 39 pages, CC BY-NC-ND."
+  tags: [ mushrooms, toxic, statistics, fr ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: recommended
+  size_estimate_gb: 0.003
+  source: { kind: http, url: https://www.anses.fr/system/files/Toxicovigilance-2025-VIG-0015-RA.pdf, homepage: https://www.anses.fr/fr/content/cueillette-des-champignons-vigilance-face-aux-risques-dintoxications }
+  license: { spdx: CC-BY-NC-ND-4.0, redistribution: allowed-nc }
+  printable: { available: true, pages_estimate: 39 }
+  update: { tracker: http-head, check_interval_days: 180 }
+  status: unverified
+  reliability: reference
+
+- id: mycofrance-syndromes
+  type: pdf
+  category: medical
+  name: { fr: "Société Mycologique de France — syndromes des champignons toxiques", en: "Société Mycologique de France — toxic mushroom syndromes" }
+  description: { fr: "La société savante française (fondée en 1884) : pages de référence sur les espèces toxiques, les syndromes, et un lexique mycologique multilingue pour lire les clés étrangères.", en: "The French learned society (founded 1884): reference pages on toxic species, syndromes, and a multilingual mycological lexicon to read foreign keys." }
+  tags: [ mushrooms, toxic, fr, lexicon ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.1
+  source: { kind: manual, homepage: https://www.mycofrance.fr, url: https://www.mycofrance.fr/les-syndromes-des-champignons-toxiques/ }
+  license: { spdx: unknown, redistribution: unclear }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: centres-antipoison-fr
+  type: pdf
+  category: medical
+  name: { fr: "Centres antipoison — numéros d'urgence (France)", en: "Poison control centres — emergency numbers (France)" }
+  description:
+    fr: "Les 8 centres antipoison français et leurs numéros, à recopier sur papier AVANT d'en avoir besoin : Angers 02 41 48 21 21 · Bordeaux 05 56 96 40 80 · Lille 0 800 59 59 59 · Lyon 04 72 11 69 11 · Marseille 04 91 75 25 25 · Nancy 03 83 22 50 50 · Paris 01 40 05 48 48 · Toulouse 05 61 77 74 47. Et le 15 (SAMU) ou 112."
+    en: "The 8 French poison control centres and their numbers, to copy on paper BEFORE needing them (list in the FR description). Plus 15 (SAMU) or 112."
+  tags: [ poison, emergency, fr, printable ]
+  languages: [ fr ]
+  profiles: [ bunker, novice, lowtech ]
+  priority: essential
+  size_estimate_gb: 0.001
+  source: { kind: manual, homepage: https://www.centres-antipoison.net/, url: https://www.service-public.gouv.fr/particuliers/vosdroits/R70482 }
+  license: { spdx: etalab-2.0, redistribution: attribution, note: { fr: "La page Service-Public est en Licence Ouverte ; le site des centres n'affiche pas de licence.", en: "The Service-Public page is Licence Ouverte; the centres' own site shows no license." } }
+  printable: { available: true, pages_estimate: 1 }
+  update: { tracker: http-head, check_interval_days: 180 }
+  status: unverified
+  reliability: reference
+  notes: { fr: "Ces numéros sont dans la fiche imprimable 07. Ils ne fonctionnent que si le réseau tient : d'où l'importance des sources hors-ligne à côté.", en: "These numbers are on printable sheet 07. They only work while the network holds: hence the offline sources beside them." }
+
+# ---------- Clés et bases d'identification / Identification keys and databases ----------
+
+- id: mycodb
+  type: zim
+  category: agriculture
+  name: { fr: "MycoDB — 8 500 espèces, 231 clés dichotomiques, 29 000 photos (FR)", en: "MycoDB — 8,500 species, 231 dichotomous keys, 29,000 photos (FR)" }
+  description:
+    fr: "La plus grande base mycologique francophone : descriptions, photos, clés de détermination, guide des odeurs pour 2 300 espèces, page des syndromes d'intoxication. Base collaborative, sans licence affichée : copie personnelle, demander avant publication."
+    en: "The largest French-language mycological database: descriptions, photos, identification keys, smell guide for 2,300 species, poisoning-syndromes page. Collaborative, no license shown: personal copy, ask before publishing."
+  tags: [ mushrooms, identification, keys, fr ]
+  languages: [ fr ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 3
+  source: { kind: manual, homepage: https://www.mycodb.fr/, url: https://www.mycodb.fr/ }
+  license: { spdx: unknown, redistribution: unclear }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: community
+  notes: { fr: "Candidat Zimit important pour le FR (permission: pending — demander à Guillaume Péan).", en: "Important Zimit candidate for FR (permission: pending — ask Guillaume Péan)." }
+
+- id: usfs-macrofungi-guide
+  type: pdf
+  category: agriculture
+  name: { fr: "USFS — guide de terrain des macro-champignons (domaine public)", en: "USFS — field guide to common macrofungi (public domain)" }
+  description: { fr: "82 pages, chaque espèce avec sa comestibilité et ses avertissements. Œuvre du gouvernement américain, domaine public — donc librement redistribuable. Attention : espèces d'Amérique du Nord de l'Est, transfert partiel vers l'Europe.", en: "82 pages, each species with edibility and warnings. US government work, public domain — freely redistributable. Caution: eastern North American species, partial transfer to Europe." }
+  tags: [ mushrooms, field-guide, public-domain, printable ]
+  languages: [ en ]
+  profiles: [ bunker, lowtech ]
+  priority: optional
+  size_estimate_gb: 0.01
+  source: { kind: http, url: https://www.fs.usda.gov/nrs/pubs/gtr/gtr_nrs79.pdf, homepage: https://www.fs.usda.gov/nrs/pubs/gtr/gtr_nrs79.pdf }
+  license: { spdx: LicenseRef-PublicDomain-US-Gov, redistribution: allowed }
+  printable: { available: true, pages_estimate: 82 }
+  update: { tracker: http-head, check_interval_days: 180 }
+  status: unverified
+  reliability: reference
+
+- id: wikispecies-zim
+  type: zim
+  category: agriculture
+  name: { fr: "Wikispecies (taxonomie de toutes les espèces)", en: "Wikispecies (taxonomy of all species)" }
+  description: { fr: "Noms acceptés, synonymes et classification de toutes les espèces vivantes. Sert à relier un nom latin entre sources FR, EN et anciennes. Pas de texte d'identification ni de toxicité.", en: "Accepted names, synonyms and classification of all living species. Links a Latin name across FR, EN and old sources. No identification or toxicity text." }
+  tags: [ taxonomy, species, reference ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1.4
+  source: { kind: kiwix, kiwix_name: wikispecies_en_all_nopic, url: https://download.kiwix.org/zim/other/wikispecies_en_all_nopic.zim }
+  license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
+  depends_on: [ kiwix-tools ]
+  update: { tracker: kiwix-opds }
+  status: unverified
+  reliability: reference
+
+- id: gbif-backbone
+  type: dataset
+  category: agriculture
+  name: { fr: "GBIF — squelette taxonomique mondial (CC BY 4.0)", en: "GBIF — global taxonomic backbone (CC BY 4.0)" }
+  description: { fr: "Le référentiel de noms d'espèces de toute la biodiversité (plantes, champignons, animaux), téléchargeable en un fichier. Colonne vertébrale d'un futur outil d'identification local.", en: "The species-name reference for all biodiversity (plants, fungi, animals), downloadable as one archive. Backbone of a future local identification tool." }
+  tags: [ taxonomy, database, open-data ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 1
+  source: { kind: http, url: https://hosted-datasets.gbif.org/datasets/backbone/current/backbone.zip, homepage: https://www.gbif.org/terms }
+  license: { spdx: CC-BY-4.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 90 }
+  status: unverified
+  reliability: reference
+
+- id: index-fungorum-checklist
+  type: dataset
+  category: agriculture
+  name: { fr: "Index Fungorum / Species Fungorum (noms de champignons, CC BY 4.0)", en: "Index Fungorum / Species Fungorum (fungal names, CC BY 4.0)" }
+  description: { fr: "Le référentiel mondial des noms de champignons (Kew), exporté en Darwin Core sous CC BY 4.0 via ChecklistBank.", en: "The world reference of fungal names (Kew), exported as Darwin Core under CC BY 4.0 via ChecklistBank." }
+  tags: [ mushrooms, taxonomy, open-data ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.2
+  source: { kind: http, url: "https://api.checklistbank.org/dataset/2073/export.zip?format=DWCA", homepage: https://www.indexfungorum.org/ }
+  license: { spdx: CC-BY-4.0, redistribution: attribution }
+  update: { tracker: http-head, check_interval_days: 180 }
+  status: unverified
+  reliability: reference
+
+- id: cornell-poisonous-plants
+  type: pdf
+  category: agriculture
+  name: { fr: "Cornell — base des plantes toxiques (plantes et champignons, animaux)", en: "Cornell — poisonous plants database (plants and fungi, animals)" }
+  description: { fr: "Photos, botanique, toxicologie, diagnostic et prévention des intoxications — orienté animaux d'élevage, donc complémentaire des sources humaines. Aucune licence affichée : copie personnelle.", en: "Photos, botany, toxicology, diagnosis and prevention of poisoning — livestock-oriented, hence complementary to the human sources. No license shown: personal copy." }
+  tags: [ toxic, plants, veterinary ]
+  languages: [ en ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 0.3
+  source: { kind: manual, homepage: https://poisonousplants.ansci.cornell.edu/, url: https://poisonousplants.ansci.cornell.edu/ }
+  license: { spdx: unknown, redistribution: unclear }
+  update: { tracker: http-head, check_interval_days: 180 }
+  status: unverified
+  reliability: reference

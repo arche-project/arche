@@ -1,0 +1,116 @@
+# Modèles spécialisés : reclassement, OCR, voix. Ce ne sont pas des « chatbots » — ce sont les
+# organes de la bibliothèque : mieux retrouver (reranker), lire les scans (OCR), parler et écouter.
+# Specialised models: reranking, OCR, speech — the library's organs, not chatbots.
+#
+# Critère de sélection (docs/fr/MODELES.md) : la capacité et la couverture du FRANÇAIS, pas la
+# nationalité ni le classement. Les modèles chinois dominent l'OCR et le reclassement ; pour la voix
+# en français, ce sont whisper.cpp et Piper — parce qu'ils parlent français, et que c'est ce qui compte.
+
+# --- Reclassement (RAG) / Reranking -------------------------------------------------------------
+
+- id: qwen3-reranker-0-6b
+  type: ai-model
+  category: ai
+  name: { fr: "Qwen3-Reranker 0.6B — reclasser les extraits avant de répondre", en: "Qwen3-Reranker 0.6B — rerank passages before answering" }
+  description: { fr: "Le levier de qualité le moins cher du RAG : après la recherche hybride (BM25 + dense), un reclasseur relit les 30 premiers extraits AVEC la question et les remet dans le bon ordre. 600 Mo, tourne sur CPU en quelques centaines de ms par question. Servi par llama-server (`--reranking`, point `/v1/rerank`) : Ollama n'a pas d'API de reclassement. Voir src/core/rag/rerank.ts.", en: "The cheapest quality lever in RAG: after hybrid retrieval, a reranker rereads the top 30 passages WITH the question and reorders them. 600 MB, runs on CPU in a few hundred ms per question. Served by llama-server (`--reranking`, `/v1/rerank` endpoint): Ollama has no reranking API. See src/core/rag/rerank.ts." }
+  tags: [ reranker, rag, multilingual ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 0.65
+  source: { kind: huggingface, hf_repo: Qwen/Qwen3-Reranker-0.6B, hf_file: model.safetensors, url: https://huggingface.co/Qwen/Qwen3-Reranker-0.6B, homepage: https://huggingface.co/Qwen/Qwen3-Reranker-0.6B }
+  checksum: { algo: sha256, value: null, url: null }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { ram_gb: 4, gpu: none, tools: [ llama-server ] }
+  depends_on: [ llama-cpp ]
+  update: { tracker: huggingface, check_interval_days: 30 }
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Convertir en GGUF (`convert_hf_to_gguf.py`, Q8_0 : ~640 Mo) ou prendre une conversion communautaire. Lancer : `llama-server -m qwen3-reranker-0.6b-q8_0.gguf --reranking --port 8012`."
+    en: "Convert to GGUF (`convert_hf_to_gguf.py`, Q8_0: ~640 MB) or take a community conversion. Run: `llama-server -m qwen3-reranker-0.6b-q8_0.gguf --reranking --port 8012`."
+
+# --- OCR : lire les scans / OCR: reading scans ------------------------------------------------------
+# Une grande part du corpus utile est SCANNÉE : Survivor Library (manuels du XIXe), planches BHL,
+# PDF Hesperian, carnets manuscrits. Sans OCR, rien de tout ça n'entre dans l'index (ADR 0007).
+
+- id: ollama-deepseek-ocr
+  type: ai-model
+  category: ai
+  name: { fr: "DeepSeek-OCR 3B — un scan devient du Markdown", en: "DeepSeek-OCR 3B — a scan becomes Markdown" }
+  description: { fr: "OCR par modèle vision-langue : une page scannée ou photographiée ressort en Markdown avec ses tableaux et sa mise en page, en très peu de jetons. Pour indexer les manuels scannés et les planches, et pour numériser un carnet de semences manuscrit. Servi par Ollama.", en: "OCR by a vision-language model: a scanned or photographed page comes out as Markdown with its tables and layout, in very few tokens. To index scanned manuals and plates, and to digitise a handwritten seed log. Served by Ollama." }
+  tags: [ ocr, vision, documents ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: recommended
+  size_estimate_gb: 6.7
+  source: { kind: ollama, ollama_model: "deepseek-ocr:3b", homepage: https://ollama.com/library/deepseek-ocr }
+  license: { spdx: MIT, redistribution: allowed }
+  requires: { ram_gb: 16, gpu: optional, tools: [ ollama ] }
+  depends_on: [ ollama ]
+  update: { tracker: ollama }
+  status: unverified
+  reliability: reference
+
+- id: paddleocr
+  type: software
+  category: ai
+  name: { fr: "PaddleOCR (+ PaddleOCR-VL 0.9B) — OCR robuste aux scans abîmés", en: "PaddleOCR (+ PaddleOCR-VL 0.9B) — OCR robust to damaged scans" }
+  description: { fr: "La boîte à outils OCR de référence, pip-installable, français inclus : scans de travers, pages gondolées, éclairage inégal — exactement l'état des vieux manuels et des planches botaniques. Le modèle VL de 0,9 milliard tourne sur CPU. Complète DeepSeek-OCR quand celui-ci bute sur un document dégradé.", en: "The reference OCR toolkit, pip-installable, French included: skewed scans, warped pages, uneven lighting — exactly the state of old manuals and botanical plates. The 0.9B VL model runs on CPU. Complements DeepSeek-OCR when it stumbles on a degraded document." }
+  tags: [ ocr, documents, python ]
+  languages: [ mul ]
+  profiles: [ bunker ]
+  priority: optional
+  size_estimate_gb: 2
+  source: { kind: github-repo, github_repo: PaddlePaddle/PaddleOCR, url: https://github.com/PaddlePaddle/PaddleOCR.git, homepage: https://github.com/PaddlePaddle/PaddleOCR }
+  license: { spdx: Apache-2.0, redistribution: allowed }
+  requires: { tools: [ python3, pip ] }
+  depends_on: [ python-standalone, pip-cache ]
+  update: { tracker: pypi, package: paddleocr, check_interval_days: 30 }
+  runtime: python
+  status: unverified
+  reliability: reference
+
+# --- Voix : écouter et parler / Speech: listen and speak -------------------------------------------
+# Accessibilité : quelqu'un qui ne lit pas bien, qui a les mains occupées, ou qui voit mal doit
+# pouvoir POSER sa question et ENTENDRE la réponse. Critère dur : le français.
+
+- id: whisper-cpp
+  type: software
+  category: ai
+  name: { fr: "whisper.cpp — reconnaissance vocale hors ligne, français compris", en: "whisper.cpp — offline speech recognition, French included" }
+  description: { fr: "Parler à la bibliothèque. Binaire natif, modèles GGML de 75 Mo (tiny) à 1,5 Go (large), 99 langues dont un très bon français. Sur Raspberry Pi 5, le modèle `small` transcrit en temps quasi réel. Les modèles vocaux chinois (SenseVoice) sont excellents mais ne couvrent pas le français : c'est le critère qui tranche.", en: "Talk to the library. Native binary, GGML models from 75 MB (tiny) to 1.5 GB (large), 99 languages including very good French. On a Raspberry Pi 5 the `small` model transcribes near real time. Chinese speech models (SenseVoice) are excellent but do not cover French: that is the deciding criterion." }
+  tags: [ speech, stt, accessibility ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.6
+  source: { kind: github-release, github_repo: ggml-org/whisper.cpp, url: https://github.com/ggml-org/whisper.cpp/releases, homepage: https://github.com/ggml-org/whisper.cpp }
+  license: { spdx: MIT, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 30 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Modèles : https://huggingface.co/ggerganov/whisper.cpp (ggml-small.bin ≈ 466 Mo, ggml-medium.bin ≈ 1,5 Go). Le `small` suffit pour poser une question ; le `medium` pour dicter un carnet."
+    en: "Models: https://huggingface.co/ggerganov/whisper.cpp (ggml-small.bin ≈ 466 MB, ggml-medium.bin ≈ 1.5 GB). `small` is enough to ask a question; `medium` to dictate a log."
+
+- id: piper-tts
+  type: software
+  category: ai
+  name: { fr: "Piper — lire la réponse à voix haute, voix françaises, sur un Pi", en: "Piper — read the answer aloud, French voices, on a Pi" }
+  description: { fr: "Synthèse vocale locale, rapide même sur Raspberry Pi, avec plusieurs voix françaises libres (fr_FR-siwis, fr_FR-upmc). Pour entendre une fiche, une procédure ou une réponse de l'assistant quand on ne peut pas lire — mains prises, faible vue, enfant. Binaire natif.", en: "Local text-to-speech, fast even on a Raspberry Pi, with several free French voices (fr_FR-siwis, fr_FR-upmc). To hear a sheet, a procedure or an assistant answer when reading is not possible — busy hands, low vision, a child. Native binary." }
+  tags: [ speech, tts, accessibility ]
+  languages: [ mul ]
+  profiles: [ bunker, novice ]
+  priority: recommended
+  size_estimate_gb: 0.2
+  source: { kind: github-release, github_repo: rhasspy/piper, url: https://github.com/rhasspy/piper/releases, homepage: https://github.com/rhasspy/piper }
+  license: { spdx: MIT, redistribution: allowed }
+  update: { tracker: github-release, check_interval_days: 60 }
+  runtime: static-binary
+  status: unverified
+  reliability: reference
+  notes:
+    fr: "Voix : https://huggingface.co/rhasspy/piper-voices (fr_FR/siwis/medium ≈ 60 Mo). Le projet Piper est peu actif depuis 2025 ; il marche, et c'est ce qu'on lui demande. Alternative si besoin : Kokoro (Apache-2.0, français correct)."
+    en: "Voices: https://huggingface.co/rhasspy/piper-voices (fr_FR/siwis/medium ≈ 60 MB). Piper has been quiet since 2025; it works, which is what we ask of it. Alternative if needed: Kokoro (Apache-2.0, decent French)."
