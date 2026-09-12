@@ -1,0 +1,6 @@
+# Fins de ligne LF partout, y compris sur Windows : scripts shell, workflows et tests comparent des "\n".
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.zim binary
+*.sqlite binary

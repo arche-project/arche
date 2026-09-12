@@ -24,7 +24,7 @@ after(() => fs.rmSync(tmp, { recursive: true, force: true }));
 // Le corpus fixture : docs/ (les fichiers Markdown, ce que le ZIM arche-docs contient — 94 au 12 septembre 2026), FTS5 + vecteurs fake-64.
 const lib = path.join(tmp, 'lib');
 await buildShard({ resourceId: 'arche-docs', articles: extractDir(path.join(ROOT, 'docs')), embedder: fakeEmbedder(), out: path.join(lib, 'index', 'arche-docs.arche.sqlite'), meta: META });
-const cli = (...args: string[]) => spawnSync(process.execPath, ['--import', 'tsx', path.join(ROOT, 'src/cli.ts'), ...args], { cwd: ROOT, encoding: 'utf8' });
+const cli = (...args: string[]) => spawnSync(process.execPath, ['--import', 'tsx', path.join(ROOT, 'src/cli.ts'), ...args], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, ARCHE_LANG: 'fr' } });
 
 test('critère 3 — le tableau distingue xapian / sqlite / fusion / rerank ; mesurable = un corpus attendu installé', async () => {
   const r = await runEval({ lib, fetchImpl: down, embedder: fakeEmbedder() });

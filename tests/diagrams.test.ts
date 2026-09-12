@@ -33,7 +33,7 @@ test('rendering without the tool returns the source file and a reason, never thr
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('rendering with a (fake) tool in the library produces the output next to the source', async () => {
+test('rendering with a (fake) tool in the library produces the output next to the source', { skip: process.platform === 'win32' ? 'le faux outil est un script sh' : false }, async () => {
   const dir = mkdtempSync(path.join(tmpdir(), 'arche-diag-'));
   try {
     // Un faux `dot` qui écrit un SVG minimal là où on lui dit : -Tsvg src -o out

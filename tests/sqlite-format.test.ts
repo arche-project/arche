@@ -162,6 +162,10 @@ test('la question « sans Arche » de l’ADR : la commande sqlite3, telle quell
     assert.ok(rows[0]!.reponse.includes('>réhydratation<'), rows[0]!.reponse);
     const has = spawnSync('sqlite3', ['-version'], { encoding: 'utf8' });
     if (has.error || has.status !== 0) { console.log('  (sqlite3 absent : la commande n’est vérifiée que par node:sqlite)'); return; }
+    // Le sqlite3 système de macOS et de certaines images CI est compilé sans FTS5 : la commande de
+    // l’ADR suppose un sqlite3 avec FTS5 (Debian, Homebrew, Windows officiel). On le dit, on ne triche pas.
+    const fts5 = spawnSync('sqlite3', [':memory:', 'CREATE VIRTUAL TABLE t USING fts5(x);'], { encoding: 'utf8' });
+    if (fts5.status !== 0) { console.log('  (sqlite3 sans FTS5 sur cette machine : la commande n’est vérifiée que par node:sqlite)'); return; }
     const r = spawnSync('sqlite3', ['-readonly', '-box', file, sql], { encoding: 'utf8' });
     assert.equal(r.status, 0, r.stderr);
     assert.ok(r.stdout.includes('>réhydratation<') && r.stdout.includes('Diarrhée'), r.stdout);

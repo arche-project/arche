@@ -524,6 +524,16 @@ tickets:
       - "`arche --help` sans extension : catalog download serve index search mcp eval jobs"
       - "`arche.yaml: extensions: [calc, visuals]` les ajoute ; test"
       - "src/ ≤ 3 000 lignes ; seuil CI passé à 3 000"
+  - id: M3-7
+    list: m3
+    title: "Windows : tests verts (fichiers SQLite verrouillés au nettoyage, outils sh)"
+    status: todo
+    size: S
+    desc: |
+      Premier run CI (12 sept. 2026) : sur windows-latest, deux tests échouent en EBUSY — un handle SQLite encore ouvert quand le test supprime son répertoire (tests/index.test.ts:121, tests/retrieve.test.ts:31) — et un test qui lance un faux outil écrit en sh est sauté. Fermer explicitement les connexions (retrieve garde un cache par processus ; build ferme avant rmSync), rendre le faux outil portable (un .cmd ou node), puis retirer `continue-on-error` de ci.yml pour Windows. Windows est une plateforme cible d'Arche : la CI doit y être bloquante.
+    accept:
+      - "`npm test` vert sur windows-latest sans test sauté"
+      - "`continue-on-error` retiré de ci.yml ; les trois OS bloquants"
 
   # ─────────────────── M4 · Base & connaissance ───────────────────
   - id: M4-1
