@@ -1,5 +1,7 @@
 # Arche
 
+[![CI](https://github.com/arche-project/arche/actions/workflows/ci.yml/badge.svg)](https://github.com/arche-project/arche/actions/workflows/ci.yml) [![Licence MIT](https://img.shields.io/badge/licence-MIT-green.svg)](LICENSE)
+
 **FR** — Votre web local, sans internet. · **EN** — Your local web, no internet required.
 
 [Français](#français) · [English](#english)
