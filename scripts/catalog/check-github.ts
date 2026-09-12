@@ -2,7 +2,7 @@
 // Tracks releases (tag, date, matching asset size) and latest commits of GitHub repositories.
 //
 // Usage : tsx scripts/catalog/check-github.ts [--dry-run]   (GITHUB_TOKEN conseillé : 60 req/h sans, 5 000 avec)
-import { loadResourceFiles, saveResourceFiles, setField, writeReport, ghHeaders, markChecked, today } from './lib.js';
+import { loadResourceFiles, saveResourceFiles, setField, writeReport, ghHeaders, markChecked, setUpdaterNote } from './lib.js';
 import { latestStable } from '../../src/core/versions.js';
 
 const dry = process.argv.includes('--dry-run');
@@ -35,7 +35,7 @@ async function main() {
           if (r.source.github_asset_pattern) {
             const re = new RegExp(r.source.github_asset_pattern);
             const assets = rel.assets.filter(a => re.test(a.name));
-            if (!assets.length) setField(rf, i, 'notes.en', `${r.notes?.en ?? ''} [updater ${today()}: asset pattern matches nothing in ${rel.tag_name}]`.trim(), 'asset pattern broken');
+            if (!assets.length) setUpdaterNote(rf, i, `asset pattern matches nothing in ${rel.tag_name}`, 'asset pattern broken');
             else setField(rf, i, 'size_bytes', Math.max(...assets.map(a => a.size)));
           }
           if (r.status === 'unverified') setField(rf, i, 'status', 'active');
@@ -48,7 +48,7 @@ async function main() {
           const pick = latestStable(tags.map(t => t.name), r.update?.stability ?? 'stable');
           if (!pick) { console.warn(`${r.id}: aucun tag lisible`); continue; }
           setField(rf, i, 'version', pick.tag, pick.tag !== r.version ? 'nouveau tag stable' : undefined);
-          if (pick.fallback) setField(rf, i, 'notes.en', `${(r.notes?.en ?? '').replace(/\s*\[updater [^\]]*\]/g, '')} [updater ${today()}: ${pick.fallback}]`.trim(), pick.fallback);
+          if (pick.fallback) setUpdaterNote(rf, i, pick.fallback, pick.fallback);
           if (r.status === 'unverified') setField(rf, i, 'status', 'active');
           markChecked(rf, i);
         } else if (tracker === 'github-commit' || r.source.kind === 'github-repo') {

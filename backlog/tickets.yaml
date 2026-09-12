@@ -105,7 +105,7 @@ tickets:
   - id: M0-1
     list: m0
     title: "Publier le dépôt sur GitHub, ci.yml vert"
-    status: todo
+    status: done
     size: S
     decision: D6
     desc: |

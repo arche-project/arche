@@ -9,7 +9,7 @@
 // politique doit se rabattre (pas de LTS, que des prérelease), la note apparaît dans la PR pour
 // que Florian tranche — l'automate ne décide jamais de distribuer une bêta.
 
-import { loadResourceFiles, saveResourceFiles, setField, writeReport, markChecked, today } from './lib.js';
+import { loadResourceFiles, saveResourceFiles, setField, writeReport, markChecked, setUpdaterNote } from './lib.js';
 import { latestStable, parseVersion, type Stability } from '../../src/core/versions.js';
 import { parseRosdistroIndex, latestActiveRos2Lts, ROS2_LTS, parseDebianRelease, pickNode, parseUbuntuMetaRelease, pickRaspiosImage } from './registries-parse.js';
 
@@ -170,7 +170,7 @@ async function main() {
         if (found.missing) { if (r.status !== 'missing') setField(rf, i, 'status', 'missing', `${tracker}: introuvable`); markChecked(rf, i); continue; }
         setField(rf, i, 'version', found.version, found.version !== r.version ? `nouvelle version stable (${tracker})` : undefined);
         if (found.updated) setField(rf, i, 'updated', found.updated);
-        if (found.note) setField(rf, i, 'notes.en', `${(r.notes?.en ?? '').replace(/\s*\[updater [^\]]*\]/g, '')} [updater ${today()}: ${found.note}]`.trim(), found.note);
+        if (found.note) setUpdaterNote(rf, i, found.note, found.note);
         if (r.status === 'unverified' || r.status === 'missing') setField(rf, i, 'status', 'active');
         markChecked(rf, i);
       } catch (e) {

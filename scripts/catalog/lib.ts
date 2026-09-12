@@ -34,6 +34,25 @@ export function setField(rf: ResourceFile, index: number, fieldPath: string, val
   changes.push({ id, field: fieldPath, from: beforeVal ?? null, to: value, note });
 }
 
+const UPDATER_MARK = /\s*\[updater [^\]]*\]/g;
+
+/**
+ * Pose (ou remplace) la note technique `[updater AAAA-MM-JJ: texte]` sur une ressource, dans les
+ * DEUX langues — le schéma exige `notes.fr` et `notes.en` ensemble, et une ressource sans `notes`
+ * doit en recevoir un objet complet. Une seule marque updater à la fois : l'ancienne est retirée.
+ * Le texte est technique et reste en anglais des deux côtés (D22 : l'anglais est la source).
+ * Sets or replaces the technical `[updater DATE: text]` note in BOTH languages — the schema
+ * requires `notes.fr` and `notes.en` together. One updater mark at a time; the old one is removed.
+ */
+export function setUpdaterNote(rf: ResourceFile, index: number, text: string, note?: string) {
+  const r = rf.items[index];
+  const mark = `[updater ${today()}: ${text}]`;
+  for (const lang of ['fr', 'en'] as const) {
+    const base = (r.notes?.[lang] ?? '').replace(UPDATER_MARK, '').trim();
+    setField(rf, index, `notes.${lang}`, base ? `${base} ${mark}` : mark, lang === 'en' ? note : undefined);
+  }
+}
+
 /**
  * Marque la ressource comme vérifiée aujourd'hui. À appeler uniquement quand l'amont a réellement
  * répondu — une erreur réseau n'est pas une vérification. C'est ce champ qui nourrit la mesure de
