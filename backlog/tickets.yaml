@@ -119,7 +119,7 @@ tickets:
   - id: M0-2
     list: m0
     title: "Lancer catalog-update.yml une fois — fraîcheur non nulle"
-    status: todo
+    status: done
     size: S
     depends_on: [ M0-1 ]
     desc: |
@@ -434,6 +434,33 @@ tickets:
       - "Nouveaux kinds dans le schéma : gitlab-release, pip-index, apt-repo, url-pattern ; catalog:validate vert"
       - Moins de 15 fiches `manual` restantes, chacune avec `manual_reason`
       - "catalog-update.yml couvre les nouveaux kinds ; README : N fiches résolues automatiquement / total"
+
+  - id: M2-9
+    list: m2
+    title: "Faux `missing` et motifs d'assets : ce que le premier catalog-update a révélé"
+    status: todo
+    size: S
+    depends_on:
+      - M0-2
+    desc: |
+      Le premier passage complet des vérificateurs (12 sept. 2026, PR #2) laisse des faux négatifs que la
+      relecture humaine a identifiés. À corriger dans le catalogue, pas dans les vérificateurs :
+      (1) mauvais type de suivi — `mosquitto` et `git-vesc` n'ont que des tags GitHub, pas de « release »
+      → `tracker: github-tag` ; `ngspice` : SourceForge refuse le HEAD → suivre la page d'accueil ou
+      le flux RSS des fichiers ; (2) liens morts réels — `ema-herbal-monographs` (404), `plantnet-offline`
+      (404), `git-openbionics` (dépôt disparu : retrouver le successeur ou passer en `deprecated` avec
+      la raison) ; (3) huit `github_asset_pattern` qui ne matchent plus rien (kiwix-tools, kiwix-desktop,
+      zim-tools, git-libzim, meshroom, git-open-manipulator, git-yale-openhand, git-berkeley-humanoid-lite)
+      — ouvrir la page de release, réécrire le motif, et vérifier que `llama-cpp` en `v0.4.0` n'est pas une
+      erreur de lecture (llama.cpp tague `bNNNN`) ; (4) `devdocs-en` : `size_estimate_gb: 2` couvrait
+      tous les DevDocs, la fiche ne vise que Python (4 Mo) → corriger l'estimation pour éteindre l'alerte
+      « size drop ». Vérifier aussi les 42 liens 403 remontés par check-links : la plupart sont des
+      pare-feux anti-robot (PFAF, Sphere, Kew, wiki Debian) → User-Agent de navigateur, ou `homepage`
+      seul, avant de conclure au lien mort.
+    accept:
+      - "Le run suivant de catalog-update.yml ne laisse en `missing` que des ressources réellement disparues (liste justifiée dans la PR)"
+      - "Aucune note `[updater …: asset pattern matches nothing …]` restante ; version de llama-cpp au format bNNNN"
+      - "check-links : moins de 10 liens en erreur, chacun avec une raison"
 
   # ─────────────────── M3 · Noyau & soustraction ───────────────────
   - id: M3-1
