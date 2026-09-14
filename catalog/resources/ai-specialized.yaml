@@ -30,8 +30,8 @@
     fr: "Convertir en GGUF (`convert_hf_to_gguf.py`, Q8_0 : ~640 Mo) ou prendre une conversion communautaire. Lancer : `llama-server -m qwen3-reranker-0.6b-q8_0.gguf --reranking --port 8012`."
     en: "Convert to GGUF (`convert_hf_to_gguf.py`, Q8_0: ~640 MB) or take a community conversion. Run: `llama-server -m qwen3-reranker-0.6b-q8_0.gguf --reranking --port 8012`."
   size_bytes: 1191588280
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 # --- OCR : lire les scans / OCR: reading scans ------------------------------------------------------
 # Une grande part du corpus utile est SCANNÉE : Survivor Library (manuels du XIXe), planches BHL,
@@ -56,8 +56,8 @@
   reliability: reference
   size_bytes: 6687239934
   version: sha256:3a18673ff291
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: paddleocr
   type: software
@@ -80,7 +80,7 @@
   version: 3.7.0
   updated: 2026-06-11
   size_bytes: 2011150336
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 # --- Voix : écouter et parler / Speech: listen and speak -------------------------------------------
 # Accessibilité : quelqu'un qui ne lit pas bien, qui a les mains occupées, ou qui voit mal doit
@@ -107,7 +107,7 @@
     en: "Models: https://huggingface.co/ggerganov/whisper.cpp (ggml-small.bin ≈ 466 MB, ggml-medium.bin ≈ 1.5 GB). `small` is enough to ask a question; `medium` to dictate a log."
   version: v1.9.4
   updated: 2026-09-11
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: piper-tts
   type: software
@@ -130,4 +130,4 @@
     en: "Voices: https://huggingface.co/rhasspy/piper-voices (fr_FR/siwis/medium ≈ 60 MB). Piper has been quiet since 2025; it works, which is what we ask of it. Alternative if needed: Kokoro (Apache-2.0, decent French)."
   version: 2023.11.14-2
   updated: 2023-11-14
-  checked: 2026-09-12
+  checked: 2026-09-14

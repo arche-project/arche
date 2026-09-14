@@ -23,7 +23,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Recette Zimit `atelierpaysan-fr` (permission pending). Vu la liquidation, demander l'accord ET faire une copie personnelle sans attendre.", en: "Zimit recipe `atelierpaysan-fr` (permission pending). Given the liquidation, ask for permission AND make a personal copy without waiting." }
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-agopengps
   type: git-repo
@@ -45,7 +45,7 @@
   notes: { fr: "Mirrorer aussi AgOpenGPS-Official/Boards et Rate_Control.", en: "Also mirror AgOpenGPS-Official/Boards and Rate_Control." }
   version: 6.8.6
   updated: 2026-08-17
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-opensprinkler
   type: git-repo
@@ -67,7 +67,7 @@
   notes: { fr: "Mirrorer aussi OpenSprinkler/OpenSprinkler-Hardware.", en: "Also mirror OpenSprinkler/OpenSprinkler-Hardware." }
   version: 221(5)
   updated: 2026-08-02
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-mycodo
   type: git-repo
@@ -88,7 +88,7 @@
   reliability: reference
   version: v8.17.0
   updated: 2026-08-03
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-hiveeyes
   type: git-repo
@@ -110,7 +110,7 @@
   version: ce77af531671
   updated: 2023-06-20
   size_bytes: 1793024
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-weewx
   type: git-repo
@@ -131,7 +131,7 @@
   reliability: reference
   version: v5.5.0
   updated: 2026-08-06
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 # ---------- Gestion de ferme / Farm management ----------
 
@@ -155,7 +155,7 @@
   runtime: container
   version: 3.5.5
   updated: 2026-08-27
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-tania
   type: git-repo
@@ -176,7 +176,7 @@
   reliability: community
   version: 1.7.2
   updated: 2019-12-24
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 # ---------- Bases de données : plantes, aliments, maladies / Databases: plants, food, diseases ----------
 
@@ -202,7 +202,7 @@
   version: 754cfd75da00
   updated: 2026-07-10
   size_bytes: 101376
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: git-openweedlocator
   type: git-repo
@@ -226,8 +226,8 @@
   notes: { fr: "Détection par couleur, pas par espèce : ne distingue pas une adventice d'une plantule de culture au même stade. Pour trier par espèce, coupler à un modèle de vision local (Qwen3.5) avec confirmation humaine des premiers passages.", en: "Colour detection, not species: cannot tell a weed from a crop seedling at the same stage. For species sorting, pair with a local vision model (Qwen3.5) and human confirmation of the first passes." }
   version: 46296531dba1
   updated: 2026-04-21
-  size_bytes: 39080960
-  checked: 2026-09-12
+  size_bytes: 39279616
+  checked: 2026-09-14
 
 - id: practical-plants
   type: zim
@@ -245,7 +245,7 @@
   status: unverified
   reliability: community
   notes: { fr: "Recette mwoffliner `practicalplants-en` (permission pending). Les données viennent en grande partie de PFAF (CC BY 4.0 pour le texte).", en: "mwoffliner recipe `practicalplants-en` (permission pending). Data largely derived from PFAF (CC BY 4.0 for text)." }
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: pfaf-database
   type: dataset
@@ -280,7 +280,7 @@
   status: unverified
   reliability: reference
   size_bytes: 1275171186
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: plantvillage-dataset
   type: dataset
@@ -297,4 +297,4 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-14
