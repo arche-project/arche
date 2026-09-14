@@ -21,8 +21,8 @@
   status: active
   reliability: reference
   size_bytes: 1359292957
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-4b
   type: ai-model
@@ -43,8 +43,8 @@
   reliability: reference
   size_bytes: 2497293444
   version: sha256:3e4cb1417446
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-gemma3-4b
   type: ai-model
@@ -65,8 +65,8 @@
   reliability: reference
   size_bytes: 3338801315
   version: sha256:aeda25e63ebd
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-8b
   type: ai-model
@@ -87,8 +87,8 @@
   reliability: reference
   size_bytes: 5225387677
   version: sha256:a3de86cd1c13
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-llama3-1-8b
   type: ai-model
@@ -109,8 +109,8 @@
   reliability: reference
   size_bytes: 4920752841
   version: sha256:667b0c1932bc
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen2-5-coder-7b
   type: ai-model
@@ -131,8 +131,8 @@
   reliability: reference
   size_bytes: 4683087074
   version: sha256:60e05f210007
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-gemma3-12b
   type: ai-model
@@ -153,8 +153,8 @@
   reliability: reference
   size_bytes: 8149189763
   version: sha256:e8ad13eff07a
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-14b
   type: ai-model
@@ -175,8 +175,8 @@
   reliability: reference
   size_bytes: 9276198077
   version: sha256:a8cc1361f314
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen2-5-coder-14b
   type: ai-model
@@ -197,8 +197,8 @@
   reliability: reference
   size_bytes: 8988123810
   version: sha256:ac9bc7a69dab
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-32b
   type: ai-model
@@ -219,8 +219,8 @@
   reliability: reference
   size_bytes: 20201253341
   version: sha256:3291abe70f16
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-gemma3-27b
   type: ai-model
@@ -241,8 +241,8 @@
   reliability: reference
   size_bytes: 17396936451
   version: sha256:e796792eba26
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen2-5-coder-32b
   type: ai-model
@@ -263,8 +263,8 @@
   reliability: reference
   size_bytes: 19851349410
   version: sha256:ac3d1ba8aa77
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-nomic-embed-text
   type: ai-model
@@ -285,8 +285,8 @@
   reliability: reference
   size_bytes: 274302030
   version: sha256:970aa74c0a90
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-bge-m3
   type: ai-model
@@ -307,8 +307,8 @@
   reliability: reference
   size_bytes: 1157672268
   version: sha256:daec91ffb5dd
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 # Exemple de modèle GGUF direct (sans Ollama), pour llama.cpp seul.
 - id: hf-qwen3-8b-gguf
@@ -330,8 +330,8 @@
   status: active
   reliability: reference
   size_bytes: 5027783488
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 # --- Génération 2026 : Qwen3.5 / Qwen3.6 (vérifiés sur ollama.com le 2026-09-11) --------------------
 # Qwen3.5 est nativement multimodal (texte + image) à toutes les tailles et couvre 201 langues.
@@ -357,8 +357,8 @@
   reliability: reference
   size_bytes: 3389983260
   version: sha256:81fb60c7daa8
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-5-9b
   type: ai-model
@@ -379,8 +379,8 @@
   reliability: reference
   size_bytes: 6594474236
   version: sha256:dec52a44569a
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-5-35b-a3b
   type: ai-model
@@ -401,8 +401,8 @@
   reliability: reference
   size_bytes: 23869191260
   version: sha256:900dde62fb7e
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-5-27b
   type: ai-model
@@ -423,8 +423,8 @@
   reliability: reference
   size_bytes: 17420432252
   version: sha256:d4b8b4f4c350
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-6-27b
   type: ai-model
@@ -445,8 +445,8 @@
   reliability: reference
   size_bytes: 17769076719
   version: sha256:415aad607fc2
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-6-35b-a3b
   type: ai-model
@@ -467,8 +467,8 @@
   reliability: reference
   size_bytes: 22621314161
   version: sha256:d372de8e9348
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-embedding-0-6b
   type: ai-model
@@ -489,8 +489,8 @@
   reliability: reference
   size_bytes: 639150592
   version: sha256:06507c7b4268
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14
 
 - id: ollama-qwen3-embedding-4b
   type: ai-model
@@ -511,5 +511,5 @@
   reliability: reference
   size_bytes: 2496703776
   version: sha256:2b0cf8f17b4c
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-14
+  checked: 2026-09-14

@@ -30,12 +30,12 @@
   status: active
   reliability: reference
   notes:
-    fr: "Télécharger les archives de la version affichée dans `version` pour chaque plateforme cible : https://nodejs.org/dist/<version>/. Le tracker suit la LTS, pas la version « current ». [updater 2026-09-12: LTS « Krypton »]"
-    en: "Download the archives of the version shown in `version` for each target platform from https://nodejs.org/dist/<version>/. The tracker follows the LTS line, not 'current'. [updater 2026-09-12: LTS « Krypton »]"
+    fr: "Télécharger les archives de la version affichée dans `version` pour chaque plateforme cible : https://nodejs.org/dist/<version>/. Le tracker suit la LTS, pas la version « current ». [updater 2026-09-14: LTS « Krypton »]"
+    en: "Download the archives of the version shown in `version` for each target platform from https://nodejs.org/dist/<version>/. The tracker follows the LTS line, not 'current'. [updater 2026-09-14: LTS « Krypton »]"
   runtime: static-binary
   version: v24.21.0
   updated: 2026-09-07
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: python-standalone
   type: software
@@ -58,7 +58,7 @@
   version: "20260901"
   updated: 2026-09-01
   size_bytes: 151826400
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: rustup-offline
   type: software
@@ -83,7 +83,7 @@
   runtime: static-binary
   version: 1.98.1
   updated: 2026-09-03
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 # --- Registres de paquets : proxys-cache locaux / Package registries: local caching proxies -------
 
@@ -112,7 +112,7 @@
   runtime: node
   version: 6.10.3
   updated: 2026-09-05
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: devpi
   type: software
@@ -136,7 +136,7 @@
   runtime: python
   version: 6.20.3
   updated: 2026-06-30
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: panamax
   type: software
@@ -159,7 +159,7 @@
   runtime: static-binary
   version: v1.0.14
   updated: 2024-06-06
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: athens
   type: software
@@ -181,7 +181,7 @@
   runtime: static-binary
   version: v0.18.1
   updated: 2026-07-15
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: arduino-library-index
   type: dataset
@@ -201,7 +201,7 @@
   update: { tracker: http-head, check_interval_days: 14 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 # --- ROS 2 : la distribution est l'unité stable / ROS 2: the distribution is the stable unit ------
 
@@ -226,10 +226,10 @@
   status: active
   reliability: reference
   notes:
-    fr: "Une LTS ROS 2 sort les années paires en mai et vit cinq ans (Humble → 2027, Jazzy → 2029). Changer de distribution = changer `update.package` et `version` ensemble. [updater 2026-09-12: une LTS plus récente est active : lyrical]"
-    en: "A ROS 2 LTS ships in May of even years and lives five years (Humble → 2027, Jazzy → 2029). Switching distribution = changing `update.package` and `version` together. [updater 2026-09-12: une LTS plus récente est active : lyrical]"
+    fr: "Une LTS ROS 2 sort les années paires en mai et vit cinq ans (Humble → 2027, Jazzy → 2029). Changer de distribution = changer `update.package` et `version` ensemble. [updater 2026-09-14: une LTS plus récente est active : lyrical]"
+    en: "A ROS 2 LTS ships in May of even years and lives five years (Humble → 2027, Jazzy → 2029). Switching distribution = changing `update.package` and `version` together. [updater 2026-09-14: une LTS plus récente est active : lyrical]"
   runtime: none
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: ros2-docs
   type: zim
@@ -257,9 +257,9 @@
   status: active
   reliability: reference
   notes:
-    fr: "[updater 2026-09-12: une LTS plus récente est active : lyrical]"
-    en: "[updater 2026-09-12: une LTS plus récente est active : lyrical]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-14: une LTS plus récente est active : lyrical]"
+    en: "[updater 2026-09-14: une LTS plus récente est active : lyrical]"
+  checked: 2026-09-14
 
 # --- Images de conteneurs / Container images ---------------------------------------------------
 
@@ -282,7 +282,7 @@
   status: missing
   reliability: reference
   runtime: container
-  checked: 2026-09-12
+  checked: 2026-09-14
 
 - id: docker-gitea
   type: software
@@ -305,4 +305,4 @@
   runtime: container
   version: 1.27.3-rootless
   updated: 2026-08-29
-  checked: 2026-09-12
+  checked: 2026-09-14
