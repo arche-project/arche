@@ -17,8 +17,8 @@
   update: { tracker: http-head, check_interval_days: 30 }
   status: unverified
   reliability: reference
-  size_bytes: 5079362932
-  checked: 2026-09-12
+  size_bytes: 5083095804
+  checked: 2026-09-17
 
 - id: organic-maps-app
   type: software
@@ -40,7 +40,7 @@
   version: 2026.08.27-18-android
   updated: 2026-08-27
   size_bytes: 64193127
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: pdf-ou-il-ny-a-pas-de-docteur
   type: pdf
@@ -59,7 +59,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "URL directe du PDF FR à confirmer (Hesperian héberge les PDF derrière un formulaire). Sinon : édition papier à acheter avant.", en: "Direct FR PDF URL to confirm (Hesperian serves PDFs behind a form). Otherwise: buy the print edition beforehand." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: pdf-sanitation-sphere-handbook
   type: pdf
@@ -95,4 +95,4 @@
   status: unverified
   reliability: reference
   notes: { fr: "URL du PDF FR à confirmer.", en: "FR PDF URL to confirm." }
-  checked: 2026-09-12
+  checked: 2026-09-17

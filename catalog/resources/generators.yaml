@@ -34,7 +34,7 @@
   version: "0.23"
   updated: 2026-05-29
   size_bytes: 55504896
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: skidl
   type: software
@@ -59,7 +59,7 @@
   version: 2.3.0
   updated: 2026-07-28
   size_bytes: 85014528
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: wireviz
   type: software
@@ -84,7 +84,7 @@
   version: 0.4.1
   updated: 2024-07-13
   size_bytes: 20953088
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: ngspice
   type: software
@@ -104,7 +104,7 @@
   runtime: static-binary
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # --- Diagrammes et graphes / Diagrams and graphs -------------------------------------------------
 
@@ -129,7 +129,7 @@
   notes:
     fr: "Le dépôt canonique est sur GitLab ; la page de téléchargement officielle est suivie par http-head. Sous Debian : paquet `graphviz` dans le miroir apt."
     en: "The canonical repo is on GitLab; the official download page is tracked by http-head. On Debian: package `graphviz` in the apt mirror."
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: mermaid-cli
   type: software
@@ -156,8 +156,8 @@
     en: "mmdc renders through an embedded Chromium (Puppeteer): ~300 MB, to cache in Verdaccio. Browser-free alternative: Mermaid diagrams render natively in Arche's web UI."
   version: 11.17.0
   updated: 2026-09-02
-  size_bytes: 3145728
-  checked: 2026-09-12
+  size_bytes: 3556352
+  checked: 2026-09-17
 
 - id: drawio-desktop
   type: software
@@ -180,7 +180,7 @@
   version: v31.4.5
   updated: 2026-09-08
   size_bytes: 156908410
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: plantuml
   type: software
@@ -205,7 +205,7 @@
   version: v1.2026.8
   updated: 2026-09-05
   size_bytes: 31813922
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: temurin-jdk
   type: software
@@ -228,7 +228,7 @@
   version: jdk-21.0.12.1+1
   updated: 2026-08-19
   size_bytes: 207473347
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # --- Mécanique / Mechanical ------------------------------------------------------------------------
 
@@ -251,7 +251,7 @@
   status: active
   reliability: reference
   version: openscad-2026.01.01-TEST2
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: cadquery
   type: software
@@ -275,8 +275,8 @@
   reliability: reference
   version: 2.8.0
   updated: 2026-06-21
-  size_bytes: 14997504
-  checked: 2026-09-12
+  size_bytes: 14964736
+  checked: 2026-09-17
 
 # --- Modèles de diffusion : ILLUSTRER, pas produire / Diffusion models: ILLUSTRATE, do not produce ---
 #
@@ -303,7 +303,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Dernière version vue : 7.5 (2024-08). Les installeurs embarquent un JRE ; sinon Temurin.", en: "Last version seen: 7.5 (2024-08). Installers bundle a JRE; otherwise Temurin." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: comfyui
   type: software
@@ -326,9 +326,9 @@
   reliability: reference
   runtime: python
   notes: { fr: "PyTorch et les modèles (FLUX.1-schnell, SDXL au catalogue) se mettent en cache avant la coupure ; compter 6 Go pour l'environnement seul. Alternative légère sans GPU : stable-diffusion.cpp.", en: "PyTorch and the models (FLUX.1-schnell, SDXL in the catalogue) are cached before the outage; count 6 GB for the environment alone. Light no-GPU alternative: stable-diffusion.cpp." }
-  version: v0.35.0
-  updated: 2026-09-09
-  checked: 2026-09-12
+  version: v0.36.0
+  updated: 2026-09-15
+  checked: 2026-09-17
 
 - id: stable-diffusion-cpp
   type: software
@@ -349,9 +349,9 @@
   runtime: static-binary
   status: active
   reliability: community
-  version: master-859-7f410a3
-  updated: 2026-09-11
-  checked: 2026-09-12
+  version: master-872-cc515a0
+  updated: 2026-09-16
+  checked: 2026-09-17
 
 - id: hf-flux1-schnell-gguf
   type: ai-model
@@ -377,8 +377,8 @@
     fr: "Il faut aussi l'encodeur de texte T5-XXL (GGUF, ~5 Go en Q5) et le VAE `ae.safetensors` du dépôt officiel : voir la doc de stable-diffusion.cpp. Total ~13 Go."
     en: "Also needs the T5-XXL text encoder (GGUF, ~5 GB at Q5) and the official `ae.safetensors` VAE: see the stable-diffusion.cpp docs. ~13 GB total."
   size_bytes: 6783943712
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-17
+  checked: 2026-09-17
 
 - id: hf-sdxl-base
   type: ai-model
@@ -401,5 +401,5 @@
   status: active
   reliability: reference
   size_bytes: 6938078334
-  updated: 2026-09-12
-  checked: 2026-09-12
+  updated: 2026-09-17
+  checked: 2026-09-17
