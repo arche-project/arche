@@ -42,7 +42,7 @@
   update: { tracker: http-head, check_interval_days: 180 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: mycofrance-syndromes
   type: pdf
@@ -59,7 +59,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: centres-antipoison-fr
   type: pdf
@@ -80,7 +80,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Ces numéros sont dans la fiche imprimable 07. Ils ne fonctionnent que si le réseau tient : d'où l'importance des sources hors-ligne à côté.", en: "These numbers are on printable sheet 07. They only work while the network holds: hence the offline sources beside them." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # ---------- Clés et bases d'identification / Identification keys and databases ----------
 
@@ -102,7 +102,7 @@
   status: unverified
   reliability: community
   notes: { fr: "Candidat Zimit important pour le FR (permission: pending — demander à Guillaume Péan).", en: "Important Zimit candidate for FR (permission: pending — ask Guillaume Péan)." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: usfs-macrofungi-guide
   type: pdf
@@ -121,7 +121,7 @@
   status: unverified
   reliability: reference
   size_bytes: 5944488
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: wikispecies-zim
   type: zim
@@ -142,7 +142,7 @@
   size_bytes: 1531480064
   version: 2026-07
   updated: 2026-07-08
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: gbif-backbone
   type: dataset
@@ -160,7 +160,7 @@
   status: unverified
   reliability: reference
   size_bytes: 971465842
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: index-fungorum-checklist
   type: dataset
@@ -178,7 +178,7 @@
   status: unverified
   reliability: reference
   size_bytes: 7032137
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: cornell-poisonous-plants
   type: pdf
@@ -195,4 +195,4 @@
   update: { tracker: http-head, check_interval_days: 180 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17

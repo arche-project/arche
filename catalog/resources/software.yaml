@@ -29,9 +29,9 @@
   version: 3.8.2
   updated: 2026-03-02
   notes:
-    fr: "[updater 2026-09-12: asset pattern matches nothing in 3.8.2]"
-    en: "[updater 2026-09-12: asset pattern matches nothing in 3.8.2]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-17: asset pattern matches nothing in 3.8.2]"
+    en: "[updater 2026-09-17: asset pattern matches nothing in 3.8.2]"
+  checked: 2026-09-17
 
 - id: kiwix-desktop
   type: software
@@ -54,9 +54,9 @@
   version: 2.5.1
   updated: 2026-01-04
   notes:
-    fr: "[updater 2026-09-12: asset pattern matches nothing in 2.5.1]"
-    en: "[updater 2026-09-12: asset pattern matches nothing in 2.5.1]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-17: asset pattern matches nothing in 2.5.1]"
+    en: "[updater 2026-09-17: asset pattern matches nothing in 2.5.1]"
+  checked: 2026-09-17
 
 - id: ollama
   type: software
@@ -76,10 +76,10 @@
   status: active
   reliability: reference
   runtime: static-binary
-  version: v0.34.0
-  updated: 2026-09-05
-  size_bytes: 1574272976
-  checked: 2026-09-12
+  version: v0.34.1
+  updated: 2026-09-14
+  size_bytes: 1570506608
+  checked: 2026-09-17
 
 - id: llama-cpp
   type: software
@@ -98,12 +98,12 @@
   status: active
   reliability: reference
   runtime: static-binary
-  version: v0.4.0
-  updated: 2026-09-04
+  version: v0.4.1
+  updated: 2026-09-14
   notes:
-    fr: "[updater 2026-09-12: asset pattern matches nothing in v0.4.0]"
-    en: "[updater 2026-09-12: asset pattern matches nothing in v0.4.0]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-17: asset pattern matches nothing in v0.4.1]"
+    en: "[updater 2026-09-17: asset pattern matches nothing in v0.4.1]"
+  checked: 2026-09-17
 
 - id: open-webui
   type: software
@@ -131,7 +131,7 @@
   runtime: python
   version: v0.11.3
   updated: 2026-08-31
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: aider
   type: software
@@ -154,7 +154,7 @@
   runtime: python
   version: v0.86.0
   updated: 2025-08-09
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: opencode
   type: software
@@ -173,10 +173,10 @@
   status: active
   reliability: community
   runtime: static-binary
-  version: v1.18.30
-  updated: 2026-09-09
-  size_bytes: 60686185
-  checked: 2026-09-12
+  version: v1.18.31
+  updated: 2026-09-14
+  size_bytes: 60718498
+  checked: 2026-09-17
 
 - id: jan
   type: software
@@ -201,7 +201,7 @@
   version: v0.8.4
   updated: 2026-07-23
   size_bytes: 157534712
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: hermes-agent
   type: software
@@ -224,9 +224,9 @@
   reliability: community
   runtime: python
   notes: { fr: "Installer depuis le wheelhouse (pas le script curl). Règles Arche : l'agent n'a que les outils MCP d'Arche et les fichiers locaux — aucun « skill » tiers téléchargé ; il ne pilote jamais un actionneur (ADR 0010) ; il tourne sous le superviseur comme un processus ordinaire. Ses canaux Telegram/Discord/WhatsApp sont inutiles hors ligne : rester en CLI ou Home Assistant.", en: "Install from the wheelhouse (not the curl script). Arche rules: the agent gets only Arche's MCP tools and local files — no third-party downloaded 'skills'; it never drives an actuator (ADR 0010); it runs under the supervisor as an ordinary process. Its Telegram/Discord/WhatsApp channels are useless offline: stay on CLI or Home Assistant." }
-  version: v2026.9.11
-  updated: 2026-09-11
-  checked: 2026-09-12
+  version: v2026.9.14
+  updated: 2026-09-14
+  checked: 2026-09-17
 
 - id: openclaw
   type: software
@@ -251,7 +251,7 @@
   notes: { fr: "Passerelle en tâche de fond (port 18789) : la lancer sous le superviseur, jamais exposée au-delà de 127.0.0.1. Aucun skill tiers ; pas de pilotage d'actionneur (ADR 0010). Support MCP à vérifier au moment de l'installation.", en: "Background gateway (port 18789): run it under the supervisor, never exposed beyond 127.0.0.1. No third-party skills; no actuator control (ADR 0010). MCP support to verify at install time." }
   version: v2026.9.4
   updated: 2026-09-11
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: node-red
   type: software
@@ -276,7 +276,7 @@
   notes: { fr: "Installer depuis le miroir npm local (ressource verdaccio) : `npm install -g node-red --registry http://127.0.0.1:4873`. Les nœuds contrib s'installent de la même façon, à mettre en cache avant la coupure.", en: "Install from the local npm mirror (verdaccio resource): `npm install -g node-red --registry http://127.0.0.1:4873`. Contrib nodes install the same way; cache them before the outage." }
   version: 5.0.7
   updated: 2026-09-08
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: n8n
   type: software
@@ -299,9 +299,9 @@
   reliability: community
   runtime: node
   notes: { fr: "Brancher Arche : nœud « MCP Client » sur http://127.0.0.1:8765/mcp. Pas de modèle de langue dans une boucle d'actionneur (ADR 0010).", en: "Connect Arche: 'MCP Client' node on http://127.0.0.1:8765/mcp. No language model in an actuator loop (ADR 0010)." }
-  version: n8n@2.38.7
-  updated: 2026-09-11
-  checked: 2026-09-12
+  version: n8n@2.39.7
+  updated: 2026-09-17
+  checked: 2026-09-17
 
 - id: gitea
   type: software
@@ -323,7 +323,7 @@
   version: v1.27.3
   updated: 2026-08-29
   size_bytes: 129469440
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: zim-tools
   type: software
@@ -346,9 +346,9 @@
   version: 3.8.0
   updated: 2026-08-13
   notes:
-    fr: "[updater 2026-09-12: asset pattern matches nothing in 3.8.0]"
-    en: "[updater 2026-09-12: asset pattern matches nothing in 3.8.0]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-17: asset pattern matches nothing in 3.8.0]"
+    en: "[updater 2026-09-17: asset pattern matches nothing in 3.8.0]"
+  checked: 2026-09-17
 
 - id: poppler-utils
   type: software
@@ -390,7 +390,7 @@
   version: 1.2.2
   updated: 2024-11-29
   size_bytes: 55123754
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: meshtastic-firmware
   type: software
@@ -412,7 +412,7 @@
   version: v2.7.26.54e0d8d
   updated: 2026-06-24
   size_bytes: 170272165
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: internet-in-a-box
   type: software
@@ -434,7 +434,7 @@
   runtime: source
   version: release-8.2
   updated: 2025-01-01
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: rachel
   type: software
@@ -452,4 +452,4 @@
   status: unverified
   reliability: reference
   runtime: source
-  checked: 2026-09-12
+  checked: 2026-09-17

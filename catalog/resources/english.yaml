@@ -24,7 +24,7 @@
   size_bytes: 1192567808
   version: 2025-01
   updated: 2025-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-eng
   type: zim
@@ -45,7 +45,7 @@
   size_bytes: 678394880
   version: 2025-01
   updated: 2025-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-bio
   type: zim
@@ -66,7 +66,7 @@
   size_bytes: 2240947200
   version: 2025-01
   updated: 2025-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-chem
   type: zim
@@ -87,7 +87,7 @@
   size_bytes: 2182917120
   version: 2025-01
   updated: 2025-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-phys
   type: zim
@@ -108,7 +108,7 @@
   size_bytes: 559554560
   version: 2026-01
   updated: 2026-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-math
   type: zim
@@ -129,7 +129,7 @@
   size_bytes: 830646272
   version: 2026-01
   updated: 2026-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-k12
   type: zim
@@ -150,7 +150,7 @@
   size_bytes: 369809408
   version: 2026-01
   updated: 2026-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: libretexts-workforce
   type: zim
@@ -171,7 +171,7 @@
   size_bytes: 513664000
   version: 2026-01
   updated: 2026-01-16
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: wikibooks-en
   type: zim
@@ -192,7 +192,7 @@
   size_bytes: 6177865728
   version: 2026-04
   updated: 2026-04-27
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: wikiversity-en
   type: zim
@@ -213,7 +213,7 @@
   size_bytes: 2459209728
   version: 2026-05
   updated: 2026-05-06
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: wikipedia-en-medicine
   type: zim
@@ -234,7 +234,7 @@
   size_bytes: 2215521280
   version: 2026-04
   updated: 2026-04-11
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # ---------- StackExchange supplémentaires / More StackExchange ----------
 
@@ -257,7 +257,7 @@
   size_bytes: 141408256
   version: 2026-08
   updated: 2026-08-04
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: stackexchange-sustainability
   type: zim
@@ -278,7 +278,7 @@
   size_bytes: 27667456
   version: 2026-08
   updated: 2026-08-06
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: stackexchange-cooking
   type: zim
@@ -299,7 +299,7 @@
   size_bytes: 237005824
   version: 2026-07
   updated: 2026-07-31
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: stackexchange-engineering
   type: zim
@@ -320,7 +320,7 @@
   size_bytes: 255770624
   version: 2026-08
   updated: 2026-08-01
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: stackexchange-medicalsciences
   type: zim
@@ -341,7 +341,7 @@
   size_bytes: 60800000
   version: 2026-02
   updated: 2026-02-02
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: stackexchange-pets
   type: zim
@@ -362,7 +362,7 @@
   size_bytes: 86638592
   version: 2026-08
   updated: 2026-08-04
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # ---------- Domaine public : manuels militaires et FEMA / Public domain: military and FEMA manuals ----------
 
@@ -382,6 +382,8 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  size_bytes: 3023620
+  checked: 2026-09-17
 
 - id: fm-4-25-11-first-aid
   type: pdf
@@ -400,7 +402,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "URL directe du PDF à fixer depuis la page IA (nom de fichier variable).", en: "Pin the direct PDF URL from the IA page (variable file name)." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: fema-cert-manual
   type: pdf
@@ -419,7 +421,7 @@
   status: unverified
   reliability: reference
   size_bytes: 5509166
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # ---------- Organisations internationales / International organisations ----------
 
@@ -440,7 +442,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Fixer les URL IRIS des PDF EN et FR (bitstream).", en: "Pin the IRIS bitstream URLs for the EN and FR PDFs." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: who-basic-emergency-care
   type: pdf
@@ -458,7 +460,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: msf-medical-guidelines
   type: pdf
@@ -476,7 +478,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: fao-knowledge-repository
   type: pdf
@@ -494,7 +496,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: practical-action-briefs
   type: pdf
@@ -512,6 +514,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
+  checked: 2026-09-17
 
 - id: e4c-solutions-library
   type: pdf
@@ -529,7 +532,7 @@
   status: unverified
   reliability: curated
   notes: { fr: "Candidat Zimit (permission=license).", en: "Zimit candidate (permission=license)." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: cd3wd-library
   type: dataset
@@ -546,7 +549,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: unknown
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # ---------- Cours et manuels universitaires hors Kiwix / University courses and textbooks outside Kiwix ----------
 
@@ -567,7 +570,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Écrire une recette « openstax » qui télécharge les PDF listés dans un fichier de sélection.", en: "Write an 'openstax' recipe that downloads the PDFs listed in a selection file." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: mit-ocw
   type: dataset
@@ -584,7 +587,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: nih-bookshelf-oa
   type: dataset
@@ -601,4 +604,4 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17

@@ -43,7 +43,7 @@
   runtime: none
   version: 13.7 (trixie)
   updated: 2026-09-12
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: raspios-lite
   type: software
@@ -69,9 +69,9 @@
     fr: "Écrire l'image avec `dd` ou Raspberry Pi Imager en mode hors-ligne (« Utiliser une image personnalisée »). Ajouter `deb http://archive.raspberrypi.com/debian/ <codename> main` au miroir apt, sinon pas de mises à jour du noyau."
     en: "Write with `dd` or Raspberry Pi Imager offline ('Use custom image'). Add `deb http://archive.raspberrypi.com/debian/ <codename> main` to the apt mirror, or no kernel updates."
   runtime: none
-  version: 2026-06-19
-  updated: 2026-06-18
-  checked: 2026-09-12
+  version: 2026-09-15
+  updated: 2026-09-15
+  checked: 2026-09-17
 
 - id: ubuntu-lts
   type: software
@@ -98,7 +98,7 @@
   runtime: none
   version: 24.04.5 LTS (noble)
   updated: 2024-04-25
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: systemrescue
   type: software
@@ -123,7 +123,7 @@
     fr: "Pas de dépôt à mettre en miroir : tout est dans l'ISO, c'est le but. Sur la clé Ventoy avec les autres. Le manuel (system-rescue.org/manual) vaut d'être imprimé : on s'en sert quand rien ne marche."
     en: "No repository to mirror: everything is in the ISO, by design. Put it on the Ventoy stick with the others. The manual is worth printing: it is used when nothing works."
   runtime: none
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: openwrt
   type: software
@@ -147,7 +147,7 @@
     en: "For the stable release download `targets/<target>/<subtarget>/` (images + ImageBuilder) and `packages/<arch>/` for your devices. firmware-selector.openwrt.org maps routers to targets — write it down BEFORE the outage."
   runtime: firmware
   version: v25.12.5
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: ventoy
   type: software
@@ -170,7 +170,7 @@
   version: v1.1.17
   updated: 2026-07-24
   size_bytes: 20291141
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: primtux
   type: software
@@ -191,7 +191,7 @@
   status: unverified
   reliability: community
   runtime: none
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: alpine-standard
   type: software
@@ -217,4 +217,4 @@
     fr: "Le tracker lit les tags du miroir GitHub alpinelinux/aports (v3.21.x…). musl ≠ glibc : les binaires précompilés d'Ollama, Node ou Gitea ont besoin de `gcompat` ou d'une version musl — vérifier avant de choisir Alpine pour le nœud Arche ; Debian reste le choix sûr pour ça."
     en: "The tracker reads the tags of the alpinelinux/aports GitHub mirror (v3.21.x…). musl ≠ glibc: prebuilt Ollama, Node or Gitea binaries need `gcompat` or a musl build — check before choosing Alpine for the Arche node; Debian remains the safe choice there."
   version: v20260805
-  checked: 2026-09-12
+  checked: 2026-09-17

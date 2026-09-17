@@ -22,7 +22,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: ema-herbal-monographs
   type: pdf
@@ -111,7 +111,7 @@
   status: unverified
   reliability: reference
   notes: { fr: "Recette simple : télécharger les fichiers CIS_*.txt listés sur la page (URL stables) ; les recharger chaque mois.", en: "Simple recipe: download the CIS_*.txt files listed on the page (stable URLs); refresh monthly." }
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: drug-shelf-life-slep
   type: pdf
@@ -128,7 +128,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 # ---------- Identifier sans se tromper / Identify without mistakes ----------
 
@@ -147,7 +147,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: plantnet-offline
   type: software
@@ -183,7 +183,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: wikipedia-fr-plantes-vente-libre
   type: pdf
@@ -220,7 +220,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: community
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: henriettes-herbal-classics
   type: pdf
@@ -237,7 +237,7 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: community
-  checked: 2026-09-12
+  checked: 2026-09-17
 
 - id: kew-powo-wcvp
   type: dataset
@@ -254,4 +254,4 @@
   update: { tracker: http-head, check_interval_days: 90 }
   status: unverified
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-17
