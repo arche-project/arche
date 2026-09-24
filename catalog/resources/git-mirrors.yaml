@@ -19,10 +19,10 @@
   update: { tracker: github-commit }
   status: active
   reliability: reference
-  version: 2d7717e3b62e
-  updated: 2026-09-09
-  size_bytes: 256974848
-  checked: 2026-09-12
+  version: ce7002bedf37
+  updated: 2026-09-19
+  size_bytes: 259999744
+  checked: 2026-09-24
 
 - id: git-marlin
   type: git-repo
@@ -43,7 +43,7 @@
   reliability: reference
   version: 2.1.2.8
   updated: 2026-06-24
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-freecad
   type: git-repo
@@ -65,7 +65,7 @@
   version: 1.1.3
   updated: 2026-07-25
   size_bytes: 820795896
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-open-source-ecology
   type: git-repo
@@ -83,7 +83,7 @@
   status: unverified
   reliability: community
   notes: { fr: "À produire en ZIM avec Zimit (voir docs/fr/guide-expert.md, section « Fabriquer ses propres ZIM »). Arbitrage : proposer un ZIM communautaire hébergé par le projet ?", en: "Build as a ZIM with Zimit (see docs/en/guide-expert.md, 'Build your own ZIMs'). Decision: offer a community ZIM hosted by the project?" }
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-farm-hack
   type: git-repo
@@ -100,7 +100,7 @@
   update: { tracker: http-head }
   status: unverified
   reliability: community
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-lowtech-lab
   type: git-repo
@@ -118,7 +118,7 @@
   status: unverified
   reliability: curated
   notes: { fr: "Contenu FR de premier plan mais absent de Kiwix. Candidat n°1 pour demander au Low-tech Lab un ZIM officiel (ou l'autorisation d'en publier un).", en: "First-rate French content missing from Kiwix. Top candidate to ask Low-tech Lab for an official ZIM (or permission to publish one)." }
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-ros2
   type: git-repo
@@ -137,10 +137,10 @@
   update: { tracker: github-commit }
   status: active
   reliability: reference
-  version: eb623a0ec35f
-  updated: 2026-09-08
-  size_bytes: 88500224
-  checked: 2026-09-12
+  version: 617ded65b393
+  updated: 2026-09-22
+  size_bytes: 88665088
+  checked: 2026-09-24
 
 - id: git-ardupilot
   type: git-repo
@@ -159,10 +159,10 @@
   update: { tracker: github-commit }
   status: active
   reliability: reference
-  version: 37ea692edb55
-  updated: 2026-09-12
-  size_bytes: 677392384
-  checked: 2026-09-12
+  version: 05d700239388
+  updated: 2026-09-24
+  size_bytes: 681355264
+  checked: 2026-09-24
 
 - id: git-esphome
   type: git-repo
@@ -181,9 +181,9 @@
   update: { tracker: github-release }
   status: active
   reliability: reference
-  version: 2026.8.2
-  updated: 2026-08-31
-  checked: 2026-09-12
+  version: 2026.9.0
+  updated: 2026-09-16
+  checked: 2026-09-24
 
 - id: git-arche
   type: git-repo
@@ -202,10 +202,10 @@
   status: active
   reliability: reference
   notes: { fr: "Remplacer l'URL par celle du dépôt réel une fois créé.", en: "Replace the URL with the real repo once created." }
-  version: 60f8f0064f5d
+  version: 5e2059ad67b0
   updated: 2026-09-12
-  size_bytes: 886784
-  checked: 2026-09-12
+  size_bytes: 941056
+  checked: 2026-09-24
 
 # --- Pérennité du format ZIM (angle mort A2/A3) : sans ces sources, plus de lecteur dans dix ans. ---
 - id: git-libzim
@@ -227,9 +227,9 @@
   version: 9.8.2
   updated: 2026-08-13
   notes:
-    fr: "[updater 2026-09-12: asset pattern matches nothing in 9.8.2]"
-    en: "[updater 2026-09-12: asset pattern matches nothing in 9.8.2]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-24: asset pattern matches nothing in 9.8.2]"
+    en: "[updater 2026-09-24: asset pattern matches nothing in 9.8.2]"
+  checked: 2026-09-24
 
 - id: git-tinygrad
   type: git-repo
@@ -252,7 +252,7 @@
   reliability: community
   version: v0.14.0
   updated: 2026-08-24
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-tflite-micro
   type: git-repo
@@ -274,10 +274,10 @@
   status: active
   reliability: reference
   notes: { fr: "Mirrorer aussi espressif/esp-tflite-micro (composant ESP-IDF prêt à l'emploi) et espressif/esp-nn.", en: "Also mirror espressif/esp-tflite-micro (ready-made ESP-IDF component) and espressif/esp-nn." }
-  version: d0318206cf43
-  updated: 2026-09-11
-  size_bytes: 36093952
-  checked: 2026-09-12
+  version: b57ba0d0d40d
+  updated: 2026-09-23
+  size_bytes: 36889600
+  checked: 2026-09-24
 
 - id: git-kiwix-tools-src
   type: git-repo
@@ -296,10 +296,10 @@
   status: active
   reliability: reference
   notes: { fr: "Ajouter aussi openzim/zim-tools et la spec openzim/spec ; ils sont petits.", en: "Also add openzim/zim-tools and the openzim/spec repo; they are small." }
-  version: 27c15eb4fd0c
-  updated: 2026-09-12
-  size_bytes: 5175296
-  checked: 2026-09-12
+  version: 17a1d9601122
+  updated: 2026-09-17
+  size_bytes: 5178368
+  checked: 2026-09-24
 
 - id: git-zimit
   type: git-repo
@@ -323,7 +323,7 @@
     en: "ADR 0008: Zimit only exists as a container. It is our CI build tool (zim-build.yml), not a daily offline tool — the source is kept for whoever wants to rebuild."
   version: v3.1.3
   updated: 2026-07-31
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: git-llama-cpp-src
   type: git-repo
@@ -341,7 +341,7 @@
   update: { tracker: github-commit }
   status: active
   reliability: reference
-  version: 3057bb66c86c
-  updated: 2026-09-12
-  size_bytes: 451136512
-  checked: 2026-09-12
+  version: 53ed051ce5e8
+  updated: 2026-09-24
+  size_bytes: 456053760
+  checked: 2026-09-24

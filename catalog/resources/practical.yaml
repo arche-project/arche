@@ -23,7 +23,7 @@
   size_bytes: 1303652352
   version: 2026-07
   updated: 2026-07-16
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: mdwiki-en
   type: zim
@@ -46,7 +46,7 @@
   size_bytes: 2302838784
   version: 2025-11
   updated: 2025-11-12
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wikem-en
   type: zim
@@ -69,7 +69,7 @@
   size_bytes: 374632448
   version: 2026-07
   updated: 2026-07-24
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: medlineplus-en
   type: zim
@@ -92,7 +92,7 @@
   size_bytes: 1944841216
   version: 2025-01
   updated: 2025-01-04
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: zimgit-post-disaster
   type: zim
@@ -115,7 +115,7 @@
   size_bytes: 644666368
   version: 2024-05
   updated: 2024-05-25
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: zimgit-water
   type: zim
@@ -138,7 +138,7 @@
   size_bytes: 20925440
   version: 2024-08
   updated: 2024-08-29
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: zimgit-medicine
   type: zim
@@ -162,7 +162,7 @@
   size_bytes: 70179840
   version: 2024-08
   updated: 2024-08-29
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: zimgit-food-preparation
   type: zim
@@ -185,7 +185,7 @@
   size_bytes: 97822720
   version: 2025-04
   updated: 2025-04-11
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: zimgit-knots
   type: zim
@@ -206,7 +206,7 @@
   size_bytes: 27945984
   version: 2024-08
   updated: 2024-08-29
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: ifixit-fr
   type: zim
@@ -229,7 +229,7 @@
   size_bytes: 3652281344
   version: 2026-03
   updated: 2026-03-08
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: ifixit-en
   type: zim
@@ -250,7 +250,7 @@
   size_bytes: 3570696192
   version: 2025-12
   updated: 2025-12-21
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: appropedia-en
   type: zim
@@ -273,7 +273,7 @@
   size_bytes: 581642240
   version: 2026-02
   updated: 2026-02-26
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: energypedia-en
   type: zim
@@ -296,7 +296,7 @@
   size_bytes: 799713280
   version: 2026-06
   updated: 2026-06-20
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: lowtech-magazine-solar
   type: zim
@@ -319,7 +319,7 @@
   size_bytes: 700556288
   version: 2025-01
   updated: 2025-01-02
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: cuisine-libre-fr
   type: zim
@@ -340,7 +340,7 @@
   size_bytes: 255952896
   version: 2026-08
   updated: 2026-08-17
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: ready-gov-en
   type: zim
@@ -361,7 +361,7 @@
   size_bytes: 2429922304
   version: 2024-12
   updated: 2024-12-03
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: survivor-library-en
   type: zim
@@ -375,16 +375,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 235
-  source: { kind: kiwix, kiwix_name: survivorlibrary.com_en_all, url: https://lb.download.kiwix.org/zim/zimit/survivorlibrary.com_en_all_2025-12.zim, homepage: https://www.survivorlibrary.com }
+  source: { kind: kiwix, kiwix_name: survivorlibrary.com_en_all, url: https://lb.download.kiwix.org/zim/zimit/survivorlibrary.com_en_all_2026-09.zim, homepage: https://www.survivorlibrary.com }
   license: { spdx: LicenseRef-PublicDomain, redistribution: allowed, note: { fr: "Scans de documents du domaine public ; le site lui-même n'est pas sous licence libre.", en: "Scans of public-domain documents; the site itself is not free-licensed." } }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: unknown
-  size_bytes: 251947683840
-  version: 2025-12
-  updated: 2025-12-11
-  checked: 2026-09-12
+  size_bytes: 220347600896
+  version: 2026-09
+  updated: 2026-09-08
+  checked: 2026-09-24
 
 - id: wikihow-fr
   type: zim
@@ -405,4 +405,4 @@
   notes:
     fr: "Au 2026-09-11, aucun ZIM WikiHow n'apparaît sur download.kiwix.org (ni FR ni EN). À arbitrer : retirer, ou produire soi-même via Zimit (licence NC : pas de redistribution, chaque utilisateur le fait pour lui)."
     en: "As of 2026-09-11 no WikiHow ZIM is listed on download.kiwix.org (FR or EN). Decision needed: drop it, or let each user build it with Zimit (NC license: no redistribution)."
-  checked: 2026-09-12
+  checked: 2026-09-24

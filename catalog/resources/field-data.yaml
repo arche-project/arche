@@ -27,7 +27,7 @@
   notes: { fr: "Installation native à préparer AVANT la coupure (elle compile et télécharge des dépendances). 16 Go de RAM pour ~300 photos ; au-delà, découper en lots ou `--fast-orthophoto`. WebODM (interface web) est Docker-only : hors périmètre ; NodeODM en natif suffit pour piloter depuis Node-RED.", en: "Native install to prepare BEFORE the outage (it compiles and downloads dependencies). 16 GB RAM for ~300 photos; beyond, split into batches or `--fast-orthophoto`. WebODM (web UI) is Docker-only: out of scope; native NodeODM is enough to drive from Node-RED." }
   version: v3.6.2
   updated: 2026-08-12
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: pdal
   type: software
@@ -52,7 +52,7 @@
   notes: { fr: "Ajouter `pdal` et `python3-pdal` à la recette de miroir apt debian pour l'installation sans pip. Un LiDAR de drone ou de téléphone (iPhone Pro) sort du LAS/LAZ ou de l'E57 : PDAL lit les deux.", en: "Add `pdal` and `python3-pdal` to the debian apt-mirror recipe for a pip-less install. Drone or phone LiDAR (iPhone Pro) outputs LAS/LAZ or E57: PDAL reads both." }
   version: 2.10.2
   updated: 2026-06-12
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: cloudcompare
   type: software
@@ -74,7 +74,7 @@
   runtime: static-binary
   version: v2.13.2
   updated: 2024-07-11
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: qgis
   type: software
@@ -97,7 +97,7 @@
   runtime: static-binary
   notes: { fr: "Les tuiles satellite (Sentinel-2, IGN) doivent être téléchargées AVANT la coupure et déclarées dans l'inventaire (`datasets`, kind `satellite`) ; QGIS les lit en GeoTIFF/MBTiles sans réseau. Pour la France, le SCAN25 et la BD ORTHO IGN sont sous licence ouverte Etalab.", en: "Satellite tiles (Sentinel-2, national agencies) must be downloaded BEFORE the outage and declared in the inventory (`datasets`, kind `satellite`); QGIS reads GeoTIFF/MBTiles offline. For France, IGN's SCAN25 and BD ORTHO are under the Etalab open licence." }
   version: final-4_2_2
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: meshroom
   type: software
@@ -121,9 +121,9 @@
   version: v2025.1.0
   updated: 2025-08-19
   notes:
-    fr: "[updater 2026-09-12: asset pattern matches nothing in v2025.1.0]"
-    en: "[updater 2026-09-12: asset pattern matches nothing in v2025.1.0]"
-  checked: 2026-09-12
+    fr: "[updater 2026-09-24: asset pattern matches nothing in v2025.1.0]"
+    en: "[updater 2026-09-24: asset pattern matches nothing in v2025.1.0]"
+  checked: 2026-09-24
 
 - id: mosquitto
   type: software
@@ -167,7 +167,7 @@
   notes: { fr: "Une caméra qui détecte un sanglier dans la parcelle ou un intrus au hangar publie sur MQTT ; Node-RED décide, l'humain agit. Jamais de détection de personne reliée à un actionneur (ADR 0010).", en: "A camera that spots a boar in the field or an intruder at the barn publishes over MQTT; Node-RED decides, the human acts. Never person detection wired to an actuator (ADR 0010)." }
   version: v0.18.0
   updated: 2026-09-12
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: motion
   type: software
@@ -189,4 +189,4 @@
   runtime: static-binary
   version: release-4.7.1
   updated: 2025-09-19
-  checked: 2026-09-12
+  checked: 2026-09-24

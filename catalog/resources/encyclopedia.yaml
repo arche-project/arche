@@ -29,7 +29,7 @@
   update: { tracker: kiwix-opds, check_interval_days: 7 }
   status: active
   reliability: reference
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wikipedia-fr-nopic
   type: zim
@@ -60,7 +60,7 @@
     en: "The recommender swaps this for wikipedia-fr-maxi automatically when disk allows."
   version: 2026-05
   updated: 2026-05-18
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wikipedia-fr-mini
   type: zim
@@ -83,7 +83,7 @@
   size_bytes: 3584080896
   version: 2026-05
   updated: 2026-05-18
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wikipedia-en-maxi
   type: zim
@@ -106,7 +106,7 @@
   size_bytes: 127418088448
   version: 2026-08
   updated: 2026-08-25
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wikipedia-en-nopic
   type: zim
@@ -129,7 +129,7 @@
   size_bytes: 52690707456
   version: 2026-06
   updated: 2026-06-17
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wiktionary-fr
   type: zim
@@ -143,16 +143,16 @@
   profiles: [ bunker, novice, lowtech ]
   priority: recommended
   size_estimate_gb: 4.6
-  source: { kind: kiwix, kiwix_name: wiktionary_fr_all_nopic, url: https://lb.download.kiwix.org/zim/wiktionary/wiktionary_fr_all_nopic_2026-05.zim }
+  source: { kind: kiwix, kiwix_name: wiktionary_fr_all_nopic, url: https://lb.download.kiwix.org/zim/wiktionary/wiktionary_fr_all_nopic_2026-08.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: reference
-  size_bytes: 4930122752
-  version: 2026-05
-  updated: 2026-05-08
-  checked: 2026-09-12
+  size_bytes: 4935857152
+  version: 2026-08
+  updated: 2026-08-20
+  checked: 2026-09-24
 
 - id: wiktionary-en
   type: zim
@@ -175,7 +175,7 @@
   size_bytes: 9156425728
   version: 2026-08
   updated: 2026-08-13
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: vikidia-fr
   type: zim
@@ -198,7 +198,7 @@
   size_bytes: 1434988544
   version: 2026-09
   updated: 2026-09-03
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: wikibooks-fr
   type: zim
@@ -221,7 +221,7 @@
   size_bytes: 2153273344
   version: 2026-07
   updated: 2026-07-16
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: gutenberg-fr
   type: zim
@@ -244,7 +244,7 @@
   size_bytes: 10534730752
   version: 2026-01
   updated: 2026-01-04
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: gutenberg-en
   type: zim
@@ -267,4 +267,4 @@
   size_bytes: 221251591168
   version: 2025-11
   updated: 2025-11-25
-  checked: 2026-09-12
+  checked: 2026-09-24

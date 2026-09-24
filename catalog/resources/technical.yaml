@@ -20,7 +20,7 @@
   size_bytes: 4214187008
   version: 2026-08
   updated: 2026-08-01
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-diy
   type: zim
@@ -41,7 +41,7 @@
   size_bytes: 2062547968
   version: 2026-08
   updated: 2026-08-03
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-gardening
   type: zim
@@ -62,7 +62,7 @@
   size_bytes: 926806016
   version: 2026-08
   updated: 2026-08-01
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-ham
   type: zim
@@ -83,7 +83,7 @@
   size_bytes: 75931648
   version: 2026-08
   updated: 2026-08-02
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-3dprinting
   type: zim
@@ -104,7 +104,7 @@
   size_bytes: 120138752
   version: 2026-07
   updated: 2026-07-02
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-arduino
   type: zim
@@ -125,7 +125,7 @@
   size_bytes: 259175424
   version: 2026-07
   updated: 2026-07-31
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-raspberrypi
   type: zim
@@ -146,7 +146,7 @@
   size_bytes: 298463232
   version: 2026-08
   updated: 2026-08-04
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-robotics
   type: zim
@@ -167,7 +167,7 @@
   size_bytes: 243724288
   version: 2026-08
   updated: 2026-08-04
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackexchange-unix
   type: zim
@@ -188,7 +188,7 @@
   size_bytes: 1312634880
   version: 2026-08
   updated: 2026-08-06
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: stackoverflow
   type: zim
@@ -209,7 +209,7 @@
   size_bytes: 114855633920
   version: 2026-07
   updated: 2026-07-02
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: devdocs-en
   type: zim
@@ -231,7 +231,7 @@
   size_bytes: 4390912
   version: 2026-08
   updated: 2026-08-02
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: freecodecamp-en
   type: zim
@@ -253,7 +253,7 @@
   size_bytes: 7894016
   version: 2026-08
   updated: 2026-08-21
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: khanacademy-fr
   type: zim
@@ -274,7 +274,7 @@
   size_bytes: 100663618560
   version: 2023-03
   updated: 2023-03-01
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: phet-fr
   type: zim
@@ -295,7 +295,7 @@
   size_bytes: 109152256
   version: 2026-08
   updated: 2026-08-25
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: openstreetmap-wiki-en
   type: zim
@@ -316,7 +316,7 @@
   size_bytes: 1243502592
   version: 2026-07
   updated: 2026-07-19
-  checked: 2026-09-12
+  checked: 2026-09-24
 
 - id: archlinux-wiki-en
   type: zim
@@ -337,4 +337,4 @@
   size_bytes: 35601408
   version: 2026-07
   updated: 2026-07-23
-  checked: 2026-09-12
+  checked: 2026-09-24
