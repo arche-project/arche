@@ -11,16 +11,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 3.9
-  source: { kind: kiwix, kiwix_name: electronics.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/electronics.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: electronics.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/electronics.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 4214187008
-  version: 2026-08
-  updated: 2026-08-01
-  checked: 2026-09-12
+  size_bytes: 4261398528
+  version: 2026-10
+  updated: 2026-10-19
+  checked: 2026-10-29
 
 - id: stackexchange-diy
   type: zim
@@ -32,16 +32,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 1.9
-  source: { kind: kiwix, kiwix_name: diy.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/diy.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: diy.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/diy.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 2062547968
-  version: 2026-08
-  updated: 2026-08-03
-  checked: 2026-09-12
+  size_bytes: 2086025216
+  version: 2026-10
+  updated: 2026-10-19
+  checked: 2026-10-29
 
 - id: stackexchange-gardening
   type: zim
@@ -53,16 +53,16 @@
   profiles: [ bunker, novice ]
   priority: recommended
   size_estimate_gb: 0.9
-  source: { kind: kiwix, kiwix_name: gardening.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/gardening.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: gardening.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/gardening.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 926806016
-  version: 2026-08
-  updated: 2026-08-01
-  checked: 2026-09-12
+  size_bytes: 933097472
+  version: 2026-10
+  updated: 2026-10-19
+  checked: 2026-10-29
 
 - id: stackexchange-ham
   type: zim
@@ -74,16 +74,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 0.07
-  source: { kind: kiwix, kiwix_name: ham.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/ham.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: ham.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/ham.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 75931648
-  version: 2026-08
-  updated: 2026-08-02
-  checked: 2026-09-12
+  size_bytes: 77109248
+  version: 2026-10
+  updated: 2026-10-20
+  checked: 2026-10-29
 
 - id: stackexchange-3dprinting
   type: zim
@@ -95,16 +95,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 0.12
-  source: { kind: kiwix, kiwix_name: 3dprinting.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/3dprinting.stackexchange.com_en_all_2026-07a.zim }
+  source: { kind: kiwix, kiwix_name: 3dprinting.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/3dprinting.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 120138752
-  version: 2026-07
-  updated: 2026-07-02
-  checked: 2026-09-12
+  size_bytes: 120338432
+  version: 2026-10
+  updated: 2026-10-16
+  checked: 2026-10-29
 
 - id: stackexchange-arduino
   type: zim
@@ -116,16 +116,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 0.25
-  source: { kind: kiwix, kiwix_name: arduino.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/arduino.stackexchange.com_en_all_2026-07.zim }
+  source: { kind: kiwix, kiwix_name: arduino.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/arduino.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 259175424
-  version: 2026-07
-  updated: 2026-07-31
-  checked: 2026-09-12
+  size_bytes: 259577856
+  version: 2026-10
+  updated: 2026-10-19
+  checked: 2026-10-29
 
 - id: stackexchange-raspberrypi
   type: zim
@@ -137,16 +137,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 0.29
-  source: { kind: kiwix, kiwix_name: raspberrypi.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/raspberrypi.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: raspberrypi.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/raspberrypi.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 298463232
-  version: 2026-08
-  updated: 2026-08-04
-  checked: 2026-09-12
+  size_bytes: 298503168
+  version: 2026-10
+  updated: 2026-10-20
+  checked: 2026-10-29
 
 - id: stackexchange-robotics
   type: zim
@@ -158,16 +158,16 @@
   profiles: [ bunker ]
   priority: optional
   size_estimate_gb: 0.23
-  source: { kind: kiwix, kiwix_name: robotics.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/robotics.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: robotics.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/robotics.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 243724288
-  version: 2026-08
-  updated: 2026-08-04
-  checked: 2026-09-12
+  size_bytes: 243377152
+  version: 2026-10
+  updated: 2026-10-20
+  checked: 2026-10-29
 
 - id: stackexchange-unix
   type: zim
@@ -179,16 +179,16 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 1.2
-  source: { kind: kiwix, kiwix_name: unix.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/unix.stackexchange.com_en_all_2026-08.zim }
+  source: { kind: kiwix, kiwix_name: unix.stackexchange.com_en_all, url: https://lb.download.kiwix.org/zim/stack_exchange/unix.stackexchange.com_en_all_2026-10.zim }
   license: { spdx: CC-BY-SA-4.0, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: community
-  size_bytes: 1312634880
-  version: 2026-08
-  updated: 2026-08-06
-  checked: 2026-09-12
+  size_bytes: 1316253696
+  version: 2026-10
+  updated: 2026-10-19
+  checked: 2026-10-29
 
 - id: stackoverflow
   type: zim
@@ -209,7 +209,7 @@
   size_bytes: 114855633920
   version: 2026-07
   updated: 2026-07-02
-  checked: 2026-09-12
+  checked: 2026-10-29
 
 - id: devdocs-en
   type: zim
@@ -231,7 +231,7 @@
   size_bytes: 4390912
   version: 2026-08
   updated: 2026-08-02
-  checked: 2026-09-12
+  checked: 2026-10-29
 
 - id: freecodecamp-en
   type: zim
@@ -253,7 +253,7 @@
   size_bytes: 7894016
   version: 2026-08
   updated: 2026-08-21
-  checked: 2026-09-12
+  checked: 2026-10-29
 
 - id: khanacademy-fr
   type: zim
@@ -274,7 +274,7 @@
   size_bytes: 100663618560
   version: 2023-03
   updated: 2023-03-01
-  checked: 2026-09-12
+  checked: 2026-10-29
 
 - id: phet-fr
   type: zim
@@ -295,7 +295,7 @@
   size_bytes: 109152256
   version: 2026-08
   updated: 2026-08-25
-  checked: 2026-09-12
+  checked: 2026-10-29
 
 - id: openstreetmap-wiki-en
   type: zim
@@ -316,7 +316,7 @@
   size_bytes: 1243502592
   version: 2026-07
   updated: 2026-07-19
-  checked: 2026-09-12
+  checked: 2026-10-29
 
 - id: archlinux-wiki-en
   type: zim
@@ -328,13 +328,13 @@
   profiles: [ bunker ]
   priority: recommended
   size_estimate_gb: 0.04
-  source: { kind: kiwix, kiwix_name: archlinux_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/archlinux_en_all_maxi_2026-07.zim }
+  source: { kind: kiwix, kiwix_name: archlinux_en_all_maxi, url: https://lb.download.kiwix.org/zim/other/archlinux_en_all_maxi_2026-10.zim }
   license: { spdx: GFDL-1.3, redistribution: attribution }
   depends_on: [ kiwix-tools ]
   update: { tracker: kiwix-opds }
   status: active
   reliability: reference
-  size_bytes: 35601408
-  version: 2026-07
-  updated: 2026-07-23
-  checked: 2026-09-12
+  size_bytes: 38311936
+  version: 2026-10
+  updated: 2026-10-21
+  checked: 2026-10-29
